@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799186dfdfda5ab48920907137d913c0, type: 3}
+  m_Name: Big Strike Craft Controller Data
+  m_EditorClassIdentifier: 
+  rigidbodyMass: 1000
+  rigidBodyDrag: 1
+  rigidbodyAngularDrag: 5
+  yawTorqueMultiplier: 2000
+  yawTorque: 80000
+  yawDeadAngle: 15
+  pitchTorqueMultiplier: 4000
+  pitchTorque: 100000
+  pitchDeadAngle: 8
+  rollTorque: 100000
+  engineMaxForwardThrust: 25000
+  engineMaxBackwardThrust: 10000
+  maxPositionCorrectionMagnitude: 1
+  maxVelocityCorrectionMagnitude: 1
+  maxRotationCorrectionDelta: 0.1
+  maxAngularVelocityCorrectionMagnitude: 1

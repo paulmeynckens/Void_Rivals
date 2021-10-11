@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9cd854c85d6164cbe853faa2cbc337, type: 3}
+  m_Name: PoolsManager
+  m_EditorClassIdentifier: 
+  pools:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 010002
+    _keys: 010002
+    _values:
+    - pooledPrefab: {fileID: 7396664288638056456, guid: c73dadba8fb9b3343bf17022460f9dc7,
+        type: 3}
+      poolSize: 4
+    - pooledPrefab: {fileID: 6984754797927874160, guid: fc20443e1f7dd9a4385d3ac6bea67d0b,
+        type: 3}
+      poolSize: 32
+    - pooledPrefab: {fileID: 6984754797927874160, guid: 67e23d3c7eacf5749bc2be3ea7da49d9,
+        type: 3}
+      poolSize: 16
