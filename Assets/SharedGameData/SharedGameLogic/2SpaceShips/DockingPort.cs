@@ -14,14 +14,8 @@ namespace ShipsLogic
         [SerializeField] Collider doorColider = null;
 
         public static readonly List<DockingPort> allDockingPorts = new List<DockingPort>();
-        
-        /*
-        Transform femaleTransform;
-        public Transform FemaleTransform
-        {
-            get => femaleTransform;
-        }
-        */
+
+
         DockingPort targetDockingPort;
         public DockingPort TargetDockingPort
         {
@@ -59,6 +53,7 @@ namespace ShipsLogic
         }
         Vector3 toParent = Vector3.zero;
         
+        public event Action<bool> OnDocked =delegate{};
 
         private void Awake()
         {
@@ -96,6 +91,7 @@ namespace ShipsLogic
 
             SphereCollider sphereCollider = GetComponent<SphereCollider>();
             sphereCollider.enabled = false;
+            OnDocked(true);
         }
         public void Undock()
         {
@@ -114,6 +110,7 @@ namespace ShipsLogic
 
             SphereCollider sphereCollider = GetComponent<SphereCollider>();
             sphereCollider.enabled = true;
+            OnDocked(false);
         }
 
         private void OnDestroy()

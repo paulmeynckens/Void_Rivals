@@ -33,7 +33,7 @@ namespace ShipsLogic
 
         const float LEVER_ARM = 100;
 
-        private ShipInput currentInputSnapshot;
+        private ShipInput currentInputSnapshot=new ShipInput { tick = 0, yaw = 0, pitch = 0, roll = 0, thrust = 0 };
         public ShipInput CurrentInputSnapshot { get => currentInputSnapshot; }//will be used for feedback elements such as joysticks movement, engine sound, gyroscope sound, etc
 
 
@@ -321,7 +321,7 @@ namespace ShipsLogic
 
                 if (isClient)
                 {
-                    currentInputSnapshot = new ShipInput { tick = 0, yaw = torque.y, pitch = torque.x, roll = torque.z, thrust = currentThrust };
+                    currentInputSnapshot = shipInput;// new ShipInput { tick = 0, yaw = torque.y, pitch = torque.x, roll = torque.z, thrust = currentThrust };
                 }
             }
 

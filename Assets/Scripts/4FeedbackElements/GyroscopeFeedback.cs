@@ -6,7 +6,7 @@ using ShipsLogic;
 
 namespace FeedbackElements
 {
-    public class GyroscopeFeedback : ContinuousFeedbackGenerator
+    public class GyroscopeFeedback : ContinuousSoundFeedbackGenerator
     {
         // Start is called before the first frame update
         ShipController shipController;

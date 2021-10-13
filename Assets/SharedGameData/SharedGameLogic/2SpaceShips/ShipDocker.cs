@@ -35,12 +35,24 @@ namespace ShipsLogic
 
         private DockingPort currentlyDockedPort = null;
 
-        [SerializeField] DockingPort activeDockingPort = null;
+        public DockingPort ActiveDockingPort
+        {
+            get => activeDockingPort;
+        }
+        DockingPort activeDockingPort = null;
+        DockingPort closestForeignPort = null;
         [SerializeField] float pullForce = 50000;
         [SerializeField] float maxSquaredDistance = 20;
         [SerializeField] float leverArm = 50;
 
         DelayedDestructor parentDestructor = null;
+
+        public bool IsPulling
+        {
+            get => isPulling;
+        }
+        bool isPulling = false;
+
 
         #region SyncVars+hooks
 
@@ -90,6 +102,7 @@ namespace ShipsLogic
 
         private void FixedUpdate()
         {
+            isPulling = false;
             if (hasAuthority && isClient)
             {
                 if (Input.GetKey(KeyBindings.Pairs[Actions.dock]))
@@ -187,12 +200,14 @@ namespace ShipsLogic
             {
                 return;
             }
-            DockingPort closestPort = ClosestDockingPort();
+
+            UpdateClosestDockingPorts();
+
             
-            if (closestPort != null)
+            if (activeDockingPort!=null && closestForeignPort != null)
             {
-                Debug.DrawLine(closestPort.transform.position, activeDockingPort.transform.position, Color.white, Time.fixedDeltaTime);
-                Transform toMatch = closestPort.transform;
+                Debug.DrawLine(closestForeignPort.transform.position, activeDockingPort.transform.position, Color.white, Time.fixedDeltaTime);
+                Transform toMatch = closestForeignPort.transform;
 
 
                 Vector3 upForce = toMatch.up * pullForce;
@@ -208,28 +223,39 @@ namespace ShipsLogic
                 
                 Vector3 pullTowardForce = (toMatch.position - activeDockingPort.transform.position).normalized * pullForce;
                 bodiesHolder.Rigidbody.AddForceAtPosition(pullTowardForce,activeDockingPort.transform.position);
+
+                isPulling = true;
             }
         }
 
-        DockingPort ClosestDockingPort()
+        void UpdateClosestDockingPorts()
         {
-            DockingPort foundPort = null;
+            activeDockingPort = null;
+            closestForeignPort = null;
+            
             float closestSquareDistance = float.MaxValue;
-            foreach(DockingPort dockingPort in DockingPort.allDockingPorts)
+            
+            foreach(DockingPort targetDockingPort in DockingPort.allDockingPorts)
             {
-                if(!dockingPorts.Contains(dockingPort))
+                if(!dockingPorts.Contains(targetDockingPort))
                 {
-                    float distance = MyUtils.SquaredDistance(activeDockingPort.transform.position, dockingPort.transform.position);
-                    if (distance < maxSquaredDistance && distance<closestSquareDistance)
+                    foreach (DockingPort ownDockinPort in dockingPorts)
                     {
-                        closestSquareDistance = distance;
-                        foundPort = dockingPort;
+                        float distance = MyUtils.SquaredDistance(ownDockinPort.transform.position, targetDockingPort.transform.position);
+                        if (distance < maxSquaredDistance && distance < closestSquareDistance)
+                        {
+                            if (ownDockinPort.transform.InverseTransformPoint(targetDockingPort.transform.position).z > 0 && targetDockingPort.transform.InverseTransformPoint(ownDockinPort.transform.position).z > 0)//means the two docking ports are facing each other
+                            {
+                                closestSquareDistance = distance;
+                                closestForeignPort = targetDockingPort;
+                                activeDockingPort = ownDockinPort;
+                            }
+                        }
                     }
-                    
+
                 }
             }
 
-            return foundPort;
         }
 
         private void OnDestroy()
@@ -310,7 +336,7 @@ namespace ShipsLogic
             RpcPull();
 
             //Debug.Log("trying to dock");
-            if (activeDockingPort.TargetDockingPort != null && activeDockingPort.TargetDockingPort.IsAvailable)
+            if (activeDockingPort != null && activeDockingPort.TargetDockingPort != null && activeDockingPort.TargetDockingPort.IsAvailable)
             {
 
                 dockingData = ServerGenerateDockingData(activeDockingPort, activeDockingPort.TargetDockingPort);
@@ -327,7 +353,7 @@ namespace ShipsLogic
 
         #endregion
 
-        #region Commands
+        #region Rpcs
 
         [ClientRpc(channel =Channels.Unreliable, includeOwner =false)]
         void RpcPull()

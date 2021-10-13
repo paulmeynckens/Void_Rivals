@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace FeedbackElements
 {
-    public class ContinuousFeedbackGenerator : MonoBehaviour
+    public class ContinuousSoundFeedbackGenerator : MonoBehaviour
     {
 
-        protected AudioSource m_audioSource = null;
+        [SerializeField] protected AudioSource m_audioSource = null;
         [SerializeField] protected float m_maxPitch = 3;
         [SerializeField] protected float m_minPitch = -1;
         [SerializeField] protected float m_pitchChangeRate = 0.5f;
@@ -19,6 +19,9 @@ namespace FeedbackElements
             {
                 m_audioSource = GetComponent<AudioSource>();
             }
+            m_audioSource.pitch = 0;
+            m_audioSource.playOnAwake = true;
+            m_audioSource.loop = true;
         }
 
         [ClientCallback]

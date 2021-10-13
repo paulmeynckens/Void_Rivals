@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FeedbackElements
 {
-    public class TurretFeedback : ContinuousFeedbackGenerator
+    public class TurretFeedback : ContinuousSoundFeedbackGenerator
     {
 
         [SerializeField] Transform verticalBody = null;
