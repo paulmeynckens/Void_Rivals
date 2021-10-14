@@ -7,33 +7,16 @@ using Mirror;
 namespace ShipsLogic
 {
 
-    public interface IConsumeEnergy
-    {
-        float Capacity { get; set; }
-        float StoredEnergy { get; set; }
-
-        byte Index { get; set; }
-    }
-
     public class EnergyGenerator : NetworkBehaviour
     {
         [SerializeField] float totalPower = 100;
 
-        IConsumeEnergy[] rankedConsumers;
-        IConsumeEnergy[] indexedConsumers;
+
+        [SerializeField]EnergyConsumer[] rankedConsumers;
+
         public readonly SyncList<byte> energyConsumersRanks = new SyncList<byte>();
 
-        private void Awake()
-        {
-            rankedConsumers = GetComponentsInChildren<IConsumeEnergy>();
-            indexedConsumers = GetComponentsInChildren<IConsumeEnergy>();
-            for(int i = 0; i < indexedConsumers.Length; i++)
-            {
-                energyConsumersRanks.Add((byte)i);
-                indexedConsumers[i].Index =(byte) i;
-            }
 
-        }
 
         private void FixedUpdate()
         {
@@ -81,7 +64,7 @@ namespace ShipsLogic
         {
             for(int i = 0; i < rankedConsumers.Length; i++)
             {
-                energyConsumersRanks[i] =(byte) rankedConsumers[i].Index;
+                energyConsumersRanks[i] =(byte) rankedConsumers[i].ComponentIndex;
             }
         }
 
