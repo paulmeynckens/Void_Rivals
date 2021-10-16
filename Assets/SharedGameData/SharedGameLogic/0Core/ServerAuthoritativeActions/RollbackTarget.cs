@@ -125,9 +125,16 @@ namespace Core.ServerAuthoritativeActions
         }
 
 
-        public virtual void ServerDealDamage(GunData gunData, Vector3 hitPosition)
+        public virtual void ServerDealDamage(GunData gunData, RaycastHit raycastHit)
         {
-            health.ServerDealDamage(gunData.damage, hitPosition);
+            health.ServerDealDamage(gunData.damage,ServerConvertRaycastToLocal(raycastHit));
+        }
+        
+        protected RaycastHit ServerConvertRaycastToLocal(RaycastHit raycastHit)
+        {
+            raycastHit.point = transform.InverseTransformPoint(raycastHit.point);
+            raycastHit.normal = transform.InverseTransformDirection(raycastHit.normal);
+            return raycastHit;
         }
     }
 }

@@ -240,21 +240,12 @@ namespace Core.ServerAuthoritativeActions
             ammo = ammo = data.magasinSize;
         }
 
-        Vector3 ServerTestRollback(Ray ray)
+        RaycastHit ServerTestRollback(Ray ray)
         {
-            RaycastHit raycastHit;
-            RollbackReplica rollbackReplica;
-            if (!Physics.Raycast(ray, out raycastHit,data.range, data.serverRollbackMask))
-            {
-                return Vector3.zero;
-            }
-            rollbackReplica = raycastHit.collider.GetComponent<RollbackReplica>();
-            if (rollbackReplica == null)
-            {
-                return Vector3.zero;
-            }
+            RaycastHit raycastHit=new RaycastHit { };
+            Physics.Raycast(ray, out raycastHit, data.range, data.serverRollbackMask);
+            return raycastHit;
 
-            return rollbackReplica.transform.InverseTransformPoint( raycastHit.point);
         }
 
 
@@ -303,14 +294,14 @@ namespace Core.ServerAuthoritativeActions
             }
             */
 
-            Vector3 foundHitLocalPosition = ServerTestRollback(ray);
+            RaycastHit foundHit = ServerTestRollback(ray);
             rollbackTarget.ServerReleaseRollback();
-
-            if (foundHitLocalPosition!=Vector3.zero)
+             
+            if (foundHit.point!=Vector3.zero)
             {
                 Debug.Log("Hit confirmed");
                 
-                rollbackTarget.ServerDealDamage(data, foundHitLocalPosition);
+                rollbackTarget.ServerDealDamage(data, foundHit);
             }
             else
             {

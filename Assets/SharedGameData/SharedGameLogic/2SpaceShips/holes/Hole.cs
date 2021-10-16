@@ -13,7 +13,7 @@ namespace ShipsLogic.Holes
         [SerializeField] Transform holeBody = null;
 
 
-        public Transform storedTransform = null;
+
 
         public short damage = 0;
 

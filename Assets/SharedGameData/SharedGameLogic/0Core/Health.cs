@@ -43,7 +43,7 @@ namespace Core
 
 
 
-        public virtual void ServerDealDamage(short damage, Vector3 hitPosition)
+        public virtual void ServerDealDamage(short damage, RaycastHit raycastHit)
         {
             currentHealth -= damage;
             if (currentHealth < 0)
