@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace ShipsLogic
         const float DOCKING_TRANSLATION_SPEED = 10f;
         const float DOCKING_TIMEOUT = 3f;
 
-        [SerializeField]List<DockingPort> dockingPorts;
+        List<DockingPort> dockingPorts;
 
 
         private DockingPort currentlyDockedPort = null;
@@ -90,7 +91,7 @@ namespace ShipsLogic
             
             bodiesHolder = GetComponent<BodiesHolder>();
 
-
+            dockingPorts = GetComponentsInChildren<DockingPort>().ToList();
             for (int i = 0; i < dockingPorts.Count; i++)
             {
                 dockingPorts[i].Index = i;

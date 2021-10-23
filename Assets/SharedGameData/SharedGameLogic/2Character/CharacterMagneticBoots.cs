@@ -39,7 +39,7 @@ namespace CharacterLogic
 
         public override void ModeUseInput(CharacterInput characterInput)
         {
-            transform.position += (twoAxisRotator.horizontalRotator.forward * characterInput.forwardBackward + twoAxisRotator.horizontalRotator.right * characterInput.rightLeft) * Time.deltaTime;
+            transform.position += (twoAxisRotator.horizontalRotator.forward * characterInput.forwardBackward + twoAxisRotator.horizontalRotator.right * characterInput.rightLeft) *moveSpeed* Time.deltaTime;
 
             if(characterInput.forwardBackward==0 && characterInput.rightLeft == 0)//if the character has not moved, then don't try to align to hull to avoid jittering
             {

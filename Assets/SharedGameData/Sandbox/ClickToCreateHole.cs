@@ -35,7 +35,7 @@ namespace Sandbox
 
         void GenerateHole(RaycastHit p_raycastHit)
         {
-            int iterations = 0;
+
             Collider[] foundExcludingColliders = Physics.OverlapSphere(p_raycastHit.point, sphereRadius,excludedLayerMask);
 
             Vector3 movement = Vector3.zero;

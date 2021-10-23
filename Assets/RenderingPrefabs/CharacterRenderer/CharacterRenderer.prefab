@@ -55,6 +55,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 71163422231979120}
     m_Modifications:
+    - target: {fileID: 611319407021110524, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: holdableItems._keys.Array.data[2]
+      value: MGA
+      objectReference: {fileID: 0}
+    - target: {fileID: 611319407021110524, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: holdableItems._keys.Array.data[3]
+      value: MDA
+      objectReference: {fileID: 0}
+    - target: {fileID: 611319407021110524, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: holdableItems._keyValues.Array.data[2]
+      value: MGA
+      objectReference: {fileID: 0}
+    - target: {fileID: 611319407021110524, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: holdableItems._keyValues.Array.data[3]
+      value: MDA
+      objectReference: {fileID: 0}
     - target: {fileID: 8482026759908062638, guid: 218c89b1385a74c4bb2b08be4643166e,
         type: 3}
       propertyPath: m_RootOrder
@@ -115,7 +135,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Characters_04 Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2289426304633802407, guid: 218c89b1385a74c4bb2b08be4643166e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 218c89b1385a74c4bb2b08be4643166e, type: 3}
 --- !u!4 &5791082334459981618 stripped
 Transform:

@@ -13,11 +13,7 @@ namespace FeedbackElements.GunsAnimators
         [SerializeField] float maxGunDegPerSecond = 300f;
 
 
-        protected override void Awake()
-        {
-            base.Awake();
-            //instantFeedBackGenerator = GetComponent<RandomSoundPlayer>();
-        }
+
 
         protected override void PlayShootAnimation()
         {

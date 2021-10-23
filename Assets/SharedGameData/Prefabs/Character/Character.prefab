@@ -967,12 +967,32 @@ PrefabInstance:
     - target: {fileID: 3284231429422067296, guid: 71c3508670aa789438d22b14770ad29f,
         type: 3}
       propertyPath: holdableItems.isExpanded
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284231429422067296, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: holdableItems._keys.Array.data[2]
+      value: MGA
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284231429422067296, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: holdableItems._keys.Array.data[3]
+      value: MDA
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284231429422067296, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: holdableItems._keyValues.Array.data[2]
+      value: MGA
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284231429422067296, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: holdableItems._keyValues.Array.data[3]
+      value: MDA
       objectReference: {fileID: 0}
     - target: {fileID: 3284231429422067296, guid: 71c3508670aa789438d22b14770ad29f,
         type: 3}
       propertyPath: holdableItems.reorderableList.isExpanded
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3646405197825632595, guid: 71c3508670aa789438d22b14770ad29f,
         type: 3}
@@ -999,7 +1019,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4192171542396376123, guid: 71c3508670aa789438d22b14770ad29f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 71c3508670aa789438d22b14770ad29f, type: 3}
 --- !u!4 &7603581603881230584 stripped
 Transform:

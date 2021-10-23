@@ -28,7 +28,7 @@ namespace Core.ServerAuthoritativeActions
         /// <summary>
         /// id, rollback tick, shot tick, travel time
         /// </summary>
-        public event Action<string, ushort,ushort,float> OnHitColliderRollback;
+        public event Action<string, ushort,ushort> OnHitColliderRollback=delegate { } ;
         public event Action OnNeedFeedback;
         ParticleSystem _particleSystem;
         
@@ -103,7 +103,7 @@ namespace Core.ServerAuthoritativeActions
             {
                 Debug.Log("hit found");
                 float travelTime = Time.time - shotTime;
-                OnHitColliderRollback?.Invoke(rollbackTarget.id, rollbackTarget.clientTick, shotTick,Time.time-shotTime) ;
+                OnHitColliderRollback(rollbackTarget.id, rollbackTarget.clientTick, shotTick) ;
             }
 
             Explode();

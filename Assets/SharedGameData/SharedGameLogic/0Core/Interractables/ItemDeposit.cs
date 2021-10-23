@@ -12,7 +12,7 @@ namespace Core.Interractables
         //[SerializeField] protected ItemDepotMode itemDepotMode = ItemDepotMode.giver;
 
         [SerializeField] protected string givenItemType = null;
-        [SerializeField] protected string requestedItemType = null;
+        [SerializeField] protected string requestedItemType = "NO";
         [SerializeField] bool infiniteSupply = false;
         [SerializeField] protected short maxQuantity = 1;
 
@@ -23,13 +23,18 @@ namespace Core.Interractables
         /// <summary>
         /// current quantity, max quantity
         /// </summary>
-        public event Action<short, short> OnChangeQuantity;
+        public event Action<short, short> OnChangeQuantity=delegate { };
 
-        [SyncVar(hook = nameof(ClientChangeQuantityVisual))] [HideInInspector] public short itemQuantity = 0;
+        public short ItemQuantity
+        {
+            get => itemQuantity;
+        }
+
+        [SyncVar(hook = nameof(ClientChangeQuantityVisual))] protected short itemQuantity = 0;
 
         protected virtual void ClientChangeQuantityVisual(short _old, short _new)
         {
-            OnChangeQuantity?.Invoke(_new, maxQuantity);
+            OnChangeQuantity(_old, _new);
         }
 
 
@@ -53,7 +58,7 @@ namespace Core.Interractables
         {
             ICanGrabItem characterHands = p_requestingPlayer.GetComponent<ICanGrabItem>();
 
-            if (characterHands.HeldItemType == "" && givenItemType != " ") //give an item to the player
+            if (characterHands.HeldItemType == requestedItemType) //give an item to the player
             {
                 if (infiniteSupply)
                 {
@@ -65,7 +70,6 @@ namespace Core.Interractables
                     {
                         characterHands.ServerGrabItem(givenItemType);
                         itemQuantity--;
-                        OnChangeQuantity?.Invoke(itemQuantity, maxQuantity);
 
                         if (itemQuantity <= 0)
                         {

@@ -18,7 +18,7 @@ namespace Core.RuntimeSpawning
             {
                 GameObject instancied= Instantiate(prefabAndLocation.prefab);
                 RuntimeSpawned runtimeSpawned = instancied.GetComponent<RuntimeSpawned>();
-                runtimeSpawned.spawnedPosition = new RuntimeSpawnedPosition { localPosition = prefabAndLocation.location.localPosition, localRotation = prefabAndLocation.location.localRotation, parentShipNetId = netId };
+                runtimeSpawned.SpawnedPosition = new RuntimeSpawnedPosition { localPosition = prefabAndLocation.location.localPosition, localRotation = prefabAndLocation.location.localRotation, parentShipNetId = netId };
 
                 NetworkServer.Spawn(instancied);
             }

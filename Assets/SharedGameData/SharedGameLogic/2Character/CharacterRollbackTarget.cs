@@ -10,6 +10,7 @@ namespace CharacterLogic
         
         [SerializeField] float damageMultiplier = 1;
 
+        
         public override void ServerDealDamage(GunData gunData, RaycastHit raycastHit)
         {
             health.ServerDealDamage((short)(gunData.damage * damageMultiplier), ServerConvertRaycastToLocal(raycastHit));

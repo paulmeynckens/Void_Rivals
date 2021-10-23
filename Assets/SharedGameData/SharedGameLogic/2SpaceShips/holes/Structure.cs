@@ -16,7 +16,7 @@ namespace ShipsLogic.Holes
 
         List<Hole> holes = new List<Hole>();
 
-        const float DAMAGE_TO_RADIUS = 1;
+        const float DAMAGE_TO_RADIUS_RATIO = 0.1f;
 
         [SerializeField] LayerMask hullLayerMask;
         [SerializeField] LayerMask excludedLayerMask;
@@ -26,31 +26,26 @@ namespace ShipsLogic.Holes
 
         public override void ServerDealDamage(short damage, RaycastHit raycastHit)
         {
-            base.ServerDealDamage(damage, raycastHit);
-            if (currentHealth <= 0)
-            {
+            
 
-                return;
-            }
 
             float sphereRadius = ConvertDamageToRadius(damage);
 
             GameObject holeInstance = ServerPopHole(raycastHit,sphereRadius) ;
-
-            if (holeInstance = null)
+            if (holeInstance == null)
             {
+                Debug.LogError("No hole generated");
                 return;
             }
 
-            holeInstance.transform.parent = hull;
+            holeInstance.transform.SetParent(hull);
 
 
             Hole hole = holeInstance.GetComponent<Hole>();
 
-            hole.remainingWork = damage;
-            hole.damage = damage;
+            hole.Damage = damage;
             RuntimeSpawned runtimeSpawned = hole.GetComponent<RuntimeSpawned>();
-            runtimeSpawned.spawnedPosition = new RuntimeSpawnedPosition { localPosition = holeInstance.transform.localPosition, localRotation = holeInstance.transform.localRotation, parentShipNetId = netId };
+            runtimeSpawned.SpawnedPosition = new RuntimeSpawnedPosition { localPosition = holeInstance.transform.localPosition, localRotation = holeInstance.transform.localRotation, parentShipNetId = netId };
 
 
             holes.Add(hole);
@@ -60,12 +55,14 @@ namespace ShipsLogic.Holes
 
             NetworkServer.Spawn(holeInstance);
 
+            base.ServerDealDamage(damage, raycastHit);
         }
 
 
         GameObject ServerPopHole(RaycastHit localRaycast, float sphereRadius)
         {
             RaycastHit p_raycastHit = ServerConvertHitToWorld(localRaycast);
+            Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + p_raycastHit.normal);
 
             Collider[] foundExcludingColliders = Physics.OverlapSphere(p_raycastHit.point, sphereRadius, excludedLayerMask);
 
@@ -82,8 +79,14 @@ namespace ShipsLogic.Holes
                         movement += (p_raycastHit.point - sphereCollider.transform.position).normalized * moveAmplitude;
                     }
                 }
-                Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + movement, Color.white, 5);
+                Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + movement, Color.red, 5);
 
+            }
+            else
+            {
+                Quaternion holeRotation = Quaternion.LookRotation(p_raycastHit.normal, Vector3.up);
+
+                return Instantiate(holePrefab, p_raycastHit.point, holeRotation);
             }
 
             Ray ray = new Ray { origin = p_raycastHit.point + movement + p_raycastHit.normal, direction = -p_raycastHit.normal };
@@ -98,7 +101,7 @@ namespace ShipsLogic.Holes
                 }
                 Quaternion holeRotation = Quaternion.LookRotation(newRaycastHit.normal, Vector3.up);
 
-                return GameObject.Instantiate(holePrefab, newRaycastHit.point, holeRotation);
+                return Instantiate(holePrefab, newRaycastHit.point, holeRotation);
 
             }
             else
@@ -138,7 +141,7 @@ namespace ShipsLogic.Holes
 
             foreach (Hole hole in holes)
             {
-                totalDamage += hole.damage;
+                totalDamage += hole.Damage;
             }
             currentHealth = (short)(maxHealth - totalDamage);
         }
@@ -208,9 +211,9 @@ namespace ShipsLogic.Holes
         #endregion
 
 
-        public static float ConvertDamageToRadius(float damage)
+        public static float ConvertDamageToRadius(short damage)
         {
-            return Mathf.Sqrt(damage) * DAMAGE_TO_RADIUS;
+            return Mathf.Sqrt(damage) * DAMAGE_TO_RADIUS_RATIO;
         }
 
     }
