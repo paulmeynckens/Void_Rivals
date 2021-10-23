@@ -2177,7 +2177,7 @@ PrefabInstance:
     - target: {fileID: 21472932733186692, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
       propertyPath: ammo
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 21472932733186692, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
@@ -2392,6 +2392,11 @@ PrefabInstance:
       propertyPath: hull
       value: 
       objectReference: {fileID: 7338415839335231512}
+    - target: {fileID: 6292104867443678685, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
+      propertyPath: interior
+      value: 
+      objectReference: {fileID: 8029778166144068871}
     - target: {fileID: 6292104867443678685, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
       propertyPath: holePrefab

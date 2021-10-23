@@ -14,7 +14,7 @@ namespace ShipsRenderer
         void Update()
         {
             float xzScale= Structure.ConvertDamageToRadius(hole.Damage);
-            Vector3 scale = new Vector3(xzScale,0,xzScale) ;
+            Vector3 scale = new Vector3(xzScale, xzScale,1) ;
             transform.localScale = scale; 
 
         

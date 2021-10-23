@@ -107,7 +107,7 @@ namespace Core.ServerAuthoritativeActions
 
             RaycastHit raycastHit= ServerTestRollback(ray, gunData);
 
-            if (raycastHit.collider!=null && raycastHit.collider.gameObject == gameObject)
+            if (raycastHit.collider!=null && raycastHit.collider.gameObject == rollbackReplica.gameObject)
             {
                 Debug.Log("Hit confirmed");
                 ServerDealDamage(gunData, raycastHit);

@@ -16,15 +16,13 @@ namespace ShipsRenderer
         }
 
 
-        void SeparateHoleRenderer()
+        void SeparateHoleRenderer(Transform targetCollider, Vector3 targetLocalPosition, Quaternion targetLocalRotation)
         {
-            Vector3 savedLocalPosition = transform.parent.localPosition;
-            Quaternion savedLocalRotation = transform.parent.localRotation;
+            Transform targetParent = LinkToRenderer.shipsRenderersLinks[targetCollider];
+            transform.parent = targetParent;
 
-            transform.parent = LinkToRenderer.shipsRenderersLinks[transform.parent];
-
-            transform.localPosition = savedLocalPosition;
-            transform.localRotation = savedLocalRotation;
+            transform.localPosition = targetLocalPosition;
+            transform.localRotation = targetLocalRotation;
         }
     }
 }

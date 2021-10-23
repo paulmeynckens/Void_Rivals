@@ -12,11 +12,11 @@ namespace ShipsLogic.Holes
     {
 
         [SerializeField] GameObject holePrefab = null;
-        [SerializeField] Transform hull = null;
+        [SerializeField] Transform interior = null;
 
         List<Hole> holes = new List<Hole>();
 
-        const float DAMAGE_TO_RADIUS_RATIO = 0.1f;
+        const float DAMAGE_TO_RADIUS_RATIO = 0.05f;
 
         [SerializeField] LayerMask hullLayerMask;
         [SerializeField] LayerMask excludedLayerMask;
@@ -38,15 +38,12 @@ namespace ShipsLogic.Holes
                 return;
             }
 
-            holeInstance.transform.SetParent(hull);
+            holeInstance.transform.parent=interior;
 
 
             Hole hole = holeInstance.GetComponent<Hole>();
 
             hole.Damage = damage;
-            RuntimeSpawned runtimeSpawned = hole.GetComponent<RuntimeSpawned>();
-            runtimeSpawned.SpawnedPosition = new RuntimeSpawnedPosition { localPosition = holeInstance.transform.localPosition, localRotation = holeInstance.transform.localRotation, parentShipNetId = netId };
-
 
             holes.Add(hole);
             hole.OnServerHoleRepair += ServerRepair;
@@ -62,7 +59,7 @@ namespace ShipsLogic.Holes
         GameObject ServerPopHole(RaycastHit localRaycast, float sphereRadius)
         {
             RaycastHit p_raycastHit = ServerConvertHitToWorld(localRaycast);
-            Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + p_raycastHit.normal);
+            Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + p_raycastHit.normal,Color.white, 1f);
 
             Collider[] foundExcludingColliders = Physics.OverlapSphere(p_raycastHit.point, sphereRadius, excludedLayerMask);
 
@@ -113,8 +110,8 @@ namespace ShipsLogic.Holes
 
         RaycastHit ServerConvertHitToWorld(RaycastHit raycastHit)
         {
-            raycastHit.point = hull.TransformPoint(raycastHit.point);
-            raycastHit.point = hull.TransformDirection(raycastHit.normal);
+            raycastHit.point = interior.TransformPoint(raycastHit.point);
+            raycastHit.normal = interior.TransformDirection(raycastHit.normal);
             return raycastHit;
         }
 

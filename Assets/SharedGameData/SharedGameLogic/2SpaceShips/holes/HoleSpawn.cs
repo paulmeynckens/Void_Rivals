@@ -9,8 +9,8 @@ namespace ShipsLogic.Holes
 {
     public class HoleSpawn : NetworkBehaviour
     {
-        public event Action OnHolePlaced = delegate { };
-        [SyncVar(hook =nameof (ClientPlaceHole))] HoleSpot positionRotation = new HoleSpot  { holeGeneratorIdentity=0, localPosition = Vector3.zero, localRotation=Quaternion.identity };
+        public event Action<Transform,Vector3,Quaternion> OnHolePlaced = delegate { };
+        [SyncVar(hook =nameof (ClientPlaceHole))] HoleSpot positionRotation ;
         
 
         void ClientPlaceHole(HoleSpot _old, HoleSpot _new)
@@ -18,7 +18,7 @@ namespace ShipsLogic.Holes
             transform.parent = BodiesHolder.interiors[NetworkIdentity.spawned[_new.holeGeneratorIdentity]];
             transform.localPosition = _new.localPosition;
             transform.localRotation = _new.localRotation;
-            OnHolePlaced();
+            OnHolePlaced(transform.parent,_new.localPosition,_new.localRotation);
         }
         public override void OnStartServer()
         {
