@@ -8,55 +8,52 @@ using Core.Interractables;
 namespace ShipsLogic.Holes
 
 {
-    public class Hole : Workable
+    public class Hole :Interractable
     {
-        [SerializeField] Transform holeBody = null;
+        [SerializeField] string requestedTool="RT";
+        [SerializeField] SphereCollider sphereCollider = null;
 
-
-        public Transform storedTransform = null;
-
-        public short damage = 0;
-
-        const float MINIMUM_SCALE = 0.2f;
-        const short MAXIMUM_DAMAGE = 500;
-
-        public event Action<Hole> OnServerHoleRepair;
-
-        protected override void Awake()
+        const short HOLE_REPAIR_RATE = 3;
+        public short Damage
         {
-            base.Awake();
+            get => damage;
+            set=> damage = value;
+        }
+        
+        [SyncVar]short damage = 0;
+
+
+        public event Action<Hole> OnServerHoleRepair=delegate { };
+
+        private void Start()
+        {
+            sphereCollider.radius = Structure.ConvertDamageToRadius(damage);
             Debug.Log("poping hole");
         }
-        protected override void OnServerWorkFinished()
+
+        protected override bool ServerCanUseObject(NetworkIdentity requestingPlayer)
         {
-            base.OnServerWorkFinished();
-            OnServerHoleRepair?.Invoke(this);
+
+            ICanGrabItem canGrabItem = requestingPlayer.GetComponent<ICanGrabItem>();
+            if (canGrabItem.HeldItemType == requestedTool)
+            {
+                return true;
+            }
+            return false;
         }
 
-        #region SyncVars+hooks
-
-
-        protected override void ClientChangeVisual(short _old, short _new)
+        protected override void ServerUseObject(NetworkIdentity requestingPlayer)
         {
-            base.ClientChangeVisual(_old, _new);
-            float newScale = MINIMUM_SCALE + ((1 - MINIMUM_SCALE) * _new / MAXIMUM_DAMAGE);
-            Vector3 scale;
-            scale.x = newScale;
-            scale.y = newScale;
-            scale.z = 1;
+            base.ServerUseObject(requestingPlayer);
+            damage -= HOLE_REPAIR_RATE;
+            if (damage <= 0)
+            {
+                damage = 0;
+                OnServerHoleRepair(this);
+            }
 
-            holeBody.transform.localScale = scale;
+
         }
-
-
-        #endregion
-
-
-
-
-
-
-
 
     }
 }

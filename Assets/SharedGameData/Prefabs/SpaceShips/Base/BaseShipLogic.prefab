@@ -101,7 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  activatedByLocalPlayer: 0
   sittingPosition: {fileID: 0}
 --- !u!114 &6874981033528846826
 MonoBehaviour:
@@ -165,7 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  activatedByLocalPlayer: 0
   givenItemType: 0
   requestedItemType: 1
   infiniteSupply: 0
@@ -186,7 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  activatedByLocalPlayer: 0
   givenItemType: 1
   requestedItemType: 4
   infiniteSupply: 0
@@ -226,7 +223,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  activatedByLocalPlayer: 0
   givenItemType: 0
   requestedItemType: 2
   infiniteSupply: 0
@@ -247,7 +243,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  activatedByLocalPlayer: 0
   givenItemType: 2
   requestedItemType: 4
   infiniteSupply: 0
@@ -303,9 +298,15 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   currentHealth: 100
-  holesLocation: []
   holePrefab: {fileID: 4648340888243257452, guid: 2aa48a3531fa4744eac1db6e66c94bb4,
     type: 3}
+  hull: {fileID: 0}
+  hullLayerMask:
+    serializedVersion: 2
+    m_Bits: 134217728
+  excludedLayerMask:
+    serializedVersion: 2
+    m_Bits: 33554432
 --- !u!114 &180661866915325284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  activatedByLocalPlayer: 0
   givenItemType: 4
   requestedItemType: 4
   infiniteSupply: 0
@@ -341,7 +341,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   dockingPorts: []
-  activeDockingPort: {fileID: 0}
   pullForce: 50000
   maxSquaredDistance: 20
   leverArm: 50
@@ -402,6 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eec3b0ff4827904d95925014ce5f5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   interior: {fileID: 0}
   externalCollider: {fileID: 0}
 --- !u!114 &4881315005927993020

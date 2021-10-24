@@ -14,7 +14,7 @@ namespace Core.ServerAuthoritativeActions
         ushort currentTick;
 
         public event Action OnNeedFeedback;
-        public event Action<short, short> OnChangeQuantity;
+        public event Action<short, short> OnChangeQuantity=delegate { };
 
         Dictionary<ushort, short> magasineStates = new Dictionary<ushort, short>();
 
@@ -44,7 +44,7 @@ namespace Core.ServerAuthoritativeActions
         [SyncVar(hook = nameof(ClientCorrectMagasineState))][SerializeField] protected short ammo = 0;
         void ClientCorrectMagasineState(short _old, short _new)
         {
-            OnChangeQuantity?.Invoke(_new, data.magasinSize);
+            OnChangeQuantity(_old, _new);
         }
 
 
@@ -57,7 +57,7 @@ namespace Core.ServerAuthoritativeActions
 
         const int SERVER_MAX_ROLLBACKS=64;
 
-        Dictionary<ushort, Ray> serverRaysMemory = null;
+        readonly Dictionary<ushort, Ray> serverRaysMemory = new Dictionary<ushort, Ray>();
         List<ushort> keystoremove = null;
 
 
@@ -124,7 +124,7 @@ namespace Core.ServerAuthoritativeActions
                 if (foundTarget != null)
                 {
                     Debug.Log("Target hit! netId : " + foundTarget.id);
-                    CmdTestHit(foundTarget.id, foundTarget.clientTick, tick, 0);
+                    CmdTestHit(foundTarget.id, foundTarget.clientTick, tick);
 
                 }
             }
@@ -191,17 +191,18 @@ namespace Core.ServerAuthoritativeActions
         public override void OnStartServer()
         {
             base.OnStartServer();
-            serverRaysMemory = new Dictionary<ushort, Ray>();
             
         }
 
         void ServerRegisterShooterDatas(ushort tick)
         {
+            
             if (shootPoint == null || data == null)
             {
                 serverRaysMemory.Clear();
                 return;
             }
+            
             if (serverRaysMemory.ContainsKey(tick))
             {
                 return;
@@ -240,22 +241,7 @@ namespace Core.ServerAuthoritativeActions
             ammo = ammo = data.magasinSize;
         }
 
-        Vector3 ServerTestRollback(Ray ray)
-        {
-            RaycastHit raycastHit;
-            RollbackReplica rollbackReplica;
-            if (!Physics.Raycast(ray, out raycastHit,data.range, data.serverRollbackMask))
-            {
-                return Vector3.zero;
-            }
-            rollbackReplica = raycastHit.collider.GetComponent<RollbackReplica>();
-            if (rollbackReplica == null)
-            {
-                return Vector3.zero;
-            }
 
-            return rollbackReplica.transform.InverseTransformPoint( raycastHit.point);
-        }
 
 
 
@@ -278,7 +264,7 @@ namespace Core.ServerAuthoritativeActions
         }
 
         [Command]
-        void CmdTestHit(string rollbackId, ushort rollbackTick,  ushort shotTick, float travelTime)
+        void CmdTestHit(string rollbackId, ushort rollbackTick,  ushort shotTick)
         {
             Debug.Log("testing hit : Id=" + rollbackId + "target tick : " + rollbackTick + "shot tick : " + shotTick);
             if (!serverRaysMemory.ContainsKey(shotTick))
@@ -291,32 +277,12 @@ namespace Core.ServerAuthoritativeActions
 
             RollbackTarget rollbackTarget = RollbackTarget.rollbackTargets[rollbackId];
 
-            rollbackTarget.ServerPrepareRollback(rollbackTick);
-
             Ray ray = serverRaysMemory[shotTick];
-            Debug.DrawRay(ray.origin,ray.direction,Color.white,1);
+            
 
-            /*
-            if (data.shootsProjectile)
-            {
-                ray.direction = ray.direction * travelTime; // recalculates the shoot ray taking in account the travel time of the projectile with margin
-            }
-            */
+            rollbackTarget.ServerTestHit(rollbackTick, ray, data);
 
-            Vector3 foundHitLocalPosition = ServerTestRollback(ray);
-            rollbackTarget.ServerReleaseRollback();
-
-            if (foundHitLocalPosition!=Vector3.zero)
-            {
-                Debug.Log("Hit confirmed");
-                
-                rollbackTarget.ServerDealDamage(data, foundHitLocalPosition);
-            }
-            else
-            {
-                Debug.Log("hit not confirmed");
-            }
-
+            
         }
 
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace Core.ServerAuthoritativeActions
 
 {
+    [DefaultExecutionOrder(+1)]
     public class RollbackTarget : MonoBehaviour
     {
         public ushort clientTick = 0;
@@ -16,7 +17,7 @@ namespace Core.ServerAuthoritativeActions
         [SerializeField] protected Health health=null;
 
 
-        public RollbackReplica rollbackReplica=null;
+        [SerializeField] GameObject rollbackReplica=null;
 
         public static Dictionary<string, RollbackTarget> rollbackTargets=null;
 
@@ -60,14 +61,7 @@ namespace Core.ServerAuthoritativeActions
                 rollbackTargets.Add(id, this);
             }
         }
-        /*
-        public void SetupAuthoritativeMovement(ServerAuthoritativeMovement serverAuthoritativeMovement)
-        {
-            authoritativeMovement = serverAuthoritativeMovement;
-            authoritativeMovement.OnServerMove += ServerRegisterPosition;
-            authoritativeMovement.OnClientMove += ClientUpdateTick;
-        }
-        */
+
 
         [ClientCallback]
         void ClientUpdateTick(ushort p_tick)
@@ -107,11 +101,30 @@ namespace Core.ServerAuthoritativeActions
             }
         }
 
-        public void ServerPrepareRollback(ushort _tick)
+        public void ServerTestHit(ushort tick, Ray ray, GunData gunData)
+        {
+            ServerPrepareRollback(tick);
+
+            RaycastHit raycastHit= ServerTestRollback(ray, gunData);
+
+            if (raycastHit.collider!=null && raycastHit.collider.gameObject == rollbackReplica.gameObject)
+            {
+                Debug.Log("Hit confirmed");
+                ServerDealDamage(gunData, raycastHit);
+            }
+            else
+            {
+                Debug.Log("Hit not confirmed");
+            }
+
+            ServerReleaseRollback();
+        }
+
+        void ServerPrepareRollback(ushort _tick)
         {
             if (!memory.ContainsKey(_tick))
             {
-                Debug.LogError("tick not contained : "+ _tick + "last stored tick :"  +lastServerStoredTick);
+                Debug.LogError("tick not contained : "+ _tick + " last stored tick :"  +lastServerStoredTick);
                 return;
             }
             rollbackReplica.transform.position = memory[_tick].position;
@@ -119,15 +132,31 @@ namespace Core.ServerAuthoritativeActions
             rollbackReplica.gameObject.SetActive(true);
 
         }
-        public void ServerReleaseRollback()
+        void ServerReleaseRollback()
         {
-            rollbackReplica.gameObject.SetActive(false);
+            rollbackReplica.SetActive(false);
         }
 
-
-        public virtual void ServerDealDamage(GunData gunData, Vector3 hitPosition)
+        RaycastHit ServerTestRollback(Ray ray, GunData data)
         {
-            health.ServerDealDamage(gunData.damage, hitPosition);
+            
+            Debug.DrawLine(ray.origin,ray.origin+ ray.direction*data.range, Color.white,1);
+            RaycastHit raycastHit;
+            Physics.Raycast(ray, out raycastHit, data.range, data.serverRollbackMask);
+            return raycastHit;
+
+        }
+
+        public virtual void ServerDealDamage(GunData gunData, RaycastHit raycastHit)
+        {
+            health.ServerDealDamage(gunData.damage,ServerConvertRaycastToLocal(raycastHit));
+        }
+        
+        protected RaycastHit ServerConvertRaycastToLocal(RaycastHit raycastHit)
+        {
+            raycastHit.point = rollbackReplica.transform.InverseTransformPoint(raycastHit.point);
+            raycastHit.normal = rollbackReplica.transform.InverseTransformDirection(raycastHit.normal);
+            return raycastHit;
         }
     }
 }

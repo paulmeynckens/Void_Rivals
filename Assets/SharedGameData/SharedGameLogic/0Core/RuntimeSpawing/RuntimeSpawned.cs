@@ -9,12 +9,16 @@ namespace Core.RuntimeSpawning
     public class RuntimeSpawned : NetworkBehaviour
     {
         [SerializeField] Transform innerPart = null;
-        [SerializeField] Transform collidersHolder = null;
+        [SerializeField] Transform outerPart = null;
         BodiesHolder bodies = null;
 
 
-        
-        [SyncVar][HideInInspector] public RuntimeSpawnedPosition spawnedPosition=new RuntimeSpawnedPosition { localPosition=Vector3.zero, localRotation=Quaternion.identity, parentShipNetId=0 };
+        public RuntimeSpawnedPosition SpawnedPosition
+        {
+            set => spawnedPosition = value;
+        }
+
+        [SyncVar] RuntimeSpawnedPosition spawnedPosition=new RuntimeSpawnedPosition { localPosition=Vector3.zero, localRotation=Quaternion.identity, parentShipNetId=0 };
 
 
         private void Start()
@@ -40,9 +44,9 @@ namespace Core.RuntimeSpawning
 
 
 
-        protected virtual void PlaceInsideAndOutside(Transform inside, Transform outside, Transform colliders )
+        protected virtual void PlaceInsideAndOutside(Transform inside, Transform original, Transform colliders )
         {
-            transform.parent = outside;
+            transform.parent = original;
             transform.localPosition = spawnedPosition.localPosition;
             transform.localRotation = spawnedPosition.localRotation;
 
@@ -53,11 +57,11 @@ namespace Core.RuntimeSpawning
                 innerPart.localRotation = spawnedPosition.localRotation;
             }
 
-            if (collidersHolder != null )
+            if (outerPart != null )
             {
-                collidersHolder.parent = colliders;
-                collidersHolder.localPosition = spawnedPosition.localPosition;
-                collidersHolder.localRotation = spawnedPosition.localRotation;
+                outerPart.parent = colliders;
+                outerPart.localPosition = spawnedPosition.localPosition;
+                outerPart.localRotation = spawnedPosition.localRotation;
             }
         }
 

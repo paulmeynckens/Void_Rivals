@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Core;
-using Assets.MultiAudioListener;
+
 
 namespace Core
 {
@@ -12,14 +12,14 @@ namespace Core
         ParticleSystem _particleSystem;
 
 
-        MultiAudioSource audioSource;
+        AudioSource audioSource;
 
         Animator animator;
 
         private void Start()
         {
             _particleSystem = GetComponentInChildren<ParticleSystem>();
-            audioSource = GetComponentInChildren<MultiAudioSource>();
+            audioSource = GetComponentInChildren<AudioSource>();
             animator = GetComponent<Animator>();
 
 

@@ -10,8 +10,6 @@ namespace ShipsLogic.Guns
     public class AmmoBox : ItemDeposit
     {
 
-        GameObject currentAmmoStack = null;
-        [SerializeField]ShipGunData gunData = null;
         [SerializeField] string requestedItemWhenEmpty = "AB";
         
 
@@ -26,44 +24,11 @@ namespace ShipsLogic.Guns
         protected override void ServerFill()
         {
             base.ServerFill();
-            itemQuantity = gunData.ammoPerRack;
+            itemQuantity = maxQuantity;
             requestedItemType = null;
 
         }
 
-        #region Customisation
-        public void ResetGun()
-        {
-
-            if (currentAmmoStack != null)
-            {
-                Destroy(currentAmmoStack);
-            }
-            givenItemType = null;
-            itemQuantity = 0;
-
-        }
-
-        public void SetGun(ShipGunData newGunShape)
-        {
-
-            gunData = newGunShape;
-
-            currentAmmoStack = Instantiate(gunData.ammoPrefab, transform);
-
-            givenItemType = gunData.requestedAmmoType;
-
-            maxQuantity = gunData.ammoPerRack;
-
-            if (isServer)
-            {
-                itemQuantity = maxQuantity;
-                //ammoRackFiller.gameObject.SetActive(false);
-            }
-
-        }
-
-        #endregion
     }
 
 }

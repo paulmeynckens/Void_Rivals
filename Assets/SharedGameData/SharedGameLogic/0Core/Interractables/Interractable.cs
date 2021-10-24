@@ -11,7 +11,7 @@ namespace Core.Interractables
         float lastSelectTime = 0;
         public event Action OnRefuse;
 
-        public bool activatedByLocalPlayer = false;
+        //public bool activatedByLocalPlayer = false;
 
         protected virtual void Awake()
         {

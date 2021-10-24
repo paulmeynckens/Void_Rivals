@@ -7,11 +7,13 @@ namespace CharacterLogic
 {
     public class CharacterRollbackTarget : RollbackTarget
     {
+        
         [SerializeField] float damageMultiplier = 1;
 
-        public override void ServerDealDamage(GunData gunData, Vector3 hitPosition)
+        
+        public override void ServerDealDamage(GunData gunData, RaycastHit raycastHit)
         {
-            health.ServerDealDamage((short)(gunData.damage * damageMultiplier), hitPosition);
+            health.ServerDealDamage((short)(gunData.damage * damageMultiplier), ServerConvertRaycastToLocal(raycastHit));
         }
     }
 }

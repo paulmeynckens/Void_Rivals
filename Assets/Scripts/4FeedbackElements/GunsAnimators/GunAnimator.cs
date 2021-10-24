@@ -10,13 +10,14 @@ namespace FeedbackElements.GunsAnimators
     {
         [SerializeField] SpaceShipGun gun=null;
         [SerializeField] AudioSource audioSource = null;
-        Animator animator;
 
+        [SerializeField] ParticleSystem m_particleSystem = null;
+ 
         protected virtual void Awake()
         {
             //gun = GetComponentInParent<SpaceShipGun>();
             gun.OnNeedFeedback += PlayShootAnimation;
-            animator = GetComponent<Animator>();
+
         }
 
         private void OnDestroy()
@@ -28,7 +29,8 @@ namespace FeedbackElements.GunsAnimators
         {
             
             audioSource.Play();
-            animator.Play("shoot");
+
+            m_particleSystem.Play();
         }
 
 

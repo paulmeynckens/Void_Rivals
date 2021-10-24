@@ -6,6 +6,7 @@ using CharacterLogic;
 using Core.Interractables;
 using RotaryHeart.Lib.SerializableDictionary;
 using Mirror;
+using GeneralRendering;
 
 namespace CharacterRenderer
 {

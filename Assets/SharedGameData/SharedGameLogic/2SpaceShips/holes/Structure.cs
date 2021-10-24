@@ -10,46 +10,41 @@ namespace ShipsLogic.Holes
 {
     public class Structure : Health
     {
-        [SerializeField] List<Transform> holesLocation = null;
-        [SerializeField] GameObject holePrefab = null;
 
+        [SerializeField] GameObject holePrefab = null;
+        [SerializeField] Transform interior = null;
 
         List<Hole> holes = new List<Hole>();
 
+        const float DAMAGE_TO_RADIUS_RATIO = 0.05f;
 
-        
-
-
-
-
-
+        [SerializeField] LayerMask hullLayerMask;
+        [SerializeField] LayerMask excludedLayerMask;
 
         #region Server
 
 
-        public override void ServerDealDamage(short damage, Vector3 localHitPosition)
+        public override void ServerDealDamage(short damage, RaycastHit raycastHit)
         {
-            base.ServerDealDamage(damage, localHitPosition);
-            if (currentHealth <= 0)
-            {
+            
 
+
+            float sphereRadius = ConvertDamageToRadius(damage);
+
+            GameObject holeInstance = ServerPopHole(raycastHit,sphereRadius) ;
+            if (holeInstance == null)
+            {
+                Debug.LogError("No hole generated");
                 return;
             }
 
-            Transform closestHoleLocation = ClosestHoleLocation(localHitPosition);
-            closestHoleLocation.gameObject.SetActive(false);
+            holeInstance.transform.parent=interior;
 
-            
 
-            GameObject holeInstance = Instantiate(holePrefab, transform);
             Hole hole = holeInstance.GetComponent<Hole>();
 
-            hole.remainingWork = damage;
-            hole.damage = damage;
-            RuntimeSpawned runtimeSpawned = hole.GetComponent<RuntimeSpawned>();
-            runtimeSpawned.spawnedPosition = new RuntimeSpawnedPosition { localPosition = closestHoleLocation.localPosition, localRotation = closestHoleLocation.localRotation, parentShipNetId = netId };
+            hole.Damage = damage;
 
-            hole.storedTransform = closestHoleLocation;
             holes.Add(hole);
             hole.OnServerHoleRepair += ServerRepair;
 
@@ -57,34 +52,68 @@ namespace ShipsLogic.Holes
 
             NetworkServer.Spawn(holeInstance);
 
+            base.ServerDealDamage(damage, raycastHit);
         }
 
-        Transform ClosestHoleLocation(Vector3 localHitPosition)
+
+        GameObject ServerPopHole(RaycastHit localRaycast, float sphereRadius)
         {
-            float smallestSquaredDistance = float.MaxValue;
-            Transform closestHoleLocation = null;
+            RaycastHit p_raycastHit = ServerConvertHitToWorld(localRaycast);
+            Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + p_raycastHit.normal,Color.white, 1f);
 
-            foreach (Transform holeLocation in holesLocation)
+            Collider[] foundExcludingColliders = Physics.OverlapSphere(p_raycastHit.point, sphereRadius, excludedLayerMask);
+
+            Vector3 movement = Vector3.zero;
+
+            if (foundExcludingColliders.Length != 0)
             {
-                if (holeLocation.gameObject.activeSelf)
-                {
-                    float squaredDistance = MyUtils.SquaredDistance(localHitPosition, holeLocation.localPosition);
-                    if (squaredDistance < smallestSquaredDistance)
-                    {
 
-                        smallestSquaredDistance = squaredDistance;
-                        closestHoleLocation = holeLocation;
+                foreach (Collider collider in foundExcludingColliders)
+                {
+                    if (collider is SphereCollider sphereCollider)
+                    {
+                        float moveAmplitude = sphereRadius + sphereCollider.radius - Vector3.Distance(p_raycastHit.point, sphereCollider.transform.position);
+                        movement += (p_raycastHit.point - sphereCollider.transform.position).normalized * moveAmplitude;
                     }
                 }
+                Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + movement, Color.red, 5);
 
             }
-            if (closestHoleLocation == null)
+            else
             {
-                Debug.LogError("no location found");
+                Quaternion holeRotation = Quaternion.LookRotation(p_raycastHit.normal, Vector3.up);
+
+                return Instantiate(holePrefab, p_raycastHit.point, holeRotation);
             }
-            return closestHoleLocation;
+
+            Ray ray = new Ray { origin = p_raycastHit.point + movement + p_raycastHit.normal, direction = -p_raycastHit.normal };
+            RaycastHit newRaycastHit;
+
+            if (Physics.Raycast(ray, out newRaycastHit, 5, hullLayerMask))
+            {
+                if (newRaycastHit.collider.gameObject != p_raycastHit.collider.gameObject)
+                {
+                    Debug.Log("Hole generation divergence : other GameObject found");
+                    return null;
+                }
+                Quaternion holeRotation = Quaternion.LookRotation(newRaycastHit.normal, Vector3.up);
+
+                return Instantiate(holePrefab, newRaycastHit.point, holeRotation);
+
+            }
+            else
+            {
+                Debug.Log("Hole generation divergence : no collider found");
+                return null;
+            }
         }
 
+        RaycastHit ServerConvertHitToWorld(RaycastHit raycastHit)
+        {
+            raycastHit.point = interior.TransformPoint(raycastHit.point);
+            raycastHit.normal = interior.TransformDirection(raycastHit.normal);
+            return raycastHit;
+        }
 
         public override void ServerDie()
         {
@@ -109,7 +138,7 @@ namespace ShipsLogic.Holes
 
             foreach (Hole hole in holes)
             {
-                totalDamage += hole.damage;
+                totalDamage += hole.Damage;
             }
             currentHealth = (short)(maxHealth - totalDamage);
         }
@@ -118,13 +147,10 @@ namespace ShipsLogic.Holes
         {
             holes.Remove(hole);
 
-            hole.storedTransform.gameObject.SetActive(true);
-
-            hole.OnServerHoleRepair -= ServerRepair;
+             hole.OnServerHoleRepair -= ServerRepair;
 
             NetworkServer.Destroy(hole.gameObject);
 
-            
             ServerCalculateHealth();
         }
 
@@ -182,7 +208,10 @@ namespace ShipsLogic.Holes
         #endregion
 
 
-
+        public static float ConvertDamageToRadius(short damage)
+        {
+            return Mathf.Sqrt(damage) * DAMAGE_TO_RADIUS_RATIO;
+        }
 
     }
 }
