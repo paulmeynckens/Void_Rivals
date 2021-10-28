@@ -18,6 +18,7 @@ namespace CharacterRenderer
     }
     [Serializable]
     public class HoldableItemsDictionnary : SerializableDictionaryBase<string, HoldableItem> { }
+
     public class CharacterIK : MonoBehaviour
     {
         [SerializeField] Transform eyes = null;
@@ -116,7 +117,7 @@ namespace CharacterRenderer
         {
             animator.SetBool("Sit", false);
             seatViewDirection = null;
-            GrabItem(characterHands.heldItemType);
+            GrabItem(characterHands.HeldItemType);
 
         }
         void Sit()

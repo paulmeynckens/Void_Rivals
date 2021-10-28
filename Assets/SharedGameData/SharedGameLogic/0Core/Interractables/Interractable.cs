@@ -28,15 +28,15 @@ namespace Core.Interractables
 
         #region Server
 
-        public virtual void ServerTryUseObject(NetworkIdentity requestingPlayer)
+        public virtual void ServerTryUseObjectE(NetworkIdentity requestingPlayer)
         {
-            if (ServerCanUseObject(requestingPlayer))
+            if (ServerCanUseObjectE(requestingPlayer))
             {
-                ServerUseObject(requestingPlayer);
+                ServerUseObjectE(requestingPlayer);
             }
         }
 
-        protected virtual bool ServerCanUseObject(NetworkIdentity requestingPlayer)
+        protected virtual bool ServerCanUseObjectE(NetworkIdentity requestingPlayer)
         {
             if (Time.time - lastSelectTime > 1)
             {
@@ -49,7 +49,33 @@ namespace Core.Interractables
             }
         }
 
-        protected virtual void ServerUseObject(NetworkIdentity requestingPlayer)
+        protected virtual void ServerUseObjectE(NetworkIdentity requestingPlayer)
+        {
+
+        }
+
+        public virtual void ServerTryUseObjectClick(NetworkIdentity requestingPlayer)
+        {
+            if (ServerCanUseObjectClick(requestingPlayer))
+            {
+                ServerUseObjectClick(requestingPlayer);
+            }
+        }
+
+        protected virtual bool ServerCanUseObjectClick(NetworkIdentity requestingPlayer)
+        {
+            if (Time.time - lastSelectTime > 1)
+            {
+                lastSelectTime = Time.time;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        protected virtual void ServerUseObjectClick(NetworkIdentity requestingPlayer)
         {
 
         }

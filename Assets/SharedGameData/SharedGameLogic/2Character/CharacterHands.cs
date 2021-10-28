@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Mirror;
-
 using Core.Interractables;
 using Core;
 
@@ -12,24 +11,24 @@ namespace CharacterLogic
     public class CharacterHands : NetworkBehaviour, ICanGrabItem
     {
 
-        CharacterGun characterGun;
-
+        
         [SerializeField] string[] loadout;
 
         public event Action<string> OnClientChangeItem = delegate { };
 
-        [SyncVar(hook = nameof(ClientGrabItem))] public string heldItemType = "NO";
+        [SyncVar(hook = nameof(ClientGrabItem))] string heldItemType = "NO";
+
+        public string HeldItemType
+        {
+            get => heldItemType;
+        }
+
         void ClientGrabItem(string _old, string _new)
         {
             OnClientChangeItem(_new);
 
         }
 
-
-        private void Awake()
-        {
-            characterGun = GetComponent<CharacterGun>();
-        }
 
         //item switching from loadout
         void FixedUpdate()
@@ -58,11 +57,6 @@ namespace CharacterLogic
                 }
             }
         }
-
-        
-        
-        string ICanGrabItem.HeldItemType => heldItemType;
-
 
 
         #region Server

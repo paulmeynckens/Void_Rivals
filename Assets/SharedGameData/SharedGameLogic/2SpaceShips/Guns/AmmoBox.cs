@@ -10,22 +10,32 @@ namespace ShipsLogic.Guns
     public class AmmoBox : ItemDeposit
     {
 
-        [SerializeField] string requestedItemWhenEmpty = "AB";
-        
+
+        short normalItemMaxQuantity;
+        string normalItemType;
+
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            normalItemMaxQuantity = maxQuantity;
+            normalItemType = itemType;
+        }
 
         public override void ServerEmpty()
         {
             base.ServerEmpty();
-            requestedItemType = requestedItemWhenEmpty;
+            itemType = "AB";
+            maxQuantity = 1;
 
         }
 
 
-        protected override void ServerFill()
+        protected override void ServerSetFull()
         {
-            base.ServerFill();
+            base.ServerSetFull();
+            maxQuantity = normalItemMaxQuantity;
             itemQuantity = maxQuantity;
-            requestedItemType = null;
+            itemType = normalItemType;
 
         }
 

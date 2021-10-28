@@ -24,7 +24,7 @@ namespace Core.Interractables
             
         }
 
-        protected override bool ServerCanUseObject(NetworkIdentity requestingPlayer)
+        protected override bool ServerCanUseObjectE(NetworkIdentity requestingPlayer)
         {
 
             ICanGrabItem canGrabItem = requestingPlayer.GetComponent<ICanGrabItem>();
@@ -35,9 +35,9 @@ namespace Core.Interractables
             return false;
         }
 
-        protected override void ServerUseObject(NetworkIdentity requestingPlayer)
+        protected override void ServerUseObjectE(NetworkIdentity requestingPlayer)
         {
-            base.ServerUseObject(requestingPlayer);
+            base.ServerUseObjectE(requestingPlayer);
             remainingWork -= WORK_RATE;
             if (remainingWork <= 0)
             {

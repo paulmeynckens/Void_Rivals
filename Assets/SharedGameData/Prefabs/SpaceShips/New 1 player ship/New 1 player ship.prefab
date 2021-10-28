@@ -3647,6 +3647,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 249343498368186820, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
+      propertyPath: itemType
+      value: MDA
+      objectReference: {fileID: 0}
+    - target: {fileID: 249343498368186820, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
       propertyPath: givenItemType
       value: MDA
       objectReference: {fileID: 0}
@@ -3659,6 +3664,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: New 1 player ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 866471858634450184, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
+      propertyPath: itemType
+      value: MGA
       objectReference: {fileID: 0}
     - target: {fileID: 866471858634450184, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
@@ -3749,6 +3759,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2667695698351548329, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
+      propertyPath: itemType
+      value: MDA
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667695698351548329, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
       propertyPath: maxQuantity
       value: 9
       objectReference: {fileID: 0}
@@ -3761,6 +3776,11 @@ PrefabInstance:
         type: 3}
       propertyPath: requestedItemType
       value: MDA
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838881332571778481, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
+      propertyPath: itemType
+      value: MGA
       objectReference: {fileID: 0}
     - target: {fileID: 4838881332571778481, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}

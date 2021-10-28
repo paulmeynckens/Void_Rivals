@@ -47,7 +47,16 @@ namespace CharacterLogic
                             currentTarget.ClientConfirm();
                         }
 
-                        CmdTryInteract();
+                        CmdTryInteractE();
+                    }
+                    if (Input.GetKey(KeyBindings.Pairs[Actions.shoot]))
+                    {
+                        if (currentTarget != null)
+                        {
+                            currentTarget.ClientConfirm();
+                        }
+
+                        CmdTryInteractClick();
                     }
                 }
 
@@ -76,14 +85,30 @@ namespace CharacterLogic
         #region Commands
 
         [Command(channel = Channels.Unreliable)]
-        void CmdTryInteract()
+        void CmdTryInteractE()
         {
             if (enabled)
             {
 
                 if (currentTarget != null)
                 {
-                    currentTarget.ServerInterract(netIdentity);
+                    currentTarget.ServerInterractE(netIdentity);
+                }
+
+
+            }
+
+        }
+
+        [Command(channel = Channels.Unreliable)]
+        void CmdTryInteractClick()
+        {
+            if (enabled)
+            {
+
+                if (currentTarget != null)
+                {
+                    currentTarget.ServerInterractClick(netIdentity);
                 }
 
 

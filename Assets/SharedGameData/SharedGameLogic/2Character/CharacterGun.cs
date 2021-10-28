@@ -18,7 +18,7 @@ namespace CharacterLogic
         }
         protected override bool CanShoot()
         {
-            if (characterHands.heldItemType != requestedItem)
+            if (characterHands.HeldItemType != requestedItem)
             {
                 return false;
             }

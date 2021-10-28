@@ -44,9 +44,9 @@ namespace Core.Interractables
 
 
         #region Server
-        protected override void ServerUseObject(NetworkIdentity requestingPlayer)
+        protected override void ServerUseObjectE(NetworkIdentity requestingPlayer)
         {
-            base.ServerUseObject(requestingPlayer);
+            base.ServerUseObjectE(requestingPlayer);
 
             if (connectionToClient != null)
             {

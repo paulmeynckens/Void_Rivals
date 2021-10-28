@@ -11,7 +11,7 @@ namespace Core.Interractables
         [SerializeField] Animator doorAnimator = null;
 
 
-        protected override void ServerUseObject(NetworkIdentity requestingPlayer)
+        protected override void ServerUseObjectE(NetworkIdentity requestingPlayer)
         {
             doorAnimator.SetBool("Open", !doorAnimator.GetBool("Open"));
 

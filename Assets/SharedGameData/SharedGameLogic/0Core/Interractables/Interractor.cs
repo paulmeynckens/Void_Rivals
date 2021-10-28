@@ -25,10 +25,15 @@ namespace Core.Interractables
 
         #region Server
 
-        public void ServerInterract(NetworkIdentity requestingPlayer)
+        public void ServerInterractE(NetworkIdentity requestingPlayer)
         {
-            interractable.ServerTryUseObject(requestingPlayer);
+            interractable.ServerTryUseObjectE(requestingPlayer);
         }
+        public void ServerInterractClick(NetworkIdentity requestingPlayer)
+        {
+            interractable.ServerTryUseObjectClick(requestingPlayer);
+        }
+
 
         #endregion
 

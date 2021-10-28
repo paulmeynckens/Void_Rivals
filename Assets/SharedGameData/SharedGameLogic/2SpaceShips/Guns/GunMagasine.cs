@@ -21,9 +21,9 @@ namespace ShipsLogic.Guns
         
 
 
-        protected override void ServerFill()
+        protected override void ServerSetFull()
         {
-            base.ServerFill();
+            base.ServerSetFull();
 
             
 
@@ -41,7 +41,7 @@ namespace ShipsLogic.Guns
             currentShape = Instantiate(newGunData.gunMagasinePrefab, transform);
 
             //m_renderer = currentShape.GetComponentInChildren<Renderer>();
-            requestedItemType = newGunData.requestedAmmoType;
+            itemType = newGunData.requestedAmmoType;
 
         }
 
@@ -52,7 +52,7 @@ namespace ShipsLogic.Guns
                 Destroy(currentShape);
             }
 
-            requestedItemType = null;
+            itemType = null;
 
         }
 

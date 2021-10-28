@@ -11,9 +11,8 @@ namespace Core.Interractables
 
         //[SerializeField] protected ItemDepotMode itemDepotMode = ItemDepotMode.giver;
 
-        [SerializeField] protected string givenItemType = null;
-        [SerializeField] protected string requestedItemType = "NO";
-        [SerializeField] bool infiniteSupply = false;
+        [SerializeField] protected string itemType = "NO";
+        [SerializeField] protected bool infiniteSupply = false;
         [SerializeField] protected short maxQuantity = 1;
 
 
@@ -47,28 +46,30 @@ namespace Core.Interractables
 
 
 
-        protected override void ServerUseObject(NetworkIdentity requestingPlayer)
+        protected override void ServerUseObjectE(NetworkIdentity requestingPlayer)
         {
-            ServerPickupOrDropObject(requestingPlayer);
+            ServerPickupObject(requestingPlayer);
         }
 
 
+
+
         [Server]
-        void ServerPickupOrDropObject(NetworkIdentity p_requestingPlayer)
+        void ServerPickupObject(NetworkIdentity p_requestingPlayer)
         {
             ICanGrabItem characterHands = p_requestingPlayer.GetComponent<ICanGrabItem>();
 
-            if (characterHands.HeldItemType == requestedItemType) //give an item to the player
+            if (characterHands.HeldItemType == "NO") //give an item to the player
             {
                 if (infiniteSupply)
                 {
-                    characterHands.ServerGrabItem(givenItemType);
+                    characterHands.ServerGrabItem(itemType);
                 }
                 else
                 {
                     if (itemQuantity > 0)
                     {
-                        characterHands.ServerGrabItem(givenItemType);
+                        characterHands.ServerGrabItem(itemType);
                         itemQuantity--;
 
                         if (itemQuantity <= 0)
@@ -82,10 +83,24 @@ namespace Core.Interractables
                     }
 
                 }
-                return;
+                
             }
 
-            if (characterHands.HeldItemType == givenItemType && givenItemType != " ") //store player's item in the depositt. 
+        }
+
+        protected override void ServerUseObjectClick(NetworkIdentity requestingPlayer)
+        {
+            ServerDropObject(requestingPlayer);
+        }
+
+        [Server]
+        void ServerDropObject(NetworkIdentity p_requestingPlayer)
+        {
+            ICanGrabItem characterHands = p_requestingPlayer.GetComponent<ICanGrabItem>();
+
+
+
+            if (characterHands.HeldItemType == itemType) //store player's item in the depositt. 
             {
                 if (infiniteSupply)
                 {
@@ -96,19 +111,13 @@ namespace Core.Interractables
                 {
                     characterHands.ServerDropItem();
                     itemQuantity++;
-                    OnChangeQuantity?.Invoke(itemQuantity, maxQuantity);
-
+                    if (itemQuantity == maxQuantity)
+                    {
+                        ServerSetFull();
+                    }
                 }
                 return;
             }
-
-            if (characterHands.HeldItemType == requestedItemType && requestedItemType != " ") //fill the deposit. 
-            {
-                characterHands.ServerDropItem();
-                ServerFill();
-                return;
-            }
-
 
 
         }
@@ -120,7 +129,7 @@ namespace Core.Interractables
         }
 
         [Server]
-        protected virtual void ServerFill()
+        protected virtual void ServerSetFull()
         {
             if (OnLoad != null)
             {

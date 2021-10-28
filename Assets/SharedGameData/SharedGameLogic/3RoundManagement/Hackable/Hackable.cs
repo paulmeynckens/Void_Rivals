@@ -71,7 +71,7 @@ namespace RoundManagement.Hackable
                 OnRestore();
             }
         }
-        protected override bool ServerCanUseObject(NetworkIdentity requestingPlayer)
+        protected override bool ServerCanUseObjectE(NetworkIdentity requestingPlayer)
         {
             //TO DO : implement team selection
             /*
@@ -82,7 +82,7 @@ namespace RoundManagement.Hackable
             }
             */
 
-            return base.ServerCanUseObject(requestingPlayer);
+            return base.ServerCanUseObjectE(requestingPlayer);
         }
 
         #endregion
