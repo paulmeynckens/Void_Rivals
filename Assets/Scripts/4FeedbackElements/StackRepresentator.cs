@@ -24,7 +24,7 @@ namespace FeedbackElements
 
 
 
-        void ChangeStackVisual(short newQuantity,short maxQuantity)
+        void ChangeStackVisual(short oldQuantity, short newQuantity )
         {
             Debug.Log("changing quantity");
             if (newQuantity <= stack.Count)

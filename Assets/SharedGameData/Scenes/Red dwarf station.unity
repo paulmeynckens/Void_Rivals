@@ -835,6 +835,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 57980534522788514, guid: 5da27ef5e7b930a4195e4bb02a2d0eb8,
+        type: 3}
+      propertyPath: m_Dithering
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 57980534698873727, guid: 5da27ef5e7b930a4195e4bb02a2d0eb8,
         type: 3}
       propertyPath: m_AnchorMax.x
