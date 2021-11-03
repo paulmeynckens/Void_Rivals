@@ -648,7 +648,6 @@ MonoBehaviour:
   - PL
   - RT
   - HT
-  heldItemType: NO
 --- !u!114 &4914572279114658005
 MonoBehaviour:
   m_ObjectHideFlags: 0

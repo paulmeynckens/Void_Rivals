@@ -43,7 +43,7 @@ TagManager:
   - walkableHull
   - inernal projectiles
   - internal moving
-  - character inside
+  - ragdoll
   - Internal
   m_SortingLayers:
   - name: Default
