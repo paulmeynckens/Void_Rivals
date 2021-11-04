@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Attach this script to all the target game objects in the scene.
@@ -12,11 +13,17 @@ public class Target : MonoBehaviour
     [Tooltip("Select if box indicator is required for this target")]
     [SerializeField] private bool needBoxIndicator = true;
 
+    [SerializeField] private bool needFocusIndicator = false;
+
+    [SerializeField] private bool needFocusBox = false;
+
     [Tooltip("Select if arrow indicator is required for this target")]
     [SerializeField] private bool needArrowIndicator = true;
 
+
     [Tooltip("Select if distance text is required for this target")]
     [SerializeField] private bool needDistanceText = true;
+
 
     /// <summary>
     /// Please do not assign its value yourself without understanding its use.
@@ -24,6 +31,8 @@ public class Target : MonoBehaviour
     /// its value is assigned at runtime by the offscreen indicator script.
     /// </summary>
     [HideInInspector] public Indicator indicator;
+
+
 
     /// <summary>
     /// Gets the color for the target indicator.
@@ -68,6 +77,15 @@ public class Target : MonoBehaviour
             return needDistanceText;
         }
     }
+
+
+
+
+
+
+
+
+
 
     /// <summary>
     /// On enable add this target object to the targets list.

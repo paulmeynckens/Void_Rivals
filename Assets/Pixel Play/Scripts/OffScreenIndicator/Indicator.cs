@@ -32,6 +32,8 @@ public class Indicator : MonoBehaviour
         }
     }
 
+    public Image IndicatorImage { get => indicatorImage; set => indicatorImage = value; }
+
     void Awake()
     {
         indicatorImage = transform.GetComponent<Image>();
@@ -78,5 +80,6 @@ public class Indicator : MonoBehaviour
 public enum IndicatorType
 {
     BOX,
-    ARROW
+    ARROW,
+    FOCUS
 }
