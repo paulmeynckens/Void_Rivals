@@ -18,7 +18,7 @@ MonoBehaviour:
   magasinSize: 10000
   clientMask:
     serializedVersion: 2
-    m_Bits: 2684354560
+    m_Bits: 3221225472
   serverRollbackMask:
     serializedVersion: 2
     m_Bits: 2147745792

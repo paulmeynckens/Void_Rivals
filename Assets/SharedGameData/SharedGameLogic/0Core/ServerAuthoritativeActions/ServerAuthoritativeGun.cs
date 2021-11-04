@@ -13,7 +13,7 @@ namespace Core.ServerAuthoritativeActions
 
         ushort currentTick;
 
-        public event Action OnNeedFeedback;
+        public event Action OnNeedFeedback=delegate { };
         public event Action<short, short> OnChangeQuantity=delegate { };
 
         Dictionary<ushort, short> magasineStates = new Dictionary<ushort, short>();
@@ -101,7 +101,7 @@ namespace Core.ServerAuthoritativeActions
                 {
                     ClientTryFindTargetRaycast(tick);
                 }
-                OnNeedFeedback?.Invoke();
+                OnNeedFeedback();
                 
                 
                 
@@ -295,7 +295,7 @@ namespace Core.ServerAuthoritativeActions
         void RpcShoot()
         {
             ClientShootProjectile(0);
-            OnNeedFeedback?.Invoke();
+            OnNeedFeedback();
         }
 
 
