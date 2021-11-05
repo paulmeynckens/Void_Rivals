@@ -18,7 +18,7 @@ namespace Targetting
         // Update is called once per frame
         void FixedUpdate()
         {
-            target.enabled = !LocalPlayerIsOnThisShip();
+            //target.enabled = !LocalPlayerIsOnThisShip();
         
         }
 

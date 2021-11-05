@@ -4293,6 +4293,23 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7647983310401932810, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: indicatorModels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647983310401932810, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: indicatorModels.Array.data[0]
+      value: 
+      objectReference: {fileID: 114629346974849376, guid: 3bb41426a165a0240b931a1f995e07cb,
+        type: 3}
+    - target: {fileID: 7647983310401932810, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: indicatorModels.Array.data[1]
+      value: 
+      objectReference: {fileID: 114082041123525444, guid: 09cefc679ac23c54aa919111d8f3fc40,
+        type: 3}
     - target: {fileID: 7923269489504616387, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: shipExtBody
