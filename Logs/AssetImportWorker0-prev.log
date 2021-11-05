@@ -15,11 +15,11 @@ C:/Users/THOMAS/Documents/GitHub/Void_Rivals
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-57822
+64801
 Successfully changed project path to: C:/Users/THOMAS/Documents/GitHub/Void_Rivals
 C:/Users/THOMAS/Documents/GitHub/Void_Rivals
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 123.90 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1060.77 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.14f1 (51d2f824827f)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.14f1/Editor/Data/Resources/UnitySubsystems
@@ -35,383 +35,51 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.14f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.14f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56172
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56932
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002374 seconds.
+Registered in 0.072789 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 123.38 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1079.03 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.993 seconds
+- Completed reload, in  9.358 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2993ms)
-		BeginReloadAssembly (72ms)
+	ReloadAssembly (9359ms)
+		BeginReloadAssembly (111ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (701ms)
-			LoadAssemblies (69ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (256ms)
+			CreateAndSetChildDomain (3ms)
+		EndReloadAssembly (4067ms)
+			LoadAssemblies (101ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (1215ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (44ms)
-			SetupLoadedEditorAssemblies (331ms)
+			RebuildScriptCaches (56ms)
+			SetupLoadedEditorAssemblies (2708ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (9ms)
+				InitializePlatformSupportModulesInManaged (12ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (123ms)
+				RefreshPlugins (1079ms)
 				BeforeProcessingInitializeOnLoad (3ms)
-				ProcessInitializeOnLoadAttributes (146ms)
-				ProcessInitializeOnLoadMethodAttributes (49ms)
+				ProcessInitializeOnLoadAttributes (890ms)
+				ProcessInitializeOnLoadMethodAttributes (724ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.005297 seconds.
+Registered in 0.007339 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 145.71 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 327.03 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Find all reader and writers took 144 milliseconds
+Find all reader and writers took 147 milliseconds
 Script Module: UnityEngine.UI.dll
-Weave behaviours and messages took 98 milliseconds
-Find all reader and writers took 95 milliseconds
-Script Module: Unity.RenderPipelines.Core.Runtime.dll
-Weave behaviours and messages took 60 milliseconds
-Find all reader and writers took 94 milliseconds
-Script Module: UnityEngine.TestRunner.dll
-Weave behaviours and messages took 21 milliseconds
-Find all reader and writers took 95 milliseconds
-Script Module: Unity.Mathematics.dll
-Weave behaviours and messages took 197 milliseconds
-Find all reader and writers took 94 milliseconds
-Script Module: SimpleWebTransport.dll
-Weave behaviours and messages took 6 milliseconds
-Find all reader and writers took 98 milliseconds
-Script Module: Unity.RenderPipelines.Universal.Runtime.dll
-Weave behaviours and messages took 60 milliseconds
-Find all reader and writers took 104 milliseconds
-Script Module: Unity.TextMeshPro.dll
-Weave behaviours and messages took 74 milliseconds
-Find all reader and writers took 91 milliseconds
-Script Module: Unity.VisualEffectGraph.Runtime.dll
-Weave behaviours and messages took 13 milliseconds
+Weave behaviours and messages took 345 milliseconds
 Find all reader and writers took 90 milliseconds
-Script Module: Unity.Timeline.dll
-Weave behaviours and messages took 24 milliseconds
-Find all reader and writers took 92 milliseconds
-Script Module: Telepathy.dll
-Weave behaviours and messages took 3 milliseconds
-Find all reader and writers took 94 milliseconds
-Script Module: kcp2k.dll
-Weave behaviours and messages took 4 milliseconds
-Find all reader and writers took 81 milliseconds
-Script Module: Unity.RenderPipeline.Universal.ShaderLibrary.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 81 milliseconds
-Script Module: Unity.Recorder.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 97 milliseconds
-Script Module: where-allocations.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 87 milliseconds
-Script Module: Unity.RenderPipelines.Core.ShaderLibrary.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 87 milliseconds
-Script Module: Unity.Recorder.Base.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 80 milliseconds
-Script Module: Unity.RenderPipelines.Universal.Shaders.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 92 milliseconds
-Script Module: Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 107 milliseconds
-Script Module: UnityEditor.TestRunner.dll
-Weave behaviours and messages took 32 milliseconds
-Find all reader and writers took 95 milliseconds
-Script Module: Unity.Toolchain.Win-x86_64-Linux-x86_64.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 92 milliseconds
-Script Module: Mirror.CompilerSymbols.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 106 milliseconds
-Script Module: UnityEditor.UI.dll
-Weave behaviours and messages took 10 milliseconds
-Find all reader and writers took 95 milliseconds
-Script Module: Unity.ShaderGraph.Utilities.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 89 milliseconds
-Script Module: Unity.Sysroot.Linux_x86_64.dll
-Weave behaviours and messages took 0 milliseconds
-Find all reader and writers took 99 milliseconds
-Script Module: RotaryHeart.dll
-Weave behaviours and messages took 0 milliseconds
-Mono: successfully reloaded assembly
-- Completed reload, in  9.229 seconds
-Domain Reload Profiling:
-	ReloadAssembly (9230ms)
-		BeginReloadAssembly (211ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (29ms)
-		EndReloadAssembly (8908ms)
-			LoadAssemblies (139ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (487ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (118ms)
-			SetupLoadedEditorAssemblies (7975ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (146ms)
-				BeforeProcessingInitializeOnLoad (143ms)
-				ProcessInitializeOnLoadAttributes (203ms)
-				ProcessInitializeOnLoadMethodAttributes (7468ms)
-				AfterProcessingInitializeOnLoad (9ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (9ms)
-Platform modules already initialized, skipping
-========================================================================
-Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 1.49 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3443 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 159.4 MB.
-System memory in use after: 153.1 MB.
-
-Unloading 83 unused Assets to reduce memory usage. Loaded Objects now: 3836.
-Total: 9.815500 ms (FindLiveObjects: 0.359700 ms CreateObjectMapping: 0.220700 ms MarkObjects: 5.684600 ms  DeleteObjects: 3.548900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  path: Assets/Scenes/Red dwarf station/LightingData.asset
-  artifactKey: Guid(a8e3b344ce4a94245904732e2d4a97e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/LightingData.asset using Guid(a8e3b344ce4a94245904732e2d4a97e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d29491b29f514ad193d34e7d2c98d7f') in 0.087298 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000459 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-2_comp_dir.png
-  artifactKey: Guid(eaed031593ccded4da83fabc2fa8e62a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-2_comp_dir.png using Guid(eaed031593ccded4da83fabc2fa8e62a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c272ecc291ee6274ef697ea4f2b57621') in 0.161622 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000249 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-4_comp_light.exr
-  artifactKey: Guid(adc7aebd73c1f72448913b4d0ebcf2b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-4_comp_light.exr using Guid(adc7aebd73c1f72448913b4d0ebcf2b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c3d3868edc2798b78bc407dc3a68d7a') in 0.167106 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000241 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-5_comp_dir.png
-  artifactKey: Guid(c197479851042a648a78f2bfc0857b7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-5_comp_dir.png using Guid(c197479851042a648a78f2bfc0857b7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a24b93a0f933199658ecf050ea20f91') in 0.056215 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000245 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-4_comp_dir.png
-  artifactKey: Guid(d20490b3a8eeeed4e84fd46c070f57a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-4_comp_dir.png using Guid(d20490b3a8eeeed4e84fd46c070f57a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e08d752800c66766b41dfea4083f658c') in 0.048269 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000257 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-3_comp_dir.png
-  artifactKey: Guid(d030f922b0eb14f4e9bad66b1347ba1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-3_comp_dir.png using Guid(d030f922b0eb14f4e9bad66b1347ba1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8600bbe5251c98ff59c20c311f76e6b0') in 0.054951 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000286 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-1_comp_light.exr
-  artifactKey: Guid(ae478053d4bad3d4b92b89d0d3a4fd4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-1_comp_light.exr using Guid(ae478053d4bad3d4b92b89d0d3a4fd4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06047094557bae7d7a9a68d9285d2e38') in 0.053177 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000266 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-0_comp_light.exr
-  artifactKey: Guid(3875abc5f67589d45ac61dd8735c0164) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-0_comp_light.exr using Guid(3875abc5f67589d45ac61dd8735c0164) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afbbf18acfb02cd04e92b42a34b67876') in 0.048747 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000766 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-2_comp_light.exr
-  artifactKey: Guid(c86ddbe1443bdd14384f4d2578f7013e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-2_comp_light.exr using Guid(c86ddbe1443bdd14384f4d2578f7013e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa5a92cc48970d0c204872257a716964') in 0.055718 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000266 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-1_comp_dir.png
-  artifactKey: Guid(5c96fdc83e7943b4b833cdf3431ff16d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-1_comp_dir.png using Guid(5c96fdc83e7943b4b833cdf3431ff16d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71b05a919dfdf43d2f136cf14a02adb4') in 0.057078 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000307 seconds.
-  path: Assets/Scenes/Red dwarf station/ReflectionProbe-0.exr
-  artifactKey: Guid(ab37772c151deb842965f0624bb2275a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/ReflectionProbe-0.exr using Guid(ab37772c151deb842965f0624bb2275a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '783c2e9db99894f642b2f750db7ff2f1') in 0.102027 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000279 seconds.
-  path: Assets/Scenes
-  artifactKey: Guid(348a4511de8b706439e0eb0cb6b2827f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes using Guid(348a4511de8b706439e0eb0cb6b2827f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5728d5ca6b12ea468fb2379c82de4bce') in 0.012271 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000266 seconds.
-  path: Assets/Scenes/Red dwarf station
-  artifactKey: Guid(63c95daaff2cfa04ca8264ecc9787e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station using Guid(63c95daaff2cfa04ca8264ecc9787e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '106bd540f0cc310ff4b02cf1a9f9b884') in 0.021610 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000286 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-0_comp_dir.png
-  artifactKey: Guid(26a67089a0988104d82be31b478fa07f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-0_comp_dir.png using Guid(26a67089a0988104d82be31b478fa07f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03e7f62657176b48e7284d0f1045fc5b') in 0.046580 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000276 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-3_comp_light.exr
-  artifactKey: Guid(89ec2723272ede44e8a20610e0c7b794) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-3_comp_light.exr using Guid(89ec2723272ede44e8a20610e0c7b794) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2761ae58daf6b5345feb964f664bab1e') in 0.045745 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000260 seconds.
-  path: Assets/Scenes/Red dwarf station/Lightmap-5_comp_light.exr
-  artifactKey: Guid(29095816d9e34ef43aed08055b944065) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Red dwarf station/Lightmap-5_comp_light.exr using Guid(29095816d9e34ef43aed08055b944065) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0535dd0396925a9e4ce5091e995062b3') in 0.048330 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2.361768 seconds.
-  path: Assets/Scenes/PolygonScenes
-  artifactKey: Guid(9d9ce48a97658094abba9e398d4bcc6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/PolygonScenes using Guid(9d9ce48a97658094abba9e398d4bcc6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e934d65ebdf850977e3a0a56ed89fe7d') in 0.019553 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.040200 seconds.
-  path: Assets/Scenes/PolygonScenes/external stuff.prefab
-  artifactKey: Guid(f2eb77d980079fc408859b48ab8c5538) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/PolygonScenes/external stuff.prefab using Guid(f2eb77d980079fc408859b48ab8c5538) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37e6fbb428ab9ca9103bc1d1ee730fb0') in 8.095405 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000489 seconds.
-  path: Assets/Scenes/NetworkedScene/Camera Profile.asset
-  artifactKey: Guid(83de2a6ca5a5cc546bfd842fa8f94e8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/NetworkedScene/Camera Profile.asset using Guid(83de2a6ca5a5cc546bfd842fa8f94e8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd00a4a0923793cb0dd442e243befbb6') in 0.028315 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000294 seconds.
-  path: Assets/Scenes/NetworkedScene
-  artifactKey: Guid(adf3edd7cbe467446abe28614299580a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/NetworkedScene using Guid(adf3edd7cbe467446abe28614299580a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5415aec9bb7569483ddef4df60fb08e7') in 0.017087 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000597 seconds.
-  path: Assets/Scenes/PolygonScenes/Internal stuff.prefab
-  artifactKey: Guid(f4de570be996a7645a88843db8b9f00f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/PolygonScenes/Internal stuff.prefab using Guid(f4de570be996a7645a88843db8b9f00f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca580a176a47b91a913f78b95978364f') in 5.500176 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 69.386859 seconds.
-  path: Assets/Presets
-  artifactKey: Guid(558255460b74ec04fa70b5570e9327bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets using Guid(558255460b74ec04fa70b5570e9327bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99e4144fdf7d1a139d389fda8ba1dbbd') in 0.016371 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.042106 seconds.
-  path: Assets/Presets/AudioCompressedInMemory.preset
-  artifactKey: Guid(2dd802e4d37c65149922028d3e973832) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/AudioCompressedInMemory.preset using Guid(2dd802e4d37c65149922028d3e973832) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70939c7466a0a575c20e055aeedbc52e') in 0.030994 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000257 seconds.
-  path: Assets/Presets/server build.preset
-  artifactKey: Guid(8891e457603bff44aab6e7fe38bf6ff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/server build.preset using Guid(8891e457603bff44aab6e7fe38bf6ff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb7e6533fbc721718bd37ccd2004f3cf') in 0.105958 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000249 seconds.
-  path: Assets/Presets/AudioStreaming.preset
-  artifactKey: Guid(86bcce7f5575b54408aa0f3a7d321039) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/AudioStreaming.preset using Guid(86bcce7f5575b54408aa0f3a7d321039) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fd64b4b8f6783da8d1e546ffa643e31') in 0.027538 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000296 seconds.
-  path: Assets/Presets/central ammo box.preset
-  artifactKey: Guid(f575344b4c9ae644fa353c715abb4d82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/central ammo box.preset using Guid(f575344b4c9ae644fa353c715abb4d82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6461e15215f76bc87a6ac0bd4b0eba4') in 0.038123 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000260 seconds.
-  path: Assets/Presets/NormalTexture.preset
-  artifactKey: Guid(14a57cf3b9fa1c74b884aa7e0dcf1faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/NormalTexture.preset using Guid(14a57cf3b9fa1c74b884aa7e0dcf1faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2180124ffec99f6a58fa05f7255d1536') in 0.033362 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000504 seconds.
-  path: Assets/Presets/UtilityTexture.preset
-  artifactKey: Guid(45f7b2e3c78185248b3adbb14429c2ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Presets/UtilityTexture.preset using Guid(45f7b2e3c78185248b3adbb14429c2ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4ea12d61e319528c50666fe0b61b6e2') in 0.035036 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 4.137431 seconds.
-  path: Assets/RenderingPrefabs
-  artifactKey: Guid(4602d25786f625e46a7d3bcb0d1cb5e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/RenderingPrefabs using Guid(4602d25786f625e46a7d3bcb0d1cb5e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08cd92b7f046db2822f900a2e19622c5') in 0.016473 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 20.447959 seconds.
-  path: Assets/Scenes/PolygonScenes/Demo_Exterior.unity
-  artifactKey: Guid(7dc0f3408c08040458ba7cc777331949) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/PolygonScenes/Demo_Exterior.unity using Guid(7dc0f3408c08040458ba7cc777331949) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9acdf001a18cd272c3a85669f4f3b2d3') in 0.017890 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 3.036569 seconds.
-  path: Assets/Scenes/PolygonScenes/VR_Version
-  artifactKey: Guid(2da648ee2a02aab448b8b5b1e033f8b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/PolygonScenes/VR_Version using Guid(2da648ee2a02aab448b8b5b1e033f8b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c5c4b3c0fb8dc5b7ed3c7bf6e142c4a') in 0.021346 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 31.917146 seconds.
-  path: Assets/Scripts
-  artifactKey: Guid(8096a68e3c75eea4c80716c49130781e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts using Guid(8096a68e3c75eea4c80716c49130781e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17c1dd6b7488acf998b86c53fb63fd5f') in 0.017925 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 8.727139 seconds.
-  path: Assets/StreamingAssets
-  artifactKey: Guid(a052fb6169b944c6f96adbd8d46b7259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StreamingAssets using Guid(a052fb6169b944c6f96adbd8d46b7259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1169ac8574b1284fcf26c425a2297294') in 0.018002 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 7.771830 seconds.
-  path: Assets/UnityURPUnlitScreenSpaceDecalShader-master
-  artifactKey: Guid(2ad7643ca10a8e2409278239f3f3ce36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UnityURPUnlitScreenSpaceDecalShader-master using Guid(2ad7643ca10a8e2409278239f3f3ce36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb5a483c177756c2a5d81bf90a96d101') in 0.016889 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 5.541749 seconds.
-  path: Assets/URP Settings
-  artifactKey: Guid(0735c275001a2c84dafdb30deced5d8d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/URP Settings using Guid(0735c275001a2c84dafdb30deced5d8d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7049002229a2389e905a49ca3cd416ab') in 0.016948 seconds 
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file
+Script Module: Unity.RenderPipelines.Core.Runtime.dll

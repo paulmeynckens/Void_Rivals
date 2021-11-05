@@ -9,10 +9,10 @@ namespace Targetting
     public class ShipTargetIndicatorManager : MonoBehaviour
     {
     // Start is called before the first frame update
-        Target target;
+        TargetThomas target;
         private void Awake()
         {
-            target = GetComponent<Target>();
+            target = GetComponent<TargetThomas>();
         }
 
         // Update is called once per frame
