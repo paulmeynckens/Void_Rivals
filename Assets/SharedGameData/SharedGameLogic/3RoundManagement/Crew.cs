@@ -101,8 +101,6 @@ namespace RoundManagement
             LinkToNetId shipLinkToNetId = spawnedShip.GetComponent<LinkToNetId>();
             shipLinkToNetId.netIdLink = netId;
 
-
-            ShipSpawnLocationHolder shipCrewManager = spawnedShip.GetComponent<ShipSpawnLocationHolder>();
             
 
             NetworkServer.Spawn(spawnedShip);
