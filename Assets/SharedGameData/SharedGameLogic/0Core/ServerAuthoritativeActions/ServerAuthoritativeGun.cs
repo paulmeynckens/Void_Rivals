@@ -6,6 +6,7 @@ using System;
 
 namespace Core.ServerAuthoritativeActions
 {
+    [DefaultExecutionOrder(+9)]
     public class ServerAuthoritativeGun : NetworkBehaviour, INeedInstantFeedback, IChangeQuantity
     {
         #region Client variables
@@ -124,7 +125,7 @@ namespace Core.ServerAuthoritativeActions
                 if (foundTarget != null)
                 {
                     Debug.Log("Target hit! netId : " + foundTarget.id);
-                    CmdTestHit(foundTarget.id, foundTarget.clientTick, tick);
+                    CmdTestHitRaycast(foundTarget.id, foundTarget.clientTick);
 
                 }
             }
@@ -141,7 +142,7 @@ namespace Core.ServerAuthoritativeActions
             {
 
                 projectile.OnReturnToPool += ClientUnsubscribe;
-                projectile.OnHitColliderRollback += CmdTestHit;
+                projectile.OnHitColliderRollback += CmdTestHitProjectile;
             }
 
             
@@ -155,7 +156,7 @@ namespace Core.ServerAuthoritativeActions
         {
             if(pooled is Projectile projectile)
             {
-                projectile.OnHitColliderRollback -= CmdTestHit;
+                projectile.OnHitColliderRollback -= CmdTestHitProjectile;
             }
         }
 
@@ -264,7 +265,7 @@ namespace Core.ServerAuthoritativeActions
         }
 
         [Command]
-        void CmdTestHit(string rollbackId, ushort rollbackTick,  ushort shotTick)
+        void CmdTestHitProjectile(string rollbackId, ushort rollbackTick,  ushort shotTick)
         {
             Debug.Log("testing hit : Id=" + rollbackId + "target tick : " + rollbackTick + "shot tick : " + shotTick);
             if (!serverRaysMemory.ContainsKey(shotTick))
@@ -283,6 +284,21 @@ namespace Core.ServerAuthoritativeActions
             rollbackTarget.ServerTestHit(rollbackTick, ray, data);
 
             
+        }
+
+        [Command]
+        void CmdTestHitRaycast(string rollbackId, ushort rollbackTick)
+        {
+            Debug.Log("testing hit : Id=" + rollbackId + "target tick : " + rollbackTick );
+            
+
+
+            RollbackTarget rollbackTarget = RollbackTarget.rollbackTargets[rollbackId];
+
+            Ray ray = new Ray { origin = shootPoint.position, direction = shootPoint.forward };// serverRaysMemory[shotTick];
+
+
+            rollbackTarget.ServerTestHit(rollbackTick, ray, data);
         }
 
 
