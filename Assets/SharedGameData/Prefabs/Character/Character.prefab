@@ -614,6 +614,7 @@ MonoBehaviour:
   doNotCollide: {fileID: 5254812820540187099}
   shootPoint: {fileID: 7478257735220569680}
   data: {fileID: 11400000, guid: f779db5f57ede36469f02b8d3c097505, type: 2}
+  serverAuthoritativeMovement: {fileID: 4969665825523161047}
   ammo: 1000
   requestedItem: PL
 --- !u!114 &5151691709812308484
@@ -666,11 +667,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c0541256dc8594f81321500a0585fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientTick: 0
   lastServerStoredTick: 0
   id: t
   health: {fileID: 3494198677090169808}
   rollbackReplica: {fileID: 162051812491467984}
+  serverAuthoritativeMovement: {fileID: 4969665825523161047}
   damageMultiplier: 1
 --- !u!136 &7613985448713905274
 CapsuleCollider:

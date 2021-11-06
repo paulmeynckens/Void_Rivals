@@ -2,6 +2,7 @@
 using Mirror;
 
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Core.ServerAuthoritativeActions
 
@@ -9,7 +10,8 @@ namespace Core.ServerAuthoritativeActions
     [DefaultExecutionOrder(+1)]
     public class RollbackTarget : MonoBehaviour
     {
-        public ushort clientTick = 0;
+        private ushort clientTick = 0;
+        public ushort ClientTick { get => clientTick; }
 
         [SerializeField] ushort lastServerStoredTick = 0;//for debugging
         public string id="t";
@@ -26,6 +28,9 @@ namespace Core.ServerAuthoritativeActions
         //[SerializeField] ServerAuthoritativeMovement authoritativeMovement = null;
 
         const int MAX_ROLLBACKS = 128;
+
+        [SerializeField]ServerAuthoritativeMovement serverAuthoritativeMovement;
+
         
 
         private void Awake()
@@ -42,14 +47,16 @@ namespace Core.ServerAuthoritativeActions
             }
             */
 
+
+            
+
         }
 
         private void FixedUpdate()
         {
+            ServerRegisterPosition(serverAuthoritativeMovement.CurrentTick);
+            ClientUpdateTick(serverAuthoritativeMovement.CurrentTick);
 
-            ClientUpdateTick(TickManager.Tick);
-        
-            ServerRegisterPosition(TickManager.Tick);
 
             if (health.netId == 0 || rollbackTargets.ContainsKey(id))
             {
@@ -103,11 +110,22 @@ namespace Core.ServerAuthoritativeActions
 
         public void ServerTestHit(ushort tick, Ray ray, GunData gunData)
         {
+            StartCoroutine(ServerTestHitIterative(tick, ray, gunData));           
+        }
+
+        IEnumerator ServerTestHitIterative(ushort tick, Ray ray, GunData gunData)
+        {
+            while(!memory.ContainsKey(tick))
+            {
+                Debug.LogError("tick not contained : " + tick + " last stored tick :" + lastServerStoredTick);
+                yield return null;
+            }
+
             ServerPrepareRollback(tick);
 
-            RaycastHit raycastHit= ServerTestRollback(ray, gunData);
+            RaycastHit raycastHit = ServerTestRollback(ray, gunData);
 
-            if (raycastHit.collider!=null && raycastHit.collider.gameObject == rollbackReplica.gameObject)
+            if (raycastHit.collider != null && raycastHit.collider.gameObject == rollbackReplica.gameObject)
             {
                 Debug.Log("Hit confirmed");
                 ServerDealDamage(gunData, raycastHit);
@@ -118,15 +136,13 @@ namespace Core.ServerAuthoritativeActions
             }
 
             ServerReleaseRollback();
+
+
         }
 
         void ServerPrepareRollback(ushort _tick)
         {
-            if (!memory.ContainsKey(_tick))
-            {
-                Debug.LogError("tick not contained : "+ _tick + " last stored tick :"  +lastServerStoredTick);
-                return;
-            }
+            
             rollbackReplica.transform.position = memory[_tick].position;
             rollbackReplica.transform.rotation = memory[_tick].rotation;
             rollbackReplica.gameObject.SetActive(true);

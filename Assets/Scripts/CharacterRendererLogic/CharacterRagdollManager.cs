@@ -46,6 +46,11 @@ namespace CharacterRenderer
         
         private void Update()
         {
+            if (networkIdentity == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
             ReplicateRagdollOnAnimated();
         }
         
@@ -60,8 +65,15 @@ namespace CharacterRenderer
                 animatedTransforms[i].localRotation = ragdollTransforms[i].localRotation;
             }
         }
+        void ReplicateAnimatedOnRagdoll()
+        {
+            for (int i = 0; i < animatedTransforms.Length; i++)
+            {
+                ragdollTransforms[i].localPosition = animatedTransforms[i].localPosition;
+                ragdollTransforms[i].localRotation = animatedTransforms[i].localRotation;
+            }
+        }
 
-        
 
 
 
@@ -84,8 +96,8 @@ namespace CharacterRenderer
         }
         void SetRagdollActive()
         {
-
-            animator.enabled = true;
+            ReplicateAnimatedOnRagdoll();
+            animator.enabled = false;
             transform.parent = networkIdentity.transform.parent;
             gameObject.SetActive(true);
 
