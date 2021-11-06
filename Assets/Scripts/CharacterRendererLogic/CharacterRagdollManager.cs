@@ -99,6 +99,8 @@ namespace CharacterRenderer
             ReplicateAnimatedOnRagdoll();
             animator.enabled = false;
             transform.parent = networkIdentity.transform.parent;
+            transform.position = networkIdentity.transform.position;
+            transform.rotation = networkIdentity.transform.rotation;
             gameObject.SetActive(true);
 
         }
