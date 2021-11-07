@@ -6,14 +6,16 @@ using System;
 
 namespace Core.ServerAuthoritativeActions
 {
+    [DefaultExecutionOrder(+9)]
     public class ServerAuthoritativeGun : NetworkBehaviour, INeedInstantFeedback, IChangeQuantity
     {
         #region Client variables
 
 
         ushort currentTick;
+        
 
-        public event Action OnNeedFeedback;
+        public event Action OnNeedFeedback=delegate { };
         public event Action<short, short> OnChangeQuantity=delegate { };
 
         Dictionary<ushort, short> magasineStates = new Dictionary<ushort, short>();
@@ -36,7 +38,7 @@ namespace Core.ServerAuthoritativeActions
         Vector3 addedVelocity = Vector3.zero;
         Vector3 lastPosition = Vector3.zero;
 
-
+        [SerializeField]ServerAuthoritativeMovement serverAuthoritativeMovement;
         #endregion
 
         #region Syncvars+hooks 
@@ -60,21 +62,26 @@ namespace Core.ServerAuthoritativeActions
         readonly Dictionary<ushort, Ray> serverRaysMemory = new Dictionary<ushort, Ray>();
         List<ushort> keystoremove = null;
 
+        
+
 
         #endregion
+        
 
+        
 
         private void FixedUpdate()
         {
             if (isClient)
             {
-                ClientGenerateShots(TickManager.Tick);
+                ClientGenerateShots(serverAuthoritativeMovement.CurrentTick);
             }
             if (isServer)
             {
-                ServerRegisterShooterDatas(TickManager.Tick);
+                ServerRegisterShooterDatas(serverAuthoritativeMovement.CurrentTick);
             }
         }
+        
 
         #region Client
 
@@ -82,6 +89,7 @@ namespace Core.ServerAuthoritativeActions
 
         protected void ClientGenerateShots(ushort tick)
         {
+            
             currentTick = tick;
             if (data!=null && data.shootsProjectile)
             {
@@ -89,8 +97,9 @@ namespace Core.ServerAuthoritativeActions
                 lastPosition = shootPoint.position;
             }
 
-            if ( CanShoot() )
+            if (Input.GetKey(KeyBindings.Pairs[Actions.shoot])&& CanShoot() )
             {
+                
                 CmdShoot();
                 if (data.shootsProjectile)
                 {
@@ -101,7 +110,7 @@ namespace Core.ServerAuthoritativeActions
                 {
                     ClientTryFindTargetRaycast(tick);
                 }
-                OnNeedFeedback?.Invoke();
+                OnNeedFeedback();
                 
                 
                 
@@ -124,7 +133,7 @@ namespace Core.ServerAuthoritativeActions
                 if (foundTarget != null)
                 {
                     Debug.Log("Target hit! netId : " + foundTarget.id);
-                    CmdTestHit(foundTarget.id, foundTarget.clientTick, tick);
+                    CmdTestHit(foundTarget.id, foundTarget.ClientTick,tick);
 
                 }
             }
@@ -170,7 +179,7 @@ namespace Core.ServerAuthoritativeActions
 
         protected virtual bool CanShoot()
         {
-            if (hasAuthority && Input.GetKey(KeyBindings.Pairs[Actions.shoot]) && enabled && data != null && shootPoint != null && Time.time - lastShotTime > data.timeBetweenShots && ammo > 0)
+            if (hasAuthority && enabled && data != null && shootPoint != null && Time.time - lastShotTime > data.timeBetweenShots && ammo > 0)
             {
                 lastShotTime = Time.time;
                 return true;
@@ -188,11 +197,7 @@ namespace Core.ServerAuthoritativeActions
         #region Server
 
 
-        public override void OnStartServer()
-        {
-            base.OnStartServer();
-            
-        }
+
 
         void ServerRegisterShooterDatas(ushort tick)
         {
@@ -266,24 +271,30 @@ namespace Core.ServerAuthoritativeActions
         [Command]
         void CmdTestHit(string rollbackId, ushort rollbackTick,  ushort shotTick)
         {
-            Debug.Log("testing hit : Id=" + rollbackId + "target tick : " + rollbackTick + "shot tick : " + shotTick);
-            if (!serverRaysMemory.ContainsKey(shotTick))
-            {
-                Debug.LogError("shot tick not found");
-                return;
-            }
+            Debug.Log("testing hit : Id=" + rollbackId + " target tick=" + rollbackTick + " shot tick=" + shotTick);
+            StartCoroutine(ServerIterativeHitTest(rollbackId,rollbackTick,shotTick));
+        }
 
-            
+        IEnumerator ServerIterativeHitTest(string rollbackId, ushort rollbackTick, ushort shotTick)
+        {
+            while (!serverRaysMemory.ContainsKey(shotTick))
+            {
+                Debug.Log("shot tick not found yet");
+                yield return null;
+            }
+            Debug.Log("shot tick found");
 
             RollbackTarget rollbackTarget = RollbackTarget.rollbackTargets[rollbackId];
 
             Ray ray = serverRaysMemory[shotTick];
-            
 
             rollbackTarget.ServerTestHit(rollbackTick, ray, data);
 
-            
+
+
         }
+
+
 
 
 
@@ -295,7 +306,7 @@ namespace Core.ServerAuthoritativeActions
         void RpcShoot()
         {
             ClientShootProjectile(0);
-            OnNeedFeedback?.Invoke();
+            OnNeedFeedback();
         }
 
 

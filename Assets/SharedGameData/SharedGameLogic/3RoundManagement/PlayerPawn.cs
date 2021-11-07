@@ -5,6 +5,7 @@ using UnityEngine;
 using Mirror;
 using CharacterLogic;
 using Core;
+using Core.ServerAuthoritativeActions;
 
 
 
@@ -429,12 +430,23 @@ namespace RoundManagement
                 characterInstance = Instantiate(characterPrefab, spawnLocation.position, spawnLocation.rotation,spawnLocation.parent);
                 LinkToNetId linkToNetId = characterInstance.GetComponent<LinkToNetId>();
                 linkToNetId.netIdLink = this.netId;
+                CharacterMove characterMove = characterInstance.GetComponent<CharacterMove>();
+                characterMove.State = new CharacterSnapshot
+                {
+                    tick = TickManager.Tick,
+                    characterMode = (byte)CharacterMode.walking,
+                    localPosition = characterInstance.transform.localPosition,
+                    localRotation=characterInstance.transform.localRotation,
+
+                };
+                
 
                 NetworkServer.Spawn(characterInstance, connectionToClient);
 
                 characterHealth = characterInstance.GetComponent<CharacterHealth>();
                 characterHealth.OnServerDie += ServerRespawnPlayer;
                 characterHealth.OnServerPulverized += ServerDespawnPlayer;
+                
             }
 
         }

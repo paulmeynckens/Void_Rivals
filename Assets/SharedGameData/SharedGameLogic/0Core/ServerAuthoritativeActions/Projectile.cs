@@ -103,7 +103,7 @@ namespace Core.ServerAuthoritativeActions
             {
                 Debug.Log("hit found");
                 float travelTime = Time.time - shotTime;
-                OnHitColliderRollback(rollbackTarget.id, rollbackTarget.clientTick, shotTick) ;
+                OnHitColliderRollback(rollbackTarget.id, rollbackTarget.ClientTick, shotTick) ;
             }
 
             Explode();

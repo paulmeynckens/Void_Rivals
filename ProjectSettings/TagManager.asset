@@ -37,13 +37,13 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - ragdolls
   - holes
   - character outside
   - walkableHull
   - inernal projectiles
   - internal moving
-  - character inside
+  - CharacterInside
   - Internal
   m_SortingLayers:
   - name: Default

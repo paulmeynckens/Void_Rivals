@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4432480249260869676}
   - component: {fileID: 1453345096464923235}
-  - component: {fileID: 7338305839873516214}
   m_Layer: 18
   m_Name: RollbackReplica
   m_TagString: Untagged
@@ -46,18 +45,6 @@ CapsuleCollider:
   m_Height: 1.95
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &7338305839873516214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162051812491467984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9724d975c222eb145ad155c540e90a02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &288516168604768969
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +368,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2396561994479272296}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -627,7 +614,8 @@ MonoBehaviour:
   doNotCollide: {fileID: 5254812820540187099}
   shootPoint: {fileID: 7478257735220569680}
   data: {fileID: 11400000, guid: f779db5f57ede36469f02b8d3c097505, type: 2}
-  ammo: 0
+  serverAuthoritativeMovement: {fileID: 4969665825523161047}
+  ammo: 1000
   requestedItem: PL
 --- !u!114 &5151691709812308484
 MonoBehaviour:
@@ -642,13 +630,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   loadout:
   - NO
   - PL
   - RT
   - HT
-  heldItemType: NO
 --- !u!114 &4914572279114658005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,11 +667,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c0541256dc8594f81321500a0585fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientTick: 0
   lastServerStoredTick: 0
   id: t
   health: {fileID: 3494198677090169808}
-  rollbackReplica: {fileID: 0}
+  rollbackReplica: {fileID: 162051812491467984}
+  serverAuthoritativeMovement: {fileID: 4969665825523161047}
   damageMultiplier: 1
 --- !u!136 &7613985448713905274
 CapsuleCollider:
@@ -1010,6 +997,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterRenderer
       objectReference: {fileID: 0}
+    - target: {fileID: 7751404272355638038, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: needFeedback
+      value: 
+      objectReference: {fileID: 6045656305423201310}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71c3508670aa789438d22b14770ad29f, type: 3}
 --- !u!4 &7603581603881230584 stripped

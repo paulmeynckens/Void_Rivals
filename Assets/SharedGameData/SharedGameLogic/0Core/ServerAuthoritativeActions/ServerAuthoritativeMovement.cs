@@ -19,16 +19,21 @@ namespace Core.ServerAuthoritativeActions
         InputSnapshot currentInput = new InputSnapshot { tick = 1 };
 
 
-        public event Action<ushort> OnClientMove;
+        public event Action<ushort> OnClientMove=delegate { };
 
         public event Action<InputSnapshot> OnUseInput;
 
-        public event Action<ushort> OnServerMove;
+        public event Action<ushort> OnServerMove = delegate { };
 
         [SyncVar] protected bool someoneIsCommanding = false;
 
-        [SyncVar(hook = nameof(ClientReceiveState))] public StateSnapshot state = new StateSnapshot() { tick = 0 };
+        [SyncVar(hook = nameof(ClientReceiveState))] StateSnapshot state;// = new StateSnapshot() { tick = 0 };
+        public StateSnapshot State { get => state; set => state = value; }
+
+        ushort currentTick = 0;
+        public ushort CurrentTick { get => currentTick; }
         
+
         void ClientReceiveState(StateSnapshot _old, StateSnapshot _new)
         {
             if (statesBuffer.ContainsKey(_new.tick))
@@ -62,8 +67,7 @@ namespace Core.ServerAuthoritativeActions
 
         const float STATE_SYNC_TIME = 1;
 
-
-
+        
 
         protected virtual void FixedUpdate()
         {
@@ -105,7 +109,8 @@ namespace Core.ServerAuthoritativeActions
             statesBuffer.Add(tick, GenerateState(tick));
             
             CmdSendInput(generatedInput);
-            OnClientMove?.Invoke(tick);
+            OnClientMove(tick);
+            currentTick = tick;
         }
 
         void NonAuthoritativeClientLoop()
@@ -138,7 +143,8 @@ namespace Core.ServerAuthoritativeActions
             }
 
 
-            OnClientMove?.Invoke(currentInput.tick);
+            OnClientMove(currentInput.tick);
+            currentTick = currentInput.tick;
         }
         void ServerLoop()
         {
@@ -171,7 +177,8 @@ namespace Core.ServerAuthoritativeActions
             {
                 state = GenerateState(currentInput.tick);
             }
-            OnServerMove?.Invoke(currentInput.tick);
+            OnServerMove(currentInput.tick);
+            currentTick = currentInput.tick;
 
         }
 
