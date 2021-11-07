@@ -36,6 +36,11 @@ namespace UI.TabPanel
             targetCrew = GetComponentInParent<Crew>();
             crewsIcons.Add(targetCrew, this);
 
+            
+        }
+
+        private void Start()
+        {
             if (targetCrew.team)
             {
                 transform.SetParent(TeamsPanel.instance.blueTeam);
