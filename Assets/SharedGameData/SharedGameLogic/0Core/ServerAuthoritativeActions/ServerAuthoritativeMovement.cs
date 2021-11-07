@@ -27,11 +27,12 @@ namespace Core.ServerAuthoritativeActions
 
         [SyncVar] protected bool someoneIsCommanding = false;
 
-        [SyncVar(hook = nameof(ClientReceiveState))] public StateSnapshot state = new StateSnapshot() { tick = 0 };
+        [SyncVar(hook = nameof(ClientReceiveState))] StateSnapshot state;// = new StateSnapshot() { tick = 0 };
+        public StateSnapshot State { get => state; set => state = value; }
 
         ushort currentTick = 0;
         public ushort CurrentTick { get => currentTick; }
-
+        
 
         void ClientReceiveState(StateSnapshot _old, StateSnapshot _new)
         {
