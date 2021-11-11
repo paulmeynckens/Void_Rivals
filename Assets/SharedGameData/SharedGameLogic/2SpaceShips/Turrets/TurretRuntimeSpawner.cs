@@ -12,12 +12,12 @@ namespace ShipsLogic.Turrets
         [SerializeField] Transform turretPointer = null;
 
 
-        protected override void PlaceInsideAndOutside(Transform inside, Transform outside, Transform colliders)
+        protected override void PlaceInsideAndOutside(Transform outside, Transform colliders)
         {
-            base.PlaceInsideAndOutside(inside, outside, colliders);
+            base.PlaceInsideAndOutside(outside, colliders);
 
 
-            turretPointer.transform.parent = inside;
+            turretPointer.transform.parent = outside;
 
 
 
