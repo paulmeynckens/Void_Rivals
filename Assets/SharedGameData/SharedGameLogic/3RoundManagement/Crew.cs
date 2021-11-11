@@ -97,6 +97,7 @@ namespace RoundManagement
 
             Transform location = TeamsManager.instance.FindSpawnLocation(team);
             GameObject spawnedShip = Instantiate(shipSpawner.prefab, location.position, location.rotation);
+            
 
             LinkToNetId shipLinkToNetId = spawnedShip.GetComponent<LinkToNetId>();
             shipLinkToNetId.netIdLink = netId;

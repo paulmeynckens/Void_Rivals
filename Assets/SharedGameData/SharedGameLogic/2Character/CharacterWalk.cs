@@ -152,8 +152,8 @@ namespace CharacterLogic
 
         void EnterShip(Transform ship)
         {
-            transform.parent = ship;
-            OnSwitchShip(ship);
+            transform.parent = ship.parent;
+            OnSwitchShip(ship.parent);
         }
 
     }

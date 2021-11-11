@@ -84,7 +84,7 @@ namespace CharacterRenderer
             float interpolationIncrement = (Time.time - lastInterpolationTime) / Time.fixedDeltaTime;
 
             InterpolateBodyPosition(interpolationIncrement);
-            InterPolateBodyRotation(interpolationIncrement);
+            InterpolateBodyRotation(interpolationIncrement);
 
 
             if (ShouldInterpolateInternalRotations())
@@ -165,7 +165,7 @@ namespace CharacterRenderer
             transform.localPosition = Vector3.Lerp(lastBodyLocalPosition, nextBodyLocalPosition, interpolationIncrement);
         }
 
-        void InterPolateBodyRotation(float interpolationIncrement)
+        void InterpolateBodyRotation(float interpolationIncrement)
         {
             if (lastParent != nextParent)
             {
@@ -179,7 +179,7 @@ namespace CharacterRenderer
                 }
                 else
                 {
-                    lastBodyLocalRotation = lastBodyLocalRotation * lastParent.rotation * Quaternion.Inverse(nextParent.rotation);
+                    lastBodyLocalRotation = lastBodyLocalRotation * Quaternion.Inverse(lastParent.rotation) * nextParent.rotation;
                 }
 
             }

@@ -6,18 +6,15 @@ namespace GeneralRendering
 {
     public class LinkToRenderer : MonoBehaviour
     {
-        [SerializeField] Transform shipInternalCollider = null;
+
         [SerializeField] Transform shipExternalCollider = null;
 
-        public static Dictionary<Transform, Transform> shipsRenderersLinks;
+        public static readonly Dictionary<Transform, Transform> shipsRenderersLinks=new Dictionary<Transform, Transform>();
 
         private void Awake()
         {
-            if (shipsRenderersLinks == null)
-            {
-                shipsRenderersLinks = new Dictionary<Transform, Transform>();
-            }
-            shipsRenderersLinks.Add(shipInternalCollider, transform);
+
+            shipsRenderersLinks.Add(transform.parent, transform);
             shipsRenderersLinks.Add(shipExternalCollider, transform);
         }
     }
