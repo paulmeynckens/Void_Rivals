@@ -7,13 +7,12 @@ namespace Core
 {
     public class BodiesHolder : NetworkBehaviour
     {
-        public readonly static Dictionary<NetworkIdentity, Transform> interiors = new Dictionary<NetworkIdentity, Transform>();
-        public readonly static Dictionary<Transform,NetworkIdentity> interiorsId = new Dictionary<Transform, NetworkIdentity>();
 
+        public readonly static Dictionary<Transform, Transform> interiors = new Dictionary<Transform, Transform>();
         public readonly static Dictionary<NetworkIdentity, Transform> exteriors = new Dictionary<NetworkIdentity, Transform>();
         public readonly static Dictionary<Transform, NetworkIdentity> exteriorsId = new Dictionary<Transform, NetworkIdentity>();
 
-        public Transform interior = null;
+
         public Transform externalCollider = null;
 
         
@@ -35,11 +34,9 @@ namespace Core
 
         private void Awake()
         {
-            interiors.Add(netIdentity, interior);
-            interiorsId.Add(interior, netIdentity);
-
             exteriors.Add(netIdentity, externalCollider);
             exteriorsId.Add(externalCollider, netIdentity);
+            interiors.Add(externalCollider, transform);
         }
 
         public void RepopRigidBody()
@@ -55,15 +52,12 @@ namespace Core
 
         private void OnDestroy()
         {
-            interiors.Remove(netIdentity);
-            interiorsId.Remove(interior);
+
 
             exteriors.Remove(netIdentity);
             exteriorsId.Remove(externalCollider);
 
-            Destroy(externalCollider.gameObject);
-            Destroy(interior.gameObject);
-            
+            Destroy(externalCollider.gameObject);           
            
         }
     }

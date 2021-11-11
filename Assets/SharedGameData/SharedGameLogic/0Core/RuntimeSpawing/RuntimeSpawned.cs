@@ -36,7 +36,7 @@ namespace Core.RuntimeSpawning
                     bodies = foundNetworkIdentity.GetComponent<BodiesHolder>();
 
 
-                    PlaceInsideAndOutside(bodies.interior, bodies.transform, bodies.externalCollider);
+                    PlaceInsideAndOutside(bodies.transform, bodies.externalCollider);
 
                 }
             }
@@ -44,18 +44,11 @@ namespace Core.RuntimeSpawning
 
 
 
-        protected virtual void PlaceInsideAndOutside(Transform inside, Transform original, Transform colliders )
+        protected virtual void PlaceInsideAndOutside(Transform original, Transform colliders )
         {
             transform.parent = original;
             transform.localPosition = spawnedPosition.localPosition;
             transform.localRotation = spawnedPosition.localRotation;
-
-            if (innerPart != null)
-            {
-                innerPart.parent = inside;
-                innerPart.localPosition = spawnedPosition.localPosition;
-                innerPart.localRotation = spawnedPosition.localRotation;
-            }
 
             if (outerPart != null )
             {

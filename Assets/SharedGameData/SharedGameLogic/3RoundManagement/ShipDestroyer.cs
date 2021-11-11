@@ -30,11 +30,7 @@ namespace RoundManagement
         void ServerKillPlayersAndDestroyShip()
         {
             
-            CharacterHealth[] characterHealths = bodiesHolder.interior.GetComponentsInChildren<CharacterHealth>();
-            foreach(CharacterHealth characterHealth in characterHealths)
-            {
-                characterHealth.ServerPulverize();
-            }
+            
 
             StartCoroutine(ServerWaitAndDestroy());
             
@@ -42,6 +38,12 @@ namespace RoundManagement
         IEnumerator ServerWaitAndDestroy()
         {
             yield return new WaitForSeconds(5);
+
+            CharacterHealth[] characterHealths = transform.GetComponentsInChildren<CharacterHealth>();
+            foreach (CharacterHealth characterHealth in characterHealths)
+            {
+                characterHealth.ServerPulverize();
+            }
             NetworkServer.Destroy(this.gameObject);
         }
     }

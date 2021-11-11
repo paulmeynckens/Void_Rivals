@@ -78,8 +78,8 @@ namespace ShipsLogic
         {
             if (parentShip == null)
             {
-                bodiesHolder.interior.position = _new;
-                bodiesHolder.interior.rotation = Quaternion.identity;
+                transform.position = _new;
+                transform.rotation = Quaternion.identity;
             }
         }
 
@@ -144,9 +144,9 @@ namespace ShipsLogic
         {
             Debug.Log("docking");
 
-            Transform shipTransform = NetworkIdentity.spawned[_dockingData.parentShipNetId].transform;
+            Transform parentShipTransform = NetworkIdentity.spawned[_dockingData.parentShipNetId].transform;
 
-            parentShip = shipTransform.GetComponent<ShipDocker>();
+            parentShip = parentShipTransform.GetComponent<ShipDocker>();
 
             Transform ownDockingPortTransform = dockingPorts[_dockingData.ownPortIndex].transform;
 
@@ -154,15 +154,15 @@ namespace ShipsLogic
 
             Quaternion calculatedLocalRotation = targetDockingPortTransform.localRotation * Quaternion.Euler(0, 180, 0) * Quaternion.Inverse(ownDockingPortTransform.localRotation);
 
-            bodiesHolder.interior.parent = parentShip.bodiesHolder.interior;
-            bodiesHolder.interior.localScale = Vector3.one;
-            bodiesHolder.interior.localRotation = calculatedLocalRotation;
+            transform.parent = parentShipTransform;
+            transform.localScale = Vector3.one;
+            transform.localRotation = calculatedLocalRotation;
 
-            Vector3 repeatedOwnPortFromNewInteriorPointOfView = parentShip.bodiesHolder.interior.InverseTransformPoint(bodiesHolder.interior.TransformPoint(ownDockingPortTransform.localPosition));
-            Vector3 fromOwnPortToShip = parentShip.bodiesHolder.interior.InverseTransformPoint(bodiesHolder.interior.position) - repeatedOwnPortFromNewInteriorPointOfView;
+            Vector3 repeatedOwnPortFromNewInteriorPointOfView = parentShipTransform.InverseTransformPoint(transform.TransformPoint(ownDockingPortTransform.localPosition));
+            Vector3 fromOwnPortToShip = parentShipTransform.InverseTransformPoint(transform.position) - repeatedOwnPortFromNewInteriorPointOfView;
             Vector3 calculatedLocalPosition =targetDockingPortTransform.localPosition + fromOwnPortToShip;
 
-            bodiesHolder.interior.localPosition = calculatedLocalPosition;
+            transform.localPosition = calculatedLocalPosition;
 
             bodiesHolder.externalCollider.parent = parentShip.bodiesHolder.externalCollider;
             bodiesHolder.externalCollider.localPosition = calculatedLocalPosition;
@@ -181,10 +181,10 @@ namespace ShipsLogic
         {
             parentShip = null;
 
-            bodiesHolder.interior.parent = transform;
-            bodiesHolder.interior.position = parkingPosition;
-            bodiesHolder.interior.rotation = Quaternion.identity;
-            bodiesHolder.interior.localScale = Vector3.one;
+            transform.parent = null;
+            transform.position = parkingPosition;
+            transform.rotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
 
             bodiesHolder.RepopRigidBody();
             bodiesHolder.externalCollider.parent = null;

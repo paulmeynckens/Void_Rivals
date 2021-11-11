@@ -37,7 +37,10 @@ namespace CharacterLogic
         }
         CharacterInput displayedInput = null;
 
-        float lastTransitionTime = 0;
+        float lastTransitionTime = -10;// -10 instead of 0 to make sure the character controller gets parented when spawned
+
+        NetworkIdentity cachedShipIdentity = null;
+
 
         private void Awake()
         {
@@ -125,9 +128,9 @@ namespace CharacterLogic
                             break;
 
                         default:
-                            buffer.localPosition = BodiesHolder.interiors[target.parentShip].InverseTransformPoint(BodiesHolder.interiors[buffer.parentShip].TransformPoint(buffer.localPosition));
-                            buffer.localRotation = Quaternion.Inverse(BodiesHolder.interiors[target.parentShip].rotation) * BodiesHolder.interiors[buffer.parentShip].rotation * buffer.localRotation;
-                            transform.parent= BodiesHolder.interiors[target.parentShip];
+                            buffer.localPosition = target.parentShip.transform.InverseTransformPoint(buffer.parentShip.transform.TransformPoint(buffer.localPosition));
+                            buffer.localRotation = Quaternion.Inverse(target.parentShip.transform.rotation) * buffer.parentShip.transform.rotation * buffer.localRotation;
+                            transform.parent= target.parentShip.transform;
                             break;
                     }
                 }
@@ -158,7 +161,7 @@ namespace CharacterLogic
 
                     default:
                         
-                        transform.parent = BodiesHolder.interiors[characterSnapshot.parentShip];
+                        transform.parent = characterSnapshot.parentShip.transform;
                         break;
                 }
 
@@ -245,13 +248,13 @@ namespace CharacterLogic
         }
 
 
-        void SwitchFromFlyToMagneticMode(Transform shipHull)
+        void SwitchFromFlyToMagneticMode(Transform externaCollider)
         {
-            transform.parent = shipHull;
-            Vector3 previousLocalPosition = transform.localPosition;
-            Quaternion previousLocalRotation = transform.localRotation;
-            transform.parent = BodiesHolder.interiors[BodiesHolder.exteriorsId[shipHull]];
+            
+            Vector3 previousLocalPosition = externaCollider.InverseTransformPoint(transform.position);
+            Quaternion previousLocalRotation = Quaternion.Inverse(externaCollider.rotation)*transform.rotation;
 
+            transform.parent = BodiesHolder.interiors[externaCollider];
             transform.localPosition = previousLocalPosition;
             transform.localRotation = previousLocalRotation;
             SwitchToMode(CharacterMode.magnetic_boots);
@@ -314,12 +317,17 @@ namespace CharacterLogic
 
             if(moveMode is CharacterFly)
             {
-                return null;
+                cachedShipIdentity=null;
             }
             else
             {
-                return BodiesHolder.interiorsId[transform.parent];
+                if (cachedShipIdentity == null || cachedShipIdentity.transform != transform.parent)
+                {
+                    cachedShipIdentity = transform.parent.GetComponent<NetworkIdentity>();
+                }
+                
             }
+            return cachedShipIdentity;
         }
         #endregion
     }

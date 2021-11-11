@@ -15,7 +15,7 @@ namespace ShipsLogic.Holes
 
         void ClientPlaceHole(HoleSpot _old, HoleSpot _new)
         {
-            transform.parent = BodiesHolder.interiors[NetworkIdentity.spawned[_new.holeGeneratorIdentity]];
+            transform.parent = NetworkIdentity.spawned[_new.holeGeneratorIdentity].transform;
             transform.localPosition = _new.localPosition;
             transform.localRotation = _new.localRotation;
             OnHolePlaced(transform.parent,_new.localPosition,_new.localRotation);
@@ -23,7 +23,7 @@ namespace ShipsLogic.Holes
         public override void OnStartServer()
         {
             base.OnStartServer();
-            positionRotation = new HoleSpot { holeGeneratorIdentity = BodiesHolder.interiorsId[transform.parent].netId, localPosition = transform.localPosition, localRotation = transform.localRotation };
+            positionRotation = new HoleSpot { holeGeneratorIdentity = transform.parent.GetComponent<NetworkIdentity>().netId, localPosition = transform.localPosition, localRotation = transform.localRotation };
         }
 
         
