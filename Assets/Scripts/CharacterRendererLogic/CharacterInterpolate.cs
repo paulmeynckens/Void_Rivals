@@ -13,7 +13,7 @@ namespace CharacterRenderer
     [DefaultExecutionOrder(+10)]
     public class CharacterInterpolate : MonoBehaviour
     {
-        public static Transform localPlayerShip = null;
+        
 
         [SerializeField] Transform horizontalRotator = null;
         [SerializeField] Transform rigg = null;
@@ -196,10 +196,7 @@ namespace CharacterRenderer
         }
 
 
-        private void OnDestroy()
-        {
-            localPlayerShip = null;
-        }
+
     }
 
 }

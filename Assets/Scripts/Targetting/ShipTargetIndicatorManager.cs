@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CharacterRenderer;
+using CharacterLogic;
 
 
 namespace Targetting
 {
     public class ShipTargetIndicatorManager : MonoBehaviour
     {
-    // Start is called before the first frame update
+
+        Transform ship;
         Target target;
         private void Awake()
         {
+            ship = transform.parent;
             target = GetComponent<Target>();
         }
 
@@ -24,7 +26,7 @@ namespace Targetting
 
         bool LocalPlayerIsOnThisShip()
         {
-            return CharacterInterpolate.localPlayerShip == transform;
+            return CharacterLocal.localCharacter.transform.parent == ship;
         }
     }
 }
