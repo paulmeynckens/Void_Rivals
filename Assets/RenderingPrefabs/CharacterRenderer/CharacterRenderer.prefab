@@ -200,6 +200,16 @@ PrefabInstance:
       propertyPath: holdableItems._keyValues.Array.data[3]
       value: MDA
       objectReference: {fileID: 0}
+    - target: {fileID: 1605674546671032593, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 3774873600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605674546671032593, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: emitterRendererParent
+      value: 
+      objectReference: {fileID: 71163422231979120}
     - target: {fileID: 1690148515025824653, guid: 218c89b1385a74c4bb2b08be4643166e,
         type: 3}
       propertyPath: m_LocalPosition.y

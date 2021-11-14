@@ -992,6 +992,26 @@ PrefabInstance:
       propertyPath: horizontalRotator
       value: 
       objectReference: {fileID: 490533384323232016}
+    - target: {fileID: 3720176326823183245, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: needFeedback
+      value: 
+      objectReference: {fileID: 6045656305423201310}
+    - target: {fileID: 3720176326823183245, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: physicalEmitter
+      value: 
+      objectReference: {fileID: 7478257735220569680}
+    - target: {fileID: 3720176326823183245, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 3774873600
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720176326823183245, guid: 71c3508670aa789438d22b14770ad29f,
+        type: 3}
+      propertyPath: emitterPhysicalParent
+      value: 
+      objectReference: {fileID: 5258164408055590323}
     - target: {fileID: 5461659639467640276, guid: 71c3508670aa789438d22b14770ad29f,
         type: 3}
       propertyPath: m_Name

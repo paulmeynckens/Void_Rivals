@@ -78,8 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5d484ecbde97040a87505ac2ee34a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needFeedback: {fileID: 0}
   ray: {fileID: 4014590911958714662}
   hitSpot: {fileID: 530327799506723611}
+  emitterPhysicalParent: {fileID: 0}
+  physicalEmitter: {fileID: 0}
+  emitterRendererParent: {fileID: 0}
   emitter: {fileID: 1603941746948204322}
   layerMask:
     serializedVersion: 2
@@ -242,7 +246,7 @@ GameObject:
   - component: {fileID: 4014590911958714662}
   - component: {fileID: 7154244327081603}
   - component: {fileID: 2881633019256402505}
-  m_Layer: 31
+  m_Layer: 0
   m_Name: ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +345,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6114643062327579696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.108, z: 0.027}
+  m_LocalPosition: {x: 0, y: -0.1096, z: 0.0354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2573178223483779633}
@@ -599,8 +603,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 0.5
+      scalar: 0.7
+      minScalar: 0.7
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5100,8 +5104,9 @@ AudioSource:
   m_GameObject: {fileID: 6114643062327579696}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6148913627597139837, guid: 13b4c02b355760b4992f95687528f2d3,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 10c7968ee661dc44ba980610fd30f3a0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5228,7 +5233,7 @@ GameObject:
   - component: {fileID: 2421753203634095875}
   - component: {fileID: 530327799506723611}
   - component: {fileID: 1667840177487575158}
-  m_Layer: 31
+  m_Layer: 0
   m_Name: hit point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

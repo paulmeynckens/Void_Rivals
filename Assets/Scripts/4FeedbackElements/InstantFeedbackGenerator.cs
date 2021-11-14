@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Core;
+using Core.ServerAuthoritativeActions;
 
 
 namespace Core
 {
     public class InstantFeedbackGenerator : MonoBehaviour
     {
-        public MonoBehaviour needFeedback = null;
+        [SerializeField] ServerAuthoritativeGun needFeedback = null;
 
         ParticleSystem _particleSystem;
 
@@ -15,6 +16,11 @@ namespace Core
         AudioSource audioSource;
 
         Animator animator;
+
+        private void Awake()
+        {
+            needFeedback.OnNeedFeedback += GenerateFeedback;
+        }
 
         private void Start()
         {
@@ -24,14 +30,6 @@ namespace Core
 
 
 
-            if (needFeedback != null && needFeedback is INeedInstantFeedback needInstantFeedback)
-            {
-                needInstantFeedback.OnNeedFeedback += GenerateFeedback;
-            }
-            else
-            {
-                Debug.LogError("this instant feedback generator has no target : " + gameObject.name);
-            }
         }
 
         void GenerateFeedback()
