@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ShipsLogic;
 using Core;
+using UnityEngine.UI;
 
 
 namespace ShipsRenderer
@@ -10,31 +11,54 @@ namespace ShipsRenderer
     public class ShipCircleDirectionPointer : MonoBehaviour
     {
 
-        [SerializeField] Transform arrow = null;
-
         ShipController shipController=null;
+        [SerializeField] Image[] images = null;
 
-        private void Awake()
+        private void Start()
         {
-            shipController = GetComponentInParent<ShipController>();
+            ShipController.OnClientTakeControl += SetupShipController;
+            ShipController.OnClientExit += DeactivatePointer;
+
+            DeactivatePointer();
         }
 
+        void SetupShipController(ShipController p_shipController)
+        {
+            
+            shipController = p_shipController;
+            
+            
+        }
+        void DeactivatePointer()
+        {
+            shipController = null;
+        }
 
         void LateUpdate()
         {
-
-            if (!shipController.hasAuthority || Input.GetKey(KeyBindings.Pairs[Actions.aim]))
+            /*
+            if (Input.GetKey(KeyBindings.Pairs[Actions.aim]))
             {
-                arrow.gameObject.SetActive(false);
+                gameObject.SetActive(false);
                 return;
             }
-            arrow.gameObject.SetActive(true);
+            gameObject.SetActive(true);
+            */
 
-            arrow.localPosition = shipController.pullController.CurrentInput*MousePullController.maxSize;
+            foreach (Image image in images)
+            {
+                image.enabled = shipController!=null;
+            }
+            if (shipController == null || !shipController.hasAuthority)
+            {
+                return;
+            }
 
-            float angle = Mathf.Atan2(arrow.localPosition.y, arrow.localPosition.x) * Mathf.Rad2Deg;
+            transform.localPosition = shipController.pullController.CurrentInput*MousePullController.maxSize;
 
-            arrow.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            float angle = Mathf.Atan2(transform.localPosition.y, transform.localPosition.x) * Mathf.Rad2Deg;
+
+            transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 
         }

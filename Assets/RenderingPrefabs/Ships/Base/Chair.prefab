@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 4005786426736427670}
   - component: {fileID: 7090434739409883344}
   m_Layer: 0
-  m_Name: Siege (1)
+  m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

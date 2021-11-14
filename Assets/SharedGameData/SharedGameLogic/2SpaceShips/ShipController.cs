@@ -18,7 +18,7 @@ namespace ShipsLogic
 
         BodiesHolder bodiesHolder;
 
-        public static event Action<ShipController> OnClientTakeControl=delegate { };
+        public static event Action<ShipController> OnClientTakeControl =delegate { };
         public static event Action OnClientExit = delegate { };
         Rigidbody MasterRigidbody
         {
@@ -92,6 +92,16 @@ namespace ShipsLogic
 
 
         #region Client
+        public override void OnStartAuthority()
+        {
+            base.OnStartAuthority();
+
+            if (shipData.shipType == ShipType.strike_craft)
+            {
+                
+                OnClientTakeControl(this);
+            }
+        }
 
 
 
@@ -248,10 +258,7 @@ namespace ShipsLogic
         {
             base.OnStopAuthority();
 
-            if (shipData.shipType == ShipType.strike_craft)
-            {
-                OnClientExit();
-            }
+            OnClientExit();
 
         }
 

@@ -26,10 +26,10 @@ namespace FeedbackElements
 
         void ChangeStackVisual(short oldQuantity, short newQuantity )
         {
-            Debug.Log("changing quantity");
+            
             if (newQuantity <= stack.Count)
             {
-                Debug.Log("ok");
+                
                 for (int i = 0; i < stack.Count; i++)
                 {
                     if (i < newQuantity)

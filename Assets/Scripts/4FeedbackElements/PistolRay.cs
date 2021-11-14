@@ -28,7 +28,7 @@ namespace FeedbackElements
 
         void DisplayRay()
         {
-            Debug.Log("pistol ray displaying hit");
+
             RaycastHit hit;
 
             if(Physics.Raycast(physicalEmitter.transform.position, physicalEmitter.transform.forward,out hit, 1000, layerMask))
