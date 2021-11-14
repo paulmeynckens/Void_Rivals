@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 using System;
+using Mirror;
 
 namespace Core
 {
@@ -92,7 +93,7 @@ namespace Core
     #region Structs
     public struct HoleSpot
     {
-        public uint holeGeneratorIdentity;
+        public NetworkIdentity holeGeneratorIdentity;
         public Vector3 localPosition;
         public Quaternion localRotation;
 

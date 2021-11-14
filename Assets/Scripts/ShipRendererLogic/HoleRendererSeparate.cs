@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ShipsLogic.Holes;
 using GeneralRendering;
+using Mirror;
 
 namespace ShipsRenderer
 {
@@ -16,9 +17,9 @@ namespace ShipsRenderer
         }
 
 
-        void SeparateHoleRenderer(Transform targetCollider, Vector3 targetLocalPosition, Quaternion targetLocalRotation)
+        void SeparateHoleRenderer(NetworkIdentity networkIdentity, Vector3 targetLocalPosition, Quaternion targetLocalRotation)
         {
-            Transform targetParent = LinkToRenderer.shipsRenderersLinks[targetCollider];
+            Transform targetParent = LinkToRenderer.shipsRenderersLinks[networkIdentity.transform];
             transform.parent = targetParent;
 
             transform.localPosition = targetLocalPosition;

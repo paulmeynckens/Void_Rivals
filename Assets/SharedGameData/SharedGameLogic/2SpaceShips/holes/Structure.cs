@@ -38,7 +38,7 @@ namespace ShipsLogic.Holes
                 return;
             }
 
-            holeInstance.transform.parent=interior;
+
 
 
             Hole hole = holeInstance.GetComponent<Hole>();
@@ -83,7 +83,7 @@ namespace ShipsLogic.Holes
             {
                 Quaternion holeRotation = Quaternion.LookRotation(p_raycastHit.normal, Vector3.up);
 
-                return Instantiate(holePrefab, p_raycastHit.point, holeRotation);
+                return Instantiate(holePrefab, p_raycastHit.point, holeRotation,transform);
             }
 
             Ray ray = new Ray { origin = p_raycastHit.point + movement + p_raycastHit.normal, direction = -p_raycastHit.normal };
@@ -98,7 +98,7 @@ namespace ShipsLogic.Holes
                 }
                 Quaternion holeRotation = Quaternion.LookRotation(newRaycastHit.normal, Vector3.up);
 
-                return Instantiate(holePrefab, newRaycastHit.point, holeRotation);
+                return Instantiate(holePrefab, newRaycastHit.point, holeRotation,transform);
 
             }
             else
