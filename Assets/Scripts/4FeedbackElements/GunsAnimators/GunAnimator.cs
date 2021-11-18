@@ -8,7 +8,7 @@ namespace FeedbackElements.GunsAnimators
 {
     public class GunAnimator : MonoBehaviour
     {
-        [SerializeField] SpaceShipGun gun=null;
+        [SerializeField] ShipGun gun=null;
         [SerializeField] AudioSource audioSource = null;
 
         [SerializeField] ParticleSystem m_particleSystem = null;

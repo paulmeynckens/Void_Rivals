@@ -7,7 +7,7 @@ namespace FeedbackElements
 {
     public class ActiveWeaponIndicator : MonoBehaviour
     {
-        [SerializeField] SpaceShipGun shipGun=null;
+        [SerializeField] ShipGun shipGun=null;
         [SerializeField] GameObject activeAmmoIndicator = null;
         // Update is called once per frame
         void FixedUpdate()

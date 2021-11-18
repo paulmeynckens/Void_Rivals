@@ -9,14 +9,14 @@ namespace FeedbackElements.GunsAnimators
     public class MagasineAnimator : MonoBehaviour
     {
         [SerializeField] GameObject ammo = null;
-        [SerializeField] SpaceShipGun shipGun;
+        [SerializeField] ShipGunMagasine shipGunMagasine;
 
 
         
         protected virtual void Awake()
         {
             //gunMagasine = GetComponentInParent<GunMagasine>();
-            shipGun.OnChangeQuantity += PlayReloadOrUnload;
+            shipGunMagasine.OnChangeQuantity += PlayReloadOrUnload;
         }
 
         void PlayReloadOrUnload(short current, short max)

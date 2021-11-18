@@ -8,20 +8,35 @@ using Core.ServerAuthoritativeActions;
 
 namespace ShipsLogic.Guns
 {
-    public class SpaceShipGun : ServerAuthoritativeGun
+    public class ShipGun : ServerAuthoritativeGun
     {
 
-        
-
+        [SerializeField] ShipGunMagasine gunMagasine = null;
 
 
         GameObject currentGun = null;
 
         Renderer ownRenderer;
 
+        protected override bool CanShoot()
+        {
+            if(base.CanShoot()&& gunMagasine.Ammo > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
 
-
+        protected override void ServerConsumeAmmo()
+        {
+            base.ServerConsumeAmmo();
+            gunMagasine.ServerConsumeAmmo();
+        }
 
 
 

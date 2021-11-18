@@ -26,7 +26,7 @@ namespace Targetting
 
         bool LocalPlayerIsOnThisShip()
         {
-            return CharacterLocal.localCharacter.transform.parent == ship;
+            return CharacterLocal.localCharacter!=null && CharacterLocal.localCharacter.transform.parent == ship;
         }
     }
 }

@@ -7,7 +7,7 @@ using System;
 namespace Core.ServerAuthoritativeActions
 {
     [DefaultExecutionOrder(+9)]
-    public class ServerAuthoritativeGun : NetworkBehaviour, INeedInstantFeedback, IChangeQuantity
+    public class ServerAuthoritativeGun : NetworkBehaviour, INeedInstantFeedback
     {
         #region Client variables
 
@@ -16,7 +16,7 @@ namespace Core.ServerAuthoritativeActions
         
 
         public event Action OnNeedFeedback=delegate { };
-        public event Action<short, short> OnChangeQuantity=delegate { };
+        
 
         Dictionary<ushort, short> magasineStates = new Dictionary<ushort, short>();
 
@@ -43,11 +43,7 @@ namespace Core.ServerAuthoritativeActions
 
         #region Syncvars+hooks 
 
-        [SyncVar(hook = nameof(ClientCorrectMagasineState))][SerializeField] protected short ammo = 0;
-        void ClientCorrectMagasineState(short _old, short _new)
-        {
-            OnChangeQuantity(_old, _new);
-        }
+        
 
 
         #endregion
@@ -110,6 +106,8 @@ namespace Core.ServerAuthoritativeActions
                 {
                     ClientTryFindTargetRaycast(tick);
                 }
+
+
                 OnNeedFeedback();
                 
                 
@@ -179,7 +177,7 @@ namespace Core.ServerAuthoritativeActions
 
         protected virtual bool CanShoot()
         {
-            if (hasAuthority && enabled && data != null && shootPoint != null && Time.time - lastShotTime > data.timeBetweenShots && ammo > 0)
+            if (hasAuthority && enabled && data != null && shootPoint != null && Time.time - lastShotTime > data.timeBetweenShots)
             {
                 lastShotTime = Time.time;
                 return true;
@@ -190,13 +188,18 @@ namespace Core.ServerAuthoritativeActions
             }
             
         }
+
+
         #endregion
 
 
 
         #region Server
 
+        protected virtual void ServerConsumeAmmo()
+        {
 
+        }
 
 
         void ServerRegisterShooterDatas(ushort tick)
@@ -238,18 +241,6 @@ namespace Core.ServerAuthoritativeActions
             }
         }
 
-
-
-
-        public void ServerReload()
-        {
-            ammo = ammo = data.magasinSize;
-        }
-
-
-
-
-
         #endregion
 
 
@@ -258,14 +249,8 @@ namespace Core.ServerAuthoritativeActions
         [Command(channel = Channels.Unreliable)]
         void CmdShoot()
         {
-            
-            if (ammo > 0)
-            {
-                ammo--;
-
-                RpcShoot();
-            }
-            
+            ServerConsumeAmmo();
+            RpcShoot();                     
         }
 
         [Command]

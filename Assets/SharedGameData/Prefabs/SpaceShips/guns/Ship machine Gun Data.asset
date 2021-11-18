@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Bits: 262144
   shootsProjectile: 1
   projectileType: 0
-  shootVelocity: 50
+  shootVelocity: 200
   projectileRadius: 0.5
   requiredEnergyFlux: 0
   ammoPerRack: 2

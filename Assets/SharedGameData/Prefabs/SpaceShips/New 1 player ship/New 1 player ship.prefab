@@ -4241,6 +4241,11 @@ PrefabInstance:
       objectReference: {fileID: 1204157655777280883}
     - target: {fileID: 21472932733186692, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
+      propertyPath: gunMagasine
+      value: 
+      objectReference: {fileID: 3500182332123288954}
+    - target: {fileID: 21472932733186692, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
       propertyPath: doNotCollide
       value: 
       objectReference: {fileID: 6958007085436449253}
@@ -4321,6 +4326,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 249343498368186820, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
+      propertyPath: ammoPerItem
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 249343498368186820, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
+      propertyPath: maxQuantity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 249343498368186820, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
       propertyPath: givenItemType
       value: MDA
       objectReference: {fileID: 0}
@@ -4352,7 +4367,7 @@ PrefabInstance:
     - target: {fileID: 1331828183466055244, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
       propertyPath: ammo
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1331828183466055244, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
@@ -4365,6 +4380,11 @@ PrefabInstance:
       propertyPath: shootPoint
       value: 
       objectReference: {fileID: 1833899117679144513}
+    - target: {fileID: 1331828183466055244, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
+      propertyPath: gunMagasine
+      value: 
+      objectReference: {fileID: 4602870473259223478}
     - target: {fileID: 1331828183466055244, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
       propertyPath: doNotCollide
@@ -4726,6 +4746,16 @@ PrefabInstance:
       propertyPath: dockingPort
       value: 
       objectReference: {fileID: 1271945063076200477}
+    - target: {fileID: 1959338563807813759, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: gunMagasine
+      value: 
+      objectReference: {fileID: 4602870473259223478}
+    - target: {fileID: 2706037466008406495, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: shipGun
+      value: 
+      objectReference: {fileID: 2422205919512132338}
     - target: {fileID: 2851295538198289046, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4791,6 +4821,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6298193026008024314, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: gunMagasine
+      value: 
+      objectReference: {fileID: 3500182332123288954}
     - target: {fileID: 6404689057080263760, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: dockingPort
@@ -4811,6 +4846,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7869328908605678843, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 2422205919512132338}
+    - target: {fileID: 7869328908605678843, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: gunMagasine
+      value: 
+      objectReference: {fileID: 4602870473259223478}
     - target: {fileID: 7923269489504616387, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: shipExtBody

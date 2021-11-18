@@ -9,7 +9,7 @@ namespace Core.Interractables
     public class ItemDeposit : Interractable, IChangeQuantity
     {
 
-        //[SerializeField] protected ItemDepotMode itemDepotMode = ItemDepotMode.giver;
+        
 
         [SerializeField] protected string itemType = "NO";
         [SerializeField] protected bool infiniteSupply = false;
@@ -55,7 +55,7 @@ namespace Core.Interractables
 
 
         [Server]
-        void ServerPickupObject(NetworkIdentity p_requestingPlayer)
+        protected virtual void ServerPickupObject(NetworkIdentity p_requestingPlayer)
         {
             ICanGrabItem characterHands = p_requestingPlayer.GetComponent<ICanGrabItem>();
 
@@ -69,7 +69,11 @@ namespace Core.Interractables
                 {
                     if (itemQuantity > 0)
                     {
-                        characterHands.ServerGrabItem(itemType);
+                        if (ServerCanGiveItemToPlayer())
+                        {
+                            characterHands.ServerGrabItem(itemType);
+                        }
+                        
                         itemQuantity--;
 
                         if (itemQuantity <= 0)
@@ -88,17 +92,25 @@ namespace Core.Interractables
 
         }
 
+
+        /// <summary>
+        /// example use : overriden by ShipGunMagasine  to prevent players to ressuply the gun without picking ammos in the ammo boxes
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool ServerCanGiveItemToPlayer()
+        {
+            return true;
+        }
+
         protected override void ServerUseObjectClick(NetworkIdentity requestingPlayer)
         {
             ServerDropObject(requestingPlayer);
         }
 
         [Server]
-        void ServerDropObject(NetworkIdentity p_requestingPlayer)
+        protected virtual void ServerDropObject(NetworkIdentity p_requestingPlayer)
         {
             ICanGrabItem characterHands = p_requestingPlayer.GetComponent<ICanGrabItem>();
-
-
 
             if (characterHands.HeldItemType == itemType) //store player's item in the depositt. 
             {

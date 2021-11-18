@@ -3,38 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Core;
+using Core.ServerAuthoritativeActions;
+using ShipsLogic.Guns;
 
 namespace FeedbackElements
 {
-    public class AmmoIndicator : MonoBehaviour
+    public class ShipAmmoIndicator : MonoBehaviour
     {
-        [SerializeField] MonoBehaviour gun = null;
-
-
-
+        [SerializeField] ShipGunMagasine gunMagasine = null;
 
         [SerializeField] TMP_Text ammoIndicator = null;
 
 
         private void Awake()
         {
-            if (gun is IChangeQuantity iChangeQuantity)
-            {
-                iChangeQuantity.OnChangeQuantity += ChangeIndicatorValue;
-            }
-
             ammoIndicator.text = "No ammo";
+            gunMagasine.OnAmmoQuantityChanged += ChangeIndicatorValue;            
         }
 
-        void ChangeIndicatorValue(short value, short maxValue)
+        void ChangeIndicatorValue(short _old, short _new)
         {
-            if (value == 0)
+            if (_new == 0)
             {
                 ammoIndicator.text = "No ammo";
             }
             else
             {
-                ammoIndicator.text = value.ToString();
+                ammoIndicator.text = _new.ToString();
             }
 
         }
