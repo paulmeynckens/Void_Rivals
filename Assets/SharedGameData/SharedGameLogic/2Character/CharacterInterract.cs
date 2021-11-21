@@ -40,7 +40,7 @@ namespace CharacterLogic
 
                 if (hasAuthority)
                 {
-                    if (Input.GetKey(KeyBindings.Pairs[Actions.interact]))
+                    if (Input.GetKey(KeyBindings.Pairs[PlayerAction.interact]))
                     {
                         if (currentTarget != null)
                         {
@@ -49,7 +49,7 @@ namespace CharacterLogic
 
                         CmdTryInteractE();
                     }
-                    if (Input.GetKey(KeyBindings.Pairs[Actions.shoot]))
+                    if (Input.GetKey(KeyBindings.Pairs[PlayerAction.shoot]))
                     {
                         if (currentTarget != null)
                         {

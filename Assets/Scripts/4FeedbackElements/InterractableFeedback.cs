@@ -14,6 +14,7 @@ namespace FeedbackElements
         [SerializeField] Material confirmMaterial = null;
         [SerializeField] Material refuseMaterial = null;
 
+        [SerializeField] GameObject helpTip = null;
 
         Renderer ownRenderer;
 
@@ -46,6 +47,11 @@ namespace FeedbackElements
             interractor.OnClientConfirm += ClientConfirm;
             interractor.OnClientDeactivate += ClientDeactivate;
             interractor.OnClientRefuse += ClientRefuseAction;
+
+            if (helpTip != null)
+            {
+                helpTip.SetActive(false);
+            }
         }
 
 
@@ -53,6 +59,10 @@ namespace FeedbackElements
         protected virtual void ClientActivate()
         {
             ownRenderer.material = activatedMaterial;
+            if (helpTip != null)
+            {
+                helpTip.SetActive(true);
+            }
         }
 
         protected virtual void ClientConfirm()
@@ -63,6 +73,10 @@ namespace FeedbackElements
         protected virtual void ClientDeactivate()
         {
             ownRenderer.material = defaultMaterial;
+            if (helpTip != null)
+            {
+                helpTip.SetActive(false);
+            }
         }
 
         protected virtual void ClientRefuseAction()

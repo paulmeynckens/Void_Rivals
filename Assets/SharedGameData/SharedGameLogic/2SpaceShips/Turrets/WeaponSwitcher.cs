@@ -48,15 +48,15 @@ namespace  ShipsLogic.Turrets
         {
             if (hasAuthority)
             {
-                if (Input.GetKey(KeyBindings.Pairs[Actions.left_weapon]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.left_weapon]))
                 {
                     CmdChangeWeaponState(ShipTwinWeaponsState.left);
                 }
-                if (Input.GetKey(KeyBindings.Pairs[Actions.both_weapons]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.both_weapons]))
                 {
                     CmdChangeWeaponState(ShipTwinWeaponsState.both);
                 }
-                if (Input.GetKey(KeyBindings.Pairs[Actions.rigth_weapon]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.rigth_weapon]))
                 {
                     CmdChangeWeaponState(ShipTwinWeaponsState.right);
                 }

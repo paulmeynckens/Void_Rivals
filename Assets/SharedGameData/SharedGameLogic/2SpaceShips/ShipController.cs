@@ -124,22 +124,22 @@ namespace ShipsLogic
 
             float thrustConsign = 0;
 
-            if (Input.GetKey(KeyBindings.Pairs[Actions.forward]) && !Input.GetKey(KeyBindings.Pairs[Actions.backward]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.forward]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.backward]))
             {
                 thrustConsign = shipData.engineMaxForwardThrust;
 
             }
-            else if (Input.GetKey(KeyBindings.Pairs[Actions.backward]) && !Input.GetKey(KeyBindings.Pairs[Actions.forward]))
+            else if (Input.GetKey(KeyBindings.Pairs[PlayerAction.backward]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.forward]))
             {
                 thrustConsign = -shipData.engineMaxBackwardThrust;
             }
 
             float rollConsign = 0;
-            if (Input.GetKey(KeyBindings.Pairs[Actions.rollLeft]) && !Input.GetKey(KeyBindings.Pairs[Actions.rollRight]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.rollLeft]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.rollRight]))
             {
                 rollConsign = shipData.rollTorque;
             }
-            if (!Input.GetKey(KeyBindings.Pairs[Actions.rollLeft]) && Input.GetKey(KeyBindings.Pairs[Actions.rollRight]))
+            if (!Input.GetKey(KeyBindings.Pairs[PlayerAction.rollLeft]) && Input.GetKey(KeyBindings.Pairs[PlayerAction.rollRight]))
             {
                 rollConsign = -shipData.rollTorque;
             }
@@ -150,21 +150,21 @@ namespace ShipsLogic
 
 
 
-                    if (Input.GetKey(KeyBindings.Pairs[Actions.left]) && !Input.GetKey(KeyBindings.Pairs[Actions.right]))
+                    if (Input.GetKey(KeyBindings.Pairs[PlayerAction.left]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.right]))
                     {
                         yawConsign = -shipData.yawTorque;
                     }
-                    if (!Input.GetKey(KeyBindings.Pairs[Actions.left]) && Input.GetKey(KeyBindings.Pairs[Actions.right]))
+                    if (!Input.GetKey(KeyBindings.Pairs[PlayerAction.left]) && Input.GetKey(KeyBindings.Pairs[PlayerAction.right]))
                     {
                         yawConsign = shipData.yawTorque;
                     }
 
 
-                    if (Input.GetKey(KeyBindings.Pairs[Actions.jump]) && !Input.GetKey(KeyBindings.Pairs[Actions.crouch]))
+                    if (Input.GetKey(KeyBindings.Pairs[PlayerAction.jump]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.crouch]))
                     {
                         pitchConsign = -shipData.pitchTorque;
                     }
-                    if (!Input.GetKey(KeyBindings.Pairs[Actions.jump]) && Input.GetKey(KeyBindings.Pairs[Actions.crouch]))
+                    if (!Input.GetKey(KeyBindings.Pairs[PlayerAction.jump]) && Input.GetKey(KeyBindings.Pairs[PlayerAction.crouch]))
                     {
                         pitchConsign = shipData.pitchTorque;
                     }
@@ -173,7 +173,7 @@ namespace ShipsLogic
 
                 case ShipType.strike_craft:
 
-                    if (Input.GetKey(KeyBindings.Pairs[Actions.aim]))
+                    if (Input.GetKey(KeyBindings.Pairs[PlayerAction.aim]))
                     {
                         break;
                     }

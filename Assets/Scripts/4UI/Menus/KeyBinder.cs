@@ -10,7 +10,7 @@ namespace UI.Menus
     public class KeyBinder : MonoBehaviour
     {
         [SerializeField] TMP_Text m_buttonText = null;
-        [SerializeField] Actions m_boundAction = Actions.forward;
+        [SerializeField] PlayerAction m_boundAction = PlayerAction.forward;
 
         private void Start()
         {

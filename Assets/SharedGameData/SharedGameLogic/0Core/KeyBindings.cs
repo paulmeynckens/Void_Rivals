@@ -7,38 +7,38 @@ namespace Core
     {
         public static float m_mouseSensitivity = 150;
 
-        public static Dictionary<Actions, KeyCode> Pairs = new Dictionary<Actions, KeyCode>()
+        public static Dictionary<PlayerAction, KeyCode> Pairs = new Dictionary<PlayerAction, KeyCode>()
     {
-            {Actions.forward,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.forward.ToString(),KeyCode.W.ToString())) },
-            {Actions.backward,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.backward.ToString(),KeyCode.S.ToString())) },
-            {Actions.left,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.left.ToString(),KeyCode.A.ToString())) },
-            {Actions.right,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.right.ToString(),KeyCode.D.ToString()))},
-            {Actions.rollLeft,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.rollLeft.ToString(),KeyCode.Q.ToString())) },
-            {Actions.rollRight,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.rollRight.ToString(),KeyCode.E.ToString()))},
-            {Actions.dock,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.dock.ToString(),KeyCode.T.ToString()))},
+            {PlayerAction.forward,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.forward.ToString(),KeyCode.W.ToString())) },
+            {PlayerAction.backward,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.backward.ToString(),KeyCode.S.ToString())) },
+            {PlayerAction.left,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.left.ToString(),KeyCode.A.ToString())) },
+            {PlayerAction.right,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.right.ToString(),KeyCode.D.ToString()))},
+            {PlayerAction.rollLeft,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.rollLeft.ToString(),KeyCode.Q.ToString())) },
+            {PlayerAction.rollRight,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.rollRight.ToString(),KeyCode.E.ToString()))},
+            {PlayerAction.dock,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.dock.ToString(),KeyCode.T.ToString()))},
 
-            {Actions.jump, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.jump.ToString(),KeyCode.Space.ToString()))},
-            {Actions.crouch, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.crouch.ToString(),KeyCode.LeftControl.ToString())) },
-            {Actions.run, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.run.ToString(),KeyCode.LeftShift.ToString())) },
+            {PlayerAction.jump, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.jump.ToString(),KeyCode.Space.ToString()))},
+            {PlayerAction.crouch, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.crouch.ToString(),KeyCode.LeftControl.ToString())) },
+            {PlayerAction.run, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.run.ToString(),KeyCode.LeftShift.ToString())) },
 
-            {Actions.hud, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.hud.ToString(),KeyCode.Q.ToString())) },
-            {Actions.interact,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.interact.ToString(),KeyCode.E.ToString())) },
-            {Actions.exit_seat,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.exit_seat.ToString(),KeyCode.F.ToString())) },
-            {Actions.in_game_menu, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.in_game_menu.ToString(),KeyCode.Escape.ToString())) },
-            {Actions.teams_screen, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.teams_screen.ToString(),KeyCode.Tab.ToString())) },
-            {Actions.shoot, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.shoot.ToString(),KeyCode.Mouse0.ToString())) },
-            {Actions.aim, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.aim.ToString(),KeyCode.Mouse1.ToString())) },
+            {PlayerAction.hud, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.hud.ToString(),KeyCode.Q.ToString())) },
+            {PlayerAction.interact,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.interact.ToString(),KeyCode.E.ToString())) },
+            {PlayerAction.exit_seat,(KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.exit_seat.ToString(),KeyCode.F.ToString())) },
+            {PlayerAction.in_game_menu, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.in_game_menu.ToString(),KeyCode.Escape.ToString())) },
+            {PlayerAction.teams_screen, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.teams_screen.ToString(),KeyCode.Tab.ToString())) },
+            {PlayerAction.shoot, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.shoot.ToString(),KeyCode.Mouse0.ToString())) },
+            {PlayerAction.aim, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.aim.ToString(),KeyCode.Mouse1.ToString())) },
 
-            {Actions.left_weapon, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.left_weapon.ToString(),KeyCode.Alpha1.ToString())) },
-            {Actions.rigth_weapon, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.rigth_weapon.ToString(),KeyCode.Alpha3.ToString())) },
-            {Actions.both_weapons, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.both_weapons.ToString(),KeyCode.Alpha2.ToString())) },
+            {PlayerAction.left_weapon, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.left_weapon.ToString(),KeyCode.Alpha1.ToString())) },
+            {PlayerAction.rigth_weapon, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.rigth_weapon.ToString(),KeyCode.Alpha3.ToString())) },
+            {PlayerAction.both_weapons, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.both_weapons.ToString(),KeyCode.Alpha2.ToString())) },
 
-            {Actions.release_cursor, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.release_cursor.ToString(),KeyCode.M.ToString())) },
+            {PlayerAction.release_cursor, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.release_cursor.ToString(),KeyCode.M.ToString())) },
 
-            {Actions.item_slot1, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.item_slot1.ToString(),KeyCode.Alpha1.ToString())) },
-            {Actions.item_slot2, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.item_slot2.ToString(),KeyCode.Alpha2.ToString())) },
-            {Actions.item_slot3, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.item_slot3.ToString(),KeyCode.Alpha3.ToString())) },
-            {Actions.item_slot4, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(Actions.item_slot4.ToString(),KeyCode.Alpha4.ToString())) },
+            {PlayerAction.item_slot1, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.item_slot1.ToString(),KeyCode.Alpha1.ToString())) },
+            {PlayerAction.item_slot2, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.item_slot2.ToString(),KeyCode.Alpha2.ToString())) },
+            {PlayerAction.item_slot3, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.item_slot3.ToString(),KeyCode.Alpha3.ToString())) },
+            {PlayerAction.item_slot4, (KeyCode)System.Enum.Parse(typeof(KeyCode),PlayerPrefs.GetString(PlayerAction.item_slot4.ToString(),KeyCode.Alpha4.ToString())) },
 
     };
 
@@ -54,7 +54,7 @@ namespace Core
 
     }
 
-    public enum Actions
+    public enum PlayerAction
     {
         hud,
         teams_screen,

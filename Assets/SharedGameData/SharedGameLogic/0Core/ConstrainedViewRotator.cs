@@ -20,7 +20,7 @@ namespace Core
         {
             if (networkIdentity.isClient && networkIdentity.hasAuthority)
             {
-                if (Input.GetKey(KeyBindings.Pairs[Actions.aim]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.aim]))
                 {
                     twoAxisRotator.RotateView();
                 }
