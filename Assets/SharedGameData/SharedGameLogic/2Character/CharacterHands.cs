@@ -35,22 +35,22 @@ namespace CharacterLogic
         {
             if (hasAuthority)
             {
-                if (Input.GetKey(KeyBindings.Pairs[Actions.item_slot1]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.item_slot1]))
                 {
                     CmdSwitchItem(0);
                     return;
                 }
-                if (Input.GetKey(KeyBindings.Pairs[Actions.item_slot2]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.item_slot2]))
                 {
                     CmdSwitchItem(1);
                     return;
                 }
-                if (Input.GetKey(KeyBindings.Pairs[Actions.item_slot3]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.item_slot3]))
                 {
                     CmdSwitchItem(2);
                     return;
                 }
-                if (Input.GetKey(KeyBindings.Pairs[Actions.item_slot4]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.item_slot4]))
                 {
                     CmdSwitchItem(3);
                     return;

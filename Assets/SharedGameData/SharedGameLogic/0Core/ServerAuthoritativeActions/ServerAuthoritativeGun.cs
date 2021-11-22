@@ -93,7 +93,7 @@ namespace Core.ServerAuthoritativeActions
                 lastPosition = shootPoint.position;
             }
 
-            if (Input.GetKey(KeyBindings.Pairs[Actions.shoot])&& CanShoot() )
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.shoot])&& CanShoot() )
             {
                 
                 CmdShoot();

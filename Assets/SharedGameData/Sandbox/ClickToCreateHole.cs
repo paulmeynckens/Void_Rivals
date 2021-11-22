@@ -16,7 +16,7 @@ namespace Sandbox
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyBindings.Pairs[Actions.shoot]))
+            if (Input.GetKeyDown(KeyBindings.Pairs[PlayerAction.shoot]))
             {
                 TryGenerateHit();
             }

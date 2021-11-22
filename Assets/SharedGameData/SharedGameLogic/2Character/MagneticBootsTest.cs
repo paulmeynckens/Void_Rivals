@@ -36,7 +36,7 @@ namespace PoloGames
 
         void MoveForward()
         {
-            if (Input.GetKey(KeyBindings.Pairs[Actions.forward]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.forward]))
             {
                 transform.position += twoAxis.horizontalRotator.forward * Time.fixedDeltaTime * moveSpeed;
                 MoveToFoundPosition();

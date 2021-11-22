@@ -19,19 +19,19 @@ namespace Sandbox
         void Update()
         {
             twoAxis.RotateView();
-            if (Input.GetKey(KeyBindings.Pairs[Actions.forward]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.forward]))
             {
                 transform.position += twoAxis.pointer.forward * speed * Time.deltaTime;
             }
-            if (Input.GetKey(KeyBindings.Pairs[Actions.backward]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.backward]))
             {
                 transform.position-= twoAxis.pointer.forward * speed * Time.deltaTime;
             }
-            if (Input.GetKey(KeyBindings.Pairs[Actions.right]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.right]))
             {
                 transform.position+=twoAxis.horizontalRotator.right * speed * Time.deltaTime;
             }
-            if (Input.GetKey(KeyBindings.Pairs[Actions.left]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.left]))
             {
                 transform.position -= twoAxis.horizontalRotator.right * speed * Time.deltaTime;
             }

@@ -10,7 +10,7 @@ namespace UI.Help
     {
         public string m_help = "action";
 
-        public Actions m_action;
+        public PlayerAction m_action;
     }
 }
 

@@ -20,7 +20,7 @@ namespace ShipsRenderer
         {
             if (shipController.hasAuthority && shipController.shipData.shipType==ShipType.strike_craft)
             {
-                if (Input.GetKey(KeyBindings.Pairs[Actions.aim]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.aim]))
                 {
                     cameraRotator.RotateView();
                 }

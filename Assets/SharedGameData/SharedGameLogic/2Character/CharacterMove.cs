@@ -75,21 +75,21 @@ namespace CharacterLogic
         protected override InputSnapshot ClientCollectInputs(ushort tick)
         {
             float _forwardBackward = 0;
-            if(Input.GetKey(KeyBindings.Pairs[Actions.forward]) && !Input.GetKey(KeyBindings.Pairs[Actions.backward]))
+            if(Input.GetKey(KeyBindings.Pairs[PlayerAction.forward]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.backward]))
             {
                 _forwardBackward = 1;
             }
-            if (Input.GetKey(KeyBindings.Pairs[Actions.backward]) && !Input.GetKey(KeyBindings.Pairs[Actions.forward]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.backward]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.forward]))
             {
                 _forwardBackward = -1;
             }
 
             float _rightLeft = 0;
-            if (Input.GetKey(KeyBindings.Pairs[Actions.right]) && !Input.GetKey(KeyBindings.Pairs[Actions.left]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.right]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.left]))
             {
                 _rightLeft = 1;
             }
-            if (Input.GetKey(KeyBindings.Pairs[Actions.left]) && !Input.GetKey(KeyBindings.Pairs[Actions.right]))
+            if (Input.GetKey(KeyBindings.Pairs[PlayerAction.left]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.right]))
             {
                 _rightLeft = -1;
             }
@@ -98,7 +98,7 @@ namespace CharacterLogic
                 tick = tick,
                 forwardBackward = _forwardBackward,
                 rightLeft = _rightLeft,
-                jump = Input.GetKey(KeyBindings.Pairs[Actions.jump]),
+                jump = Input.GetKey(KeyBindings.Pairs[PlayerAction.jump]),
                 yRotation = twoAxisRotator.horizontalRotator.localEulerAngles.y,
                 xRotation = twoAxisRotator.pointer.localEulerAngles.x,
 

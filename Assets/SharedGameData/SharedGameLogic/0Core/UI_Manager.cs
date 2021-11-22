@@ -33,11 +33,11 @@ namespace Core
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyBindings.Pairs[Actions.in_game_menu]))
+            if (Input.GetKeyDown(KeyBindings.Pairs[PlayerAction.in_game_menu]))
             {
                 menuPanel.SetActive(!menuPanel.activeSelf);
             }
-            tabPanel.SetActive(Input.GetKey(KeyBindings.Pairs[Actions.teams_screen]));
+            tabPanel.SetActive(Input.GetKey(KeyBindings.Pairs[PlayerAction.teams_screen]));
 
             aMenuIsActive = menuPanel.activeSelf || tabPanel.activeSelf || forceCursorVisible;
 

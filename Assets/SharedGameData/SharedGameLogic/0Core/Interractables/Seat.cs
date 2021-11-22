@@ -26,7 +26,7 @@ namespace Core.Interractables
 
         void FixedUpdate()
         {
-            if (hasAuthority && Input.GetKey(KeyBindings.Pairs[Actions.exit_seat]) && !UI_Manager.instance.aMenuIsActive)
+            if (hasAuthority && Input.GetKey(KeyBindings.Pairs[PlayerAction.exit_seat]) && !UI_Manager.instance.aMenuIsActive)
             {
                 CmdLeave();
             }

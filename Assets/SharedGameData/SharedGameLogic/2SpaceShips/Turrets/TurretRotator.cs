@@ -55,7 +55,7 @@ namespace ShipsLogic.Turrets
             
             if (hasAuthority && !UI_Manager.instance.aMenuIsActive)
             {
-                if (!Input.GetKey(KeyBindings.Pairs[Actions.release_cursor]))//sets the cursor visible and view locked
+                if (!Input.GetKey(KeyBindings.Pairs[PlayerAction.release_cursor]))//sets the cursor visible and view locked
                 {
                     rotator.RotateView();
                 }

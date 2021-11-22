@@ -106,7 +106,7 @@ namespace ShipsLogic
             isPulling = false;
             if (hasAuthority && isClient)
             {
-                if (Input.GetKey(KeyBindings.Pairs[Actions.dock]))
+                if (Input.GetKey(KeyBindings.Pairs[PlayerAction.dock]))
                 {
                     CmdTryDockingOrUnDock();
                     PullToDockingPort();
