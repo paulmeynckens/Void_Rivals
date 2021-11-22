@@ -564,7 +564,7 @@ MonoBehaviour:
   m_selectionRange: 2
   m_SelectableItemsLayer:
     serializedVersion: 2
-    m_Bits: 2147483648
+    m_Bits: 2181038080
   m_pointerTransform: {fileID: 7478257735220569680}
 --- !u!54 &3371155946534899190
 Rigidbody:
@@ -615,8 +615,8 @@ MonoBehaviour:
   shootPoint: {fileID: 7478257735220569680}
   data: {fileID: 11400000, guid: f779db5f57ede36469f02b8d3c097505, type: 2}
   serverAuthoritativeMovement: {fileID: 4969665825523161047}
-  ammo: 1000
   requestedItem: PL
+  ammo: 1000
 --- !u!114 &5151691709812308484
 MonoBehaviour:
   m_ObjectHideFlags: 0

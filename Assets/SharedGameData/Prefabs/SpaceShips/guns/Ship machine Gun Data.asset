@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7ad395cb4edff4f8628c2372f52773, type: 3}
   m_Name: Ship machine Gun Data
   m_EditorClassIdentifier: 
-  damage: 60
+  damage: 15
   range: 100
   timeBetweenShots: 0.11
   magasinSize: 100

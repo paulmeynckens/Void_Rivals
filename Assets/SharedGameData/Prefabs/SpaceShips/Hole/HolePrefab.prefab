@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0.2
   requestedTool: RT
   sphereCollider: {fileID: 4586660303725842256}
 --- !u!114 &8308487928363269014

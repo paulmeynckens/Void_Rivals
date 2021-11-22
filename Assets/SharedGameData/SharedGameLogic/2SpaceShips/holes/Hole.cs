@@ -31,7 +31,7 @@ namespace ShipsLogic.Holes
             Debug.Log("poping hole");
         }
 
-        protected override bool ServerCanUseObjectE(NetworkIdentity requestingPlayer)
+        protected override bool ServerCanUseObjectClick(NetworkIdentity requestingPlayer)
         {
 
             ICanGrabItem canGrabItem = requestingPlayer.GetComponent<ICanGrabItem>();
@@ -42,9 +42,9 @@ namespace ShipsLogic.Holes
             return false;
         }
 
-        protected override void ServerUseObjectE(NetworkIdentity requestingPlayer)
+        protected override void ServerUseObjectClick(NetworkIdentity requestingPlayer)
         {
-            base.ServerUseObjectE(requestingPlayer);
+            base.ServerUseObjectClick(requestingPlayer);
             damage -= HOLE_REPAIR_RATE;
             if (damage <= 0)
             {
