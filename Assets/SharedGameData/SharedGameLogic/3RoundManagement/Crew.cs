@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using Core.ServerAuthoritativeActions;
 using Mirror;
 using System;
 using ShipsLogic;
@@ -96,9 +97,13 @@ namespace RoundManagement
         {
 
             Transform location = TeamsManager.instance.FindSpawnLocation(team);
-            GameObject spawnedShip = Instantiate(shipSpawner.prefab, location.position, location.rotation);
-            
+            GameObject spawnedShip = Instantiate(shipSpawner.prefab);
 
+            BodiesHolder bodiesHolder = spawnedShip.GetComponent<BodiesHolder>();
+            bodiesHolder.externalCollider.position = location.position;
+            bodiesHolder.externalCollider.rotation = location.rotation;
+
+            
             LinkToNetId shipLinkToNetId = spawnedShip.GetComponent<LinkToNetId>();
             shipLinkToNetId.netIdLink = netId;
 

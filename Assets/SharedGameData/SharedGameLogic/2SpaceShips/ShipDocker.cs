@@ -179,6 +179,9 @@ namespace ShipsLogic
 
         void UnDock()
         {
+            bodiesHolder.RepopRigidBody();
+            bodiesHolder.externalCollider.parent = null;
+
             parentShip = null;
 
             transform.parent = null;
@@ -186,8 +189,7 @@ namespace ShipsLogic
             transform.rotation = Quaternion.identity;
             transform.localScale = Vector3.one;
 
-            bodiesHolder.RepopRigidBody();
-            bodiesHolder.externalCollider.parent = null;
+            
 
             currentlyDockedPort.Undock();
 
