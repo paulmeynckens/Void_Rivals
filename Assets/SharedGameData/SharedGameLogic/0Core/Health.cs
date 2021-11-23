@@ -6,24 +6,32 @@ using System;
 
 namespace Core
 {
-    public class Health : NetworkBehaviour,IChangeQuantity
+    public class Health : NetworkBehaviour
     {
+        public short MaxHealth
+        {
+            get => maxHealth;
+        }
         protected short maxHealth;
 
         protected ICanDie[] aliveOrDeads;
 
 
-        public event Action<short, short> OnChangeQuantity;
+        public event Action<short, short> OnChangeHealthQuantity;
 
         public event Action OnServerDie = delegate { };
         public event Action OnClientDie = delegate { };
 
         #region SynVars +hooks
 
-        [SyncVar(hook = nameof(ClientUpdateHealthVisual))] public short currentHealth = 100;
+        [SerializeField][SyncVar(hook = nameof(ClientUpdateHealthVisual))] protected short health = 100;
         void ClientUpdateHealthVisual(short _old, short _new)
         {
-            OnChangeQuantity?.Invoke(_new, maxHealth);
+            OnChangeHealthQuantity?.Invoke(_old, _new);
+        }
+        public short CurrentHealth
+        {
+            get => health;
         }
         
         #endregion
@@ -38,17 +46,17 @@ namespace Core
         public override void OnStartServer()
         {
             base.OnStartServer();
-            maxHealth = currentHealth;
+            maxHealth = health;
         }
 
 
 
         public virtual void ServerDealDamage(short damage, RaycastHit raycastHit)
         {
-            currentHealth -= damage;
-            if (currentHealth < 0)
+            health -= damage;
+            if (health < 0)
             {
-                currentHealth = 0;
+                health = 0;
                 ServerDie();
             }
         }
@@ -56,16 +64,16 @@ namespace Core
 
         public void ServerHeal(short healingAmount)
         {
-            currentHealth += (short)healingAmount;
-            if (currentHealth > maxHealth)
+            health += (short)healingAmount;
+            if (health > maxHealth)
             {
-                currentHealth = maxHealth;
+                health = maxHealth;
             }
         }
 
         public void ServerHealFull()
         {
-            currentHealth = maxHealth;
+            health = maxHealth;
         }
 
         

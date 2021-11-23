@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
@@ -14,7 +15,26 @@ namespace ShipsLogic.Holes
         [SerializeField] GameObject holePrefab = null;
         [SerializeField] Transform interior = null;
 
+        
         List<Hole> holes = new List<Hole>();
+
+        #region Syncvar + hooks
+
+        public event Action<short,short> OnNumberOfholesChanged = delegate { };
+
+        public short NumberOfHoles
+        {
+            get => numberOfHoles;
+        }
+
+        [SyncVar(hook = nameof(UpdateNumberOfHoles))] short numberOfHoles = 0;
+
+        void UpdateNumberOfHoles(short _old, short _new)
+        {
+            OnNumberOfholesChanged(_old,_new);
+        }
+
+        #endregion
 
         const float DAMAGE_TO_RADIUS_RATIO = 0.05f;
 
@@ -51,6 +71,8 @@ namespace ShipsLogic.Holes
             ServerCalculateHealth();
 
             NetworkServer.Spawn(holeInstance);
+
+
 
             base.ServerDealDamage(damage, raycastHit);
         }
@@ -140,7 +162,8 @@ namespace ShipsLogic.Holes
             {
                 totalDamage += hole.Damage;
             }
-            currentHealth = (short)(maxHealth - totalDamage);
+            health = (short)(maxHealth - totalDamage);
+            numberOfHoles = (short)holes.Count;
         }
 
         void ServerRepair(Hole hole)

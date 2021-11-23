@@ -4352,6 +4352,11 @@ PrefabInstance:
       objectReference: {fileID: 7338415839335231512}
     - target: {fileID: 6292104867443678685, guid: 7ce1a76b78781074fbe72fcb9505242e,
         type: 3}
+      propertyPath: health
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292104867443678685, guid: 7ce1a76b78781074fbe72fcb9505242e,
+        type: 3}
       propertyPath: interior
       value: 
       objectReference: {fileID: 8029778166144068871}
@@ -4615,6 +4620,11 @@ PrefabInstance:
       propertyPath: quantityChanger
       value: 
       objectReference: {fileID: 3559861158027790810}
+    - target: {fileID: 4270413219230616268, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: structure
+      value: 
+      objectReference: {fileID: 7256690793601823075}
     - target: {fileID: 4571003157354957703, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: gunMagasine
@@ -4655,6 +4665,11 @@ PrefabInstance:
       propertyPath: interractor
       value: 
       objectReference: {fileID: 6432111313598433722}
+    - target: {fileID: 7651092856450937482, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: structure
+      value: 
+      objectReference: {fileID: 7256690793601823075}
     - target: {fileID: 7923269489504616387, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: shipExtBody
