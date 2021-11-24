@@ -4,31 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Mirror;
+using Core;
 
 
-namespace Core
+namespace UI
 {
-    public class UI_Manager : MonoBehaviour
+    public class PanelsActivator : MonoBehaviour
     {
 
         [SerializeField] GameObject menuPanel = null;
         [SerializeField] GameObject tabPanel = null;
 
 
-        public static UI_Manager instance;
-        public bool forceCursorVisible = false;
 
-        public bool aMenuIsActive = false;
+        bool forceCursorVisible = false;
 
-        //[SerializeField] GameObject[] panels =null;
+        bool aMenuIsActive = false;
 
-
-        private void Awake()
-        {
-            instance = this;
-        }
-
-        
 
 
         private void Update()

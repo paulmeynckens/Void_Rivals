@@ -53,7 +53,7 @@ namespace ShipsLogic.Turrets
         private void Update()
         {
             
-            if (hasAuthority && !UI_Manager.instance.aMenuIsActive)
+            if (hasAuthority && !InputsBlocker.instance.BlockPlayerInputs())
             {
                 if (!Input.GetKey(KeyBindings.Pairs[PlayerAction.release_cursor]))//sets the cursor visible and view locked
                 {

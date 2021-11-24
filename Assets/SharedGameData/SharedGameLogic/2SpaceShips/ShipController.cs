@@ -107,15 +107,18 @@ namespace ShipsLogic
 
         protected override InputSnapshot ClientCollectInputs(ushort tick)
         {
-            /*
-            if (UI_Manager.instance.aMenuIsActive)
+            if (InputsBlocker.instance.BlockPlayerInputs())
             {
-                return new InputSnapshot
+                return new ShipInput
                 {
                     tick = tick,
+                    yaw = 0,
+                    pitch = 0,
+                    thrust = 0,
+                    roll = 0,
+
                 };
             }
-            */
 
 
             float yawConsign = 0;

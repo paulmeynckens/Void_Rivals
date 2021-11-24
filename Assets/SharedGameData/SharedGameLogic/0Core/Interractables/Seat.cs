@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Core;
 using Mirror;
 
 
@@ -26,7 +27,7 @@ namespace Core.Interractables
 
         void FixedUpdate()
         {
-            if (hasAuthority && Input.GetKey(KeyBindings.Pairs[PlayerAction.exit_seat]) && !UI_Manager.instance.aMenuIsActive)
+            if (hasAuthority && Input.GetKey(KeyBindings.Pairs[PlayerAction.exit_seat]) && !InputsBlocker.instance.BlockPlayerInputs())
             {
                 CmdLeave();
             }

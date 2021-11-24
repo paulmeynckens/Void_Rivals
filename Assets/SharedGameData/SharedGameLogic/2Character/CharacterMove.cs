@@ -74,6 +74,20 @@ namespace CharacterLogic
         #region Client
         protected override InputSnapshot ClientCollectInputs(ushort tick)
         {
+            if (InputsBlocker.instance.BlockPlayerInputs())
+            {
+                return new CharacterInput
+                {
+                    tick = tick,
+                    forwardBackward = 0,
+                    rightLeft = 0,
+                    jump = false,
+                    yRotation = twoAxisRotator.horizontalRotator.localEulerAngles.y,
+                    xRotation = twoAxisRotator.pointer.localEulerAngles.x,
+
+                };
+            }
+
             float _forwardBackward = 0;
             if(Input.GetKey(KeyBindings.Pairs[PlayerAction.forward]) && !Input.GetKey(KeyBindings.Pairs[PlayerAction.backward]))
             {

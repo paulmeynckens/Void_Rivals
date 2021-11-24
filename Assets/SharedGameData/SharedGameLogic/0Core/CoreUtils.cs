@@ -166,6 +166,11 @@ namespace Core
 
         public void RotateView()
         {
+            if (InputsBlocker.instance.BlockPlayerInputs())
+            {
+                return;
+            }
+
             if (horizontalRotator!=null)
             {
                 RotateViewHorizontal();

@@ -355,7 +355,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4544278421251027940}
   m_HandleRect: {fileID: 3926710879537546765}
   m_Direction: 2
-  m_Value: 1.0000004
+  m_Value: 1
   m_Size: 0.6065483
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1070,6 +1070,7 @@ GameObject:
   - component: {fileID: 5790148171025665016}
   - component: {fileID: 3903437685232522497}
   - component: {fileID: 6808356617011980412}
+  - component: {fileID: 733983330289065917}
   m_Layer: 5
   m_Name: In Game Canvas
   m_TagString: Untagged
@@ -1179,8 +1180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuPanel: {fileID: 5790148172578571722}
   tabPanel: {fileID: 7881535938634388472}
-  forceCursorVisible: 0
-  aMenuIsActive: 0
 --- !u!114 &3903437685232522497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1215,6 +1214,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 1, g: 1, b: 1, a: 1}
   padding: 2
+--- !u!114 &733983330289065917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5790148171025665021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30affc0090fd7b46af6a54046b029f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabPanel: {fileID: 7881535938634388472}
+  menuPanel: {fileID: 5790148172578571722}
 --- !u!1 &5790148171164667842
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,7 +2583,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7881535938909692502}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4585,7 +4598,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7881535940446201381}
   m_HandleRect: {fileID: 7881535940446201380}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999998
   m_Size: 0.6259675
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -10374,12 +10387,12 @@ PrefabInstance:
     - target: {fileID: 6110161180287527836, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Size
-      value: 0.2977524
+      value: 0.29775238
       objectReference: {fileID: 0}
     - target: {fileID: 6110161180287527836, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 6258176432890508517, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
@@ -10409,7 +10422,7 @@ PrefabInstance:
     - target: {fileID: 7387769807370459129, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8187482054434250599, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
