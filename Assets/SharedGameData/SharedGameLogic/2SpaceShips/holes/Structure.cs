@@ -18,6 +18,8 @@ namespace ShipsLogic.Holes
         
         List<Hole> holes = new List<Hole>();
 
+        const int MAX_ITERATIONS = 10;
+
         #region Syncvar + hooks
 
         public event Action<short,short> OnNumberOfholesChanged = delegate { };
@@ -80,54 +82,59 @@ namespace ShipsLogic.Holes
 
         GameObject ServerPopHole(RaycastHit localRaycast, float sphereRadius)
         {
-            RaycastHit p_raycastHit = ServerConvertHitToWorld(localRaycast);
-            Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + p_raycastHit.normal,Color.white, 1f);
-
-            Collider[] foundExcludingColliders = Physics.OverlapSphere(p_raycastHit.point, sphereRadius, excludedLayerMask);
+            RaycastHit _raycastHit = ServerConvertHitToWorld(localRaycast);
 
             Vector3 movement = Vector3.zero;
 
-            if (foundExcludingColliders.Length != 0)
-            {
+            GameObject popedHole = null;
+            int iterations = 1;
 
-                foreach (Collider collider in foundExcludingColliders)
+            do
+            {
+                Debug.DrawLine(_raycastHit.point, _raycastHit.point + _raycastHit.normal, Color.white, 1f);
+                Collider[] foundExcludingColliders = Physics.OverlapSphere(_raycastHit.point, sphereRadius, excludedLayerMask);
+
+                if (foundExcludingColliders.Length == 0)
                 {
-                    if (collider is SphereCollider sphereCollider)
+
+                    Quaternion holeRotation = Quaternion.LookRotation(_raycastHit.normal, Vector3.up);
+
+                    popedHole= Instantiate(holePrefab, _raycastHit.point, holeRotation, transform);
+                }
+                else
+                {
+                    Debug.Log("iteration " + iterations + " found a excluding object");
+
+                    foreach (Collider collider in foundExcludingColliders)
                     {
-                        float moveAmplitude = sphereRadius + sphereCollider.radius - Vector3.Distance(p_raycastHit.point, sphereCollider.transform.position);
-                        movement += (p_raycastHit.point - sphereCollider.transform.position).normalized * moveAmplitude;
+                        if (collider is SphereCollider sphereCollider)
+                        {
+                            float moveAmplitude = sphereRadius + sphereCollider.radius - Vector3.Distance(_raycastHit.point, sphereCollider.transform.position);
+                            movement += (_raycastHit.point - sphereCollider.transform.position).normalized * moveAmplitude;
+                        }
+                    }
+                    Debug.DrawLine(_raycastHit.point, _raycastHit.point + movement, Color.red, 5);
+
+                    Ray ray = new Ray { origin = _raycastHit.point + movement + _raycastHit.normal, direction = -_raycastHit.normal };
+
+                    
+                    if (Physics.Raycast(ray, out _raycastHit, 5, hullLayerMask))
+                    {
+                        iterations++;
+                    }
+                    else
+                    {
+                        Debug.Log("Hole generation divergence : no hull found");
+                        iterations =MAX_ITERATIONS+1;
                     }
                 }
-                Debug.DrawLine(p_raycastHit.point, p_raycastHit.point + movement, Color.red, 5);
-
             }
-            else
-            {
-                Quaternion holeRotation = Quaternion.LookRotation(p_raycastHit.normal, Vector3.up);
+            while (popedHole == null || iterations < MAX_ITERATIONS);
 
-                return Instantiate(holePrefab, p_raycastHit.point, holeRotation,transform);
-            }
 
-            Ray ray = new Ray { origin = p_raycastHit.point + movement + p_raycastHit.normal, direction = -p_raycastHit.normal };
-            RaycastHit newRaycastHit;
 
-            if (Physics.Raycast(ray, out newRaycastHit, 5, hullLayerMask))
-            {
-                if (newRaycastHit.collider.gameObject != p_raycastHit.collider.gameObject)
-                {
-                    Debug.Log("Hole generation divergence : other GameObject found");
-                    return null;
-                }
-                Quaternion holeRotation = Quaternion.LookRotation(newRaycastHit.normal, Vector3.up);
+            return popedHole;
 
-                return Instantiate(holePrefab, newRaycastHit.point, holeRotation,transform);
-
-            }
-            else
-            {
-                Debug.Log("Hole generation divergence : no collider found");
-                return null;
-            }
         }
 
         RaycastHit ServerConvertHitToWorld(RaycastHit raycastHit)
