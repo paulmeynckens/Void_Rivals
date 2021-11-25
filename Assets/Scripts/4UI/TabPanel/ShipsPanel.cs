@@ -32,22 +32,23 @@ namespace UI.TabPanel
         bool CheckShipSize(string ship)
         {
             int crewSize = PlayerPawn.local.Crew.crewMembers.Count;
-            int requestedShipSize = ShipsManager.instance.shipSpawners[ship].shipSize;
+            int requestedMaxShipCapacity = ShipsManager.instance.shipSpawners[ship].shipMaxCapacity;
+            int requestedMinShipCapacity = ShipsManager.instance.shipSpawners[ship].shipMinCapacity;
 
-            if (crewSize == requestedShipSize)
-            {
-                
-            }
-            else if (requestedShipSize > crewSize)
-            {
-                shipTooBigPanel.SetActive(true);
-            }
-            else
+
+            if (crewSize > requestedMaxShipCapacity)
             {
                 shipTooSmallPanel.SetActive(true);
+                return false;
             }
 
-            return crewSize == requestedShipSize;
+            if (crewSize < requestedMinShipCapacity )
+            {
+                shipTooBigPanel.SetActive(true);
+                return false;
+            }
+
+            return true;
         }
     }
 }

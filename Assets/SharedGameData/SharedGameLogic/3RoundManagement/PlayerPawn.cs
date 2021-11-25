@@ -115,7 +115,7 @@ namespace RoundManagement
 
                     if (targetCrew.ship != 0)
                     {
-                        if (targetCrew.crewMembers.Count >= targetCrew.shipSize)
+                        if (targetCrew.crewMembers.Count >= targetCrew.crewMaxCapacity)
                         {
                             Debug.Log(gameObject.name + "has tried to join crew : " + targetCrew.netId + " but it' ship is full");
                             return;
@@ -178,7 +178,7 @@ namespace RoundManagement
 
             if (Crew.ship != 0)
             {
-                if (Crew.crewMembers.Count >= Crew.shipSize)
+                if (Crew.crewMembers.Count >= Crew.crewMaxCapacity)
                 {
                     Debug.Log(gameObject.name + "has tried to add a player to his crew but his ship is full");
                     return;
@@ -276,13 +276,13 @@ namespace RoundManagement
             int crewSize = Crew.crewMembers.Count;
 
 
-            if (crewSize < shipSpawner.shipSize)
+            if (crewSize < shipSpawner.shipMinCapacity)
             {
                 Debug.LogError(gameObject.name + " has tried to spawn a ship that is too big");
                 return;
             }
 
-            if (crewSize > shipSpawner.shipSize)
+            if (crewSize > shipSpawner.shipMaxCapacity)
             {
                 Debug.LogError(gameObject.name + " has tried to spawn a ship that is too small");
                 return;

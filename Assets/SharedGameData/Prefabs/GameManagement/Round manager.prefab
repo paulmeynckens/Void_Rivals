@@ -1033,10 +1033,12 @@ MonoBehaviour:
     _values:
     - prefab: {fileID: 4217626998827798958, guid: 1c4cfd36cb9136047b906cc9d6c05cca,
         type: 3}
-      shipSize: 1
+      shipMaxCapacity: 2
+      shipMinCapacity: 1
     - prefab: {fileID: 7020337693989390996, guid: ce0c07375c622ef469017715d940e6d8,
         type: 3}
-      shipSize: 2
+      shipMaxCapacity: 4
+      shipMinCapacity: 2
 --- !u!114 &4830423670499057785
 MonoBehaviour:
   m_ObjectHideFlags: 0

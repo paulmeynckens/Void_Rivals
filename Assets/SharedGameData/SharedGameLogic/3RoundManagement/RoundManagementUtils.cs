@@ -216,7 +216,8 @@ namespace RoundManagement
     public struct ShipSpawner
     {
         public GameObject prefab;
-        public int shipSize;
+        public int shipMaxCapacity;
+        public int shipMinCapacity;
 
     }
 

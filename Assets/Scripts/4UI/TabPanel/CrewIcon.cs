@@ -85,7 +85,7 @@ namespace UI.TabPanel
 
         bool LocalPlayerCanJoinThisCrew()
         {
-            return PlayerPawn.local.Crew == null && (targetCrew.crewMembers.Count < targetCrew.shipSize || targetCrew.ship == 0) && targetCrew.state!=CrewState.Closed;
+            return PlayerPawn.local.Crew == null && (targetCrew.crewMembers.Count < targetCrew.crewMaxCapacity) && targetCrew.state!=CrewState.Closed;
         }
         bool LocalPlayerIsInThisCrew()
         {
