@@ -120,8 +120,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5541827289417949764}
   m_HandleRect: {fileID: 9187029238458940364}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 5511011805512977633}
   m_HorizontalScrollbar: {fileID: 7103491602465743691}
   m_VerticalScrollbar: {fileID: 5155720190784613079}
@@ -355,8 +355,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4544278421251027940}
   m_HandleRect: {fileID: 3926710879537546765}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.6065483
+  m_Value: 1.0000001
+  m_Size: 0.60654837
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3088,7 +3088,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 7881535940452617531}
   m_HorizontalScrollbar: {fileID: 7881535938419737919}
   m_VerticalScrollbar: {fileID: 7881535938928275452}
@@ -4598,7 +4598,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7881535940446201381}
   m_HandleRect: {fileID: 7881535940446201380}
   m_Direction: 2
-  m_Value: 0.9999998
+  m_Value: 1
   m_Size: 0.6259675
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4836,7 +4836,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 7881535939902939602}
   m_HorizontalScrollbar: {fileID: 7881535939956321735}
   m_VerticalScrollbar: {fileID: 7881535938821220090}
@@ -8097,7 +8097,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7881535938844933127}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10387,7 +10387,7 @@ PrefabInstance:
     - target: {fileID: 6110161180287527836, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Size
-      value: 0.29775238
+      value: 0.29775235
       objectReference: {fileID: 0}
     - target: {fileID: 6110161180287527836, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
@@ -10422,7 +10422,7 @@ PrefabInstance:
     - target: {fileID: 7387769807370459129, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8187482054434250599, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
