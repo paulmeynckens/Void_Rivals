@@ -169,7 +169,7 @@ namespace CharacterRenderer
 
         bool ShouldInterpolateInternalRotations()
         {
-            return characterMove.CurrentCharacterMode != CharacterMode.walking && networkIdentity.hasAuthority;
+            return !networkIdentity.hasAuthority;//characterMove.CurrentCharacterMode != CharacterMode.walking && 
         }
 
         void InterpolateBodyPosition(float interpolationIncrement)
