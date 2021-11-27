@@ -5,7 +5,8 @@ namespace Core
 {
     public static class KeyBindings
     {
-        public static float m_mouseSensitivity = 150;
+        public static float m_mouseSensitivity = 1
+            ;
 
         public static Dictionary<PlayerAction, KeyCode> Pairs = new Dictionary<PlayerAction, KeyCode>()
     {

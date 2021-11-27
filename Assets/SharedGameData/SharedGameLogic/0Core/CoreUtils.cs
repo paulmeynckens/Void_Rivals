@@ -202,7 +202,7 @@ namespace Core
 
         void RotateViewHorizontal()
         {
-            float horizontal = Input.GetAxis("Mouse X");
+            float horizontal = Input.GetAxis("Mouse X")*KeyBindings.m_mouseSensitivity;
 
             horizontalRotator.transform.Rotate(0, horizontal, 0);
 
@@ -210,7 +210,7 @@ namespace Core
 
         void RotateViewVertical()
         {
-            float vertical = Input.GetAxis("Mouse Y");
+            float vertical = Input.GetAxis("Mouse Y")*KeyBindings.m_mouseSensitivity;
 
             pointer.Rotate(-vertical, 0, 0);
 
