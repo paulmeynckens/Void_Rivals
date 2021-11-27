@@ -117,14 +117,43 @@ namespace CharacterRenderer
 
             transform.localScale = Vector3.one;
 
-            lastParent = nextParent;
-            nextParent = transform.parent;
+            
 
             lastBodyLocalPosition = nextBodyLocalPosition;
             nextBodyLocalPosition = networkIdentity.transform.localPosition ;
 
             lastBodyLocalRotation = nextBodyLocalRotation;
             nextBodyLocalRotation = networkIdentity.transform.localRotation;
+
+            lastParent = nextParent;
+            nextParent = networkIdentity.transform.parent;
+
+            if (lastParent != nextParent)
+            {
+                if (lastParent == null)
+                {
+                    lastBodyLocalPosition = nextParent.InverseTransformPoint(lastBodyLocalPosition);
+
+                    lastBodyLocalRotation = lastBodyLocalRotation * Quaternion.Inverse(nextParent.rotation);
+                }
+                else if (nextParent == null)
+                {
+                    lastBodyLocalPosition = lastParent.TransformPoint(lastBodyLocalPosition);
+
+                    lastBodyLocalRotation = lastBodyLocalRotation * nextParent.rotation;
+                }
+                else
+                {
+
+                    lastBodyLocalPosition = nextParent.InverseTransformPoint(lastParent.TransformPoint(lastBodyLocalPosition));
+                    
+                    lastBodyLocalRotation =  lastParent.rotation * lastBodyLocalRotation* Quaternion.Inverse(nextParent.rotation);
+                }
+            }
+
+
+
+            
 
             if (ShouldInterpolateInternalRotations())
             {
@@ -145,44 +174,16 @@ namespace CharacterRenderer
 
         void InterpolateBodyPosition(float interpolationIncrement)
         {
-            if (lastParent != nextParent)
-            {
-                if (lastParent == null)
-                {
-                    lastBodyLocalPosition = nextParent.InverseTransformPoint(lastBodyLocalPosition);                   
-                }
-                else if (nextParent == null)
-                {
-                    lastBodyLocalPosition = lastParent.TransformPoint(lastBodyLocalPosition);
-                }
-                else
-                {
-                    lastBodyLocalPosition = nextParent.InverseTransformPoint(transform.parent.TransformPoint(lastBodyLocalPosition));
-                }
-                
-            }
+            /*
+            
+            */
 
             transform.localPosition = Vector3.Lerp(lastBodyLocalPosition, nextBodyLocalPosition, interpolationIncrement);
         }
 
         void InterpolateBodyRotation(float interpolationIncrement)
         {
-            if (lastParent != nextParent)
-            {
-                if (lastParent == null)
-                {
-                    lastBodyLocalRotation = lastBodyLocalRotation * Quaternion.Inverse(nextParent.rotation);
-                }
-                else if (nextParent == null)
-                {
-                    lastBodyLocalRotation = lastBodyLocalRotation * nextParent.rotation;
-                }
-                else
-                {
-                    lastBodyLocalRotation = lastBodyLocalRotation * Quaternion.Inverse(lastParent.rotation) * nextParent.rotation;
-                }
-
-            }
+            
 
             transform.localRotation = Quaternion.Lerp(lastBodyLocalRotation, nextBodyLocalRotation, interpolationIncrement);
         }
