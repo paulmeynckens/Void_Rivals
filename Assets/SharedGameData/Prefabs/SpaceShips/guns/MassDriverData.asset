@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c74ea972104dce4d897ccbe3df2f58b, type: 3}
   m_Name: MassDriverData
   m_EditorClassIdentifier: 
-  damage: 601
+  damage: 200
   range: 100
   timeBetweenShots: 4
   magasinSize: 1

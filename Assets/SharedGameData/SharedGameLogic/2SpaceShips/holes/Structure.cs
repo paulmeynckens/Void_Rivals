@@ -86,7 +86,7 @@ namespace ShipsLogic.Holes
 
             Vector3 movement = Vector3.zero;
 
-            GameObject popedHole = null;
+            
             int iterations = 1;
 
             do
@@ -99,7 +99,9 @@ namespace ShipsLogic.Holes
 
                     Quaternion holeRotation = Quaternion.LookRotation(_raycastHit.normal, Vector3.up);
 
-                    popedHole= Instantiate(holePrefab, _raycastHit.point, holeRotation, transform);
+                    GameObject popedHole = Instantiate(holePrefab, _raycastHit.point, holeRotation, transform);
+
+                    return popedHole;
                 }
                 else
                 {
@@ -129,11 +131,11 @@ namespace ShipsLogic.Holes
                     }
                 }
             }
-            while (popedHole == null || iterations < MAX_ITERATIONS);
+            while (iterations < MAX_ITERATIONS);
 
 
 
-            return popedHole;
+            return null;
 
         }
 
