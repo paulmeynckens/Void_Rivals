@@ -404,8 +404,9 @@ namespace RoundManagement
         {
             if (Crew.ship != 0)
             {
+                ShipDestructor shipDestructor = NetworkIdentity.spawned[Crew.ship].GetComponent<ShipDestructor>();
                 DelayedDestructor destructor = NetworkIdentity.spawned[Crew.ship].GetComponent<DelayedDestructor>();
-                destructor.ServerBeginDestruction();
+                shipDestructor.ServerDespawnShip();
             }
             
             NetworkServer.Destroy(Crew.gameObject);
@@ -446,7 +447,7 @@ namespace RoundManagement
 
                 characterHealth = characterInstance.GetComponent<CharacterHealth>();
                 characterHealth.OnServerDie += ServerRespawnPlayer;
-                characterHealth.OnServerPulverized += ServerDespawnPlayer;
+                //characterHealth.OnServerPulverized += ServerDespawnPlayer;
                 
             }
 

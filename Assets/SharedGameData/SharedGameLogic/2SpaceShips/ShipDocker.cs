@@ -46,7 +46,7 @@ namespace ShipsLogic
         [SerializeField] float maxSquaredDistance = 20;
         [SerializeField] float leverArm = 50;
 
-        DelayedDestructor parentDestructor = null;
+
 
         public bool IsPulling
         {
@@ -297,21 +297,13 @@ namespace ShipsLogic
 
         }
 
-        void ServerEjectBeforeDestruction()
+        public void ServerEjectBeforeDestruction()
         {
             dockingData = new DockingData { parentShipNetId = 0, parentPortIndex = 0 };
             UnDock();
         }
 
-        public override void OnStopServer()
-        {
-            if (parentDestructor != null)
-            {
-                parentDestructor.OnServerWillDestroyThisObject -= ServerEjectBeforeDestruction;
-            }
-            
-            base.OnStopServer();
-        }
+
 
         #endregion
 
@@ -327,7 +319,7 @@ namespace ShipsLogic
             
             if (parentShip!=null)//means we are docked
             {
-                parentDestructor.OnServerWillDestroyThisObject -= ServerEjectBeforeDestruction;
+
                 lastDockedTime = Time.time;
                 dockingData = new DockingData { parentShipNetId = 0, parentPortIndex = 0 };
                 UnDock();
@@ -344,8 +336,8 @@ namespace ShipsLogic
 
                 dockingData = ServerGenerateDockingData(activeDockingPort, activeDockingPort.TargetDockingPort);
                 Dock(dockingData);
-                parentDestructor = parentShip.GetComponent<DelayedDestructor>();
-                parentDestructor.OnServerWillDestroyThisObject += ServerEjectBeforeDestruction;
+
+
                 lastDockedTime = Time.time;
 
             }

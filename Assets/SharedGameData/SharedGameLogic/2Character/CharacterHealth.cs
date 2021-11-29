@@ -12,10 +12,11 @@ namespace CharacterLogic
 {
     public class CharacterHealth : Health
     {
-        public event Action OnServerPulverized;
+        public event Action OnPulverized=delegate { };
         public void ServerPulverize()
         {
-            OnServerPulverized?.Invoke();
+            //OnServerPulverized();
+            ServerDie();
 
         }
         public override void ServerDie()
@@ -29,6 +30,7 @@ namespace CharacterLogic
             yield return new WaitForSeconds(10);
             NetworkServer.Destroy(gameObject);
         }
+
     }
 }
 
