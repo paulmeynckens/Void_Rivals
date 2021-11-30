@@ -66,53 +66,52 @@ namespace CharacterLogic
         public override void ModeApplyExternalForces()
         {
 
-            
+            if (!walker.isGrounded && !isClimbing)
+            {
+                deltaUpDown += Physics.gravity.y * Time.fixedDeltaTime; //applies gravity if not grounded and not flying
+                
+            }
+            else
+            {
+                deltaUpDown = -0.05f;//stick the character controller to the ground
+                
+            }
 
-            
+
 
 
         }
 
+
         public override void ModeUseInput(CharacterInput inputs)
         {
-
-            if (walker.isGrounded)
-            {
-                if (inputs.jump)
-                {
-                    deltaUpDown += JUMP_SPEED*Time.deltaTime;
-                }
-                else
-                {
-                    deltaUpDown = -0.05f;//stick the character controller to the ground
-                }
-            }
-            else
-            {
-                deltaUpDown += Physics.gravity.y * Time.fixedDeltaTime; //applies gravity if not grounded and not flying
-            }
-
-            if (isClimbing)
-            {
-                deltaUpDown = 0;
-            }
+            walker.enabled = true;//solving bug #36
 
             Vector3 movement = Vector3.zero;
 
+            if (walker.isGrounded && inputs.jump && !isClimbing)
+            {
+                
+                deltaUpDown += JUMP_SPEED;
+            }
+
+
+
 
             if (isClimbing)
             {
-                movement = (twoAxisRotator.pointer.forward * inputs.forwardBackward * CLIMB_SPEED + twoAxisRotator.horizontalRotator.right * inputs.rightLeft * CLIMB_SPEED)*Time.fixedDeltaTime;
+                movement = twoAxisRotator.pointer.forward * inputs.forwardBackward * CLIMB_SPEED * Time.fixedDeltaTime + twoAxisRotator.horizontalRotator.right * inputs.rightLeft * CLIMB_SPEED * Time.fixedDeltaTime;
             }
             else
             {
-                movement = (twoAxisRotator.horizontalRotator.forward * inputs.forwardBackward * JOG_SPEED + twoAxisRotator.horizontalRotator.right * inputs.rightLeft  * JOG_SPEED)*Time.fixedDeltaTime;
+                movement = twoAxisRotator.horizontalRotator.forward * inputs.forwardBackward * JOG_SPEED * Time.fixedDeltaTime + twoAxisRotator.horizontalRotator.right * inputs.rightLeft  * JOG_SPEED*Time.fixedDeltaTime + Vector3.up * deltaUpDown * Time.fixedDeltaTime;
             }
 
-            movement += deltaUpDown * Vector3.up;
+
 
             walker.Move(movement);
 
+            walker.enabled = false;//solving bug #36
         }
 
 
