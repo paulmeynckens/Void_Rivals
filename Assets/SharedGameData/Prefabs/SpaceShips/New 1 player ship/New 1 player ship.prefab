@@ -4643,11 +4643,26 @@ PrefabInstance:
       propertyPath: quantityChanger
       value: 
       objectReference: {fileID: 3559861158027790810}
+    - target: {fileID: 4088407965831714158, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: quantityChanger
+      value: 
+      objectReference: {fileID: 3500182332123288954}
+    - target: {fileID: 4263861372559663318, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: interractor
+      value: 
+      objectReference: {fileID: 5153285337339598434}
     - target: {fileID: 4270413219230616268, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: structure
       value: 
       objectReference: {fileID: 7256690793601823075}
+    - target: {fileID: 4317956826137588100, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: quantityChanger
+      value: 
+      objectReference: {fileID: 4602870473259223478}
     - target: {fileID: 4321467061313694795, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: interractor
