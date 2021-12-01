@@ -4394,7 +4394,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6874981033528846826, guid: 7ce1a76b78781074fbe72fcb9505242e, type: 3}
     - {fileID: 4419971004567408084, guid: 7ce1a76b78781074fbe72fcb9505242e, type: 3}
-    - {fileID: 7180609406773086949, guid: 7ce1a76b78781074fbe72fcb9505242e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ce1a76b78781074fbe72fcb9505242e, type: 3}
 --- !u!4 &3585944767425022740 stripped
 Transform:
@@ -4539,6 +4538,11 @@ PrefabInstance:
       propertyPath: interractor
       value: 
       objectReference: {fileID: 7343924660183057041}
+    - target: {fileID: 745579161410209855, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: shipGun
+      value: 
+      objectReference: {fileID: 2422205919512132338}
     - target: {fileID: 897186804899882332, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: m_RootOrder
@@ -4649,11 +4653,21 @@ PrefabInstance:
       propertyPath: interractor
       value: 
       objectReference: {fileID: 8910881530969077347}
+    - target: {fileID: 4482270305523551245, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: shipGun
+      value: 
+      objectReference: {fileID: 3722986343901404730}
     - target: {fileID: 4761943683923489241, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: structure
       value: 
       objectReference: {fileID: 7256690793601823075}
+    - target: {fileID: 5071494883162401786, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: gunMagasine
+      value: 
+      objectReference: {fileID: 3500182332123288954}
     - target: {fileID: 5773757159354810380, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: interractor
@@ -4704,6 +4718,11 @@ PrefabInstance:
       propertyPath: shipExternalCollider
       value: 
       objectReference: {fileID: 1705732897518561999}
+    - target: {fileID: 8218362255068262344, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: gunMagasine
+      value: 
+      objectReference: {fileID: 4602870473259223478}
     - target: {fileID: 8246309877990834772, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: gun

@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 7923769833445329965}
   - component: {fileID: 6481171307647731110}
   - component: {fileID: 7671163450191973764}
+  - component: {fileID: 6299500234306388620}
   m_Layer: 0
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -350,6 +351,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6299500234306388620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816786275703237659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46553ebed8261e4e8d0e60855f3a5f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunMagasine: {fileID: 0}
+  ammoIndicator: {fileID: 7671163450191973764}
 --- !u!1 &4784735962561083348
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +376,7 @@ GameObject:
   - component: {fileID: 6376028955345953403}
   - component: {fileID: 6193281398610782755}
   - component: {fileID: 7483686487459397711}
+  - component: {fileID: 3403026661288633723}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -427,6 +443,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3403026661288633723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4784735962561083348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81df4c1760080ae45852b9afe4160f04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipGun: {fileID: 0}
 --- !u!1 &6051162607966034757
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +539,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4663068720774842088
 MonoBehaviour:
   m_ObjectHideFlags: 0
