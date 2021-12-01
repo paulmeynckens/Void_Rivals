@@ -10,7 +10,7 @@ namespace CharacterLogic
     {
 
         Rigidbody masterRigidbody;
-        CapsuleCollider capsuleCollider;
+        //CapsuleCollider capsuleCollider;
 
 
         public readonly MousePullController pullController = new MousePullController();
@@ -32,19 +32,19 @@ namespace CharacterLogic
         private void Awake()
         {
             masterRigidbody = GetComponent<Rigidbody>();
-            capsuleCollider = GetComponent<CapsuleCollider>();
+            //capsuleCollider = GetComponent<CapsuleCollider>();
         }
         public override void Deactivate()
         {
             base.Deactivate();
             masterRigidbody.isKinematic = true;
-            capsuleCollider.enabled = false;
+            //capsuleCollider.enabled = false;
         }
         public override void Activate()
         {
             base.Activate();
             masterRigidbody.isKinematic = false;
-            capsuleCollider.enabled = true;
+            //capsuleCollider.enabled = true;
         }
 
         public override void ModeApplyExternalForces()
