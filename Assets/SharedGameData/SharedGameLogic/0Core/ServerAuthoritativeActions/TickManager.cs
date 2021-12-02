@@ -4,7 +4,7 @@ using Mirror;
 
 namespace Core.ServerAuthoritativeActions
 {
-    public class TickManager : NetworkBehaviour
+    public class TickManager : MonoBehaviour
     {
 
         public static ushort Tick = 0;
@@ -37,14 +37,10 @@ namespace Core.ServerAuthoritativeActions
             }
 
         }
-        public override void OnStartServer()
+
+        private void Start()
         {
-            base.OnStartServer();
-            Tick = 0;
-        }
-        public override void OnStartClient()
-        {
-            base.OnStartClient();
+
             Tick = (ushort)(NetworkTime.time / Time.fixedDeltaTime);
         }
 

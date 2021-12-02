@@ -15,8 +15,6 @@ namespace Core
 
         public Transform externalCollider = null;
 
-        
-
         Rigidbody _rigidbody;
         public Rigidbody Rigidbody
         {
@@ -50,15 +48,8 @@ namespace Core
                 Destroy(_rigidbody);
         }
 
-        private void OnDestroy()
-        {
+        
+        
 
-
-            exteriors.Remove(netIdentity);
-            exteriorsId.Remove(externalCollider);
-
-            Destroy(externalCollider.gameObject);           
-           
-        }
     }
 }

@@ -98,11 +98,10 @@ namespace RoundManagement
         {
 
             Transform location = TeamsManager.instance.FindSpawnLocation(team);
-            GameObject spawnedShip = Instantiate(shipSpawner.prefab);
 
-            BodiesHolder bodiesHolder = spawnedShip.GetComponent<BodiesHolder>();
-            bodiesHolder.externalCollider.position = location.position;
-            bodiesHolder.externalCollider.rotation = location.rotation;
+            ShipSpawnedStateManager spawnedShip = shipSpawner.GetAvailableShip();
+
+
 
             
             LinkToNetId shipLinkToNetId = spawnedShip.GetComponent<LinkToNetId>();
@@ -110,15 +109,19 @@ namespace RoundManagement
 
 
             ShipSpawnLocationHolder shipCrewManager = spawnedShip.GetComponent<ShipSpawnLocationHolder>();
-            
 
-            NetworkServer.Spawn(spawnedShip);
-            ship = spawnedShip.GetComponent<NetworkIdentity>().netId;
-            crewMaxCapacity = shipSpawner.shipMaxCapacity;
-            crewMinCapacity = shipSpawner.shipMinCapacity;
+            
+            
             
             Health shipHealth = spawnedShip.GetComponent<Health>();
             shipHealth.OnServerDie += ServerRemoveShip;
+
+            spawnedShip.ServerSpawnShip(location.position, location.rotation);
+
+
+            ship = spawnedShip.netId;
+            crewMaxCapacity = shipSpawner.shipMaxCapacity;
+            crewMinCapacity = shipSpawner.shipMinCapacity;
         }
 
         void ServerRemoveShip()

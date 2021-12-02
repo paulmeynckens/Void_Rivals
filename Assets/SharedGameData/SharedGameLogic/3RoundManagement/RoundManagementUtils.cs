@@ -215,9 +215,21 @@ namespace RoundManagement
     [Serializable]
     public struct ShipSpawner
     {
-        public GameObject prefab;
+        [SerializeField] ShipSpawnedStateManager[] ships;
         public int shipMaxCapacity;
         public int shipMinCapacity;
+
+        public ShipSpawnedStateManager GetAvailableShip()
+        {
+            foreach(ShipSpawnedStateManager ship in ships)
+            {
+                if (!ship.Spawned)
+                {
+                    return ship;
+                }
+            }
+            return null;
+        }
 
     }
 

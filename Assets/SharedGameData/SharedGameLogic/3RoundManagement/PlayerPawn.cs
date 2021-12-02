@@ -404,7 +404,7 @@ namespace RoundManagement
         {
             if (Crew.ship != 0)
             {
-                ShipDestructor shipDestructor = NetworkIdentity.spawned[Crew.ship].GetComponent<ShipDestructor>();
+                ShipSpawnedStateManager shipDestructor = NetworkIdentity.spawned[Crew.ship].GetComponent<ShipSpawnedStateManager>();
                 DelayedDestructor destructor = NetworkIdentity.spawned[Crew.ship].GetComponent<DelayedDestructor>();
                 shipDestructor.ServerDespawnShip();
             }

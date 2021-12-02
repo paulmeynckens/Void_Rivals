@@ -189,11 +189,14 @@ namespace ShipsLogic
             transform.rotation = Quaternion.identity;
             transform.localScale = Vector3.one;
 
+
+            if (currentlyDockedPort != null)
+            {
+                currentlyDockedPort.Undock();
+
+                currentlyDockedPort = null;
+            }
             
-
-            currentlyDockedPort.Undock();
-
-            currentlyDockedPort = null;
 
         }
 
@@ -261,28 +264,26 @@ namespace ShipsLogic
 
         }
 
-        private void OnDestroy()
+        public void StowShip()
         {
-            if (parentShip != null)//to clear the docked ship's docking port when leaving
-            {
-                UnDock();
-            }
-            
+            bodiesHolder.externalCollider.parent = transform;
+            bodiesHolder.externalCollider.localPosition = Vector3.zero;
+            bodiesHolder.externalCollider.localRotation = Quaternion.identity;
         }
 
         #endregion
 
         #region Server
 
-        public override void OnStartServer()
+        public void ServerPrepareShip()
         {
             parkingPosition = ShipsParking.instance.GetAvailableLocation().position;
             dockingData = new DockingData { parentShipNetId = 0, ownPortIndex = 0, parentPortIndex = 0 };
             
             UnDock();
-
-            base.OnStartServer();
         }
+
+        
         DockingData ServerGenerateDockingData(DockingPort ownDockingPort, DockingPort targetDockingPort)
         {
             DockingData dockingData;

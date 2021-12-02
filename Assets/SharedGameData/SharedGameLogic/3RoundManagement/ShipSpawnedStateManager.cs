@@ -9,20 +9,45 @@ using CharacterLogic;
 
 namespace RoundManagement
 {
-    public class ShipDestructor : NetworkBehaviour
+    public class ShipSpawnedStateManager : NetworkBehaviour
     {
-        Structure structure=null;
-        BodiesHolder bodiesHolder=null;
+        Structure structure;
+        ShipDocker shipDocker;
+        BodiesHolder bodiesHolder;
+
+        #region syncvars + hooks
+        bool spawned = false;
+        public bool Spawned
+        {
+            get => spawned;
+        }
+        
+        
+
+        #endregion
+
+        #region both sides
         private void Awake()
         {
+            
             bodiesHolder = GetComponent<BodiesHolder>();
+            shipDocker = GetComponent<ShipDocker>();
         }
+
+
+
+
+        #endregion
 
         public override void OnStartServer()
         {
             base.OnStartServer();
+            CustomVisibility.globalVisibilities.Add(netIdentity, false);
             structure = GetComponent<Structure>();
             structure.OnServerDie += ServerDestroyShip;
+
+            gameObject.SetActive(false);
+
         }
 
         public void ServerDespawnShip()
@@ -69,9 +94,34 @@ namespace RoundManagement
         IEnumerator ServerWaitAndDestroy()
         {
             yield return new WaitForSeconds(10);
-            
-            NetworkServer.Destroy(this.gameObject);
 
+            //NetworkServer.Destroy(this.gameObject);
+
+            CustomVisibility.globalVisibilities[netIdentity] = false;
+            spawned = false;
+            gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(1);
+
+            shipDocker.StowShip();
+
+            
+
+        }
+
+        public void ServerSpawnShip(Vector3 position, Quaternion rotation)
+        {
+            bodiesHolder.externalCollider.parent = null;
+            bodiesHolder.externalCollider.position = position;
+            bodiesHolder.externalCollider.rotation = rotation;
+
+            CustomVisibility.globalVisibilities[netIdentity] = true;
+            spawned = true;
+            gameObject.SetActive(true);
+            shipDocker.ServerPrepareShip();
+            
+
+            
         }
     }
 }
