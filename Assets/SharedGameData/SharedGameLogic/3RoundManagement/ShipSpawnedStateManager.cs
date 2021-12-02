@@ -16,13 +16,14 @@ namespace RoundManagement
         BodiesHolder bodiesHolder;
 
         #region syncvars + hooks
+        /*
         bool spawned = false;
         public bool Spawned
         {
             get => spawned;
         }
         
-        
+        */
 
         #endregion
 
@@ -42,7 +43,7 @@ namespace RoundManagement
         public override void OnStartServer()
         {
             base.OnStartServer();
-            CustomVisibility.globalVisibilities.Add(netIdentity, false);
+            
             structure = GetComponent<Structure>();
             structure.OnServerDie += ServerDestroyShip;
 
@@ -93,12 +94,13 @@ namespace RoundManagement
 
         IEnumerator ServerWaitAndDestroy()
         {
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(1);
 
             //NetworkServer.Destroy(this.gameObject);
-
+            /*
             CustomVisibility.globalVisibilities[netIdentity] = false;
             spawned = false;
+            */
             gameObject.SetActive(false);
 
             yield return new WaitForSeconds(1);
@@ -114,9 +116,10 @@ namespace RoundManagement
             bodiesHolder.externalCollider.parent = null;
             bodiesHolder.externalCollider.position = position;
             bodiesHolder.externalCollider.rotation = rotation;
-
+            /*
             CustomVisibility.globalVisibilities[netIdentity] = true;
             spawned = true;
+            */
             gameObject.SetActive(true);
             shipDocker.ServerPrepareShip();
             

@@ -8,18 +8,10 @@ namespace Core
     public class CustomVisibility : InterestManagement
     {
         
-        public static readonly Dictionary<NetworkIdentity, bool> globalVisibilities = new Dictionary<NetworkIdentity, bool>();
 
         public override bool OnCheckObserver(NetworkIdentity identity, NetworkConnection newObserver)
         {
-            if (!globalVisibilities.ContainsKey(identity))
-            {
-                return true;
-            }
-            else
-            {
-                return globalVisibilities[identity];
-            }
+            return identity.gameObject.activeInHierarchy;
         }
         public override void OnRebuildObservers(NetworkIdentity identity, HashSet<NetworkConnection> newObservers, bool initialize)
         {
@@ -27,11 +19,7 @@ namespace Core
             {
                 if (conn != null && conn.identity != null)
                 {
-                    if (!globalVisibilities.ContainsKey(identity))
-                    {
-                        newObservers.Add(conn);
-                    }
-                    else if(globalVisibilities[identity])
+                    if (identity.gameObject.activeInHierarchy)
                     {
                         newObservers.Add(conn);
                     }
