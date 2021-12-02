@@ -8,13 +8,19 @@ using Mirror;
 
 namespace Core.Interractables
 {
+    public enum SeatRefuse
+    {
+        already_someone
+    }
     public class Seat : Interractable
     {
 
 
+        [SerializeField] NetworkIdentity[] controlledObjects = null; 
+
         NetworkConnectionToClient owningPlayer = null;
 
-
+        
 
         public Transform sittingPosition=null;
         
@@ -57,7 +63,7 @@ namespace Core.Interractables
                 }
                 else
                 {
-                    TargetRefuseAction(requestingPlayer.connectionToClient);
+                    TargetRefuseAction(requestingPlayer.connectionToClient,(byte)SeatRefuse.already_someone);
                     return;
                 }
             }
@@ -73,8 +79,12 @@ namespace Core.Interractables
 
         void ServerWelcomeCharacter(NetworkIdentity welcomedCharacter)
         {
-            
             netIdentity.AssignClientAuthority(welcomedCharacter.connectionToClient);
+            foreach (NetworkIdentity networkIdentity in controlledObjects)
+            {
+                networkIdentity.AssignClientAuthority(welcomedCharacter.connectionToClient);
+            }
+            
             welcomedCharacter.RemoveClientAuthority();
 
             currentSitter = welcomedCharacter.GetComponent<Sitter>();
@@ -90,6 +100,10 @@ namespace Core.Interractables
         {
             currentSitter.netIdentity.AssignClientAuthority(connectionToClient);
             netIdentity.RemoveClientAuthority();
+            foreach (NetworkIdentity networkIdentity in controlledObjects)
+            {
+                networkIdentity.RemoveClientAuthority();
+            }
             currentSitter.ServerSetSeat(0);
             currentSitter = null;
 
@@ -110,9 +124,9 @@ namespace Core.Interractables
             ServerEjectCharacter();
         }
 
-        public override void TargetRefuseAction(NetworkConnection targetPlayer)
+        public override void TargetRefuseAction(NetworkConnection targetPlayer,byte reason)
         {
-            base.TargetRefuseAction(targetPlayer);
+            base.TargetRefuseAction(targetPlayer, reason);
         }
 
     }

@@ -7,7 +7,7 @@ namespace FeedbackElements
 {
     public class InterractableFeedback : MonoBehaviour
     {
-        [SerializeField] Interractor interractor=null;
+        [SerializeField] Interractable interractable=null;
 
         [SerializeField] Material defaultMaterial;
         [SerializeField] Material activatedMaterial = null;
@@ -43,10 +43,10 @@ namespace FeedbackElements
                 refuseMaterial = Resources.Load("Refuse") as Material;
             }
 
-            interractor.OnClientActivated += ClientActivate;
-            interractor.OnClientConfirm += ClientConfirm;
-            interractor.OnClientDeactivate += ClientDeactivate;
-            interractor.OnClientRefuse += ClientRefuseAction;
+            interractable.OnClientActivated += ClientActivate;
+            interractable.OnClientConfirm += ClientConfirm;
+            interractable.OnClientDeactivate += ClientDeactivate;
+            interractable.OnClientRefuse += ClientRefuseAction;
 
             if (helpTip != null)
             {
@@ -79,7 +79,7 @@ namespace FeedbackElements
             }
         }
 
-        protected virtual void ClientRefuseAction()
+        protected virtual void ClientRefuseAction(byte reason)
         {
             ownRenderer.material = refuseMaterial;
         }

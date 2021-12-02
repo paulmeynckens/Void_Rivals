@@ -15,8 +15,8 @@ namespace CharacterLogic
 
         [SerializeField] Transform m_pointerTransform = null; //to know where the player is looking
 
-        Interractor currentTarget = null;
-        Interractor previousTarget = null;
+        Interractable currentTarget = null;
+        Interractable previousTarget = null;
         bool alive = true;
        
 
@@ -64,16 +64,16 @@ namespace CharacterLogic
         }
 
         #region Both sides
-        Interractor FindActivator()
+        Interractable FindActivator()
         {
             Ray ray = new Ray(m_pointerTransform.position, m_pointerTransform.forward);
             RaycastHit raycastHit;
 
-            Interractor foundActivator = null;
+            Interractable foundActivator = null;
 
             if (Physics.Raycast(ray, out raycastHit, m_selectionRange, m_SelectableItemsLayer, QueryTriggerInteraction.Collide) == true)
             {
-                foundActivator = raycastHit.collider.GetComponent<Interractor>();
+                foundActivator = raycastHit.collider.GetComponent<Interractable>();
             }
             return foundActivator;
         }
@@ -92,7 +92,7 @@ namespace CharacterLogic
 
                 if (currentTarget != null)
                 {
-                    currentTarget.ServerInterractE(netIdentity);
+                    currentTarget.ServerTryUseObjectE(netIdentity);
                 }
 
 
@@ -108,7 +108,7 @@ namespace CharacterLogic
 
                 if (currentTarget != null)
                 {
-                    currentTarget.ServerInterractClick(netIdentity);
+                    currentTarget.ServerTryUseObjectClick(netIdentity);
                 }
 
 

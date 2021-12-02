@@ -9,7 +9,12 @@ namespace Core.Interractables
     public class Interractable : NetworkBehaviour
     {
         float lastSelectTime = 0;
-        public event Action OnRefuse;
+
+        
+        public event Action OnClientActivated = delegate { };
+        public event Action OnClientConfirm = delegate { };
+        public event Action OnClientDeactivate = delegate { };
+        public event Action<byte> OnClientRefuse = delegate { };
 
         //public bool activatedByLocalPlayer = false;
 
@@ -20,10 +25,33 @@ namespace Core.Interractables
 
 
         [TargetRpc]
-        public virtual void TargetRefuseAction(NetworkConnection targetPlayer)
+        public virtual void TargetRefuseAction(NetworkConnection targetPlayer, byte reason)
         {
-            OnRefuse?.Invoke();
+            OnClientRefuse(reason);
         }
+
+        #region Client
+
+        public virtual void ClientActivate()
+        {
+            OnClientActivated();
+        }
+
+        public virtual void ClientConfirm()
+        {
+            OnClientConfirm();
+        }
+
+        /// <summary>
+        /// This is called by the selection manager when the object is no longer hit by the selection raycast
+        /// </summary>
+
+        public virtual void ClientDeactivate()
+        {
+            OnClientDeactivate();
+        }
+
+        #endregion
 
 
         #region Server

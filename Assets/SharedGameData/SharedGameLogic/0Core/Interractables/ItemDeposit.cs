@@ -6,6 +6,14 @@ using System;
 
 namespace Core.Interractables
 {
+    public enum ItemDepositRefuse
+    {
+        hand_not_empty,
+        hands_empty,
+        wrong_item_dropped,
+        empty_item_deposit,
+        full_item_deposit,
+    }
     public class ItemDeposit : Interractable, IChangeQuantity
     {
 
@@ -59,35 +67,37 @@ namespace Core.Interractables
         {
             ICanGrabItem characterHands = p_requestingPlayer.GetComponent<ICanGrabItem>();
 
-            if (characterHands.HeldItemType == "NO") //give an item to the player
+            if (characterHands.HeldItemType != "NO")
             {
-                if (infiniteSupply)
+                TargetRefuseAction(p_requestingPlayer.connectionToClient, (byte)ItemDepositRefuse.hand_not_empty);
+                return;
+            }
+
+            if (infiniteSupply)
+            {
+                characterHands.ServerGrabItem(itemType);
+            }
+            else
+            {
+                if (itemQuantity > 0)
                 {
-                    characterHands.ServerGrabItem(itemType);
+                    if (ServerCanGiveItemToPlayer())
+                    {
+                        characterHands.ServerGrabItem(itemType);
+                    }
+
+                    itemQuantity--;
+
+                    if (itemQuantity <= 0)
+                    {
+                        ServerEmpty();
+                    }
                 }
                 else
                 {
-                    if (itemQuantity > 0)
-                    {
-                        if (ServerCanGiveItemToPlayer())
-                        {
-                            characterHands.ServerGrabItem(itemType);
-                        }
-                        
-                        itemQuantity--;
-
-                        if (itemQuantity <= 0)
-                        {
-                            ServerEmpty();
-                        }
-                    }
-                    else
-                    {
-                        TargetRefuseAction(p_requestingPlayer.connectionToClient);
-                    }
-
+                    TargetRefuseAction(p_requestingPlayer.connectionToClient, (byte)ItemDepositRefuse.empty_item_deposit);
                 }
-                
+
             }
 
         }
@@ -112,22 +122,36 @@ namespace Core.Interractables
         {
             ICanGrabItem characterHands = p_requestingPlayer.GetComponent<ICanGrabItem>();
 
-            if (characterHands.HeldItemType == itemType) //store player's item in the depositt. 
+
+            if (characterHands.HeldItemType == "NO")
             {
-                if (infiniteSupply)
+                TargetRefuseAction(p_requestingPlayer.connectionToClient, (byte)ItemDepositRefuse.hands_empty);
+                return;
+            }
+
+            if (characterHands.HeldItemType != itemType)
+            {
+                TargetRefuseAction(p_requestingPlayer.connectionToClient, (byte)ItemDepositRefuse.wrong_item_dropped);
+                return;
+            }
+
+            if (infiniteSupply)
+            {
+                characterHands.ServerDropItem();
+                return;
+            }
+            if (itemQuantity < maxQuantity)
+            {
+                characterHands.ServerDropItem();
+                itemQuantity++;
+                if (itemQuantity == maxQuantity)
                 {
-                    characterHands.ServerDropItem();
-                    return;
+                    ServerSetFull();
                 }
-                if (itemQuantity < maxQuantity)
-                {
-                    characterHands.ServerDropItem();
-                    itemQuantity++;
-                    if (itemQuantity == maxQuantity)
-                    {
-                        ServerSetFull();
-                    }
-                }
+            }
+            else
+            {
+                TargetRefuseAction(p_requestingPlayer.connectionToClient, (byte)ItemDepositRefuse.full_item_deposit);
                 return;
             }
 
