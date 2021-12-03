@@ -3727,7 +3727,7 @@ Transform:
   m_GameObject: {fileID: 8295264490801087637}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.5837984, y: -0.7567787, z: 0.17719865}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3585944767425022740}
   m_RootOrder: 27
@@ -4697,6 +4697,11 @@ PrefabInstance:
       propertyPath: interractor
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5773757159354810380, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: interractable
+      value: 
+      objectReference: {fileID: 3158024773921642150}
     - target: {fileID: 6404689057080263760, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: dockingPort

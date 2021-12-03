@@ -13,10 +13,10 @@ namespace CharacterLogic
     public class CharacterHealth : Health
     {
         public event Action OnPulverized=delegate { };
-        public void ServerPulverize()
+        public void ServerDespawnImmediately()
         {
             //OnServerPulverized();
-            ServerDie();
+            NetworkServer.Destroy(gameObject);
 
         }
         public override void ServerDie()

@@ -9,6 +9,7 @@ using CharacterLogic;
 
 namespace RoundManagement
 {
+    [DefaultExecutionOrder(+1000)]
     public class ShipSpawnedStateManager : NetworkBehaviour
     {
         Structure structure;
@@ -51,13 +52,15 @@ namespace RoundManagement
 
         }
 
+
+
         public void ServerDespawnShip()
         {
             ServerUndockShips();
 
-            ServerKillPlayers();
+            gameObject.SetActive(false);            
 
-            StartCoroutine(ServerWaitAndDestroy());
+            shipDocker.StowShip();
         }
 
         void ServerDestroyShip()
@@ -66,7 +69,7 @@ namespace RoundManagement
 
             ServerKillPlayers();
 
-            StartCoroutine(ServerWaitAndDestroy());
+            StartCoroutine(ServerWaitAndDespawn());
             
         }
 
@@ -88,13 +91,13 @@ namespace RoundManagement
             CharacterHealth[] characterHealths = transform.GetComponentsInChildren<CharacterHealth>();
             foreach (CharacterHealth characterHealth in characterHealths)
             {
-                characterHealth.ServerPulverize();
+                characterHealth.ServerDespawnImmediately();
             }
         }
 
-        IEnumerator ServerWaitAndDestroy()
+        IEnumerator ServerWaitAndDespawn()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(10);
 
             //NetworkServer.Destroy(this.gameObject);
             /*
