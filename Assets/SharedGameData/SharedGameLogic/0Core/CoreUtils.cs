@@ -9,6 +9,10 @@ namespace Core
 {
     #region Interfaces
 
+    public interface IResettable
+    {
+        void ServerReset();
+    }
     
     public interface IShoutMessages
     {

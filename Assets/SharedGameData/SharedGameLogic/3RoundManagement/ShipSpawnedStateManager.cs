@@ -58,6 +58,8 @@ namespace RoundManagement
         {
             ServerUndockShips();
 
+            ServerReset();
+
             gameObject.SetActive(false);            
 
             shipDocker.StowShip();
@@ -97,13 +99,10 @@ namespace RoundManagement
 
         IEnumerator ServerWaitAndDespawn()
         {
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(5);
 
-            //NetworkServer.Destroy(this.gameObject);
-            /*
-            CustomVisibility.globalVisibilities[netIdentity] = false;
-            spawned = false;
-            */
+            ServerReset();
+
             gameObject.SetActive(false);
 
             yield return new WaitForSeconds(1);
@@ -112,6 +111,15 @@ namespace RoundManagement
 
             
 
+        }
+
+        void ServerReset()
+        {
+            IResettable[] resettables = GetComponentsInChildren<IResettable>();
+            foreach (IResettable resettable in resettables)
+            {
+                resettable.ServerReset();
+            }
         }
 
         public void ServerSpawnShip(Vector3 position, Quaternion rotation)

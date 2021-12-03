@@ -7,7 +7,7 @@ using Core;
 
 namespace  ShipsLogic.Turrets
 {
-    public class WeaponSwitcher : NetworkBehaviour
+    public class WeaponSwitcher : NetworkBehaviour,IResettable
     {
         [SerializeField] ServerAuthoritativeGun rightGun = null;
         [SerializeField] ServerAuthoritativeGun leftGun = null;
@@ -68,6 +68,11 @@ namespace  ShipsLogic.Turrets
         void CmdChangeWeaponState(ShipTwinWeaponsState desiredState)
         {
             weaponsState = desiredState;
+        }
+
+        void IResettable.ServerReset()
+        {
+            weaponsState = ShipTwinWeaponsState.both;
         }
     }
 

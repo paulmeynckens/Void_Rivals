@@ -84,6 +84,12 @@ namespace ShipsLogic.Guns
             }
         }
 
+        public override void ServerReset()
+        {
+            base.ServerReset();
+            ammo = (short)(ammoPerItem * itemQuantity);
+        }
+
         #endregion
 
         #region Customisation

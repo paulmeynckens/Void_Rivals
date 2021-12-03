@@ -174,6 +174,12 @@ namespace Core.Interractables
 
         }
 
+        public override void ServerReset()
+        {
+            base.ServerReset();
+            itemQuantity = maxQuantity;
+        }
+
     }
 }
 

@@ -6,7 +6,7 @@ using Mirror;
 
 namespace Core.Interractables
 {
-    public class Interractable : NetworkBehaviour
+    public class Interractable : NetworkBehaviour,IResettable
     {
         float lastSelectTime = 0;
 
@@ -104,6 +104,11 @@ namespace Core.Interractables
         }
 
         protected virtual void ServerUseObjectClick(NetworkIdentity requestingPlayer)
+        {
+
+        }
+
+        public virtual void ServerReset()
         {
 
         }

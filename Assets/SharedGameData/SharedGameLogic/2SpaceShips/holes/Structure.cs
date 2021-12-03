@@ -9,7 +9,7 @@ using Core.RuntimeSpawning;
 
 namespace ShipsLogic.Holes
 {
-    public class Structure : Health
+    public class Structure : Health,IResettable
     {
 
         [SerializeField] GameObject holePrefab = null;
@@ -245,6 +245,10 @@ namespace ShipsLogic.Holes
             return Mathf.Sqrt(damage) * DAMAGE_TO_RADIUS_RATIO;
         }
 
+        void IResettable.ServerReset()
+        {
+            health = maxHealth;
+        }
     }
 }
 

@@ -39,6 +39,14 @@ namespace ShipsLogic.Guns
 
         }
 
+        public override void ServerReset()
+        {
+            base.ServerReset();
+            maxQuantity = normalItemMaxQuantity;
+            itemQuantity = maxQuantity;
+            itemType = normalItemType;
+        }
+
     }
 
 }
