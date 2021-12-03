@@ -11380,6 +11380,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6844075940516789439}
     m_Modifications:
+    - target: {fileID: 7266867407284977435, guid: 17727bdf3cc3001489f0d50f15a1f339,
+        type: 3}
+      propertyPath: maxRollAngle
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7460801329933546043, guid: 17727bdf3cc3001489f0d50f15a1f339,
         type: 3}
       propertyPath: m_RootOrder
