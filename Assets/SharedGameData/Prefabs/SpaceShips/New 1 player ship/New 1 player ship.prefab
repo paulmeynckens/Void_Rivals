@@ -193,7 +193,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8087151247788108912}
   - component: {fileID: 570768902685628252}
-  - component: {fileID: 3659669853268980169}
   m_Layer: 31
   m_Name: Airlock Exit
   m_TagString: Exit To Hull
@@ -228,19 +227,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.8577814, y: 3.8799038, z: 1.7017207}
   m_Center: {x: 0, y: 4.275611, z: -6.5750017}
---- !u!114 &3659669853268980169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340946752450669504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dac48b1f9948a1b4491d3b1c1800da4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1705732897518561999}
 --- !u!1 &527817342850438156
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,6 +4435,24 @@ PrefabInstance:
     - {fileID: -7768374173720702243, guid: c26eb43989bc1a142b6985b095a9d138, type: 3}
     - {fileID: -5754084199372789682, guid: c26eb43989bc1a142b6985b095a9d138, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c26eb43989bc1a142b6985b095a9d138, type: 3}
+--- !u!4 &1705732897518561999 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c26eb43989bc1a142b6985b095a9d138,
+    type: 3}
+  m_PrefabInstance: {fileID: 1162283249401580836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2080711015329886325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c26eb43989bc1a142b6985b095a9d138,
+    type: 3}
+  m_PrefabInstance: {fileID: 1162283249401580836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5037964003746524680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6182091970567201580, guid: c26eb43989bc1a142b6985b095a9d138,
+    type: 3}
+  m_PrefabInstance: {fileID: 1162283249401580836}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6709057683527400175 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3658578625223542837, guid: c26eb43989bc1a142b6985b095a9d138,
@@ -4464,6 +4468,12 @@ GameObject:
 --- !u!1 &3811838113835035462 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2650118673936246370, guid: c26eb43989bc1a142b6985b095a9d138,
+    type: 3}
+  m_PrefabInstance: {fileID: 1162283249401580836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4611998738554860419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5773718212829740711, guid: c26eb43989bc1a142b6985b095a9d138,
     type: 3}
   m_PrefabInstance: {fileID: 1162283249401580836}
   m_PrefabAsset: {fileID: 0}
@@ -4488,30 +4498,6 @@ GameObject:
 --- !u!1 &2366055715905749984 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5695741440514093372, guid: c26eb43989bc1a142b6985b095a9d138,
-    type: 3}
-  m_PrefabInstance: {fileID: 1162283249401580836}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1705732897518561999 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c26eb43989bc1a142b6985b095a9d138,
-    type: 3}
-  m_PrefabInstance: {fileID: 1162283249401580836}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2080711015329886325 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c26eb43989bc1a142b6985b095a9d138,
-    type: 3}
-  m_PrefabInstance: {fileID: 1162283249401580836}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4611998738554860419 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5773718212829740711, guid: c26eb43989bc1a142b6985b095a9d138,
-    type: 3}
-  m_PrefabInstance: {fileID: 1162283249401580836}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5037964003746524680 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6182091970567201580, guid: c26eb43989bc1a142b6985b095a9d138,
     type: 3}
   m_PrefabInstance: {fileID: 1162283249401580836}
   m_PrefabAsset: {fileID: 0}
@@ -4747,6 +4733,16 @@ PrefabInstance:
       propertyPath: dockingPort
       value: 
       objectReference: {fileID: 5186567504841561863}
+    - target: {fileID: 8207573751739212895, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: externalCollider
+      value: 
+      objectReference: {fileID: 1705732897518561999}
+    - target: {fileID: 8207573751739212895, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: internalCollider
+      value: 
+      objectReference: {fileID: 3585944767425022740}
     - target: {fileID: 8207573751739212895, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: shipExternalCollider
