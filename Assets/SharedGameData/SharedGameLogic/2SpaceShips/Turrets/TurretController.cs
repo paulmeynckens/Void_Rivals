@@ -6,7 +6,7 @@ using Mirror;
 
 namespace ShipsLogic.Turrets
 {
-    public class TurretRotator : NetworkBehaviour
+    public class TurretController : NetworkBehaviour
     {
         [SerializeField] TwoAxisRotator rotator = null;
 
@@ -32,9 +32,7 @@ namespace ShipsLogic.Turrets
 
 
 
-        float targetHorizontalAngle;
 
-        float targetVerticalAngle;
 
         #region Syncvars+hooks
         [SyncVar(hook = nameof(ClientUpdateRotations))] Vector2 rotations = Vector2.zero;
@@ -42,8 +40,8 @@ namespace ShipsLogic.Turrets
         {
             if (!hasAuthority)
             {
-                targetHorizontalAngle = _new.y;
-                targetVerticalAngle = _new.x;
+                rotator.horizontalRotator.localRotation = Quaternion.Euler(0, _new.y, 0);
+                rotator.pointer.localRotation = Quaternion.Euler(_new.x, 0, 0);
             }
         }
 
@@ -61,9 +59,9 @@ namespace ShipsLogic.Turrets
                 }
 
             }
-            float maxRotationDelta = rotationSpeed * Time.deltaTime;
-            RotateHorizontalBodies(maxRotationDelta);
-            RotateVerticalBodies(maxRotationDelta);
+            
+            RotateHorizontalBodies();
+            RotateVerticalBodies();
 
         }
 
@@ -71,9 +69,7 @@ namespace ShipsLogic.Turrets
         {
             if (hasAuthority)
             {
-                targetHorizontalAngle = rotator.horizontalRotator.localEulerAngles.y;
-                targetVerticalAngle = rotator.pointer.localEulerAngles.x;
-                CmdSendRotations(targetHorizontalAngle, targetVerticalAngle);
+                CmdSendRotations(rotator.horizontalRotator.localEulerAngles.y, rotator.pointer.localEulerAngles.x);
             }
         }
 
@@ -92,9 +88,9 @@ namespace ShipsLogic.Turrets
 
         #region Both sides
 
-        void RotateHorizontalBodies(float maxRotationDelta)
+        void RotateHorizontalBodies()
         {
-            float appliedAngle = targetHorizontalAngle;
+            float appliedAngle = rotator.horizontalRotator.localEulerAngles.y;
             if (restrictedHorizontalAngle)
             {
                 if(appliedAngle>0 && appliedAngle < 180)//right quadran
@@ -116,7 +112,9 @@ namespace ShipsLogic.Turrets
 
 
 
-            Quaternion appliedHorizontalRotation = Quaternion.RotateTowards(horizontalBodies[0].localRotation, Quaternion.Euler(0, appliedAngle, 0), maxRotationDelta);
+            Quaternion appliedHorizontalRotation = Quaternion.Euler(0, appliedAngle, 0);
+
+            rotator.horizontalRotator.localRotation= Quaternion.Euler(0, appliedAngle, 0);
 
             foreach (Transform horizontalBody in horizontalBodies)
             {
@@ -126,10 +124,10 @@ namespace ShipsLogic.Turrets
         }
 
 
-        void RotateVerticalBodies(float maxRotationDelta)
+        void RotateVerticalBodies()
         {
 
-            float appliedAngle = targetVerticalAngle;
+            float appliedAngle = rotator.pointer.localEulerAngles.x;
 
             if (appliedAngle > 0 && appliedAngle < 180)//lower quadran
             {
@@ -146,7 +144,9 @@ namespace ShipsLogic.Turrets
                 }
             }
 
-            Quaternion appliedVerticalRotation = Quaternion.RotateTowards(verticalBodies[0].localRotation, Quaternion.Euler(appliedAngle, 0, 0), maxRotationDelta);
+            Quaternion appliedVerticalRotation = Quaternion.Euler(appliedAngle, 0, 0);
+
+            rotator.pointer.localRotation= Quaternion.Euler(appliedAngle, 0, 0);
 
             foreach (Transform verticalBody in verticalBodies)
             {
@@ -163,8 +163,9 @@ namespace ShipsLogic.Turrets
         [Command (channel = Channels.Unreliable)]
         void CmdSendRotations(float horizontal, float vertical)
         {
-            targetHorizontalAngle = horizontal;
-            targetVerticalAngle = vertical;
+
+            rotator.horizontalRotator.localRotation = Quaternion.Euler(0, horizontal, 0);
+            rotator.pointer.localRotation = Quaternion.Euler(vertical, 0, 0);
 
             rotations = new Vector2 { y = horizontal, x = vertical };
 

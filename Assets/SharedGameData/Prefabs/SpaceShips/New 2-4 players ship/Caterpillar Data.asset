@@ -15,10 +15,10 @@ MonoBehaviour:
   rigidbodyMass: 5000
   rigidBodyDrag: 1
   rigidbodyAngularDrag: 2
-  yawTorque: 100000
-  pitchTorque: 150000
+  yawTorque: 400000
+  pitchTorque: 200000
   rollTorque: 20000
-  engineMaxForwardThrust: 50000
-  engineMaxBackwardThrust: 10000
+  engineMaxForwardThrust: 200000
+  engineMaxBackwardThrust: 20000
   shipType: 0
   stabilisationTorque: 300000

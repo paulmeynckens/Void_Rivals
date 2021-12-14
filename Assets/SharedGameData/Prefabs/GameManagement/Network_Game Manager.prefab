@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1545193468555026597}
   - component: {fileID: 9038562736638142836}
   - component: {fileID: 6612503020792197372}
-  - component: {fileID: 5677243218574864839}
+  - component: {fileID: 3920274454192202899}
   m_Layer: 0
   m_Name: Network_Game Manager
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
---- !u!114 &5677243218574864839
+--- !u!114 &3920274454192202899
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

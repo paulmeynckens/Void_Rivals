@@ -395,8 +395,8 @@ MonoBehaviour:
   syncInterval: 0.1
   itemType: MDA
   infiniteSupply: 0
-  maxQuantity: 1
-  ammoPerItem: 100
+  maxQuantity: 3
+  ammoPerItem: 1
 --- !u!1 &933706878012833587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1547,6 @@ MonoBehaviour:
   verticalBodies:
   - {fileID: 5874385302168788711}
   - {fileID: 4682274721670641967}
-  - {fileID: 7625538015098554750}
   - {fileID: 6754245202038232641}
   - {fileID: 3342225243531470455}
   upperVerticalAngle: 70
@@ -3075,7 +3074,6 @@ MonoBehaviour:
   verticalBodies:
   - {fileID: 643256625712372881}
   - {fileID: 757144346844514594}
-  - {fileID: 6353753177733146111}
   - {fileID: 580292104131510449}
   - {fileID: 5634400068093873886}
   upperVerticalAngle: 30
@@ -7168,6 +7166,21 @@ PrefabInstance:
       propertyPath: internalCollider
       value: 
       objectReference: {fileID: 6875533491071242460}
+    - target: {fileID: 4085611182364874030, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: pointer
+      value: 
+      objectReference: {fileID: 5106482702491131214}
+    - target: {fileID: 4085611182364874030, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: turretController
+      value: 
+      objectReference: {fileID: 67222989022124469}
+    - target: {fileID: 4085611182364874030, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: horizontalRotator
+      value: 
+      objectReference: {fileID: 2646821570943245508}
     - target: {fileID: 4114329794153679431, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: quantityChanger
@@ -7183,6 +7196,21 @@ PrefabInstance:
       propertyPath: quantityChanger
       value: 
       objectReference: {fileID: 3636967722181345184}
+    - target: {fileID: 4290765493093935661, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: pointer
+      value: 
+      objectReference: {fileID: 7530449939767697797}
+    - target: {fileID: 4290765493093935661, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: turretController
+      value: 
+      objectReference: {fileID: 7346989960845936736}
+    - target: {fileID: 4290765493093935661, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: horizontalRotator
+      value: 
+      objectReference: {fileID: 1799431984637396711}
     - target: {fileID: 4307078601425044488, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: shipGun
@@ -7248,6 +7276,21 @@ PrefabInstance:
       propertyPath: quantityChanger
       value: 
       objectReference: {fileID: 7936105976576786051}
+    - target: {fileID: 6780582640221384953, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: pointer
+      value: 
+      objectReference: {fileID: 7300112523681266402}
+    - target: {fileID: 6780582640221384953, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: turretController
+      value: 
+      objectReference: {fileID: 8333832481547109779}
+    - target: {fileID: 6780582640221384953, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: horizontalRotator
+      value: 
+      objectReference: {fileID: 7359018786709591503}
     - target: {fileID: 6823223664708240944, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: interractable
