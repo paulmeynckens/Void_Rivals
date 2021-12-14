@@ -6,7 +6,7 @@ using Mirror;
 
 namespace ShipsLogic.Turrets
 {
-    public class TurretController : NetworkBehaviour
+    public class TurretController : NetworkBehaviour,IResettable
     {
         [SerializeField] TwoAxisRotator rotator = null;
 
@@ -171,10 +171,17 @@ namespace ShipsLogic.Turrets
 
         }
 
+
+
         #endregion
 
-        #region Rpcs
-        
+        #region Server
+        void IResettable.ServerReset()
+        {
+            rotations = Vector2.zero;
+            rotator.horizontalRotator.localRotation = Quaternion.identity;
+            rotator.pointer.localRotation = Quaternion.identity;
+        }
 
 
         #endregion

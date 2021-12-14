@@ -60,7 +60,7 @@ namespace ShipsRenderer
             {
                 horizontalFollower.localRotation = Quaternion.Lerp(lastRotatorLocalRotation, nextRotatorLocalRotation, interpolationIncrement);
             }
-            foreach (Transform verticalFollower in horizontalFollowers)
+            foreach (Transform verticalFollower in verticalFollowers)
             {
                 verticalFollower.localRotation = Quaternion.Lerp(lastPointerLocalRotation, nextPointerLocalRotation, interpolationIncrement);
             }            
