@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8130462463781448928}
   - component: {fileID: 8520110936359347988}
   - component: {fileID: 5106968139753999290}
-  - component: {fileID: 8308487928363269014}
   - component: {fileID: 4586660303725842256}
   - component: {fileID: 1677986517394523035}
   m_Layer: 25
@@ -69,19 +68,6 @@ MonoBehaviour:
   syncInterval: 0.2
   requestedTool: RT
   sphereCollider: {fileID: 4586660303725842256}
---- !u!114 &8308487928363269014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8230836436418555466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79edc071322820c419e420b6c29d0136, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interractable: {fileID: 5106968139753999290}
 --- !u!135 &4586660303725842256
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -120,7 +106,12 @@ PrefabInstance:
         type: 3}
       propertyPath: interractor
       value: 
-      objectReference: {fileID: 8308487928363269014}
+      objectReference: {fileID: 0}
+    - target: {fileID: 43133698068642179, guid: 245dd1de9a7f2994ea464d6606e2fd45,
+        type: 3}
+      propertyPath: interractable
+      value: 
+      objectReference: {fileID: 5106968139753999290}
     - target: {fileID: 181882934898381364, guid: 245dd1de9a7f2994ea464d6606e2fd45,
         type: 3}
       propertyPath: m_Name

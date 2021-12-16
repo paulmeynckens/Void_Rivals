@@ -281,7 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6740703527777313555}
   - component: {fileID: 5813744427571149713}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_Gyroscope_Airvent_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4407349769729126786}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Lower_turret_vertical_Pivot_Collider_R (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1216,7 +1216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5242619338454348381}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1398,7 +1398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4425928985460922787}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1602,7 +1602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3134007961705367855}
   - component: {fileID: 7041229440425016646}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_Generator_Airvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1646,7 +1646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3391642972372529587}
   - component: {fileID: 4480968295838338833}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Caterpillar_Docking_Port_Location_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1690,7 +1690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1776899478367917930}
   - component: {fileID: 8727976106653737468}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Caterpillar_Docking_Port_Location_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2107,7 +2107,7 @@ GameObject:
   - component: {fileID: 1872156759893994591}
   - component: {fileID: 3587523698491246426}
   - component: {fileID: 1658387903060959401}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_ext_collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2193,7 +2193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 697590829601351927}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2548,7 +2548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3276482340821988706}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: upper_turret_vertical_Pivot_Collider_R (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2848,7 +2848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2894683516546284909}
   - component: {fileID: 12825551055827731}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_EngineNozzle_2_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3129,7 +3129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6554328561967244543}
   - component: {fileID: 1850926544565520727}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_Gyroscope_Airvent_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3275,7 +3275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548951802028748011}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: upper_turret_vertical_Pivot_Collider_L (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3435,7 +3435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3903595551849603190}
   - component: {fileID: 1717092742614499094}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_Upper_Turret_ext_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3539,7 +3539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7907494032579052597}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3614,7 +3614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649128144039164130}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FWD_Gun_Horizontal_Pivot_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4117,7 +4117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1417913525127094071}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FWD_Gun_Vertical_Pivot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4228,7 +4228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7963580126124690584}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FWD_Gun_Horizontal_Pivot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4259,7 +4259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 219895438850395072}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4290,7 +4290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2674766990242519124}
   - component: {fileID: 902190860430056712}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: forwardMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4556,7 +4556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastServerStoredTick: 0
   id: t
-  health: {fileID: 1582504306346811081}
+  health: {fileID: 7274500473515644189}
   rollbackReplica: {fileID: 4739498931678239133}
   serverAuthoritativeMovement: {fileID: 1063389666013167687}
 --- !u!1 &5955803915290852083
@@ -4880,7 +4880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastServerStoredTick: 0
   id: t
-  health: {fileID: 1582504306346811081}
+  health: {fileID: 880885155165210157}
   rollbackReplica: {fileID: 8317701526025116346}
   serverAuthoritativeMovement: {fileID: 1063389666013167687}
 --- !u!1 &6149449444846967195
@@ -4999,7 +4999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8872795475815424273}
   - component: {fileID: 8907834302032115642}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_Module_Airvent_2_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5075,7 +5075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5338208444885737005}
   - component: {fileID: 2010029932720562826}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: LowerMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5200,7 +5200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4413714910133440433}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: FWD_Gun_Vertical_Pivot_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5703,7 +5703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4925281606261111878}
   - component: {fileID: 5965963787949541540}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_Life_suport_Airvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5837,7 +5837,7 @@ GameObject:
   - component: {fileID: 5482593900587696889}
   - component: {fileID: 5051995166474711651}
   - component: {fileID: 2624852744086225111}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: upper turret MG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5918,7 +5918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8527065198081160204}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: RollbackReplicas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5993,7 +5993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1109827496740295283}
   - component: {fileID: 1062160366019860441}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: LowerMD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6082,7 +6082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8967466435175806061}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6113,7 +6113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4702257515658830110}
   - component: {fileID: 211023803453540245}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_EngineNozzle_1_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6395,7 +6395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9052114590524698582}
   - component: {fileID: 792477732612317155}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Caterpillar_Lower_Turret_ext_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6444,7 +6444,7 @@ GameObject:
   - component: {fileID: 7044937861812453559}
   - component: {fileID: 8901662061201119500}
   - component: {fileID: 602317757182671051}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: upper turret MD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6526,7 +6526,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4456376140253679280}
   - component: {fileID: 2749083864806988873}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: forwardMD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6846,7 +6846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2263358865247674218}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Lower_turret_vertical_Pivot_Collider_L (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
