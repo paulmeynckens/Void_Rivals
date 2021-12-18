@@ -31,7 +31,7 @@ namespace FeedbackElements
             }
         }
 
-        protected void DockingFeedback(bool open)
+        protected void PlayDockingFeedback(bool open)
         {
 
             if (open)
