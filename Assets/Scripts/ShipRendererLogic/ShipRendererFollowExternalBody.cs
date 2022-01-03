@@ -24,11 +24,12 @@ namespace ShipsRenderer
 
         private void Start()
         {
-            EnableOrDisable(stateManager.enabled);
+            EnableOrDisable(stateManager.Spawned);
         }
 
         private void FixedUpdate()
         {
+            gameObject.SetActive(stateManager.Spawned);
             rb.MovePosition(shipExtBody.position);
             rb.MoveRotation(shipExtBody.rotation);
         }
