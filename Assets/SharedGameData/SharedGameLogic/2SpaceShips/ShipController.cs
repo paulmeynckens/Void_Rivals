@@ -51,8 +51,13 @@ namespace ShipsLogic
         }
         private void Start()
         {
-            MasterRigidbody.transform.parent = null;
-            SetMasterRigidbodyData();
+            if (MasterRigidbody != null)
+            {
+                MasterRigidbody.transform.parent = null;
+                SetMasterRigidbodyData();
+            }
+            
+            
         }
         protected override void Update()
         {

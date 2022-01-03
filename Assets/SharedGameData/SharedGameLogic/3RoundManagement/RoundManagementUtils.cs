@@ -223,7 +223,7 @@ namespace RoundManagement
         {
             foreach(ShipSpawnedStateManager ship in ships)
             {
-                if (!ship.gameObject.activeInHierarchy)
+                if (!ship.Spawned)
                 {
                     return ship;
                 }

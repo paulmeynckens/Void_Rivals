@@ -54,6 +54,7 @@ namespace ShipsLogic
         }
         bool isPulling = false;
 
+        Vector3 parkingPosition = Vector3.zero;
 
         #region SyncVars+hooks
 
@@ -73,21 +74,15 @@ namespace ShipsLogic
             }
         }
 
-        [SyncVar(hook =nameof(ClientGoToParkingPosition))] Vector3 parkingPosition = Vector3.zero;
-        void ClientGoToParkingPosition(Vector3 _old, Vector3 _new)
-        {
-            if (parentShip == null)
-            {
-                transform.position = _new;
-                transform.rotation = Quaternion.identity;
-            }
-        }
+        
+        
 
         #endregion
 
 
         private void Awake()
         {
+            parkingPosition = transform.position;
             
             bodiesHolder = GetComponent<BodiesHolder>();
 
@@ -277,7 +272,7 @@ namespace ShipsLogic
 
         public void ServerPrepareShip()
         {
-            parkingPosition = ShipsParking.instance.GetAvailableLocation().position;
+
             dockingData = new DockingData { parentShipNetId = 0, ownPortIndex = 0, parentPortIndex = 0 };
             
             UnDock();
