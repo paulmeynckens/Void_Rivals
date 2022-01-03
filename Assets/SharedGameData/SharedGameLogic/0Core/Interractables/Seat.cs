@@ -112,6 +112,17 @@ namespace Core.Interractables
             
         }
 
+        public override void ServerReset()
+        {
+            base.ServerReset();
+            netIdentity.RemoveClientAuthority();
+            foreach (NetworkIdentity networkIdentity in controlledObjects)
+            {
+                networkIdentity.RemoveClientAuthority();
+            }
+            currentSitter = null;
+        }
+
         #endregion
 
 

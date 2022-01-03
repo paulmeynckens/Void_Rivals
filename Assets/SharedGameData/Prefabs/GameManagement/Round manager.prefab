@@ -1075,7 +1075,7 @@ MonoBehaviour:
       - {fileID: 1496975844420090533}
       - {fileID: 4935822284463143137}
       shipMaxCapacity: 4
-      shipMinCapacity: 1
+      shipMinCapacity: 2
 --- !u!114 &4830423670499057785
 MonoBehaviour:
   m_ObjectHideFlags: 0

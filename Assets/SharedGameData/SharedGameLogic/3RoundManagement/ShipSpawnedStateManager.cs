@@ -17,8 +17,10 @@ namespace RoundManagement
         ShipDocker shipDocker;
         BodiesHolder bodiesHolder;
 
+        IResettable[] resettables;
+
         #region syncvars + hooks
-        
+
         [SyncVar(hook = nameof(ClientActivateSpawn))]bool spawned = false;
         public bool Spawned
         {
@@ -37,7 +39,7 @@ namespace RoundManagement
         #region both sides
         private void Awake()
         {
-            
+            resettables = GetComponentsInChildren<IResettable>();
             bodiesHolder = GetComponent<BodiesHolder>();
             shipDocker = GetComponent<ShipDocker>();
         }
@@ -119,7 +121,7 @@ namespace RoundManagement
 
         void ServerReset()
         {
-            IResettable[] resettables = GetComponentsInChildren<IResettable>();
+            
             foreach (IResettable resettable in resettables)
             {
                 resettable.ServerReset();
