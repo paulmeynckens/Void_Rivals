@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Core;
@@ -17,14 +18,19 @@ namespace RoundManagement
         BodiesHolder bodiesHolder;
 
         #region syncvars + hooks
-        /*
-        bool spawned = false;
+        
+        [SyncVar(hook = nameof(ClientActivateSpawn))]bool spawned = false;
         public bool Spawned
         {
             get => spawned;
         }
+
+        public event Action<bool> OnClientSpawnStateChanged = delegate { };
         
-        */
+        void ClientActivateSpawn(bool _old, bool _new)
+        {
+            OnClientSpawnStateChanged(_new);
+        }
 
         #endregion
 
@@ -48,7 +54,7 @@ namespace RoundManagement
             structure = GetComponent<Structure>();
             structure.OnServerDie += ServerDestroyShip;
 
-            gameObject.SetActive(false);
+
 
         }
 
@@ -58,11 +64,11 @@ namespace RoundManagement
         {
             ServerUndockShips();
 
-            ServerReset();
-
-            gameObject.SetActive(false);            
+            ServerReset();                        
 
             shipDocker.StowShip();
+
+            spawned=false;
         }
 
         void ServerDestroyShip()
@@ -103,13 +109,11 @@ namespace RoundManagement
 
             ServerReset();
 
-            gameObject.SetActive(false);
-
             yield return new WaitForSeconds(1);
 
             shipDocker.StowShip();
 
-            
+            spawned = false;
 
         }
 
@@ -129,10 +133,12 @@ namespace RoundManagement
             bodiesHolder.externalCollider.rotation = rotation;
             /*
             CustomVisibility.globalVisibilities[netIdentity] = true;
-            spawned = true;
+            
             */
-            gameObject.SetActive(true);
+
             shipDocker.ServerPrepareShip();
+            spawned = true;
+            
             
 
             

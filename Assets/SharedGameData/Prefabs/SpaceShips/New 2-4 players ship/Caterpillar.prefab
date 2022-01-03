@@ -5573,7 +5573,6 @@ GameObject:
   - component: {fileID: 6437158438334870938}
   - component: {fileID: 5317090654889793558}
   - component: {fileID: 8749797609917942595}
-  - component: {fileID: 6433133873675711406}
   - component: {fileID: 7783897532255199856}
   m_Layer: 0
   m_Name: Caterpillar_ext_collider
@@ -5667,19 +5666,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8738723129516920634, guid: 4a38dc46d43244440830e3d5c9908114, type: 3}
---- !u!114 &6433133873675711406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6816875892167086004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3646387d082fa1f4da67bee9cc4333c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originShip: {fileID: 964177680997270054}
 --- !u!114 &7783897532255199856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5995,8 +5981,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7957163904249646371}
   - component: {fileID: 5482593900587696889}
-  - component: {fileID: 5051995166474711651}
-  - component: {fileID: 2624852744086225111}
   m_Layer: 18
   m_Name: upper turret MG
   m_TagString: Untagged
@@ -6033,42 +6017,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.5}
---- !u!114 &5051995166474711651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7100573644673319922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 3bb1e2ade1df16e4ab3ef15e69e482d4
-  hasSpawned: 0
---- !u!114 &2624852744086225111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7100573644673319922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6199f36f9085dd44b40ea88a1014630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  doNotCollide: {fileID: 7100573644673319922}
-  shootPoint: {fileID: 7907494032579052597}
-  data: {fileID: 11400000, guid: bf8f7a8718edaea448c3598409e17b6e, type: 2}
-  serverAuthoritativeMovement: {fileID: 1063389666013167687}
-  gunMagasine: {fileID: 7936105976576786051}
 --- !u!1 &7167924289740058238
 GameObject:
   m_ObjectHideFlags: 0
@@ -6602,8 +6550,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5453244781369532438}
   - component: {fileID: 7044937861812453559}
-  - component: {fileID: 8901662061201119500}
-  - component: {fileID: 602317757182671051}
   m_Layer: 18
   m_Name: upper turret MD
   m_TagString: Untagged
@@ -6640,42 +6586,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 1.5}
---- !u!114 &8901662061201119500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8357568697608446573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 3bb1e2ade1df16e4ab3ef15e69e482d4
-  hasSpawned: 0
---- !u!114 &602317757182671051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8357568697608446573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6199f36f9085dd44b40ea88a1014630, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  doNotCollide: {fileID: 8357568697608446573}
-  shootPoint: {fileID: 697590829601351927}
-  data: {fileID: 11400000, guid: 5eead6cf05ecfb540b22f02b17e636b0, type: 2}
-  serverAuthoritativeMovement: {fileID: 1063389666013167687}
-  gunMagasine: {fileID: 5897909369021670567}
 --- !u!1 &8631431361375373986
 GameObject:
   m_ObjectHideFlags: 0

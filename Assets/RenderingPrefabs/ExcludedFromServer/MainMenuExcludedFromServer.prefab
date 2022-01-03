@@ -8052,7 +8052,6 @@ GameObject:
   - component: {fileID: 7041087060672652063}
   - component: {fileID: 5375954429766088759}
   - component: {fileID: 8879337846756043389}
-  - component: {fileID: 2508675386360740356}
   m_Layer: 0
   m_Name: Characters_04 Variant
   m_TagString: Untagged
@@ -8190,18 +8189,6 @@ MonoBehaviour:
   - {fileID: 6399675910588328463}
   - {fileID: 8395360608672350474}
   - {fileID: 6076723301334668790}
---- !u!114 &2508675386360740356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4331630615451640799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29f33cc73e6459449a361ee2f9af6601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4476764606813234840
 GameObject:
   m_ObjectHideFlags: 0
