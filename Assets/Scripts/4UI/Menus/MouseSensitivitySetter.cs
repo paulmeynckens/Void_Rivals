@@ -20,12 +20,10 @@ namespace UI
         // Update is called once per frame
         void Update()
         {
-            KeyBindings.m_mouseSensitivity = slider.value;        
-        }
-
-        private void OnDisable()
-        {
+            KeyBindings.m_mouseSensitivity = slider.value;
             PlayerPrefs.SetFloat("Mouse sensitivity", KeyBindings.m_mouseSensitivity);
         }
+
+
     }
 }
