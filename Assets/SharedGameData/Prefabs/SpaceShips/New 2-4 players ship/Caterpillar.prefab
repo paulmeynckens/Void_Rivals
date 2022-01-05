@@ -4626,7 +4626,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2486787715748477706}
   - component: {fileID: 729196097279896512}
-  - component: {fileID: 5919571395703719509}
   m_Layer: 0
   m_Name: Caterpillar_Upper_Turret_ext_collider
   m_TagString: Untagged
@@ -4664,23 +4663,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2815055780292500296, guid: 4a38dc46d43244440830e3d5c9908114, type: 3}
---- !u!114 &5919571395703719509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5898529994236448062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f3bdb84986abea4eb6b08df5ab804a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastServerStoredTick: 0
-  id: t
-  health: {fileID: 7274500473515644189}
-  rollbackReplica: {fileID: 4739498931678239133}
-  serverAuthoritativeMovement: {fileID: 1063389666013167687}
 --- !u!1 &5955803915290852083
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,7 +4932,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8707407912594046615}
   - component: {fileID: 8653459406993019711}
-  - component: {fileID: 8399525974469771103}
   m_Layer: 0
   m_Name: Caterpillar_Lower_Turret_ext_collider
   m_TagString: Untagged
@@ -4988,23 +4969,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2298664872605768314, guid: 4a38dc46d43244440830e3d5c9908114, type: 3}
---- !u!114 &8399525974469771103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6104922147950467542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f3bdb84986abea4eb6b08df5ab804a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastServerStoredTick: 0
-  id: t
-  health: {fileID: 880885155165210157}
-  rollbackReplica: {fileID: 8317701526025116346}
-  serverAuthoritativeMovement: {fileID: 1063389666013167687}
 --- !u!1 &6149449444846967195
 GameObject:
   m_ObjectHideFlags: 0

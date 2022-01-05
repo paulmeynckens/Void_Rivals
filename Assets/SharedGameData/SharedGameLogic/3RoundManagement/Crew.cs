@@ -28,8 +28,18 @@ namespace RoundManagement
         [SyncVar] public string shipName = " ";
 
         [SyncVar] public CrewState state = CrewState.Confirm;
-        [SyncVar] public int crewMinCapacity = 0;
-        [SyncVar] public int crewMaxCapacity =0;
+        [SyncVar] int crewMinCapacity = 0;
+        public int CrewMinCapacity
+        {
+            get => crewMinCapacity;
+            set => crewMinCapacity = value;
+        }
+        [SyncVar] int crewMaxCapacity = MAX_CREW_MEMBERS;
+        public int CrewMaxCapacity
+        {
+            get => crewMaxCapacity;
+            set => crewMaxCapacity = value;
+        }
 
         [SyncVar] public string shipType = " ";
         public SyncDictionary<uint, float> joinRequests = new SyncDictionary<uint, float>();
@@ -37,7 +47,7 @@ namespace RoundManagement
         
         
         public const float JOIN_CREW_REQUEST_TIMEOUT = 6f;
-        public const int MAX_CREW_MEMBERS = 2;// increase this number when the maximum ship size increases
+        public const int MAX_CREW_MEMBERS = 4;// increase this number when the maximum ship size increases
 
 
 

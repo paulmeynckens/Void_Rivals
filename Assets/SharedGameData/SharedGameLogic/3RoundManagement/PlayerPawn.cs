@@ -115,7 +115,7 @@ namespace RoundManagement
 
                     if (targetCrew.ship != 0)
                     {
-                        if (targetCrew.crewMembers.Count >= targetCrew.crewMaxCapacity)
+                        if (targetCrew.crewMembers.Count >= targetCrew.CrewMaxCapacity)
                         {
                             Debug.Log(gameObject.name + "has tried to join crew : " + targetCrew.netId + " but it' ship is full");
                             return;
@@ -178,7 +178,7 @@ namespace RoundManagement
 
             if (Crew.ship != 0)
             {
-                if (Crew.crewMembers.Count >= Crew.crewMaxCapacity)
+                if (Crew.crewMembers.Count >= Crew.CrewMaxCapacity)
                 {
                     Debug.Log(gameObject.name + "has tried to add a player to his crew but his ship is full");
                     return;
