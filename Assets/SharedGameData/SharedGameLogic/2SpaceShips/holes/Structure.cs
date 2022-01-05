@@ -159,8 +159,6 @@ namespace ShipsLogic.Holes
             }
             base.ServerDie();
 
-
-
         }
 
         void ServerCalculateHealth()
@@ -248,6 +246,7 @@ namespace ShipsLogic.Holes
         void IResettable.ServerReset()
         {
             health = maxHealth;
+            numberOfHoles = 0;
         }
     }
 }
