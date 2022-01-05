@@ -34,6 +34,12 @@ namespace UI.Menus
             
         }
 
+        private void Update()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         public void SetPlayerName(string name)
         {
             PlayerPrefs.SetString(PlayerData.PLAYER_NAME_KEY, playerNameField.text);
