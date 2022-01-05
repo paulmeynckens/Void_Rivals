@@ -30,8 +30,8 @@ namespace UI.TabPanel
 
         private void FixedUpdate()
         {
-            blueTeamNB.text = TeamsManager.instance.blueCount.ToString();
-            redTeamNB.text = TeamsManager.instance.redCount.ToString();
+            blueTeamNB.text = TeamsManager.instance.BlueCount.ToString();
+            redTeamNB.text = TeamsManager.instance.RedCount.ToString();
             if (PlayerPawn.local != null)
             {
                 ClientHideOrShowCreateButtons();

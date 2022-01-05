@@ -18,9 +18,18 @@ namespace RoundManagement
         
         public int maxTeamDifference = 3;
 
-        [SyncVar] internal int blueCount = 0;
+        public int BlueCount
+        {
+            get => blueCount;
+        }
+        [SyncVar] int blueCount = 0;       
 
-        [SyncVar] internal int redCount = 0;
+        public int RedCount
+        {
+            get => redCount;
+        }
+        [SyncVar] int redCount = 0;
+
 
         [SerializeField] SpawnLocationShuffler blueSpawnLocations = null;
         [SerializeField] SpawnLocationShuffler redSpawnLocations = null;
@@ -51,6 +60,15 @@ namespace RoundManagement
             }
             
 
+        }
+
+        
+        private void Update()
+        {
+            if (isServer)
+            {
+                ServerRecountPlayers();
+            }
         }
 
         public void ServerRecountPlayers()

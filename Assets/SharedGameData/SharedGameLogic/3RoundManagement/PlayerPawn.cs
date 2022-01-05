@@ -383,7 +383,7 @@ namespace RoundManagement
 
             Crew.crewMembers.Remove(netId);
 
-            TeamsManager.instance.ServerRecountPlayers();
+            
 
             if (Crew.crewMembers.Count == 0)//Means the crew is empty. It must be destroyed.
             {
@@ -397,6 +397,8 @@ namespace RoundManagement
             }
 
             Crew = null;
+
+            TeamsManager.instance.ServerRecountPlayers();
 
         }
 
