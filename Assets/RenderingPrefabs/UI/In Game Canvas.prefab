@@ -121,7 +121,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 9187029238458940364}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -355,8 +355,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4544278421251027940}
   m_HandleRect: {fileID: 3926710879537546765}
   m_Direction: 2
-  m_Value: 0.13502532
-  m_Size: 0.5451292
+  m_Value: 1
+  m_Size: 0.5451293
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -934,7 +934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000003695488, y: 689.86414}
+  m_AnchoredPosition: {x: 0.000024318695, y: 0.000061035}
   m_SizeDelta: {x: 0, y: 1753.364}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6833574860174324966
@@ -3992,8 +3992,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7881535939180446924}
   m_HandleRect: {fileID: 7881535939180446927}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.5657839
+  m_Value: 1.0000004
+  m_Size: 0.56578404
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4598,8 +4598,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7881535940446201381}
   m_HandleRect: {fileID: 7881535940446201380}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.5811394
+  m_Value: 1.0000004
+  m_Size: 0.58113945
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8096,7 +8096,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7881535938844933124}
   m_HandleRect: {fileID: 7881535938844933127}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -10392,17 +10392,17 @@ PrefabInstance:
     - target: {fileID: 4697787474868979547, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: -0.000035914552
       objectReference: {fileID: 0}
     - target: {fileID: 6110161180287527836, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Size
-      value: 0.9999999
+      value: 0.9999958
       objectReference: {fileID: 0}
     - target: {fileID: 6110161180287527836, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6258176432890508517, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
@@ -10427,7 +10427,7 @@ PrefabInstance:
     - target: {fileID: 7387769807370459129, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}
       propertyPath: m_Size
-      value: 0.99999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7387769807370459129, guid: 5d2b5651af5f26c48a1944eb36eaf1bc,
         type: 3}

@@ -15,10 +15,11 @@ namespace FeedbackElements
         [SerializeField] TMP_Text ammoIndicator = null;
 
 
-        private void Awake()
+
+        private void Start()
         {
-            ammoIndicator.text = "No ammo";
-            gunMagasine.OnAmmoQuantityChanged += ChangeIndicatorValue;            
+            gunMagasine.OnAmmoQuantityChanged += ChangeIndicatorValue;
+            ammoIndicator.text = gunMagasine.Ammo.ToString();
         }
 
         void ChangeIndicatorValue(short _old, short _new)

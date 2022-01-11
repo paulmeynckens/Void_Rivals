@@ -34,11 +34,7 @@ namespace ShipsLogic.Guns
 
         #endregion
 
-        public override void OnStartClient()
-        {
-            base.OnStartClient();
-            Debug.Log("OnAmmoQuantityChanged invocation list length : " +  OnAmmoQuantityChanged.GetInvocationList().Length);
-        }
+
 
         #region Server
 

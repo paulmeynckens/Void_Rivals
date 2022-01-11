@@ -985,12 +985,14 @@ namespace Mirror
         internal void OnDeserializeAllSafely(NetworkReader reader, bool initialState)
         {
             if (NetworkBehaviours == null)
-            {
+            { /*
                 Debug.LogError($"NetworkBehaviours array is null on {gameObject.name}!\n" +
                     $"Typically this can happen when a networked object is a child of a " +
                     $"non-networked parent that's disabled, preventing Awake on the networked object " +
                     $"from being invoked, where the NetworkBehaviours array is initialized.", gameObject);
                 return;
+                */
+                InitializeNetworkBehaviours();
             }
 
             // deserialize all components that were received

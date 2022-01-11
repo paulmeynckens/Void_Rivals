@@ -8063,7 +8063,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3987616089956940133}
   - component: {fileID: 7041087060672652063}
-  - component: {fileID: 5375954429766088759}
   - component: {fileID: 8879337846756043389}
   m_Layer: 0
   m_Name: Characters_04 Variant
@@ -8107,68 +8106,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5375954429766088759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4331630615451640799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90aecfcbe524f5c4483af233c5f41dd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eyes: {fileID: 8456833777959756989}
-  lookTarget: {fileID: 6843935312898859839}
-  hands: {fileID: 564974200283886895}
-  holdableItems:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues:
-    - NO
-    - AB
-    - MGA
-    - MDA
-    - PL
-    - RT
-    - HT
-    _keys:
-    - NO
-    - AB
-    - MGA
-    - MDA
-    - PL
-    - RT
-    - HT
-    _values:
-    - {fileID: 8863479383230326830}
-    - {fileID: 6575262248112469513}
-    - {fileID: 597957439957417841}
-    - {fileID: 8547093070954481625}
-    - {fileID: 3330298102748930817}
-    - {fileID: 7041028127746460500}
-    - {fileID: 5497446410629256114}
 --- !u!114 &8879337846756043389
 MonoBehaviour:
   m_ObjectHideFlags: 0
