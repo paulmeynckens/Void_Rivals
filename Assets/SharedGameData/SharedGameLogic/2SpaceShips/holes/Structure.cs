@@ -14,6 +14,7 @@ namespace ShipsLogic.Holes
 
         [SerializeField] GameObject holePrefab = null;
         [SerializeField] Transform interior = null;
+        [SerializeField] NetworkIdentity internalCollider = null;
 
         
         List<Hole> holes = new List<Hole>();
@@ -71,7 +72,8 @@ namespace ShipsLogic.Holes
             hole.OnServerHoleRepair += ServerRepair;
 
             ServerCalculateHealth();
-
+            HoleSpawn holeSpawn = holeInstance.GetComponent<HoleSpawn>();
+            holeSpawn.Hull = internalCollider;
             NetworkServer.Spawn(holeInstance);
 
 
@@ -99,7 +101,9 @@ namespace ShipsLogic.Holes
 
                     Quaternion holeRotation = Quaternion.LookRotation(_raycastHit.normal, Vector3.up);
 
-                    GameObject popedHole = Instantiate(holePrefab, _raycastHit.point, holeRotation, transform);
+                    GameObject popedHole = Instantiate(holePrefab, _raycastHit.point, holeRotation, transform.parent);
+
+                    
 
                     return popedHole;
                 }
@@ -246,7 +250,9 @@ namespace ShipsLogic.Holes
         void IResettable.ServerReset()
         {
             health = maxHealth;
+           
             numberOfHoles = 0;
+            holes.Clear();
         }
     }
 }

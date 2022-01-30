@@ -2194,10 +2194,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  health: 5000
+  health: 100
   holePrefab: {fileID: 8230836436418555466, guid: c1f724a14b9285148b5e2780414313bc,
     type: 3}
   interior: {fileID: 4201206082647661018}
+  internalCollider: {fileID: 7414424398765524067}
   hullLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -4227,6 +4228,7 @@ MonoBehaviour:
   holePrefab: {fileID: 8230836436418555466, guid: c1f724a14b9285148b5e2780414313bc,
     type: 3}
   interior: {fileID: 1879180754878325854}
+  internalCollider: {fileID: 0}
   hullLayerMask:
     serializedVersion: 2
     m_Bits: 134217728
@@ -6410,6 +6412,7 @@ MonoBehaviour:
   holePrefab: {fileID: 8230836436418555466, guid: c1f724a14b9285148b5e2780414313bc,
     type: 3}
   interior: {fileID: 5016325298011204105}
+  internalCollider: {fileID: 0}
   hullLayerMask:
     serializedVersion: 2
     m_Bits: 134217728
@@ -7285,9 +7288,19 @@ PrefabInstance:
       objectReference: {fileID: 1799431984637396711}
     - target: {fileID: 2994841685526510663, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
+      propertyPath: ship
+      value: 
+      objectReference: {fileID: 6875533491071242460}
+    - target: {fileID: 2994841685526510663, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
       propertyPath: shipExtBody
       value: 
       objectReference: {fileID: 4934173788898176809}
+    - target: {fileID: 2994841685526510663, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: stateManager
+      value: 
+      objectReference: {fileID: 524945760495229983}
     - target: {fileID: 3080387521822165506, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: structure
@@ -7325,6 +7338,11 @@ PrefabInstance:
       objectReference: {fileID: 5752899003896246665}
     - target: {fileID: 3876085543521364901, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
+      propertyPath: generalBody
+      value: 
+      objectReference: {fileID: 6875533491071242460}
+    - target: {fileID: 3876085543521364901, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
       propertyPath: externalCollider
       value: 
       objectReference: {fileID: 4934173788898176809}
@@ -7332,7 +7350,7 @@ PrefabInstance:
         type: 3}
       propertyPath: internalCollider
       value: 
-      objectReference: {fileID: 6875533491071242460}
+      objectReference: {fileID: 4201206082647661018}
     - target: {fileID: 4085611182364874030, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: pointer

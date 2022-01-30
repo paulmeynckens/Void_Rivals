@@ -1646,10 +1646,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  health: 1000
+  health: 500
   holePrefab: {fileID: 8230836436418555466, guid: c1f724a14b9285148b5e2780414313bc,
     type: 3}
   interior: {fileID: 8029778166144068871}
+  internalCollider: {fileID: 3155215863865046324}
   hullLayerMask:
     serializedVersion: 2
     m_Bits: 134217728
@@ -4583,9 +4584,19 @@ PrefabInstance:
       objectReference: {fileID: 6431497271365284451}
     - target: {fileID: 7923269489504616387, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
+      propertyPath: ship
+      value: 
+      objectReference: {fileID: 3585944767425022740}
+    - target: {fileID: 7923269489504616387, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
       propertyPath: shipExtBody
       value: 
       objectReference: {fileID: 1705732897518561999}
+    - target: {fileID: 7923269489504616387, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: stateManager
+      value: 
+      objectReference: {fileID: 3059966077175568102}
     - target: {fileID: 7929095364514037261, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: seat
@@ -4598,6 +4609,11 @@ PrefabInstance:
       objectReference: {fileID: 5186567504841561863}
     - target: {fileID: 8207573751739212895, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
+      propertyPath: generalBody
+      value: 
+      objectReference: {fileID: 3585944767425022740}
+    - target: {fileID: 8207573751739212895, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
       propertyPath: externalCollider
       value: 
       objectReference: {fileID: 1705732897518561999}
@@ -4605,7 +4621,7 @@ PrefabInstance:
         type: 3}
       propertyPath: internalCollider
       value: 
-      objectReference: {fileID: 3585944767425022740}
+      objectReference: {fileID: 8029778166144068871}
     - target: {fileID: 8207573751739212895, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: shipExternalCollider

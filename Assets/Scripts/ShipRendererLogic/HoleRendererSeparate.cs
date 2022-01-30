@@ -16,14 +16,15 @@ namespace ShipsRenderer
             holeSpawn.OnHolePlaced += SeparateHoleRenderer;
         }
 
+        
 
-        void SeparateHoleRenderer(NetworkIdentity networkIdentity, Vector3 targetLocalPosition, Quaternion targetLocalRotation)
+        void SeparateHoleRenderer(HoleSpot holeSpot)
         {
-            Transform targetParent = LinkToRenderer.shipsRenderersLinks[networkIdentity.transform];
+            Transform targetParent = LinkToRenderer.shipsRenderersLinks[holeSpot.holeGeneratorIdentity.transform];
             transform.parent = targetParent;
 
-            transform.localPosition = targetLocalPosition;
-            transform.localRotation = targetLocalRotation;
+            transform.localPosition = holeSpot.localPosition;
+            transform.localRotation = holeSpot.localRotation;
         }
     }
 }

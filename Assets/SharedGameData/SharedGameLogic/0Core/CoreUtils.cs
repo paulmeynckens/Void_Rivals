@@ -95,13 +95,7 @@ namespace Core
 
 
     #region Structs
-    public struct HoleSpot
-    {
-        public NetworkIdentity holeGeneratorIdentity;
-        public Vector3 localPosition;
-        public Quaternion localRotation;
-
-    }
+    
 
 
 

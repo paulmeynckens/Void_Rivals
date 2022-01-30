@@ -307,14 +307,14 @@ namespace Mirror
 #pragma warning disable 618
             visibility = GetComponent<NetworkVisibility>();
 #pragma warning restore 618
-            /*
+            
             if (hasSpawned)
             {
                 Debug.LogError($"{name} has already spawned. Don't call Instantiate for NetworkIdentities that were in the scene since the beginning (aka scene objects).  Otherwise the client won't know which object to use for a SpawnSceneObject message.");
                 SpawnedFromInstantiate = true;
                 Destroy(gameObject);
             }
-            */
+            
             hasSpawned = true;
         }
 
@@ -985,14 +985,13 @@ namespace Mirror
         internal void OnDeserializeAllSafely(NetworkReader reader, bool initialState)
         {
             if (NetworkBehaviours == null)
-            { /*
+            { 
                 Debug.LogError($"NetworkBehaviours array is null on {gameObject.name}!\n" +
                     $"Typically this can happen when a networked object is a child of a " +
                     $"non-networked parent that's disabled, preventing Awake on the networked object " +
                     $"from being invoked, where the NetworkBehaviours array is initialized.", gameObject);
                 return;
-                */
-                InitializeNetworkBehaviours();
+                
             }
 
             // deserialize all components that were received
