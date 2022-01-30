@@ -7,7 +7,7 @@ namespace ShipsRenderer
 {
     public class ProtoshipJoystick : MonoBehaviour
     {
-        ShipController shipController;
+        [SerializeField]ShipController shipController;
 
         [SerializeField] Transform baseTransform = null;
         [SerializeField] Transform poleTransform = null;
@@ -25,10 +25,7 @@ namespace ShipsRenderer
         Quaternion targetGazRotation = Quaternion.identity;
         float gazRotationSpeed;
 
-        private void Awake()
-        {
-            shipController = GetComponentInParent<ShipController>();
-        }
+
 
 
         // Update is called once per frame

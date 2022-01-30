@@ -22,24 +22,29 @@ namespace RoundManagement
             OnChangeCaptain?.Invoke(_new);
         }
 
-
-        [SyncVar] public uint ship = 0;
+        public NetworkIdentity Ship
+        {
+            get => ship;
+        }
+        [SyncVar]  NetworkIdentity ship = null;
 
         [SyncVar] public string shipName = " ";
 
         [SyncVar] public CrewState state = CrewState.Confirm;
-        [SyncVar] int crewMinCapacity = 0;
+        
         public int CrewMinCapacity
         {
             get => crewMinCapacity;
             set => crewMinCapacity = value;
         }
-        [SyncVar] int crewMaxCapacity = MAX_CREW_MEMBERS;
+        [SyncVar] int crewMinCapacity = 0;
+        
         public int CrewMaxCapacity
         {
             get => crewMaxCapacity;
             set => crewMaxCapacity = value;
         }
+        [SyncVar] int crewMaxCapacity = MAX_CREW_MEMBERS;
 
         [SyncVar] public string shipType = " ";
         public SyncDictionary<uint, float> joinRequests = new SyncDictionary<uint, float>();
@@ -61,11 +66,6 @@ namespace RoundManagement
             {
                 ServerCheckJoinRequestsTimeout();
             }
-            else
-            {
-                
-            }
-
 
         }
 
@@ -129,14 +129,14 @@ namespace RoundManagement
             spawnedShip.ServerSpawnShip(location.position, location.rotation);
 
 
-            ship = spawnedShip.netId;
+            ship = spawnedShip.netIdentity;
             crewMaxCapacity = shipSpawner.shipMaxCapacity;
             crewMinCapacity = shipSpawner.shipMinCapacity;
         }
 
         void ServerRemoveShip()
         {
-            ship = 0;
+            ship = null;
             crewMaxCapacity = 0;
             crewMinCapacity = 0;
             

@@ -15,8 +15,8 @@ namespace RoundManagement
     {
         Structure structure;
         ShipDocker shipDocker;
-        BodiesHolder bodiesHolder;
-
+        
+        [SerializeField] Transform externalCollider = null;
         IResettable[] resettables;
 
         #region syncvars + hooks
@@ -39,9 +39,9 @@ namespace RoundManagement
         #region both sides
         private void Awake()
         {
-            resettables = GetComponentsInChildren<IResettable>();
-            bodiesHolder = GetComponent<BodiesHolder>();
-            shipDocker = GetComponent<ShipDocker>();
+            resettables = transform.parent.GetComponentsInChildren<IResettable>();
+           
+            shipDocker = transform.parent.GetComponentInChildren<ShipDocker>();
         }
 
 
@@ -130,9 +130,9 @@ namespace RoundManagement
 
         public void ServerSpawnShip(Vector3 position, Quaternion rotation)
         {
-            bodiesHolder.externalCollider.parent = null;
-            bodiesHolder.externalCollider.position = position;
-            bodiesHolder.externalCollider.rotation = rotation;
+            externalCollider.parent = null;
+            externalCollider.position = position;
+            externalCollider.rotation = rotation;
             /*
             CustomVisibility.globalVisibilities[netIdentity] = true;
             
@@ -140,10 +140,7 @@ namespace RoundManagement
 
             shipDocker.ServerPrepareShip();
             spawned = true;
-            
-            
 
-            
         }
     }
 }

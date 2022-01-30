@@ -9,16 +9,12 @@ namespace ShipsRenderer
     public class ShipViewRotation : MonoBehaviour
     {
         [SerializeField] TwoAxisRotator cameraRotator = null;
-        ShipController shipController;
-        private void Awake()
-        {
-            shipController = GetComponentInParent<ShipController>();
-        }
+        [SerializeField] ShipController shipController;
 
         // Update is called once per frame
         void Update()
         {
-            if (shipController.hasAuthority && shipController.shipData.shipType==ShipType.strike_craft)
+            if (shipController.hasAuthority)
             {
                 if (Input.GetKey(KeyBindings.Pairs[PlayerAction.aim]))
                 {

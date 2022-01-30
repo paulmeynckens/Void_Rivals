@@ -8,7 +8,7 @@ using Core;
 
 namespace ShipsLogic
 {
-    public class DockingPort : MonoBehaviour
+    public class DockingPort : NetworkBehaviour
     {
         [Tooltip("Collider that is deactivated when the docking port is docked and activated back to prevent the players from falling outside the ship")]
         [SerializeField] Collider doorColider = null;

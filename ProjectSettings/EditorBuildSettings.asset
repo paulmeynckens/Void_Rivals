@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/SharedGameData/Scenes/Main Menu.unity
     guid: 79ae6f39e88ae9d48ba18f2ba896047d
   - enabled: 1

@@ -14,17 +14,14 @@ namespace ShipsLogic
         float lastDockedTime;
         const float MIN_DOCKING_TIME=5;
 
-        BodiesHolder bodiesHolder;
 
-        Rigidbody MovingBody
-        {
-            get
-            {
-                return bodiesHolder.Rigidbody;
-            }
-        }
+
+
 
         //public GameObject inner = null;
+
+        [SerializeField] Transform externalBody = null;
+        Transform ownShipTransform;
         ShipDocker parentShip = null;
 
         const float DOCKING_ROTATION_SPEED = 60f;
@@ -56,6 +53,8 @@ namespace ShipsLogic
 
         Vector3 parkingPosition = Vector3.zero;
 
+        Rigidbody externalBodyRB = null;
+
         #region SyncVars+hooks
 
         [SyncVar(hook = nameof(ClientManageDocking))] DockingData dockingData = new DockingData { parentShipNetId = 0};
@@ -83,8 +82,8 @@ namespace ShipsLogic
         private void Awake()
         {
             parkingPosition = transform.position;
-            
-            bodiesHolder = GetComponent<BodiesHolder>();
+
+            ownShipTransform = transform.parent;
 
             dockingPorts = GetComponentsInChildren<DockingPort>().ToList();
             for (int i = 0; i < dockingPorts.Count; i++)
@@ -139,9 +138,11 @@ namespace ShipsLogic
         {
             Debug.Log("docking");
 
-            Transform parentShipTransform = NetworkIdentity.spawned[_dockingData.parentShipNetId].transform;
+            parentShip = NetworkIdentity.spawned[_dockingData.parentShipNetId].GetComponent<ShipDocker>();
 
-            parentShip = parentShipTransform.GetComponent<ShipDocker>();
+            Transform parentShipTransform = parentShip.ownShipTransform;
+
+            
 
             Transform ownDockingPortTransform = dockingPorts[_dockingData.ownPortIndex].transform;
 
@@ -149,19 +150,19 @@ namespace ShipsLogic
 
             Quaternion calculatedLocalRotation = targetDockingPortTransform.localRotation * Quaternion.Euler(0, 180, 0) * Quaternion.Inverse(ownDockingPortTransform.localRotation);
 
-            transform.parent = parentShipTransform;
-            transform.localScale = Vector3.one;
-            transform.localRotation = calculatedLocalRotation;
+            ownShipTransform.parent = parentShipTransform;
+            ownShipTransform.localScale = Vector3.one;
+            ownShipTransform.localRotation = calculatedLocalRotation;
 
-            Vector3 repeatedOwnPortFromNewInteriorPointOfView = parentShipTransform.InverseTransformPoint(transform.TransformPoint(ownDockingPortTransform.localPosition));
-            Vector3 fromOwnPortToShip = parentShipTransform.InverseTransformPoint(transform.position) - repeatedOwnPortFromNewInteriorPointOfView;
+            Vector3 repeatedOwnPortFromNewInteriorPointOfView = parentShipTransform.InverseTransformPoint(ownShipTransform.TransformPoint(ownDockingPortTransform.localPosition));
+            Vector3 fromOwnPortToShip = parentShipTransform.InverseTransformPoint(ownShipTransform.position) - repeatedOwnPortFromNewInteriorPointOfView;
             Vector3 calculatedLocalPosition =targetDockingPortTransform.localPosition + fromOwnPortToShip;
 
-            transform.localPosition = calculatedLocalPosition;
+            ownShipTransform.localPosition = calculatedLocalPosition;
 
-            bodiesHolder.externalCollider.parent = parentShip.bodiesHolder.externalCollider;
-            bodiesHolder.externalCollider.localPosition = calculatedLocalPosition;
-            bodiesHolder.externalCollider.localRotation = calculatedLocalRotation;
+            externalBody.parent = parentShip.externalBody;
+            externalBody.localPosition = calculatedLocalPosition;
+            externalBody.localRotation = calculatedLocalRotation;
   
 
             currentlyDockedPort = dockingPorts[_dockingData.ownPortIndex];
@@ -169,20 +170,22 @@ namespace ShipsLogic
             currentlyDockedPort.Dock(parentPort);
             parentPort.Dock(currentlyDockedPort);
 
-            bodiesHolder.DestroyRigidBody();
+
+            Destroy(externalBodyRB);
         }
 
         void UnDock()
         {
-            bodiesHolder.RepopRigidBody();
-            bodiesHolder.externalCollider.parent = null;
+            
+            
+            externalBody.parent = null;
 
             parentShip = null;
 
-            transform.parent = null;
-            transform.position = parkingPosition;
-            transform.rotation = Quaternion.identity;
-            transform.localScale = Vector3.one;
+            ownShipTransform.parent = null;
+            ownShipTransform.position = parkingPosition;
+            ownShipTransform.rotation = Quaternion.identity;
+            ownShipTransform.localScale = Vector3.one;
 
 
             if (currentlyDockedPort != null)
@@ -191,13 +194,14 @@ namespace ShipsLogic
 
                 currentlyDockedPort = null;
             }
-            
 
+            externalBodyRB= externalBody.gameObject.AddComponent<Rigidbody>();
+            
         }
 
         void PullToDockingPort()
         {
-            if (bodiesHolder.Rigidbody == null)
+            if (externalBodyRB == null)
             {
                 return;
             }
@@ -213,17 +217,17 @@ namespace ShipsLogic
 
                 Vector3 upForce = toMatch.up * pullForce;
                 Vector3 upForceApplicationPoint = activeDockingPort.transform.TransformPoint(0, leverArm, 0);
-                bodiesHolder.Rigidbody.AddForceAtPosition(upForce, upForceApplicationPoint);
-                bodiesHolder.Rigidbody.AddForceAtPosition(-upForce, activeDockingPort.transform.position);
+                externalBodyRB.AddForceAtPosition(upForce, upForceApplicationPoint);
+                externalBodyRB.AddForceAtPosition(-upForce, activeDockingPort.transform.position);
 
                 Vector3 rightForce = -toMatch.right * pullForce;
                 Vector3 rightForceApplicationPoint = activeDockingPort.transform.TransformPoint(leverArm,0, 0);
-                bodiesHolder.Rigidbody.AddForceAtPosition(rightForce, rightForceApplicationPoint);
-                bodiesHolder.Rigidbody.AddForceAtPosition(-rightForce, activeDockingPort.transform.position);
+                externalBodyRB.AddForceAtPosition(rightForce, rightForceApplicationPoint);
+                externalBodyRB.AddForceAtPosition(-rightForce, activeDockingPort.transform.position);
 
                 
                 Vector3 pullTowardForce = (toMatch.position - activeDockingPort.transform.position).normalized * pullForce;
-                bodiesHolder.Rigidbody.AddForceAtPosition(pullTowardForce,activeDockingPort.transform.position);
+                externalBodyRB.AddForceAtPosition(pullTowardForce,activeDockingPort.transform.position);
 
                 isPulling = true;
             }
@@ -261,9 +265,9 @@ namespace ShipsLogic
 
         public void StowShip()
         {
-            bodiesHolder.externalCollider.parent = transform;
-            bodiesHolder.externalCollider.localPosition = Vector3.zero;
-            bodiesHolder.externalCollider.localRotation = Quaternion.identity;
+            externalBody.parent = transform;
+            externalBody.localPosition = Vector3.zero;
+            externalBody.localRotation = Quaternion.identity;
         }
 
         #endregion

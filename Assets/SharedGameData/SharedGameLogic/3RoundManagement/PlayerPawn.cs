@@ -113,7 +113,7 @@ namespace RoundManagement
                         return;
                     }
 
-                    if (targetCrew.ship != 0)
+                    if (targetCrew.Ship != null)
                     {
                         if (targetCrew.crewMembers.Count >= targetCrew.CrewMaxCapacity)
                         {
@@ -176,7 +176,7 @@ namespace RoundManagement
                 return;
             }
 
-            if (Crew.ship != 0)
+            if (Crew.Ship != null)
             {
                 if (Crew.crewMembers.Count >= Crew.CrewMaxCapacity)
                 {
@@ -266,7 +266,7 @@ namespace RoundManagement
                 Debug.LogError(gameObject.name + " has tried to spawn a ship without beeing captain");
                 return;
             }
-            if (Crew.ship != 0)
+            if (Crew.Ship != null)
             {
                 Debug.LogError(gameObject.name + " has tried to spawn a ship but a ship is already there");
                 return;
@@ -302,7 +302,7 @@ namespace RoundManagement
                 Debug.LogError(gameObject.name + " has tried to spawn but has no crew");
                 return;
             }
-            if (Crew.ship == 0)
+            if (Crew.Ship == null)
             {
                 Debug.LogError(gameObject.name + " has tried to spawn but his crew has no ship");
                 return;
@@ -404,10 +404,10 @@ namespace RoundManagement
 
         void ServerDestroyCrew()
         {
-            if (Crew.ship != 0)
+            if (Crew.Ship != null)
             {
-                ShipSpawnedStateManager shipDestructor = NetworkIdentity.spawned[Crew.ship].GetComponent<ShipSpawnedStateManager>();
-                DelayedDestructor destructor = NetworkIdentity.spawned[Crew.ship].GetComponent<DelayedDestructor>();
+                ShipSpawnedStateManager shipDestructor = Crew.Ship.GetComponent<ShipSpawnedStateManager>();
+                DelayedDestructor destructor = Crew.Ship.GetComponent<DelayedDestructor>();
                 shipDestructor.ServerDespawnShip();
             }
             
@@ -416,7 +416,7 @@ namespace RoundManagement
 
         void ServerSpawnPlayer()
         {
-            ShipSpawnLocationHolder shipCrewManager = NetworkIdentity.spawned[Crew.ship].GetComponent<ShipSpawnLocationHolder>();
+            ShipSpawnLocationHolder shipCrewManager = Crew.Ship.GetComponent<ShipSpawnLocationHolder>();
             Transform characterLocation = shipCrewManager.spawnLocationShuffler.FindSpawnLocation();
             
             spawnLocation = characterLocation;

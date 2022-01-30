@@ -16,15 +16,22 @@ namespace ShipsLogic
         [SyncVar] [HideInInspector] public float propulsionAvailiability = 1;
 
 
-        BodiesHolder bodiesHolder;
+        
 
         public static event Action<ShipController> OnClientTakeControl =delegate { };
         public static event Action OnClientExit = delegate { };
+
+        [SerializeField] Transform externalCollider = null;
+        Rigidbody rb=null;
         Rigidbody MasterRigidbody
         {
             get
             {
-               return bodiesHolder.Rigidbody;
+                if (rb == null)
+                {
+                    rb = externalCollider.GetComponent<Rigidbody>();
+                }
+               return rb;
             }
         }
 
@@ -42,13 +49,7 @@ namespace ShipsLogic
         float currentThrust = 0;
 
 
-        private void Awake()
-        {
-            bodiesHolder = GetComponent<BodiesHolder>();
-
-            
-
-        }
+   
         private void Start()
         {
             if (MasterRigidbody != null)

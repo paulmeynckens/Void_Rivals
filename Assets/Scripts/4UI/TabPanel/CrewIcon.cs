@@ -66,7 +66,7 @@ namespace UI.TabPanel
 
             spawnButton.SetActive(LocalPlayerIsInThisCrew());
 
-            openShipPanelButton.SetActive(LocalPlayerIsCaptain() && targetCrew.ship == 0);
+            openShipPanelButton.SetActive(LocalPlayerIsCaptain() && targetCrew.Ship == null);
 
             captainMenu.SetActive(LocalPlayerIsCaptain());
 
@@ -99,7 +99,7 @@ namespace UI.TabPanel
 
         bool ShouldActivateSpawnButton()
         {
-            return LocalPlayerIsInThisCrew() && targetCrew.ship != 0 && !PlayerPawn.local.spawned;
+            return LocalPlayerIsInThisCrew() && targetCrew.Ship != null && !PlayerPawn.local.spawned;
         }
         void SetCrewStatusVisual(CrewState crewState)
         {
@@ -179,7 +179,7 @@ namespace UI.TabPanel
 
         public void AskSpawn()
         {
-            if (targetCrew.ship == 0)
+            if (targetCrew.Ship == null)
             {
                 TeamsPanel.instance.youNeedAShipToSpawn.SetActive(true);
             }
@@ -189,7 +189,7 @@ namespace UI.TabPanel
 
         public void AskOpenShipsSelectionPanel()
         {
-            if(LocalPlayerIsCaptain() && targetCrew.ship == 0)
+            if(LocalPlayerIsCaptain() && targetCrew.Ship == null)
             {
                 ShipsPanel.instance.gameObject.SetActive(true);
             }

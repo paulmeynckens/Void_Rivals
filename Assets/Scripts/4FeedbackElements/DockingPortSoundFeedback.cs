@@ -8,12 +8,9 @@ namespace FeedbackElements
     public class DockingPortSoundFeedback : ContinuousSoundFeedbackGenerator
     {
         [SerializeField] DockingPort dockingPort=null;
-        ShipDocker shipDocker;
-        // Start is called before the first frame update
-        private void Awake()
-        {
-            shipDocker = GetComponentInParent<ShipDocker>();
-        }
+        [SerializeField] ShipDocker shipDocker=null;
+        
+        
 
         // Update is called once per frame
         void Update()

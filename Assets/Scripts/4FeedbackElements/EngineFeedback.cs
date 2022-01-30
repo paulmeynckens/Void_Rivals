@@ -11,16 +11,12 @@ namespace FeedbackElements
 
         //[SerializeField] Transform flame = null;
         [SerializeField] TrailRenderer trail = null;
-        ShipController shipController;
+        [SerializeField]ShipController shipController=null;
         [SerializeField] ParticleSystem m_particleSystem = null;
 
         //Vector3 flameScale=Vector3.zero;
 
-        private void Awake()
-        {
 
-            shipController = GetComponentInParent<ShipController>();
-        }
 
         // Update is called once per frame
         void Update()

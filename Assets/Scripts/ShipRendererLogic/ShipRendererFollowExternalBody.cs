@@ -17,7 +17,7 @@ namespace ShipsRenderer
         {
             rb = GetComponent<Rigidbody>();
             rb.interpolation = RigidbodyInterpolation.Interpolate;
-            stateManager = GetComponentInParent<ShipSpawnedStateManager>();
+            stateManager = transform.parent.GetComponentInChildren<ShipSpawnedStateManager>();
             stateManager.OnClientSpawnStateChanged += EnableOrDisable;
             ship = transform.parent;
         }

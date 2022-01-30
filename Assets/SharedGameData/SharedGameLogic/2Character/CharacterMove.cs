@@ -137,8 +137,8 @@ namespace CharacterLogic
                     {
                         case CharacterMode.flying:
                             transform.parent = null;
-                            buffer.localPosition = BodiesHolder.exteriors[buffer.parentShip].TransformPoint(buffer.localPosition);
-                            buffer.localRotation = BodiesHolder.exteriors[buffer.parentShip].rotation * buffer.localRotation;
+                            //buffer.localPosition = BodiesHolder.exteriors[buffer.parentShip].TransformPoint(buffer.localPosition);
+                            //buffer.localRotation = BodiesHolder.exteriors[buffer.parentShip].rotation * buffer.localRotation;
                             break;
 
                         default:
@@ -268,7 +268,7 @@ namespace CharacterLogic
             Vector3 previousLocalPosition = externaCollider.InverseTransformPoint(transform.position);
             Quaternion previousLocalRotation = Quaternion.Inverse(externaCollider.rotation)*transform.rotation;
 
-            transform.parent = BodiesHolder.interiors[externaCollider];
+            //transform.parent = BodiesHolder.interiors[externaCollider];
             transform.localPosition = previousLocalPosition;
             transform.localRotation = previousLocalRotation;
             SwitchToMode(CharacterMode.magnetic_boots);

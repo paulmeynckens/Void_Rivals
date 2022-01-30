@@ -215,17 +215,18 @@ namespace RoundManagement
     [Serializable]
     public struct ShipSpawner
     {
-        [SerializeField] ShipSpawnedStateManager[] ships;
+        [SerializeField] Transform[] ships;
         public int shipMaxCapacity;
         public int shipMinCapacity;
 
         public ShipSpawnedStateManager GetAvailableShip()
         {
-            foreach(ShipSpawnedStateManager ship in ships)
+            foreach(Transform shipTransform in ships)
             {
-                if (!ship.Spawned)
+                ShipSpawnedStateManager shipSpawnedStateManager = shipTransform.GetComponentInChildren<ShipSpawnedStateManager>();
+                if (!shipSpawnedStateManager.Spawned)
                 {
-                    return ship;
+                    return shipSpawnedStateManager;
                 }
             }
             return null;
