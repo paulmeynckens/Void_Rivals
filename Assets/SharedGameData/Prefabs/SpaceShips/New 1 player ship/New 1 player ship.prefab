@@ -4444,6 +4444,16 @@ PrefabInstance:
       objectReference: {fileID: 5182342243073473647}
     - target: {fileID: 3188276464097083025, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
+      propertyPath: linkToNetId
+      value: 
+      objectReference: {fileID: 4482477958794405298}
+    - target: {fileID: 3188276464097083025, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
+      propertyPath: shipStateManager
+      value: 
+      objectReference: {fileID: 3059966077175568102}
+    - target: {fileID: 3188276464097083025, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
+        type: 3}
       propertyPath: rendererGroups.Array.size
       value: 1
       objectReference: {fileID: 0}

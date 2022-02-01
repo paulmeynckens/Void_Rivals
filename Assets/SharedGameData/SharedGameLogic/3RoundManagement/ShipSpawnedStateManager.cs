@@ -21,6 +21,14 @@ namespace RoundManagement
 
         #region syncvars + hooks
 
+        public uint ShipCrewNetId
+        {
+            get => shipCrewNetId;
+            set => shipCrewNetId = value;
+        }
+        [SyncVar] uint shipCrewNetId = 0;
+
+
         [SyncVar(hook = nameof(ClientActivateSpawn))]bool spawned = false;
         public bool Spawned
         {
@@ -116,6 +124,8 @@ namespace RoundManagement
             shipDocker.StowShip();
 
             spawned = false;
+
+            shipCrewNetId = 0;
 
         }
 

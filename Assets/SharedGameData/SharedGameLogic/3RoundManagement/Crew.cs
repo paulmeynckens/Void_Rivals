@@ -111,12 +111,12 @@ namespace RoundManagement
 
             ShipSpawnedStateManager spawnedShip = shipSpawner.GetAvailableShip();
 
+            spawnedShip.ShipCrewNetId = netId;
 
-
-            
+            /*
             LinkToNetId shipLinkToNetId = spawnedShip.GetComponent<LinkToNetId>();
             shipLinkToNetId.netIdLink = netId;
-
+            */
 
             ShipSpawnLocationHolder shipCrewManager = spawnedShip.GetComponent<ShipSpawnLocationHolder>();
 
@@ -136,6 +136,7 @@ namespace RoundManagement
 
         void ServerRemoveShip()
         {
+
             ship = null;
             crewMaxCapacity = 0;
             crewMinCapacity = 0;

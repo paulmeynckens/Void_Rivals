@@ -7276,6 +7276,21 @@ PrefabInstance:
       propertyPath: quantityChanger
       value: 
       objectReference: {fileID: 130726639565578771}
+    - target: {fileID: 2956404837320853263, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: targetColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956404837320853263, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: targetColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2956404837320853263, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: targetColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2979962433155678352, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: externalCollider
@@ -7316,6 +7331,16 @@ PrefabInstance:
       propertyPath: gunMagasine
       value: 
       objectReference: {fileID: 2261887940989613877}
+    - target: {fileID: 3390293675209546406, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: linkToNetId
+      value: 
+      objectReference: {fileID: 4757307959376886584}
+    - target: {fileID: 3390293675209546406, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: shipStateManager
+      value: 
+      objectReference: {fileID: 524945760495229983}
     - target: {fileID: 3418480171708879447, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: quantityChanger
