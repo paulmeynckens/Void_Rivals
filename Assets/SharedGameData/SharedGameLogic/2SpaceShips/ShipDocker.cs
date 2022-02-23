@@ -28,7 +28,7 @@ namespace ShipsLogic
         const float DOCKING_TRANSLATION_SPEED = 10f;
         const float DOCKING_TIMEOUT = 3f;
 
-        List<DockingPort> dockingPorts;
+        [SerializeField]List<DockingPort> dockingPorts;
 
 
         private DockingPort currentlyDockedPort = null;
@@ -85,7 +85,7 @@ namespace ShipsLogic
 
             ownShipTransform = transform.parent;
 
-            dockingPorts = GetComponentsInChildren<DockingPort>().ToList();
+            
             for (int i = 0; i < dockingPorts.Count; i++)
             {
                 dockingPorts[i].Index = i;

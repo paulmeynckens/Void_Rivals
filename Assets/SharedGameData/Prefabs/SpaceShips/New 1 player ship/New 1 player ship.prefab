@@ -636,6 +636,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   externalBody: {fileID: 1705732897518561999}
+  dockingPorts:
+  - {fileID: 1271945063076200477}
+  - {fileID: 5186567504841561863}
   pullForce: 10000
   maxSquaredDistance: 400
   leverArm: 50
