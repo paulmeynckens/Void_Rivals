@@ -55,7 +55,7 @@ namespace ShipsLogic
             if (MasterRigidbody != null)
             {
                 MasterRigidbody.transform.parent = null;
-                SetMasterRigidbodyData();
+                SetMasterRigidbody();
             }
             
             
@@ -87,10 +87,7 @@ namespace ShipsLogic
 
         protected override void FixedUpdate()
         {
-            if (MasterRigidbody != null)//means the ship is not docked
-            {
-                SetMasterRigidbodyData();
-            }
+            SetMasterRigidbody();
             base.FixedUpdate();
 
         }
@@ -279,13 +276,24 @@ namespace ShipsLogic
 
         #region Both Sides
 
-        protected void SetMasterRigidbodyData()
+        protected void SetMasterRigidbody()
         {
-            MasterRigidbody.isKinematic = false;
-            MasterRigidbody.useGravity = false;
-            MasterRigidbody.mass = shipData.rigidbodyMass;
-            MasterRigidbody.drag = shipData.rigidBodyDrag;
-            MasterRigidbody.angularDrag = shipData.rigidbodyAngularDrag;
+            if (externalCollider.parent != null && rb!=null)
+            {
+                Destroy(rb);
+                return;
+            }
+
+            if(rb==null)
+            {
+                rb = externalCollider.gameObject.AddComponent<Rigidbody>();
+                rb.isKinematic = false;
+                rb.useGravity = false;
+                rb.mass = shipData.rigidbodyMass;
+                rb.drag = shipData.rigidBodyDrag;
+                rb.angularDrag = shipData.rigidbodyAngularDrag;
+            }
+            
             
         }
         protected override void ApplyExternalForces()

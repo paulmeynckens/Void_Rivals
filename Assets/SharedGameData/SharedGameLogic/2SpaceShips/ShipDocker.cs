@@ -14,10 +14,6 @@ namespace ShipsLogic
         float lastDockedTime;
         const float MIN_DOCKING_TIME=5;
 
-
-
-
-
         //public GameObject inner = null;
 
         [SerializeField] Transform externalBody = null;

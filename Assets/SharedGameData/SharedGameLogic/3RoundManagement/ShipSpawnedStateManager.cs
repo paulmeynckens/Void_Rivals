@@ -14,10 +14,13 @@ namespace RoundManagement
     public class ShipSpawnedStateManager : NetworkBehaviour
     {
         Structure structure;
-        ShipDocker shipDocker;
+
+        [SerializeField] Transform generalBody = null;
         
         [SerializeField] Transform externalCollider = null;
         IResettable[] resettables;
+
+        [SerializeField] MaleDockingPort maleDockingPort = null;
 
         #region syncvars + hooks
 
@@ -40,6 +43,8 @@ namespace RoundManagement
         void ClientActivateSpawn(bool _old, bool _new)
         {
             OnClientSpawnStateChanged(_new);
+
+
         }
 
         #endregion
@@ -47,9 +52,9 @@ namespace RoundManagement
         #region both sides
         private void Awake()
         {
-            resettables = transform.parent.GetComponentsInChildren<IResettable>();
+            resettables = generalBody.GetComponentsInChildren<IResettable>();
            
-            shipDocker = transform.parent.GetComponentInChildren<ShipDocker>();
+
         }
 
 
@@ -76,7 +81,6 @@ namespace RoundManagement
 
             ServerReset();                        
 
-            shipDocker.StowShip();
 
             spawned=false;
         }
@@ -121,7 +125,6 @@ namespace RoundManagement
 
             yield return new WaitForSeconds(1);
 
-            shipDocker.StowShip();
 
             spawned = false;
 
@@ -131,7 +134,9 @@ namespace RoundManagement
 
         void ServerReset()
         {
-            
+            externalCollider.parent = generalBody;
+            externalCollider.localPosition = Vector3.zero;
+            externalCollider.localRotation = Quaternion.identity;
             foreach (IResettable resettable in resettables)
             {
                 resettable.ServerReset();
@@ -148,7 +153,6 @@ namespace RoundManagement
             
             */
 
-            shipDocker.ServerPrepareShip();
             spawned = true;
 
         }
