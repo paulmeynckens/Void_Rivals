@@ -78,7 +78,7 @@ namespace ShipsLogic
 
         protected override void FixedUpdate()
         {
-            SetMasterRigidbody();
+            SetRigidbodyData();
             base.FixedUpdate();
 
         }
@@ -267,7 +267,7 @@ namespace ShipsLogic
 
         #region Both Sides
 
-        protected void SetMasterRigidbody()
+        protected void SetRigidbodyData()
         {
             if (externalCollider.parent != null)
             {
@@ -282,14 +282,15 @@ namespace ShipsLogic
             if(rb==null)
             {
                 rb = externalCollider.gameObject.AddComponent<Rigidbody>();
-                rb.isKinematic = false;
-                rb.useGravity = false;
-                rb.mass = shipData.rigidbodyMass;
-                rb.drag = shipData.rigidBodyDrag;
-                rb.angularDrag = shipData.rigidbodyAngularDrag;
+                
             }
-            
-            
+            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.mass = shipData.rigidbodyMass;
+            rb.drag = shipData.rigidBodyDrag;
+            rb.angularDrag = shipData.rigidbodyAngularDrag;
+
+
         }
         protected override void ApplyExternalForces()
         {

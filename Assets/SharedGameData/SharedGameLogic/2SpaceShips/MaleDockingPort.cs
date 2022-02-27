@@ -8,11 +8,11 @@ using Core;
 
 namespace ShipsLogic
 {
-    
+    [Serializable]
     public struct DockingState
     {
         public bool isActive;
-        public NetworkIdentity currentFemaleDockingPortIdentity;
+        public NetworkIdentity femaleDockingPortIdentity;
     }
     public class MaleDockingPort : NetworkBehaviour,IResettable
     {
@@ -38,22 +38,25 @@ namespace ShipsLogic
 
         #region Syncvars + hooks
 
-        [SyncVar(hook = nameof(ClientProcessDockingData))] NetworkIdentity currentFemaleDockingPortIdentity=null;
-        void ClientProcessDockingData(NetworkIdentity _old, NetworkIdentity _new)
+        [SyncVar(hook = nameof(ClientProcessDockingState))] DockingState currentDockingState = new DockingState { isActive = false, femaleDockingPortIdentity = null };
+        void ClientProcessDockingState(DockingState _old, DockingState _new)
         {
-            if (_new == null)
+            if (_new.isActive == false)
+            {
+                Stow();
+                return;
+            }
+
+            if (_new.femaleDockingPortIdentity == null)
             {
                 UnDock();
 
             }
-            else if (_new == netIdentity)
-            {
-                Stow();
-            }
+            
             else
             {
 
-                Dock(_new.GetComponent<FemaleDockingPort>());
+                Dock(_new.femaleDockingPortIdentity.GetComponent<FemaleDockingPort>());
             }
         }
 
@@ -190,9 +193,9 @@ namespace ShipsLogic
         void UnDock()
         {
             doorCollider.SetActive(true);
-            if (currentFemaleDockingPortIdentity.GetComponent<FemaleDockingPort>() != null)
+            if (currentDockingState.femaleDockingPortIdentity != null)
             {
-                currentFemaleDockingPortIdentity.GetComponent<FemaleDockingPort>().DoorCollider.SetActive(true);
+                currentDockingState.femaleDockingPortIdentity.GetComponent<FemaleDockingPort>().DoorCollider.SetActive(true);
             }
 
             transform.parent.parent = null;
@@ -248,26 +251,26 @@ namespace ShipsLogic
         {
 
             lastDockedTime = Time.time;
-            FemaleDockingPort femaleDockingPort = currentFemaleDockingPortIdentity.GetComponent<FemaleDockingPort>();
+            FemaleDockingPort femaleDockingPort = currentDockingState.femaleDockingPortIdentity.GetComponent<FemaleDockingPort>();
             femaleDockingPort.IsAvailable = true;// sets the currently used female docking port available for other male docking ports to dock
-            currentFemaleDockingPortIdentity = null;
+            currentDockingState = new DockingState { isActive = true, femaleDockingPortIdentity=null };
             UnDock();
         }
 
         public void ServerPrepare()
         {
-            currentFemaleDockingPortIdentity = null;
+            currentDockingState = new DockingState { isActive = true, femaleDockingPortIdentity = null };
         }
 
         void IResettable.ServerReset()
         {
-            if (currentFemaleDockingPortIdentity != null)
+            if (currentDockingState.femaleDockingPortIdentity != null)
             {
                 UnDock();
             }
 
 
-            currentFemaleDockingPortIdentity = netIdentity;
+            currentDockingState = new DockingState { isActive = true, femaleDockingPortIdentity = null };
 
             targetFemaleDockingPort = null;
 
@@ -290,7 +293,7 @@ namespace ShipsLogic
                 return;
             }
 
-            if (currentFemaleDockingPortIdentity != null)//means we are docked
+            if (currentDockingState.femaleDockingPortIdentity != null)//means we are docked
             {
 
                 ServerEject();
@@ -306,7 +309,7 @@ namespace ShipsLogic
                 targetFemaleDockingPort.IsAvailable = false;
                 
 
-                currentFemaleDockingPortIdentity = targetFemaleDockingPort.netIdentity;
+                currentDockingState.femaleDockingPortIdentity = targetFemaleDockingPort.netIdentity;
                 Dock(targetFemaleDockingPort);
                 lastDockedTime = Time.time;
             }
