@@ -10,7 +10,7 @@ using CharacterLogic;
 
 namespace RoundManagement
 {
-    [DefaultExecutionOrder(+1000)]
+    [DefaultExecutionOrder(-1000)]
     public class ShipSpawnedStateManager : MonoBehaviour
     {
         NetworkIdentity[] childNetworkIdentities;

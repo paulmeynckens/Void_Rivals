@@ -33,11 +33,15 @@ namespace ShipsLogic
 
         [SyncVar] bool isAvailable = true;
 
-        public static readonly List<FemaleDockingPort> allFemaleDockingPorts = new List<FemaleDockingPort>();
+        public static readonly List<FemaleDockingPort> allFemalesDockingPorts = new List<FemaleDockingPort>();
 
-        private void Awake()
+        
+
+        public override void OnStartServer()
         {
-            allFemaleDockingPorts.Add(this);
+            base.OnStartServer();
+            allFemalesDockingPorts.Add(this);
+            //Debug.Log(allFemalesDockingPorts.Count);
         }
 
         void IResettable.ServerReset()

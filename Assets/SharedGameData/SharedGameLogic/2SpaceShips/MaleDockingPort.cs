@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using Core.Interractables;
 using System;
+using System.Linq;
 using Core;
 
 namespace ShipsLogic
@@ -23,7 +24,9 @@ namespace ShipsLogic
 
         [SerializeField] Transform maleNonMovingBody = null;
 
-        [SerializeField] List<FemaleDockingPort> ownShipFemaleDockingPorts = null;
+        
+
+        [SerializeField]List<FemaleDockingPort> otherShipsFemaleDockingPorts=new List<FemaleDockingPort>();
 
         [SerializeField] GameObject doorCollider = null;
 
@@ -60,11 +63,12 @@ namespace ShipsLogic
             }
         }
 
-        
+        public FemaleDockingPort TargetFemaleDockingPort { get => targetFemaleDockingPort;}
+        [SyncVar]FemaleDockingPort targetFemaleDockingPort = null;
 
         #endregion
 
-        FemaleDockingPort targetFemaleDockingPort = null;
+
 
         FemaleDockingPort collidedFemale = null;
 
@@ -75,6 +79,8 @@ namespace ShipsLogic
         {
             get => isPulling;
         }
+        
+
         const float MIN_DOCKING_TIME = 5;
 
         bool isPulling = false;
@@ -84,21 +90,32 @@ namespace ShipsLogic
         private void Awake()
         {
             parkingPosition = maleNonMovingBody.position;
-             //currentFemaleDockingPortIdentity = GetComponent<NetworkIdentity>();
+            
+            //currentFemaleDockingPortIdentity = GetComponent<NetworkIdentity>();
+        }
+
+        
+
+        private void Start()
+        {
+            
         }
 
         private void FixedUpdate()
         {
-            
+            if (isServer&&currentDockingState.isActive)
+            {
+                targetFemaleDockingPort = ServerFindClosestFemaleDockingPort();
+            }
             
             if (hasAuthority && isClient)
             {
                 if (Input.GetKey(KeyBindings.Pairs[PlayerAction.dock]))
                 {
                     CmdTryDockingOrUnDock();
-                    targetFemaleDockingPort = ClosestFemaleDockingPort();
+                    
                     PullToDockingPort();
-                    targetFemaleDockingPort = null;
+                    
                 }
 
             }
@@ -111,32 +128,9 @@ namespace ShipsLogic
 
         #endregion
 
-        #region BothSides
+        #region Both Sides
 
-        public FemaleDockingPort ClosestFemaleDockingPort()
-        {
-            FemaleDockingPort foundFemale = null;
-
-            float closestSquareDistance = float.MaxValue;
-
-            foreach (FemaleDockingPort targetDockingPort in FemaleDockingPort.allFemaleDockingPorts)
-            {
-                if (targetDockingPort.gameObject.activeInHierarchy && targetDockingPort.IsAvailable && !ownShipFemaleDockingPorts.Contains(targetDockingPort))
-                {
-                    float distance = MyUtils.SquaredDistance(transform.position, targetDockingPort.transform.position);
-                    if (distance < maxSquaredDistance && distance < closestSquareDistance)
-                    {
-                        if (transform.InverseTransformPoint(targetDockingPort.transform.position).z > 0 && targetDockingPort.transform.InverseTransformPoint(transform.position).z > 0)//means the two docking ports are facing each other
-                        {
-                            closestSquareDistance = distance;
-                            foundFemale = targetDockingPort;
-                        }
-                    }
-
-                }
-            }
-            return foundFemale;
-        }
+        
 
         void PullToDockingPort()
         {
@@ -146,10 +140,10 @@ namespace ShipsLogic
             }
 
 
-            if (targetFemaleDockingPort != null)
+            if (TargetFemaleDockingPort != null)
             {
-                Debug.DrawLine(targetFemaleDockingPort.transform.position, transform.position, Color.white, Time.fixedDeltaTime);
-                Transform toMatch = targetFemaleDockingPort.transform;
+                Debug.DrawLine(TargetFemaleDockingPort.transform.position, transform.position, Color.white, Time.fixedDeltaTime);
+                Transform toMatch = TargetFemaleDockingPort.transform;
 
 
                 Vector3 upForce = toMatch.up * pullForce;
@@ -157,7 +151,7 @@ namespace ShipsLogic
                 externalBodyRB.AddForceAtPosition(upForce, upForceApplicationPoint);
                 externalBodyRB.AddForceAtPosition(-upForce, transform.position);
 
-                Vector3 rightForce = -toMatch.right * pullForce;
+                Vector3 rightForce = toMatch.right * pullForce;
                 Vector3 rightForceApplicationPoint = transform.TransformPoint(leverArm, 0, 0);
                 externalBodyRB.AddForceAtPosition(rightForce, rightForceApplicationPoint);
                 externalBodyRB.AddForceAtPosition(-rightForce, transform.position);
@@ -233,6 +227,48 @@ namespace ShipsLogic
 
         #region Server
 
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+
+            List<FemaleDockingPort> ownShipFemaleDockingPorts = transform.root.GetComponentsInChildren<FemaleDockingPort>().ToList();
+            List<FemaleDockingPort> allShipsFemaleDockingPorts= FindObjectsOfType<FemaleDockingPort>().ToList();
+            
+            foreach(FemaleDockingPort femaleDockingPortToAdd in allShipsFemaleDockingPorts)
+            {
+                if (!ownShipFemaleDockingPorts.Contains(femaleDockingPortToAdd))
+                {
+                    otherShipsFemaleDockingPorts.Add(femaleDockingPortToAdd);
+                }
+            }
+        }
+        FemaleDockingPort ServerFindClosestFemaleDockingPort()
+        {
+            FemaleDockingPort closestFoundFemale = null;
+            float closestSquareDistance = float.MaxValue;
+
+            foreach (FemaleDockingPort female in otherShipsFemaleDockingPorts)
+            {
+                if (female.gameObject.activeSelf)
+                {
+                    if (female.IsAvailable)
+                    {
+                        float squareDistance = MyUtils.SquaredDistance(transform.position, female.transform.position);
+                        if (squareDistance < maxSquaredDistance && squareDistance < closestSquareDistance)
+                        {
+                            if (transform.InverseTransformPoint(female.transform.position).z > 0 && female.transform.InverseTransformPoint(transform.position).z < 0)//means the two docking ports are looking in the same direction
+                            {
+                                closestSquareDistance = squareDistance;
+                                closestFoundFemale = female;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return closestFoundFemale;
+        }
+
         [ServerCallback]
         private void OnTriggerEnter(Collider other)
         {
@@ -301,16 +337,16 @@ namespace ShipsLogic
             }
 
 
-            targetFemaleDockingPort = ClosestFemaleDockingPort();
+            
             PullToDockingPort();
 
-            if (collidedFemale == targetFemaleDockingPort)
+            if (collidedFemale!=null && collidedFemale == TargetFemaleDockingPort)
             {
-                targetFemaleDockingPort.IsAvailable = false;
+                TargetFemaleDockingPort.IsAvailable = false;
                 
 
-                currentDockingState.femaleDockingPortIdentity = targetFemaleDockingPort.netIdentity;
-                Dock(targetFemaleDockingPort);
+                currentDockingState.femaleDockingPortIdentity = TargetFemaleDockingPort.netIdentity;
+                Dock(TargetFemaleDockingPort);
                 lastDockedTime = Time.time;
             }
 
@@ -326,9 +362,9 @@ namespace ShipsLogic
         [ClientRpc(channel = Channels.Unreliable, includeOwner = false)]
         void RpcPull()
         {
-            targetFemaleDockingPort = ClosestFemaleDockingPort();
+            
             PullToDockingPort();
-            targetFemaleDockingPort = null;
+            
         }
 
         

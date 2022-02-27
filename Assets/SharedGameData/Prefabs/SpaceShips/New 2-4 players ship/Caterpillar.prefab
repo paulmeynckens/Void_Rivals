@@ -1766,7 +1766,6 @@ MonoBehaviour:
   pullForce: 50000
   maxSquaredDistance: 20
   leverArm: 50
-  currentFemaleDockingPortIdentity: {fileID: 7776091237245872928}
 --- !u!1 &2427091220950330950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2965,7 +2964,7 @@ GameObject:
   - component: {fileID: 3080504408777481432}
   - component: {fileID: 6690651824991021017}
   m_Layer: 0
-  m_Name: ship pawn
+  m_Name: caterpillar pawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3017,7 +3016,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   spawnLocationShuffler:
-    potentialLocations: []
+    potentialLocations:
+    - {fileID: 9217538109180370652}
 --- !u!1 &3713415099403248640
 GameObject:
   m_ObjectHideFlags: 0
