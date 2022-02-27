@@ -8,6 +8,12 @@ using Core;
 
 namespace ShipsLogic
 {
+    
+    public struct DockingState
+    {
+        public bool isActive;
+        public NetworkIdentity currentFemaleDockingPortIdentity;
+    }
     public class MaleDockingPort : NetworkBehaviour,IResettable
     {
         public Transform MaleNonMovingBody
@@ -30,14 +36,37 @@ namespace ShipsLogic
         const float DOCKING_TRANSLATION_SPEED = 10f;
         const float DOCKING_TIMEOUT = 3f;
 
-        [SyncVar(hook = nameof(ClientProcessDockingData))] NetworkIdentity currentFemaleDockingPortIdentity ;
+        #region Syncvars + hooks
 
+        [SyncVar(hook = nameof(ClientProcessDockingData))] NetworkIdentity currentFemaleDockingPortIdentity=null;
+        void ClientProcessDockingData(NetworkIdentity _old, NetworkIdentity _new)
+        {
+            if (_new == null)
+            {
+                UnDock();
+
+            }
+            else if (_new == netIdentity)
+            {
+                Stow();
+            }
+            else
+            {
+
+                Dock(_new.GetComponent<FemaleDockingPort>());
+            }
+        }
+
+        
+
+        #endregion
 
         FemaleDockingPort targetFemaleDockingPort = null;
 
         FemaleDockingPort collidedFemale = null;
 
         Rigidbody externalBodyRB = null;
+
 
         public bool IsPulling
         {
@@ -46,13 +75,13 @@ namespace ShipsLogic
         const float MIN_DOCKING_TIME = 5;
 
         bool isPulling = false;
-        private Vector3 parkingPosition;
+        private Vector3 parkingPosition=Vector3.zero;
         private float lastDockedTime;
 
         private void Awake()
         {
             parkingPosition = maleNonMovingBody.position;
-            currentFemaleDockingPortIdentity = netIdentity;
+             //currentFemaleDockingPortIdentity = GetComponent<NetworkIdentity>();
         }
 
         private void FixedUpdate()
@@ -73,25 +102,10 @@ namespace ShipsLogic
         }
 
         #region Client
-        void ClientProcessDockingData(NetworkIdentity _old, NetworkIdentity _new)
-        {
+        
 
+        
 
-            if (_new == null)
-            {
-                UnDock();
-                
-            }
-            else if (_new == netIdentity)
-            {
-                Stow();
-            }
-            else
-            {
-
-                Dock(_new.GetComponent<FemaleDockingPort>());
-            }
-        }
         #endregion
 
         #region BothSides
@@ -176,9 +190,10 @@ namespace ShipsLogic
         void UnDock()
         {
             doorCollider.SetActive(true);
-            currentFemaleDockingPortIdentity.GetComponent<FemaleDockingPort>().DoorCollider.SetActive(true);
-            
-            
+            if (currentFemaleDockingPortIdentity.GetComponent<FemaleDockingPort>() != null)
+            {
+                currentFemaleDockingPortIdentity.GetComponent<FemaleDockingPort>().DoorCollider.SetActive(true);
+            }
 
             transform.parent.parent = null;
             externalBodyRB = transform.parent.gameObject.AddComponent<Rigidbody>();
@@ -229,15 +244,19 @@ namespace ShipsLogic
         }
 
         //
-        void ServerEject()
+        public void ServerEject()
         {
 
             lastDockedTime = Time.time;
             FemaleDockingPort femaleDockingPort = currentFemaleDockingPortIdentity.GetComponent<FemaleDockingPort>();
             femaleDockingPort.IsAvailable = true;// sets the currently used female docking port available for other male docking ports to dock
-            femaleDockingPort.OnServerEject -= ServerEject;
             currentFemaleDockingPortIdentity = null;
             UnDock();
+        }
+
+        public void ServerPrepare()
+        {
+            currentFemaleDockingPortIdentity = null;
         }
 
         void IResettable.ServerReset()
@@ -285,7 +304,7 @@ namespace ShipsLogic
             if (collidedFemale == targetFemaleDockingPort)
             {
                 targetFemaleDockingPort.IsAvailable = false;
-                targetFemaleDockingPort.OnServerEject += ServerEject;
+                
 
                 currentFemaleDockingPortIdentity = targetFemaleDockingPort.netIdentity;
                 Dock(targetFemaleDockingPort);

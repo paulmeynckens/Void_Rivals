@@ -1547,7 +1547,6 @@ GameObject:
   - component: {fileID: 6720661976730238502}
   - component: {fileID: 4482477958794405298}
   - component: {fileID: 3961941816268678688}
-  - component: {fileID: 3059966077175568102}
   - component: {fileID: 2734618687778318157}
   m_Layer: 31
   m_Name: Ship central computer
@@ -1641,22 +1640,6 @@ MonoBehaviour:
   excludedLayerMask:
     serializedVersion: 2
     m_Bits: 33554432
---- !u!114 &3059966077175568102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3569778421294472714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7510c361d108844db89c81a057871bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  generalBody: {fileID: 3585944767425022740}
-  externalCollider: {fileID: 1705732897518561999}
 --- !u!114 &2734618687778318157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1977,6 +1960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3585944767425022740}
+  - component: {fileID: 1933149770113421156}
   m_Layer: 0
   m_Name: New 1 player ship
   m_TagString: Untagged
@@ -2013,6 +1997,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 79.475, z: 0}
+--- !u!114 &1933149770113421156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217626998827798958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7510c361d108844db89c81a057871bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  externalCollider: {fileID: 1705732897518561999}
 --- !u!1 &4441746346556314465
 GameObject:
   m_ObjectHideFlags: 0
@@ -4536,7 +4533,7 @@ PrefabInstance:
         type: 3}
       propertyPath: shipStateManager
       value: 
-      objectReference: {fileID: 3059966077175568102}
+      objectReference: {fileID: 0}
     - target: {fileID: 3188276464097083025, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: rendererGroups.Array.size
@@ -4691,7 +4688,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stateManager
       value: 
-      objectReference: {fileID: 3059966077175568102}
+      objectReference: {fileID: 0}
     - target: {fileID: 7929095364514037261, guid: a17edbd3991e3b44fbc0d1fdce61b79c,
         type: 3}
       propertyPath: seat

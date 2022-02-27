@@ -11,83 +11,93 @@ using CharacterLogic;
 namespace RoundManagement
 {
     [DefaultExecutionOrder(+1000)]
-    public class ShipSpawnedStateManager : NetworkBehaviour
+    public class ShipSpawnedStateManager : MonoBehaviour
     {
-        Structure structure;
+        NetworkIdentity[] childNetworkIdentities;
 
-        [SerializeField] Transform generalBody = null;
+
+        public Structure Structure { get => structure;}
+        Structure structure;       
         
         [SerializeField] Transform externalCollider = null;
         IResettable[] resettables;
 
-        [SerializeField] MaleDockingPort maleDockingPort = null;
+        MaleDockingPort maleDockingPort;
+
+
+        public ShipPawn ShipPawn { get => shipPawn;}
+        ShipPawn shipPawn;
+
+        
 
         #region syncvars + hooks
 
-        public uint ShipCrewNetId
-        {
-            get => shipCrewNetId;
-            set => shipCrewNetId = value;
-        }
-        [SyncVar] uint shipCrewNetId = 0;
 
 
-        [SyncVar(hook = nameof(ClientActivateSpawn))]bool spawned = false;
+
+        bool spawned = false;
         public bool Spawned
         {
             get => spawned;
         }
-
-        public event Action<bool> OnClientSpawnStateChanged = delegate { };
         
-        void ClientActivateSpawn(bool _old, bool _new)
-        {
-            OnClientSpawnStateChanged(_new);
 
+        
 
-        }
 
         #endregion
 
-        #region both sides
+
+
+
+        
         private void Awake()
         {
-            resettables = generalBody.GetComponentsInChildren<IResettable>();
-           
-
-        }
-
-
-
-
-        #endregion
-
-        public override void OnStartServer()
-        {
-            base.OnStartServer();
-            
-            structure = GetComponent<Structure>();
+            transform.parent = null;
+            shipPawn = GetComponentInChildren<ShipPawn>();
+            structure = GetComponentInChildren<Structure>();
             structure.OnServerDie += ServerDestroyShip;
 
+            resettables = GetComponentsInChildren<IResettable>();
 
+            maleDockingPort = GetComponentInChildren<MaleDockingPort>();
 
+            childNetworkIdentities = GetComponentsInChildren<NetworkIdentity>();
         }
 
+
+        [Server]
+        private void Start()
+        {
+            
+            /*
+            foreach (NetworkIdentity networkIdentity in childNetworkIdentities)
+            {
+                NetworkServer.UnSpawn(networkIdentity.gameObject);
+            }
+            */
+        }
 
 
         public void ServerDespawnShip()
         {
-            ServerUndockShips();
+            
+            ServerUndockChildShips();
 
-            ServerReset();                        
+            ServerReset();
+            /*
 
-
-            spawned=false;
+            foreach (NetworkIdentity networkIdentity in childNetworkIdentities)
+            {
+                NetworkServer.UnSpawn(networkIdentity.gameObject);
+            }
+            */
+            spawned =false;
         }
 
         void ServerDestroyShip()
         {
-            ServerUndockShips();
+            ServerUndockChildShips();
 
             ServerKillPlayers();
 
@@ -95,15 +105,15 @@ namespace RoundManagement
             
         }
 
-        void ServerUndockShips()
+        void ServerUndockChildShips()
         {
-            ShipDocker[] dockedShips = GetComponentsInChildren<ShipDocker>();
+            MaleDockingPort[] dockedMales = GetComponentsInChildren<MaleDockingPort>();
 
-            foreach (ShipDocker dockedShip in dockedShips)
+            foreach (MaleDockingPort dockedMale in dockedMales)
             {
-                if (dockedShip.transform.parent == transform)
+                if (dockedMale!=maleDockingPort)
                 {
-                    dockedShip.ServerEjectBeforeDestruction();
+                    dockedMale.ServerEject();
                 }
             }
         }
@@ -128,32 +138,37 @@ namespace RoundManagement
 
             spawned = false;
 
-            shipCrewNetId = 0;
+            shipPawn.ServerLeaveCrew();
 
         }
 
         void ServerReset()
         {
-            externalCollider.parent = generalBody;
-            externalCollider.localPosition = Vector3.zero;
-            externalCollider.localRotation = Quaternion.identity;
+            
             foreach (IResettable resettable in resettables)
             {
                 resettable.ServerReset();
             }
         }
 
-        public void ServerSpawnShip(Vector3 position, Quaternion rotation)
+        public void ServerSpawnShip(Vector3 position, Quaternion rotation,NetworkIdentity crew)
         {
             externalCollider.parent = null;
             externalCollider.position = position;
             externalCollider.rotation = rotation;
-            /*
-            CustomVisibility.globalVisibilities[netIdentity] = true;
-            
-            */
+            maleDockingPort.ServerPrepare();
+
 
             spawned = true;
+
+            shipPawn.ServerJoinCrew(crew);
+
+            /*
+            foreach(NetworkIdentity networkIdentity in childNetworkIdentities)
+            {
+                NetworkServer.Spawn(networkIdentity.gameObject);
+            }
+            */
 
         }
     }

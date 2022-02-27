@@ -11,25 +11,25 @@ namespace ShipsRenderer
         [SerializeField] Transform ship;
 
         Rigidbody rb;
-        [SerializeField]ShipSpawnedStateManager stateManager;
+        [SerializeField]ShipPawn shipPawn;
         
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             
-            stateManager.OnClientSpawnStateChanged += EnableOrDisable;
+            shipPawn.OnClientSpawnStateChanged += EnableOrDisable;
             
         }
 
         private void Start()
         {
-            EnableOrDisable(stateManager.Spawned);
+            EnableOrDisable(shipPawn.ShipCrewNetId!=0);
         }
 
         private void FixedUpdate()
         {
-            gameObject.SetActive(stateManager.Spawned);
+            gameObject.SetActive(shipPawn.ShipCrewNetId != 0);
             rb.MovePosition(shipExtBody.position);
             rb.MoveRotation(shipExtBody.rotation);
         }

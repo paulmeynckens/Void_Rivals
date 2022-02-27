@@ -14,7 +14,7 @@ namespace ShipsRenderer
         [SerializeField] TMP_Text shipNameText = null;
 
         [SerializeField] RendererGroup[] rendererGroups;
-        [SerializeField] ShipSpawnedStateManager shipStateManager = null;
+        [SerializeField] ShipPawn shipPawn = null;
         Crew crew=null;
         Target target;
 
@@ -33,7 +33,7 @@ namespace ShipsRenderer
 
         private void OnEnable()
         {
-            SearchCrewAndSetApparence(shipStateManager.ShipCrewNetId);
+            SearchCrewAndSetApparence(shipPawn.ShipCrewNetId);
         }
         void SearchCrewAndSetApparence(uint targetCrewId)
         {
@@ -42,9 +42,8 @@ namespace ShipsRenderer
                 return;
             }
             StartCoroutine(SearchCrew(targetCrewId));
-            
-            
         }
+
         IEnumerator SearchCrew(uint targetCrewId)
         {
             while (crew == null)

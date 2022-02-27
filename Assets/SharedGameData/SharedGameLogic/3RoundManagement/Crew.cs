@@ -111,7 +111,7 @@ namespace RoundManagement
 
             ShipSpawnedStateManager spawnedShip = shipSpawner.GetAvailableShip();
 
-            spawnedShip.ShipCrewNetId = netId;
+            
 
             /*
             LinkToNetId shipLinkToNetId = spawnedShip.GetComponent<LinkToNetId>();
@@ -123,13 +123,13 @@ namespace RoundManagement
             
             
             
-            Health shipHealth = spawnedShip.GetComponent<Health>();
+            Health shipHealth = spawnedShip.Structure;
             shipHealth.OnServerDie += ServerRemoveShip;
 
-            spawnedShip.ServerSpawnShip(location.position, location.rotation);
+            spawnedShip.ServerSpawnShip(location.position, location.rotation, netIdentity);
 
 
-            ship = spawnedShip.netIdentity;
+            ship = spawnedShip.ShipPawn.netIdentity;
             crewMaxCapacity = shipSpawner.shipMaxCapacity;
             crewMinCapacity = shipSpawner.shipMinCapacity;
         }

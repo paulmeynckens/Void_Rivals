@@ -138,45 +138,7 @@ namespace RoundManagement
 
     #region classes
 
-    /*
-    [Serializable]
-    public class ShipsGarage
-    {
-        [Range(1, 2)] public int shipSize = 1;
 
-        
-        public GameObject shipIconPrefab = null;
-
-        [SerializeField] ShipCrewManager[] shipsCrewManagers = null;
-        public ShipCrewManager GetOneAvailableShip()
-        {
-            
-            foreach (ShipCrewManager shipCrewManager in shipsCrewManagers)
-            {
-                if (shipCrewManager.Crew!=null)
-                {
-                    return shipCrewManager;
-                }
-            }
-            Debug.LogError("not enough ship");
-            return null;
-        }
-
-        public int NumberOfAvailableShips()
-        {
-
-            int number = 0;
-            foreach (ShipCrewManager ship in shipsCrewManagers)
-            {
-                if (ship.Crew==null)
-                {
-                    number++;
-                }
-            }
-            return number;
-        }
-    }
-    */
 
     [Serializable] 
     public class SpawnLocationShuffler
@@ -215,15 +177,15 @@ namespace RoundManagement
     [Serializable]
     public struct ShipSpawner
     {
-        [SerializeField] Transform[] ships;
+        [SerializeField] ShipSpawnedStateManager[] ships;
         public int shipMaxCapacity;
         public int shipMinCapacity;
 
         public ShipSpawnedStateManager GetAvailableShip()
         {
-            foreach(Transform shipTransform in ships)
+            foreach(ShipSpawnedStateManager shipSpawnedStateManager in ships)
             {
-                ShipSpawnedStateManager shipSpawnedStateManager = shipTransform.GetComponentInChildren<ShipSpawnedStateManager>();
+                
                 if (!shipSpawnedStateManager.Spawned)
                 {
                     return shipSpawnedStateManager;

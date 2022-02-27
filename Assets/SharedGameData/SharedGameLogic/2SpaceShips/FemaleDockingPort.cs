@@ -18,7 +18,7 @@ namespace ShipsLogic
 
         [SerializeField] Transform femaleNonMovingBody = null;
 
-        public event Action OnServerEject = delegate { };
+        
 
         public GameObject DoorCollider { get => doorCollider; }
 
@@ -42,7 +42,7 @@ namespace ShipsLogic
 
         void IResettable.ServerReset()
         {
-            OnServerEject();
+            
             isAvailable = true;
         }
     }

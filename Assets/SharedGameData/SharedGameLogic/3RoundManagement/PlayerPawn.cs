@@ -416,8 +416,8 @@ namespace RoundManagement
 
         void ServerSpawnPlayer()
         {
-            ShipSpawnLocationHolder shipCrewManager = Crew.Ship.GetComponent<ShipSpawnLocationHolder>();
-            Transform characterLocation = shipCrewManager.spawnLocationShuffler.FindSpawnLocation();
+            ShipPawn shipPawn = Crew.Ship.GetComponent<ShipPawn>();
+            Transform characterLocation = shipPawn.SpawnLocationShuffler.FindSpawnLocation();
             
             spawnLocation = characterLocation;
             spawned = true;

@@ -50,16 +50,7 @@ namespace ShipsLogic
 
 
    
-        private void Start()
-        {
-            if (MasterRigidbody != null)
-            {
-                MasterRigidbody.transform.parent = null;
-                SetMasterRigidbody();
-            }
-            
-            
-        }
+        
         protected override void Update()
         {
             base.Update();
@@ -278,9 +269,13 @@ namespace ShipsLogic
 
         protected void SetMasterRigidbody()
         {
-            if (externalCollider.parent != null && rb!=null)
+            if (externalCollider.parent != null)
             {
-                Destroy(rb);
+                if (rb != null)
+                {
+                    Destroy(rb);
+                }
+                
                 return;
             }
 
