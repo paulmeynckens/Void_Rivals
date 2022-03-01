@@ -153,11 +153,11 @@ namespace RoundManagement
 
         public void ServerSpawnShip(Vector3 position, Quaternion rotation,NetworkIdentity crew)
         {
-            externalCollider.parent = null;
+            
+            
+            maleDockingPort.ServerPrepare();
             externalCollider.position = position;
             externalCollider.rotation = rotation;
-            maleDockingPort.ServerPrepare();
-
 
             spawned = true;
 

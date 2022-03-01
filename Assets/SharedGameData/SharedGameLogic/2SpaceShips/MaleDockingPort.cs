@@ -72,7 +72,7 @@ namespace ShipsLogic
 
         FemaleDockingPort collidedFemale = null;
 
-        Rigidbody externalBodyRB = null;
+        
 
 
         public bool IsPulling
@@ -134,14 +134,17 @@ namespace ShipsLogic
 
         void PullToDockingPort()
         {
-            if (externalBodyRB == null)
+            Rigidbody externalBodyRB = transform.parent.GetComponent<Rigidbody>();
+
+            if (externalBodyRB == null) // means the ship is docked
             {
                 return;
             }
 
-
             if (TargetFemaleDockingPort != null)
             {
+                
+
                 Debug.DrawLine(TargetFemaleDockingPort.transform.position, transform.position, Color.white, Time.fixedDeltaTime);
                 Transform toMatch = TargetFemaleDockingPort.transform;
 
@@ -173,14 +176,20 @@ namespace ShipsLogic
 
             transform.parent.parent = femaleDockingPort.transform.parent;
             transform.parent.localScale = Vector3.one;
-            transform.parent.localRotation = femaleDockingPort.transform.localRotation;            
-            transform.parent.Translate(femaleDockingPort.transform.position - transform.position);
+            transform.parent.localRotation = femaleDockingPort.transform.localRotation;
+            
+            Vector3 calculatedDelta = femaleDockingPort.transform.position-transform.position;
+
+            transform.parent.position = transform.parent.position+ calculatedDelta;
+
+            //transform.parent.position = femaleDockingPort.transform.position+femaleDockingPort.transform.TransformPoint(-transform.localPosition);
 
             maleNonMovingBody.transform.parent = femaleDockingPort.FemaleNonMovingBody;
             maleNonMovingBody.transform.localScale = Vector3.one;
             maleNonMovingBody.transform.localRotation = transform.parent.localRotation;
-            maleNonMovingBody.transform.localPosition = transform.parent.localPosition;                   
+            maleNonMovingBody.transform.localPosition = transform.parent.localPosition;
 
+            Rigidbody externalBodyRB = transform.parent.GetComponent<Rigidbody>();
             Destroy(externalBodyRB);
         }
 
@@ -193,17 +202,14 @@ namespace ShipsLogic
             }
 
             transform.parent.parent = null;
-            externalBodyRB = transform.parent.gameObject.AddComponent<Rigidbody>();
+            
 
             ParkGeneralBody();
         }
 
         void Stow()
         {
-            if (externalBodyRB != null)
-            {
-                Destroy(externalBodyRB);
-            }
+            
             ParkGeneralBody();
             StowOutside();
 
@@ -295,6 +301,7 @@ namespace ShipsLogic
 
         public void ServerPrepare()
         {
+            UnDock();
             currentDockingState = new DockingState { isActive = true, femaleDockingPortIdentity = null };
         }
 
@@ -345,7 +352,8 @@ namespace ShipsLogic
                 TargetFemaleDockingPort.IsAvailable = false;
                 
 
-                currentDockingState.femaleDockingPortIdentity = TargetFemaleDockingPort.netIdentity;
+                currentDockingState = new DockingState{isActive=true, femaleDockingPortIdentity = TargetFemaleDockingPort.netIdentity};
+                
                 Dock(TargetFemaleDockingPort);
                 lastDockedTime = Time.time;
             }

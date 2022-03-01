@@ -1761,7 +1761,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   maleNonMovingBody: {fileID: 6875533491071242460}
-  ownShipFemaleDockingPorts: []
+  otherShipsFemaleDockingPorts: []
   doorCollider: {fileID: 2443529581963936844}
   pullForce: 50000
   maxSquaredDistance: 20
@@ -7513,6 +7513,11 @@ PrefabInstance:
       objectReference: {fileID: 4556926566005421300}
     - target: {fileID: 3752717746177525879, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3752717746177525879, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
       propertyPath: shipDocker
       value: 
       objectReference: {fileID: 0}
@@ -7621,6 +7626,11 @@ PrefabInstance:
       propertyPath: shipController
       value: 
       objectReference: {fileID: 5259905439263050486}
+    - target: {fileID: 5988110855299630271, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5988110855299630271, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: dockingPort
@@ -7768,6 +7778,11 @@ PrefabInstance:
       objectReference: {fileID: 3926734477518672404}
     - target: {fileID: 8440385117828583115, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440385117828583115, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
       propertyPath: dockingPort
       value: 
       objectReference: {fileID: 0}
@@ -7856,6 +7871,11 @@ PrefabInstance:
       propertyPath: quantityChanger
       value: 
       objectReference: {fileID: 5999824850008285521}
+    - target: {fileID: 9083398593503116263, guid: 15f7d0264a0de984e9973badb950c83d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9083398593503116263, guid: 15f7d0264a0de984e9973badb950c83d,
         type: 3}
       propertyPath: shipDocker
