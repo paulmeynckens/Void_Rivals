@@ -28,6 +28,8 @@ namespace RoundManagement
         }
         [SyncVar]  NetworkIdentity ship = null;
 
+        ShipSpawnedStateManager shipSpawnedStateManager = null;
+
         [SyncVar] public string shipName = " ";
 
         [SyncVar] public CrewState state = CrewState.Confirm;
@@ -109,7 +111,7 @@ namespace RoundManagement
 
             Transform location = TeamsManager.instance.FindSpawnLocation(team);
 
-            ShipSpawnedStateManager spawnedShip = shipSpawner.GetAvailableShip();
+           shipSpawnedStateManager = shipSpawner.GetAvailableShip();
 
             
 
@@ -118,25 +120,28 @@ namespace RoundManagement
             shipLinkToNetId.netIdLink = netId;
             */
 
-            ShipSpawnLocationHolder shipCrewManager = spawnedShip.GetComponent<ShipSpawnLocationHolder>();
+            
 
             
             
             
-            Health shipHealth = spawnedShip.Structure;
+            Health shipHealth = shipSpawnedStateManager.Structure;
             shipHealth.OnServerDie += ServerRemoveShip;
 
-            spawnedShip.ServerSpawnShip(location.position, location.rotation, netIdentity);
+            shipSpawnedStateManager.ServerSpawnShip(location.position, location.rotation, netIdentity);
 
 
-            ship = spawnedShip.ShipPawn.netIdentity;
+            ship = shipSpawnedStateManager.ShipPawn.netIdentity;
             crewMaxCapacity = shipSpawner.shipMaxCapacity;
             crewMinCapacity = shipSpawner.shipMinCapacity;
         }
 
-        void ServerRemoveShip()
+        public void ServerRemoveShip()
         {
-
+            
+            shipSpawnedStateManager.ServerDespawnShip();
+            shipSpawnedStateManager=null;
+            ship.GetComponent<ShipPawn>().ShipCrewNetId = 0;
             ship = null;
             crewMaxCapacity = 0;
             crewMinCapacity = 0;

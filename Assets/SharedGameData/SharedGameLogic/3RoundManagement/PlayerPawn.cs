@@ -406,9 +406,9 @@ namespace RoundManagement
         {
             if (Crew.Ship != null)
             {
-                ShipSpawnedStateManager shipDestructor = Crew.Ship.GetComponent<ShipSpawnedStateManager>();
-                DelayedDestructor destructor = Crew.Ship.GetComponent<DelayedDestructor>();
-                shipDestructor.ServerDespawnShip();
+                Crew.ServerRemoveShip();
+                
+                
             }
             
             NetworkServer.Destroy(Crew.gameObject);

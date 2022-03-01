@@ -18,18 +18,16 @@ namespace RoundManagement
         
 
         [SyncVar(hook = nameof(ClientChangeCrew))]uint shipCrewNetId = 0;
+        NetworkIdentity crewNetworkIdentity = null;
 
-        Transform initialParent;
+
 
         public event Action<bool> OnClientSpawnStateChanged = delegate { };
 
         public SpawnLocationShuffler SpawnLocationShuffler { get => spawnLocationShuffler; }
         [SerializeField] SpawnLocationShuffler spawnLocationShuffler = null;
 
-        private void Awake()
-        {
-            initialParent = transform.parent;
-        }
+
 
 
         void ClientChangeCrew(uint _old, uint _new)
@@ -37,7 +35,7 @@ namespace RoundManagement
             OnClientSpawnStateChanged(_new != 0);
             if (_new == 0)
             {
-                transform.parent = initialParent;
+                crewNetworkIdentity=null;
             }
             else
             {
@@ -48,25 +46,25 @@ namespace RoundManagement
 
         IEnumerator ClientSearchAndJoinCrew(uint crewNetId)
         {
-            while (transform.parent.GetComponent<NetworkIdentity>() == null)
+            while (crewNetworkIdentity == null)
             {
                 yield return null;
                 if (NetworkIdentity.spawned.TryGetValue(crewNetId,out NetworkIdentity foundCrew))
                 {
-                    transform.parent = foundCrew.transform;
+                    crewNetworkIdentity = foundCrew;
                 }
             }
         }
 
         public void ServerJoinCrew(NetworkIdentity crew)
         {
-            transform.parent = crew.transform;
+            
             shipCrewNetId = crew.netId;
         }
 
         public void ServerLeaveCrew()
         {
-            transform.parent = initialParent;
+            
             shipCrewNetId = 0;
         }
       
