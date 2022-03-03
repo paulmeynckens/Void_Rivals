@@ -8,116 +8,39 @@ using Core;
 
 namespace ShipsLogic
 {
-    public class DockingPort : NetworkBehaviour
+    [DefaultExecutionOrder(+100)]
+    public abstract class DockingPort : NetworkBehaviour
     {
         [Tooltip("Collider that is deactivated when the docking port is docked and activated back to prevent the players from falling outside the ship")]
-        [SerializeField] Collider doorColider = null;
+        [SerializeField] protected GameObject doorCollider = null;
 
-        public static readonly List<DockingPort> allDockingPorts = new List<DockingPort>();
+        public event Action<bool> OnDocked = delegate { };
+        public bool IsDocked { get => isDocked;}
+        
 
+        [SyncVar(hook =nameof(ClientActivateDockingFeedback))] private bool isDocked = false;
 
-        DockingPort targetDockingPort;
-        public DockingPort TargetDockingPort
+        public Transform NonMovingBody { get => nonMovingBody; }
+        Transform nonMovingBody;
+
+        void ClientActivateDockingFeedback(bool _old, bool _new)
         {
-            get => targetDockingPort;
+            OnDocked(_new);
+            doorCollider.SetActive(!isDocked);
         }
 
-        int index;
-        public int Index
+        protected virtual void Awake()
         {
-            get => index;
-            set
-            {
-                index = value;
-            }
+            nonMovingBody = transform.root;
         }
 
-        NetworkIdentity shipNetId;
-        public NetworkIdentity ShipNetId
+        protected void ServerSetDocked(bool docked)
         {
-            get => shipNetId;
+            isDocked = docked;
+            doorCollider.SetActive(!docked);
         }
 
         
-
-
-        DockingPort pairDockingPort = null;
-        public bool IsAvailable
-        {
-            get => pairDockingPort == null;
-        }
-
-        public Vector3 ToParent
-        {
-            get => toParent;
-        }
-        Vector3 toParent = Vector3.zero;
-        
-        public event Action<bool> OnDocked =delegate{};
-
-        private void Awake()
-        {
-            shipNetId = GetComponentInParent<NetworkIdentity>();
-            allDockingPorts.Add(this);
-            toParent = transform.InverseTransformPoint(transform.parent.position);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            DockingPort otherDockingPort = other.gameObject.GetComponent<DockingPort>();
-
-            if (otherDockingPort != null)
-            {
-                targetDockingPort = otherDockingPort;
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            targetDockingPort = null;
-        }
-
-        public void ServerEjectDockingPort()
-        {
-            Undock();
-        }
-
-        public void Dock(DockingPort target)
-        {
-
-            pairDockingPort = target;
-
-            doorColider.enabled = false;
-
-            SphereCollider sphereCollider = GetComponent<SphereCollider>();
-            sphereCollider.enabled = false;
-            OnDocked(true);
-        }
-        public void Undock()
-        {
-            if (pairDockingPort!=null && pairDockingPort.pairDockingPort==this)
-            {
-                pairDockingPort.NonRecursiveUndock();
-            }
-
-            NonRecursiveUndock();
-        }
-        void NonRecursiveUndock()
-        {
-            pairDockingPort = null;
-
-            doorColider.enabled = true;
-
-            SphereCollider sphereCollider = GetComponent<SphereCollider>();
-            sphereCollider.enabled = true;
-            OnDocked(false);
-        }
-
-        private void OnDestroy()
-        {
-            allDockingPorts.Remove(this);
-        }
-
     }
 }
 

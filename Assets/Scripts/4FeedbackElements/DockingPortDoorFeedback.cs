@@ -12,8 +12,7 @@ namespace FeedbackElements
         // Start is called before the first frame update
         private void Awake()
         {
-            dockingPort.OnDocked += PlayDockingFeedback;
-
+            dockingPort.OnDocked += PlayDoorFeedback;
         }
 
 

@@ -26,7 +26,7 @@ namespace ShipsLogic
 
         
 
-        [SerializeField]List<FemaleDockingPort> otherShipsFemaleDockingPorts=new List<FemaleDockingPort>();
+        List<FemaleDockingPort> otherShipsFemaleDockingPorts=new List<FemaleDockingPort>();
 
         [SerializeField] GameObject doorCollider = null;
 

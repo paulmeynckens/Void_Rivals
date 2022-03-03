@@ -11,7 +11,7 @@ namespace FeedbackElements
 
         private void Awake()
         {
-            doorSwitch.OnDoorChangeState += PlayDockingFeedback;
+            doorSwitch.OnDoorChangeState += PlayDoorFeedback;
         }
         
 

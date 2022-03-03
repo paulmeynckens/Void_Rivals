@@ -7,15 +7,15 @@ namespace FeedbackElements
 {
     public class DockingPortSoundFeedback : ContinuousSoundFeedbackGenerator
     {
-        [SerializeField] DockingPort dockingPort=null;
-        [SerializeField] ShipDocker shipDocker=null;
+        
+        [SerializeField] MaleDockingPort maleDockingPort=null;
         
         
 
         // Update is called once per frame
         void Update()
         {
-            if(shipDocker.ActiveDockingPort==dockingPort&& shipDocker.IsPulling)
+            if(maleDockingPort.IsPulling)
             {
                 IncreasePower();
             }

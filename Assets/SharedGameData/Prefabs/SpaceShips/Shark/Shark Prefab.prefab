@@ -183,12 +183,10 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   maleNonMovingBody: {fileID: 1026067256805418791}
-  ownShipFemaleDockingPorts: []
   doorCollider: {fileID: 6450993480205299663}
   pullForce: 50000
-  maxSquaredDistance: 20
+  maxSquaredDistance: 400
   leverArm: 50
-  currentFemaleDockingPortIdentity: {fileID: 5030671781390398672}
 --- !u!114 &5030671781390398672
 MonoBehaviour:
   m_ObjectHideFlags: 0
