@@ -7,22 +7,20 @@ using Core.ServerAuthoritativeActions;
 
 namespace CharacterLogic
 {
+    /*
     public enum CharacterMode : byte
     {
         walking,
         magnetic_boots,
         flying,
-    }
+    */
+
+
     public class CharacterMove : ServerAuthoritativeMovement
     {
         [SerializeField] TwoAxisRotator twoAxisRotator=null;
 
-        public CharacterMode CurrentCharacterMode
-        {
-            get => currentCharacterMode;
-        }
-        CharacterMode currentCharacterMode = CharacterMode.walking;//initial movement mode is walking
-
+        
         CharacterMoveMode moveMode;
 
         CharacterWalk characterWalk;
@@ -30,6 +28,8 @@ namespace CharacterLogic
         CharacterMagneticBoots characterMagneticBoots;
 
         CharacterFly characterFly;
+
+        CharacterSitMode characterSit;
 
         public CharacterInput DisplayedInput
         {
@@ -39,7 +39,7 @@ namespace CharacterLogic
 
         float lastTransitionTime = -10;// -10 instead of 0 to make sure the character controller gets parented when spawned
 
-        NetworkIdentity cachedShipIdentity = null;
+        NetworkIdentity cachedParentIdentity = null;
 
 
         private void Awake()
@@ -49,7 +49,7 @@ namespace CharacterLogic
             characterWalk = GetComponent<CharacterWalk>();
             characterMagneticBoots = GetComponent<CharacterMagneticBoots>();
             characterFly = GetComponent<CharacterFly>();
-
+            characterSit = GetComponent<CharacterSitMode>();
             
             characterWalk.TwoAxis = twoAxisRotator;
             characterMagneticBoots.TwoAxis = twoAxisRotator;
@@ -68,7 +68,18 @@ namespace CharacterLogic
             }
 
         }
-
+        protected override void FixedUpdate()
+        {
+            if (moveMode == characterSit)
+            {
+                
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;
+                
+                
+            }
+            base.FixedUpdate();
+        }
 
 
         #region Client
@@ -119,20 +130,25 @@ namespace CharacterLogic
             };
         }
 
-        protected override void ClientCorrectState(StateSnapshot bufferedState, StateSnapshot newState)
+        protected override void ClientCompareState(StateSnapshot bufferedState, StateSnapshot newState)
         {
             if(bufferedState is CharacterSnapshot buffer && newState is CharacterSnapshot target)
             {
-                if (buffer.characterMode != target.characterMode)
-                {
-                    SwitchToMode((CharacterMode)target.characterMode);
-                }
-                if (buffer.parentShip != target.parentShip)
+                
+                if (buffer.parentIdentity != target.parentIdentity)
                 {
                     if (showDebugMessages)
                     {
-                        Debug.Log("parent not matching");
+                        Debug.Log("parent not matching, switching state");
                     }
+
+                    ManageMode(target.parentIdentity);
+
+                    buffer.localPosition = target.parentIdentity.transform.InverseTransformPoint(buffer.parentIdentity.transform.TransformPoint(buffer.localPosition));
+                    buffer.localRotation = Quaternion.Inverse(target.parentIdentity.transform.rotation) * buffer.parentIdentity.transform.rotation * buffer.localRotation;
+                    transform.parent = target.parentIdentity.transform;
+
+                    /*
                     switch ((CharacterMode)target.characterMode)
                     {
                         case CharacterMode.flying:
@@ -142,11 +158,10 @@ namespace CharacterLogic
                             break;
 
                         default:
-                            buffer.localPosition = target.parentShip.transform.InverseTransformPoint(buffer.parentShip.transform.TransformPoint(buffer.localPosition));
-                            buffer.localRotation = Quaternion.Inverse(target.parentShip.transform.rotation) * buffer.parentShip.transform.rotation * buffer.localRotation;
-                            transform.parent= target.parentShip.transform;
+                            
                             break;
                     }
+                    */
                 }
 
                 Vector3 positionDelta = target.localPosition-buffer.localPosition;
@@ -165,19 +180,8 @@ namespace CharacterLogic
         {
             if(newState is CharacterSnapshot characterSnapshot)
             {
-                SwitchToMode((CharacterMode)characterSnapshot.characterMode);
-                switch ((CharacterMode)characterSnapshot.characterMode)
-                {
-                    case CharacterMode.flying:
-                        transform.parent = null;
-                        
-                        break;
-
-                    default:
-                        
-                        transform.parent = characterSnapshot.parentShip.transform;
-                        break;
-                }
+                ManageMode(characterSnapshot.parentIdentity);
+                
 
                 
                 transform.localPosition = characterSnapshot.localPosition;
@@ -194,27 +198,13 @@ namespace CharacterLogic
             {
                 return;
             }
-            switch (other.gameObject.tag)
+
+            
+            if (TryGetComponent<CharacterMovementModeSwapper>(out CharacterMovementModeSwapper characterMovementModeSwapper))
             {
-                case "Airlock Entry":
-                    Debug.Log("enter ship");
-                    SwitchFromMagneticToWalkMode();
-                    break;
-
-
-                case "Exit To Hull":
-                    SwitchFromWalkToMagneticMode();
-                    break;
-
-
-                case "Ship Hull":
-                    SwitchFromFlyToMagneticMode(other.transform);
-                    break;
-
-                default:
-
-                    break;
+                ManageMode(characterMovementModeSwapper.target);
             }
+            
         }
 
         bool EnoughTransitionTimePassed()
@@ -228,64 +218,43 @@ namespace CharacterLogic
 
         }
 
-
-
-
-        void SwitchToMode(CharacterMode p_new)
+        void ManageMode(NetworkIdentity parentIdentity)
         {
-            currentCharacterMode = p_new;
-
             moveMode.Deactivate();
-
-            switch (p_new)
+            
+            if (parentIdentity == null)
             {
-                case CharacterMode.flying:
-                    moveMode = characterFly;
-                    break;
-                case CharacterMode.magnetic_boots:
-                    moveMode = characterMagneticBoots;
-                    break;
-                case CharacterMode.walking:
-                    moveMode = characterWalk;
-                    break;
-
+                moveMode = characterFly;
+                return;
             }
+            else
+            {
+                switch (parentIdentity.tag)
+                {
+                    case "Ship Interior":
+                        moveMode = characterWalk;
+                        break;
 
+                    case "Walkable Hull":
+                        moveMode = characterMagneticBoots;
+                        break;
+
+                    case "Seat":
+                        moveMode = characterSit;
+                        break;
+
+                    default:
+                        Debug.LogError("no matching Tag : " + parentIdentity.tag);
+                        break;
+                }
+            }
             moveMode.Activate();
-        }
 
-        void SwitchFromMagneticToWalkMode()
-        {  
-            transform.localRotation = Quaternion.Euler(0, transform.localRotation.eulerAngles.y, 0);
-
-            SwitchToMode(CharacterMode.walking);
+            transform.parent = parentIdentity.transform;
         }
 
 
-        void SwitchFromFlyToMagneticMode(Transform externaCollider)
-        {
-            
-            Vector3 previousLocalPosition = externaCollider.InverseTransformPoint(transform.position);
-            Quaternion previousLocalRotation = Quaternion.Inverse(externaCollider.rotation)*transform.rotation;
-
-            //transform.parent = BodiesHolder.interiors[externaCollider];
-            transform.localPosition = previousLocalPosition;
-            transform.localRotation = previousLocalRotation;
-            SwitchToMode(CharacterMode.magnetic_boots);
-
-        }
-        void SwitchFromWalkToMagneticMode()
-        {
-            SwitchToMode(CharacterMode.magnetic_boots);
-        }
-
-        void SwitchFromMagneticToFlyMode()
-        {
-            transform.parent = null;
-            
-            SwitchToMode(CharacterMode.flying);
-
-        }
+        
         #endregion
 
         #region Both sides
@@ -320,28 +289,27 @@ namespace CharacterLogic
             return new CharacterSnapshot
             {
                 tick = tick,
-                characterMode = (byte)currentCharacterMode,
-                parentShip = FindParentShip(),
+                parentIdentity = FindParentNetId(),
                 localPosition = transform.localPosition,
                 localRotation = transform.localRotation
             };
         }
-        NetworkIdentity FindParentShip()
+        NetworkIdentity FindParentNetId()
         {
 
             if(moveMode is CharacterFly)
             {
-                cachedShipIdentity=null;
+                cachedParentIdentity=null;
             }
             else
             {
-                if (cachedShipIdentity == null || cachedShipIdentity.transform != transform.parent)
+                if (cachedParentIdentity == null || cachedParentIdentity.transform != transform.parent)
                 {
-                    cachedShipIdentity = transform.parent.GetComponent<NetworkIdentity>();
+                    cachedParentIdentity = transform.parent.GetComponent<NetworkIdentity>();
                 }
                 
             }
-            return cachedShipIdentity;
+            return cachedParentIdentity;
         }
         #endregion
     }

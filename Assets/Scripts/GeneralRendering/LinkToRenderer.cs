@@ -1,24 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 namespace GeneralRendering
 {
     public class LinkToRenderer : MonoBehaviour
     {
-        [SerializeField] Transform generalBody = null;
-        [SerializeField] Transform externalCollider = null;
-        [SerializeField] Transform internalCollider = null;
         
+        [SerializeField] List<NetworkIdentity> linkedToThisRenderer = null;
 
-        public static readonly Dictionary<Transform, Transform> shipsRenderersLinks=new Dictionary<Transform, Transform>();
+        public static readonly Dictionary<NetworkIdentity, Transform> shipsRenderersLinks=new Dictionary<NetworkIdentity, Transform>();
 
         private void Awake()
         {
-
-            shipsRenderersLinks.Add(generalBody, transform);
-            shipsRenderersLinks.Add(externalCollider, transform);
-            shipsRenderersLinks.Add(internalCollider, transform);
+            foreach(NetworkIdentity networkIdentity in linkedToThisRenderer)
+            {
+                shipsRenderersLinks.Add(networkIdentity, transform);
+            }
         }
     }
 }

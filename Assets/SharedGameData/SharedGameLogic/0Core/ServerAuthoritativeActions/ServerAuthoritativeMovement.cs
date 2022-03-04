@@ -38,7 +38,7 @@ namespace Core.ServerAuthoritativeActions
         {
             if (statesBuffer.ContainsKey(_new.tick))
             {
-                ClientCorrectState(statesBuffer[_new.tick], _new);
+                ClientCompareState(statesBuffer[_new.tick], _new);
                 statesBuffer.Clear();
                 statesBuffer.Add(_new.tick, GenerateState(_new.tick));//usefull for uncontrolled ships
             }
@@ -205,7 +205,7 @@ namespace Core.ServerAuthoritativeActions
         {
             return new InputSnapshot { tick = tick };
         }
-        protected virtual void ClientCorrectState(StateSnapshot bufferedState, StateSnapshot newState)
+        protected virtual void ClientCompareState(StateSnapshot bufferedState, StateSnapshot newState)
         {
 
         }

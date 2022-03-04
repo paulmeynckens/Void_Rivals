@@ -437,7 +437,7 @@ namespace RoundManagement
                 characterMove.State = new CharacterSnapshot
                 {
                     tick = TickManager.Tick,
-                    parentShip = spawnLocation.parent.GetComponent<NetworkIdentity>(),
+                    parentIdentity = spawnLocation.parent.GetComponent<NetworkIdentity>(),
                     characterMode = (byte)CharacterMode.walking,
                     localPosition = characterInstance.transform.localPosition,
                     localRotation=characterInstance.transform.localRotation,

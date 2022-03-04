@@ -573,6 +573,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: -8188121551121493967, guid: fda6ef9a60f11d14ea5b560be8b6457d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ship Hull
+      objectReference: {fileID: 0}
     - target: {fileID: -8121184417487849608, guid: fda6ef9a60f11d14ea5b560be8b6457d,
         type: 3}
       propertyPath: m_Layer

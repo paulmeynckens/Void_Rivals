@@ -20,12 +20,12 @@ namespace Core.Interractables
 
         NetworkConnectionToClient owningPlayer = null;
 
-        
 
-        public Transform sittingPosition=null;
-        
 
-        Sitter currentSitter = null;
+
+        Transform currentSitterPreviousParent = null;
+
+        NetworkIdentity currentSitter = null;
         Health sitterHealth = null;
 
 
@@ -85,10 +85,11 @@ namespace Core.Interractables
                 networkIdentity.AssignClientAuthority(welcomedCharacter.connectionToClient);
             }
             
-            welcomedCharacter.RemoveClientAuthority();
+            //welcomedCharacter.RemoveClientAuthority();
 
-            currentSitter = welcomedCharacter.GetComponent<Sitter>();
-            currentSitter.ServerSetSeat(netId);
+            currentSitter = welcomedCharacter;
+            currentSitterPreviousParent = currentSitter.transform.parent;
+            currentSitter.transform.parent = transform;
             
 
             sitterHealth = welcomedCharacter.GetComponent<Health>();
@@ -98,13 +99,14 @@ namespace Core.Interractables
 
         void ServerEjectCharacter()
         {
-            currentSitter.netIdentity.AssignClientAuthority(connectionToClient);
+            //currentSitter.AssignClientAuthority(connectionToClient);
             netIdentity.RemoveClientAuthority();
             foreach (NetworkIdentity networkIdentity in controlledObjects)
             {
                 networkIdentity.RemoveClientAuthority();
             }
-            currentSitter.ServerSetSeat(0);
+
+            currentSitter.transform.parent = currentSitterPreviousParent;
             currentSitter = null;
 
             sitterHealth.OnServerDie -= ServerEjectCharacter;

@@ -194,7 +194,7 @@ namespace ShipsLogic
 
         }
 
-        protected override void ClientCorrectState(StateSnapshot bufferedState, StateSnapshot newState)
+        protected override void ClientCompareState(StateSnapshot bufferedState, StateSnapshot newState)
         {
             if (MasterRigidbody == null)
             {

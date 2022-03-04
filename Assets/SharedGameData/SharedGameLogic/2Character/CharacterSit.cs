@@ -14,31 +14,33 @@ namespace CharacterLogic
     {
         [SerializeField] TwoAxisRotator twoAxisRotator = null;
 
-        public Seat CurrentSeat
+        public NetworkIdentity CurrentSeat
         {
             get => currentSeat;
         }
-        Seat currentSeat = null;
+        
 
         public event Action OnClientSit = delegate { };
         public event Action OnClientGetUp = delegate { };
 
+        Transform previousParent = null;
         Vector3 previousLocalPosition = Vector3.zero;
+        Quaternion previousLocalRotation = Quaternion.identity;
 
         #region Syncvars + hooks
-        [SyncVar(hook =nameof(ClientSearchAndGrabSeat))] public uint seatNetId = 0;
-        void ClientSearchAndGrabSeat(uint _old, uint _new)
-        {
+        [SyncVar(hook =nameof(ClientProcessSeatInfo))] NetworkIdentity currentSeat = null;
+        void ClientProcessSeatInfo(NetworkIdentity _old, NetworkIdentity _new)
+        {          
             
-            StopAllCoroutines();
-            if (_new != 0)
+            if (_new != null)
             {
-                StartCoroutine(ClientSearchSeatAndSit(_new));
+                TakeSeat(_new);
+                OnClientSit();
             }
             else
             {
                 StandUp();
-                
+                OnClientGetUp();
             }
             
         }
@@ -46,19 +48,7 @@ namespace CharacterLogic
 
         #region Client
 
-        IEnumerator ClientSearchSeatAndSit(uint seatId)
-        {
-            while (currentSeat == null)
-            {
-                if (NetworkIdentity.spawned.TryGetValue(seatNetId, out NetworkIdentity foundNetworkIdentity))
-                {
-                    TakeSeat(foundNetworkIdentity.GetComponent<Seat>());
-                    
-                }
-                yield return null;
-                
-            }
-        }
+        
 
         #endregion
 
@@ -66,27 +56,22 @@ namespace CharacterLogic
         #region BothSides
         void StandUp()
         {
+            transform.parent = previousParent;
             transform.localPosition = previousLocalPosition;
-            currentSeat = null;
-            if (isClient)
-            {
-                OnClientGetUp();
-            }
-            
+            transform.localRotation = previousLocalRotation;
+
         }
 
-        void TakeSeat(Seat seat)
+        void TakeSeat(NetworkIdentity seat)
         {
+            previousParent = transform.parent;
             previousLocalPosition = transform.localPosition;
-            currentSeat = seat;
-            transform.localPosition = currentSeat.sittingPosition.localPosition;
-            transform.localRotation = currentSeat.sittingPosition.localRotation;
-            twoAxisRotator.horizontalRotator.localRotation = Quaternion.identity;
-            twoAxisRotator.pointer.localRotation = Quaternion.identity;
-            if (isClient)
-            {
-                OnClientSit();
-            }
+            previousLocalRotation = transform.localRotation;
+
+            transform.parent = seat.transform;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+
         }
         /*
         private void FixedUpdate()
@@ -102,21 +87,21 @@ namespace CharacterLogic
 
         #region Server
 
-        public override void ServerSetSeat(uint seatId)
+        public override void ServerSetSeat(NetworkIdentity seatId)
         {
             base.ServerSetSeat(seatId);
             
-            seatNetId = seatId;
-            if (seatId == 0)
-            {
-                StandUp();
-                return;
-            }
-            if (NetworkIdentity.spawned.TryGetValue(seatId, out NetworkIdentity foundNetworkIdentity))
-            {
-                TakeSeat(foundNetworkIdentity.GetComponent<Seat>());
+            currentSeat = seatId;
 
+            if (seatId == null)
+            {
+                StandUp();               
             }
+            else
+            {
+                TakeSeat(seatId);
+            }
+            
         }
 
         #endregion

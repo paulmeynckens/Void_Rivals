@@ -5,6 +5,7 @@ using UnityEngine;
 using Mirror;
 using RotaryHeart.Lib.SerializableDictionary;
 using CharacterLogic;
+using Core.Interractables;
 
 namespace CharacterRenderer
 {
@@ -27,7 +28,7 @@ namespace CharacterRenderer
         [SerializeField] HoldableItemsDictionnary holdableItems = null;
 
         CharacterHands characterHands;
-        CharacterSit characterSit;
+        //CharacterSit characterSit;
         NetworkIdentity networkIdentity;
 
 
@@ -38,14 +39,16 @@ namespace CharacterRenderer
         Transform leftHandObj = null;
         Transform leftElbowObj = null;
 
+        Transform previousParent = null;
+        Transform currentParent = null;
+
+
         private void Awake()
         {
             networkIdentity = GetComponentInParent<NetworkIdentity>();
             animator = GetComponent<Animator>();
             characterHands = GetComponentInParent<CharacterHands>();
-            characterSit = GetComponentInParent<CharacterSit>();
-            characterSit.OnClientGetUp += GetUp;
-            characterSit.OnClientSit += Sit;
+            
             characterHands.OnClientChangeItem += GrabItem;
         }
 
@@ -62,6 +65,20 @@ namespace CharacterRenderer
         // Update is called once per frame
         void Update()
         {
+            currentParent = networkIdentity.transform.parent;
+            if (currentParent != previousParent)
+            {
+                if (currentParent.TryGetComponent<Seat>(out Seat seat))
+                {
+                    Sit(seat);
+                }
+                else
+                {
+                    GetUp();
+                }
+            }
+            previousParent = currentParent;
+
             if (seatViewDirection != null)
             {
 
@@ -72,6 +89,8 @@ namespace CharacterRenderer
             {
                 eyes.rotation = hands.rotation;
             }
+
+            
         }
 
 
@@ -120,13 +139,13 @@ namespace CharacterRenderer
             GrabItem(characterHands.HeldItemType);
 
         }
-        void Sit()
+        void Sit(Seat seat)
         {
             foreach (KeyValuePair<string, HoldableItem> holdableItem in holdableItems)
             {
                 holdableItem.Value.gameObject.SetActive(false);
             }
-            SeatPostureData seatPostureData = SeatPostureDataHolder.seatIKs[characterSit.CurrentSeat];
+            SeatPostureData seatPostureData = SeatPostureDataHolder.seatIKs[seat];
 
             animator.SetBool("Sit", seatPostureData.needsSitting);
             seatViewDirection = seatPostureData.viewDirection;

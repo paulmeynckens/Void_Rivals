@@ -17,8 +17,8 @@ namespace Core.ServerAuthoritativeActions
 
     public class CharacterSnapshot : StateSnapshot
     {
-        public byte characterMode;
-        public NetworkIdentity parentShip;
+        
+        public NetworkIdentity parentIdentity;
         public Vector3 localPosition;
         public Quaternion localRotation;
     }
@@ -57,7 +57,7 @@ namespace Core.ServerAuthoritativeActions
                 writer.WriteByte(PLAYER_MAGNETIC);                
                 writer.WriteUShort(magneticState.tick);
                 writer.WriteByte(magneticState.characterMode);
-                writer.WriteNetworkIdentity(magneticState.parentShip);
+                writer.WriteNetworkIdentity(magneticState.parentIdentity);
                 writer.WriteVector3(magneticState.localPosition);
                 writer.WriteQuaternion(magneticState.localRotation);
             }
@@ -97,7 +97,7 @@ namespace Core.ServerAuthoritativeActions
                     {
                         tick = reader.ReadUShort(),
                         characterMode=reader.ReadByte(),
-                        parentShip = reader.ReadNetworkIdentity(),
+                        parentIdentity = reader.ReadNetworkIdentity(),
                         localPosition = reader.ReadVector3(),
                         localRotation = reader.ReadQuaternion(),
                     };

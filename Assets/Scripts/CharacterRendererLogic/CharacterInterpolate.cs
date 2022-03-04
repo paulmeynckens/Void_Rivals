@@ -106,14 +106,7 @@ namespace CharacterRenderer
         {
             lastInterpolationTime = Time.time;
 
-            if (networkIdentity.transform.parent == null)
-            {
-                transform.parent = null;
-            }
-            else
-            {
-                transform.parent = LinkToRenderer.shipsRenderersLinks[networkIdentity.transform.parent];
-            }
+            
 
             transform.localScale = Vector3.one;
 
@@ -130,6 +123,15 @@ namespace CharacterRenderer
 
             if (lastParent != nextParent)
             {
+                if (networkIdentity.transform.parent == null)
+                {
+                    transform.parent = null;
+                }
+                else
+                {
+                    transform.parent = LinkToRenderer.shipsRenderersLinks[networkIdentity.transform.parent.GetComponent<NetworkIdentity>()];
+                }
+
                 if (lastParent == null)
                 {
                     lastBodyLocalPosition = nextParent.InverseTransformPoint(lastBodyLocalPosition);

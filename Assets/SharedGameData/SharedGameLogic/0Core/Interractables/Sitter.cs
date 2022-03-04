@@ -7,7 +7,7 @@ namespace Core.Interractables
 {
     public class Sitter : NetworkBehaviour
     {
-        public virtual void ServerSetSeat(uint seatId)
+        public virtual void ServerSetSeat(NetworkIdentity seatId)
         {
 
         }
