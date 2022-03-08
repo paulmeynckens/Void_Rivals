@@ -39,8 +39,8 @@ namespace CharacterLogic
 
         float lastTransitionTime = -10;// -10 instead of 0 to make sure the character controller gets parented when spawned
 
-        NetworkIdentity cachedParentIdentity = null;
-
+        Transform previousParent = null;
+        NetworkIdentity cachedIdentity = null;
 
         private void Awake()
         {
@@ -62,7 +62,7 @@ namespace CharacterLogic
         protected override void Update()
         {
             base.Update();
-            if (hasAuthority)
+            if (hasAuthority && moveMode != characterSit)
             {
                 twoAxisRotator.RotateView();
             }
@@ -70,12 +70,18 @@ namespace CharacterLogic
         }
         protected override void FixedUpdate()
         {
-            if (moveMode == characterSit)
+            if (previousParent != transform.parent)
             {
-                
+                cachedIdentity = transform.parent.GetComponent<NetworkIdentity>();
+                ManageMode(cachedIdentity);
+            }
+            previousParent = transform.parent;
+
+
+            if (moveMode == characterSit)
+            {                
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
-                
                 
             }
             base.FixedUpdate();
@@ -194,14 +200,17 @@ namespace CharacterLogic
         #region State machine
         private void OnTriggerEnter(Collider other)
         {
-            if (!EnoughTransitionTimePassed())
-            {
-                return;
-            }
-
             
-            if (TryGetComponent<CharacterMovementModeSwapper>(out CharacterMovementModeSwapper characterMovementModeSwapper))
+            
+            
+            
+
+            if (other.gameObject.TryGetComponent(out CharacterMovementModeSwapper characterMovementModeSwapper))
             {
+                if (!EnoughTransitionTimePassed())
+                {
+                    return;
+                }
                 ManageMode(characterMovementModeSwapper.target);
             }
             
@@ -218,7 +227,7 @@ namespace CharacterLogic
 
         }
 
-        void ManageMode(NetworkIdentity parentIdentity)
+        public void ManageMode(NetworkIdentity parentIdentity)
         {
             moveMode.Deactivate();
             
@@ -235,7 +244,7 @@ namespace CharacterLogic
                         moveMode = characterWalk;
                         break;
 
-                    case "Walkable Hull":
+                    case "Ship Hull":
                         moveMode = characterMagneticBoots;
                         break;
 
@@ -289,27 +298,27 @@ namespace CharacterLogic
             return new CharacterSnapshot
             {
                 tick = tick,
-                parentIdentity = FindParentNetId(),
+                parentIdentity = cachedIdentity,
                 localPosition = transform.localPosition,
                 localRotation = transform.localRotation
             };
         }
         NetworkIdentity FindParentNetId()
         {
+            /*
+            NetworkIdentity foundIdentity = null;
 
-            if(moveMode is CharacterFly)
+            if (previousParent != transform.parent)
             {
-                cachedParentIdentity=null;
+                foundIdentity = transform.parent.GetComponent<NetworkIdentity>();
             }
-            else
-            {
-                if (cachedParentIdentity == null || cachedParentIdentity.transform != transform.parent)
-                {
-                    cachedParentIdentity = transform.parent.GetComponent<NetworkIdentity>();
-                }
-                
-            }
-            return cachedParentIdentity;
+            previousParent = transform.parent;
+
+            
+            return foundIdentity;
+            */
+
+            return transform.parent.GetComponent<NetworkIdentity>();
         }
         #endregion
     }

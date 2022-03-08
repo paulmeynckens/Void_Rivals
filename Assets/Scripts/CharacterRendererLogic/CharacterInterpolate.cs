@@ -129,7 +129,7 @@ namespace CharacterRenderer
                 }
                 else
                 {
-                    transform.parent = LinkToRenderer.shipsRenderersLinks[networkIdentity.transform.parent.GetComponent<NetworkIdentity>()];
+                    transform.parent = LinkToRenderer.linkedRenderer[networkIdentity.transform.parent.GetComponent<NetworkIdentity>()];
                 }
 
                 if (lastParent == null)

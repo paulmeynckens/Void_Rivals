@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.Interractables;
 using System;
+using GeneralRendering;
+using Mirror;
 
 namespace CharacterRenderer
 {
@@ -23,6 +25,7 @@ namespace CharacterRenderer
         private void Awake()
         {
             seatIKs.Add(seat, seatData);
+            LinkToRenderer.linkedRenderer.Add(seat.GetComponent<NetworkIdentity>(), transform); ;
         }
 
 

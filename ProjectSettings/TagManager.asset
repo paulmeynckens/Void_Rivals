@@ -12,6 +12,8 @@ TagManager:
   - Airlock Entry
   - Exit To Hull
   - Ship Hull
+  - Airlock
+  - Seat
   layers:
   - Default
   - TransparentFX

@@ -438,11 +438,12 @@ namespace RoundManagement
                 {
                     tick = TickManager.Tick,
                     parentIdentity = spawnLocation.parent.GetComponent<NetworkIdentity>(),
-                    characterMode = (byte)CharacterMode.walking,
+                    
                     localPosition = characterInstance.transform.localPosition,
                     localRotation=characterInstance.transform.localRotation,
 
                 };
+                
                 
 
                 NetworkServer.Spawn(characterInstance, connectionToClient);

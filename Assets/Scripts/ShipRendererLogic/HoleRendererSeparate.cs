@@ -20,7 +20,7 @@ namespace ShipsRenderer
 
         void SeparateHoleRenderer(HoleSpot holeSpot)
         {
-            Transform targetParent = LinkToRenderer.shipsRenderersLinks[holeSpot.holeGeneratorIdentity.transform];
+            Transform targetParent = LinkToRenderer.linkedRenderer[holeSpot.holeGeneratorIdentity];
             transform.parent = targetParent;
 
             transform.localPosition = holeSpot.localPosition;

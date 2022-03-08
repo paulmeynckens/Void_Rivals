@@ -28,9 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6666649e1d414543a302564da917164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalBody: {fileID: 0}
-  externalCollider: {fileID: 0}
-  internalCollider: {fileID: 0}
+  linkedToThisRenderer: []
 --- !u!114 &3449188864885072892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,7 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipExtBody: {fileID: 0}
   ship: {fileID: 0}
-  stateManager: {fileID: 0}
+  shipPawn: {fileID: 0}
 --- !u!114 &5665901660960732001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +71,7 @@ MonoBehaviour:
   changingNames: []
   shipNameText: {fileID: 0}
   rendererGroups: []
-  shipStateManager: {fileID: 0}
+  shipPawn: {fileID: 0}
 --- !u!114 &6567099527842910553
 MonoBehaviour:
   m_ObjectHideFlags: 0

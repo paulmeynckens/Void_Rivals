@@ -61,6 +61,7 @@ namespace CharacterLogic
             base.Activate();
             walker.enabled = true;
             deltaUpDown = 0;
+            transform.localRotation = Quaternion.Euler(0, transform.localRotation.eulerAngles.y, 0); //resets the character vertical
         }
 
         public override void ModeApplyExternalForces()
@@ -120,25 +121,10 @@ namespace CharacterLogic
 
         private void OnTriggerEnter(Collider other)
         {
-
-            switch (other.gameObject.tag)
+            if (other.CompareTag("Climbable"))
             {
-                case "Ship Interior":
-                    EnterShip(other.transform);
-                    break;
-
-
-                case "Climbable":
-                    isClimbing = true;
-                    break;
-
-
-
-                default:
-
-                    break;
+                isClimbing = true;
             }
-
         }
 
         private void OnTriggerExit(Collider other)
@@ -149,11 +135,6 @@ namespace CharacterLogic
             }
         }
 
-        void EnterShip(Transform ship)
-        {
-            transform.parent = ship.parent;
-            OnSwitchShip(ship.parent);
-        }
 
     }
 

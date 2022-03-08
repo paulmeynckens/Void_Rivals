@@ -56,7 +56,7 @@ namespace Core.ServerAuthoritativeActions
             {
                 writer.WriteByte(PLAYER_MAGNETIC);                
                 writer.WriteUShort(magneticState.tick);
-                writer.WriteByte(magneticState.characterMode);
+                
                 writer.WriteNetworkIdentity(magneticState.parentIdentity);
                 writer.WriteVector3(magneticState.localPosition);
                 writer.WriteQuaternion(magneticState.localRotation);
@@ -96,7 +96,7 @@ namespace Core.ServerAuthoritativeActions
                     return new CharacterSnapshot
                     {
                         tick = reader.ReadUShort(),
-                        characterMode=reader.ReadByte(),
+                        
                         parentIdentity = reader.ReadNetworkIdentity(),
                         localPosition = reader.ReadVector3(),
                         localRotation = reader.ReadQuaternion(),

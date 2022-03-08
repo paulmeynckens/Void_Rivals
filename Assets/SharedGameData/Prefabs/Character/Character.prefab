@@ -494,7 +494,6 @@ GameObject:
   - component: {fileID: 3494198677090169808}
   - component: {fileID: 6045656305423201310}
   - component: {fileID: 5151691709812308484}
-  - component: {fileID: 4914572279114658005}
   - component: {fileID: 1440627348575181494}
   - component: {fileID: 7613985448713905274}
   - component: {fileID: 2999034902598190389}
@@ -505,6 +504,7 @@ GameObject:
   - component: {fileID: 7393779872878339597}
   - component: {fileID: 8500046663855260993}
   - component: {fileID: 4418268974373842420}
+  - component: {fileID: 5823823916935586242}
   m_Layer: 30
   m_Name: Character
   m_TagString: Untagged
@@ -636,25 +636,6 @@ MonoBehaviour:
   - PL
   - RT
   - HT
---- !u!114 &4914572279114658005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254812820540187099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c79f846ff199734090c5bc5d62233a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0
-  twoAxisRotator:
-    horizontalRotator: {fileID: 490533384323232016}
-    pointer: {fileID: 7478257735220569680}
-    resetCameraRotationSpeed: 120
-  seatNetId: 0
 --- !u!114 &1440627348575181494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,6 +810,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layer: 30
+--- !u!114 &5823823916935586242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5254812820540187099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54eff259ef4e6df4f98f505d25555930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer: 0
 --- !u!1 &5651872528481254476
 GameObject:
   m_ObjectHideFlags: 0

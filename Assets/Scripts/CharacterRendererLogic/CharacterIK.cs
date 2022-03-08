@@ -134,7 +134,7 @@ namespace CharacterRenderer
 
         void GetUp()
         {
-            animator.SetBool("Sit", false);
+            
             seatViewDirection = null;
             GrabItem(characterHands.HeldItemType);
 
@@ -147,7 +147,7 @@ namespace CharacterRenderer
             }
             SeatPostureData seatPostureData = SeatPostureDataHolder.seatIKs[seat];
 
-            animator.SetBool("Sit", seatPostureData.needsSitting);
+            
             seatViewDirection = seatPostureData.viewDirection;
             GrabHandles(seatPostureData.iKData);
 

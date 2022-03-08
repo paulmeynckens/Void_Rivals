@@ -44,24 +44,7 @@ namespace UI
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
-
-            DisableIfServer();
         }
-
-
-        [ServerCallback]
-        void DisableIfServer()
-        {
-            gameObject.SetActive(false);
-        }
-
-        
- 
-
-
-
-
-
 
     }
 

@@ -10,13 +10,13 @@ namespace GeneralRendering
         
         [SerializeField] List<NetworkIdentity> linkedToThisRenderer = null;
 
-        public static readonly Dictionary<NetworkIdentity, Transform> shipsRenderersLinks=new Dictionary<NetworkIdentity, Transform>();
+        public static readonly Dictionary<NetworkIdentity, Transform> linkedRenderer=new Dictionary<NetworkIdentity, Transform>();
 
         private void Awake()
         {
             foreach(NetworkIdentity networkIdentity in linkedToThisRenderer)
             {
-                shipsRenderersLinks.Add(networkIdentity, transform);
+                linkedRenderer.Add(networkIdentity, transform);
             }
         }
     }

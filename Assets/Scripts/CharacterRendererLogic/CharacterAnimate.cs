@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using CharacterLogic;
 
@@ -22,29 +23,42 @@ namespace CharacterRenderer
             animator = GetComponent<Animator>();
         }
 
-        // Update is called once per frame
+        
         private void FixedUpdate()
         {
-
-            switch (characterMove.CurrentCharacterMode)
+            if (characterMove.transform.parent != null)
             {
-                case CharacterMode.walking:
-                    animator.SetBool("OnHull", false);
-                    animator.SetBool("Fly", !walker.isGrounded && !characterWalk.IsClimbing);
+                switch (characterMove.transform.parent.tag)
+                {
+                    case "Ship Interior":
+                        animator.SetBool("OnHull", false);
+                        animator.SetBool("Fly", !walker.isGrounded && !characterWalk.IsClimbing);
+                        animator.SetBool("Sit", false);
+                        break;
 
-                    break;
-                case CharacterMode.magnetic_boots:
-                    animator.SetBool("OnHull", true);
-                    animator.SetBool("Fly", false);
-                    break;
+                    case "Ship Hull":
+                        animator.SetBool("OnHull", true);
+                        animator.SetBool("Fly", false);
+                        animator.SetBool("Sit", false);
+                        break;
 
-                case CharacterMode.flying:
-                    animator.SetBool("OnHull", false);
-                    animator.SetBool("Fly", true);
-                    break;
+                    case "Seat":
+                        animator.SetBool("OnHull", false);
+                        animator.SetBool("Fly", false);
+                        animator.SetBool("Sit", true);
+                        break;
 
-
+                    default:
+                        break;
+                }
             }
+            else
+            {
+                animator.SetBool("OnHull", false);
+                animator.SetBool("Fly", true);
+                animator.SetBool("Sit", false);
+            }
+            
             if (characterMove.DisplayedInput != null)
             {
                 animator.SetFloat("x", characterMove.DisplayedInput.rightLeft);
