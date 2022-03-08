@@ -45,7 +45,11 @@ namespace Core.Interractables
 
 
         #region Both Sides
-
+        protected override void Awake()
+        {
+            base.Awake();
+            gameObject.tag = "Seat";
+        }
 
         #endregion
 

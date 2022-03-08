@@ -74,7 +74,13 @@ namespace CharacterLogic
             {
                 cachedIdentity = transform.parent.GetComponent<NetworkIdentity>();
                 ManageMode(cachedIdentity);
+                syncInterval = 0;
             }
+            else
+            {
+                syncInterval = 2;
+            }
+            
             previousParent = transform.parent;
 
 
@@ -148,6 +154,15 @@ namespace CharacterLogic
                         Debug.Log("parent not matching, switching state");
                     }
 
+                    if (buffer.parentIdentity.CompareTag("Seat"))
+                    {
+                        transform.parent = target.parentIdentity.transform;
+                        transform.localPosition = target.localPosition;
+                        transform.localRotation = target.localRotation;
+                        ManageMode(target.parentIdentity);
+                        return;
+                    }
+
                     ManageMode(target.parentIdentity);
 
                     buffer.localPosition = target.parentIdentity.transform.InverseTransformPoint(buffer.parentIdentity.transform.TransformPoint(buffer.localPosition));
@@ -201,10 +216,6 @@ namespace CharacterLogic
         private void OnTriggerEnter(Collider other)
         {
             
-            
-            
-            
-
             if (other.gameObject.TryGetComponent(out CharacterMovementModeSwapper characterMovementModeSwapper))
             {
                 if (!EnoughTransitionTimePassed())
@@ -260,6 +271,9 @@ namespace CharacterLogic
             moveMode.Activate();
 
             transform.parent = parentIdentity.transform;
+
+            
+            
         }
 
 
