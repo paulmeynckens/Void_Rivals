@@ -13,8 +13,8 @@ namespace ShipsLogic.Holes
     {
 
         [SerializeField] GameObject holePrefab = null;
-        [SerializeField] Transform interior = null;
-        [SerializeField] NetworkIdentity internalCollider = null;
+        //[SerializeField] Transform interior = null;
+        //[SerializeField] NetworkIdentity internalCollider = null;
 
         
         List<Hole> holes = new List<Hole>();
@@ -73,7 +73,7 @@ namespace ShipsLogic.Holes
 
             ServerCalculateHealth();
             HoleSpawn holeSpawn = holeInstance.GetComponent<HoleSpawn>();
-            holeSpawn.Hull = internalCollider;
+            holeSpawn.Hull = netIdentity;
             NetworkServer.Spawn(holeInstance);
 
 
@@ -145,8 +145,8 @@ namespace ShipsLogic.Holes
 
         RaycastHit ServerConvertHitToWorld(RaycastHit raycastHit)
         {
-            raycastHit.point = interior.TransformPoint(raycastHit.point);
-            raycastHit.normal = interior.TransformDirection(raycastHit.normal);
+            raycastHit.point = transform.TransformPoint(raycastHit.point);
+            raycastHit.normal = transform.TransformDirection(raycastHit.normal);
             return raycastHit;
         }
 

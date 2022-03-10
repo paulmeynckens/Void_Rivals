@@ -235,6 +235,21 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4168454650036348598, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: headsRenderers.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168454650036348598, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: headsRenderers.Array.data[4]
+      value: 
+      objectReference: {fileID: 717861857620925356}
+    - target: {fileID: 4168454650036348598, guid: 218c89b1385a74c4bb2b08be4643166e,
+        type: 3}
+      propertyPath: headsRenderers.Array.data[5]
+      value: 
+      objectReference: {fileID: 3082414264325271330}
     - target: {fileID: 8482026759908062638, guid: 218c89b1385a74c4bb2b08be4643166e,
         type: 3}
       propertyPath: m_RootOrder
@@ -613,6 +628,18 @@ Transform:
 --- !u!4 &2621293489264024385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 110492521167831517, guid: 218c89b1385a74c4bb2b08be4643166e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2731495668411243164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &717861857620925356 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3179087619806429488, guid: 218c89b1385a74c4bb2b08be4643166e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2731495668411243164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3082414264325271330 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1094048874821055934, guid: 218c89b1385a74c4bb2b08be4643166e,
     type: 3}
   m_PrefabInstance: {fileID: 2731495668411243164}
   m_PrefabAsset: {fileID: 0}

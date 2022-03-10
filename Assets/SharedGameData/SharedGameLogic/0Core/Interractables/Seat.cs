@@ -89,7 +89,7 @@ namespace Core.Interractables
                 networkIdentity.AssignClientAuthority(welcomedCharacter.connectionToClient);
             }
             
-            //welcomedCharacter.RemoveClientAuthority();
+            welcomedCharacter.RemoveClientAuthority();
 
             currentSitter = welcomedCharacter;
             currentSitterPreviousParent = currentSitter.transform.parent;
@@ -103,7 +103,7 @@ namespace Core.Interractables
 
         void ServerEjectCharacter()
         {
-            //currentSitter.AssignClientAuthority(connectionToClient);
+            currentSitter.AssignClientAuthority(connectionToClient);
             netIdentity.RemoveClientAuthority();
             foreach (NetworkIdentity networkIdentity in controlledObjects)
             {
