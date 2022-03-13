@@ -21,7 +21,7 @@ namespace UI.TabPanel
         {
             
             
-            PlayerPawn.local.CmdAskSpawnShip(ship);
+            PlayerPawn.localPlayerPawn.CmdAskSpawnShip(PlayerPawn.localPlayerPawn.CrewId,ship);
 
             if (CheckShipSize(ship))
             {
@@ -31,7 +31,7 @@ namespace UI.TabPanel
 
         bool CheckShipSize(string ship)
         {
-            int crewSize = PlayerPawn.local.Crew.crewMembers.Count;
+            int crewSize = PlayerPawn.localPlayerPawn.CrewId.transform.childCount;
             int requestedMaxShipCapacity = ShipsManager.instance.shipSpawners[ship].shipMaxCapacity;
             int requestedMinShipCapacity = ShipsManager.instance.shipSpawners[ship].shipMinCapacity;
 

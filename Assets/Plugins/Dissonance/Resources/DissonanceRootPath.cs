@@ -1,4 +1,4 @@
-﻿
+
 // ReSharper disable once CheckNamespace (Justification: Don't want to create a Dissonance.Resources namespace)
 namespace Dissonance
 {
@@ -13,7 +13,7 @@ namespace Dissonance
 
         // Magic GUID: 6e445e37-4c7a-43ce-9f2d-068dd0a2413d
         // internal const string BasePath = "{{PATH}}";
-        internal const string BasePath = "Assets/Plugins/Dissonance";
+         internal const string BasePath = "Assets/Plugins/Dissonance";
 
         internal const string BaseResourcePath = BasePath + "/Resources";
     }
