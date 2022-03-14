@@ -33,13 +33,7 @@ namespace RoundManagement
 
         public CrewState State { get => state; set => state = value; }
 
-        /*
-public PlayerPawn[] CrewMembers
-{
 
-get => GetComponentsInChildren<PlayerPawn>();
-}
-*/
 
 
         bool team=false;

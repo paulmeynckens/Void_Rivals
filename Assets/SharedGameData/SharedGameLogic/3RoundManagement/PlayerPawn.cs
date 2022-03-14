@@ -34,7 +34,7 @@ namespace RoundManagement
 
         CharacterHealth characterHealth = null;
 
-        
+        public static event Action<PlayerPawn> OnLocalPlayerChangedCrew = delegate { };
 
         #region Syncvars+hooks
 
@@ -67,14 +67,11 @@ namespace RoundManagement
             transform.parent = _new.transform;
             if (isLocalPlayer)
             {
-                LocalPlayerConnectChannels(_new);
+                OnLocalPlayerChangedCrew(this);
             }
         }
 
-        void LocalPlayerConnectChannels(NetworkIdentity crew)
-        {
 
-        }
 
         #endregion
 

@@ -13,22 +13,39 @@ MonoBehaviour:
   m_Name: ChatRoomSettings
   m_EditorClassIdentifier: 
   Names:
-  - Global
+  - Neutral
   - Red
   - Blue
-  - Crew0
-  - Crew2
-  - Crew3
-  - Crew4
-  - Crew5
-  - Crew6
-  - Crew7
-  - Crew8
-  - Crew9
-  - Crew10
-  - Crew11
-  - Crew12
-  - Crew13
-  - Crew14
-  - Crew15
-  - Crew16
+  - Red0
+  - Red1
+  - Red2
+  - Red3
+  - Red4
+  - Red5
+  - Red6
+  - Red7
+  - Red8
+  - Red9
+  - Red10
+  - Red11
+  - Red12
+  - Red13
+  - Red14
+  - Red15
+  - Blue0
+  - Blue1
+  - Blue2
+  - Blue3
+  - Blue4
+  - Blue5
+  - Blue6
+  - Blue7
+  - Blue8
+  - Blue9
+  - Blue10
+  - Blue11
+  - Blue12
+  - Blue13
+  - Blue14
+  - Blue15
+  - Global
