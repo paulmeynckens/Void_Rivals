@@ -64,7 +64,15 @@ namespace RoundManagement
 
         void ClientJoinCrew(NetworkIdentity _old, NetworkIdentity _new)
         {
-            transform.parent = _new.transform;
+            if (_new == null)
+            {
+                transform.parent = null;
+            }
+            else
+            {
+                transform.parent = _new.transform;
+            }
+            
             if (isLocalPlayer)
             {
                 OnLocalPlayerChangedCrew(this);
@@ -376,6 +384,28 @@ namespace RoundManagement
         {
             ServerLeaveCrew();
             ServerDespawnPlayer();
+
+            NetworkIdentity characterIdentity = null;
+            if (characterInstance != null)
+            {
+                characterIdentity = characterInstance.GetComponent<NetworkIdentity>();
+            }
+            List<NetworkIdentity> foundNetIdents = new List<NetworkIdentity>();
+
+            foreach (NetworkIdentity identity in connectionToClient.clientOwnedObjects)
+            {
+                if (identity != netIdentity || identity!= characterIdentity)
+                {
+                    foundNetIdents.Add(identity);
+                }
+            }
+
+            foreach (NetworkIdentity netId in foundNetIdents)
+            {
+                netId.RemoveClientAuthority();
+            }
+
+
             base.OnStopServer();
             
         }

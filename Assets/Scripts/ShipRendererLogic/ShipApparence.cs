@@ -28,7 +28,7 @@ namespace ShipsRenderer
 
         private void OnEnable()
         {
-            Crew newCrew = shipPawn.ShipCrewId.GetComponent<Crew>();
+            Crew newCrew = shipPawn.CrewId.GetComponent<Crew>();
             ChangeColor(newCrew.Team);
         }
         

@@ -29,6 +29,7 @@ namespace RoundManagement
         public NetworkIdentity ShipPawnId
         {
             get => shipPawnId;
+
         }
 
         public CrewState State { get => state; set => state = value; }
@@ -43,7 +44,9 @@ namespace RoundManagement
 
         ShipSpawnedStateManager shipSpawnedStateManager = null;
 
-        [SyncVar] NetworkIdentity shipPawnId = null;
+        NetworkIdentity shipPawnId = null;
+
+        [SyncVar(hook = nameof(ClientChangeShip))] uint shipPawnNetId = 0;
 
         [SyncVar] string shipName = " ";
 
@@ -64,7 +67,37 @@ namespace RoundManagement
         public const float JOIN_CREW_REQUEST_TIMEOUT = 6f;
         public const int MAX_CREW_MEMBERS = 4;// increase this number when the maximum ship size increases
 
-        
+
+        void ClientChangeShip(uint _old, uint _new)
+        {
+            if (_new == 0)
+            {
+                shipPawnId = null;
+                
+            }
+            else
+            {
+                StartCoroutine(SearchShipNetidentity(_new));
+            }
+
+        }
+
+        IEnumerator SearchShipNetidentity(uint netId)
+        {
+
+            while (shipPawnId == null || shipPawnId.netId != netId)
+            {
+                yield return null;
+                if (NetworkClient.spawned.TryGetValue(netId, out NetworkIdentity identity))
+                {
+                    shipPawnId = identity;
+                    
+                }
+
+            }
+
+        }
+
         private void FixedUpdate()
         {
             if (isServer)
@@ -118,7 +151,8 @@ namespace RoundManagement
 
 
             shipPawnId = shipSpawnedStateManager.ShipPawn.netIdentity;
-            shipSpawnedStateManager.ShipPawn.ShipCrewId = netIdentity;
+            shipPawnNetId = shipPawnId.netId;
+            shipSpawnedStateManager.ShipPawn.CrewId = netIdentity;
             crewMaxCapacity = shipSpawner.shipMaxCapacity;
             crewMinCapacity = shipSpawner.shipMinCapacity;
         }
@@ -130,9 +164,10 @@ namespace RoundManagement
                 return;
             }
             shipSpawnedStateManager.ServerDespawnShip();
-            shipSpawnedStateManager.ShipPawn.ShipCrewId = null;
+            shipSpawnedStateManager.ShipPawn.CrewId = null;
             shipSpawnedStateManager =null;            
             shipPawnId = null;
+            shipPawnNetId = 0;
             crewMaxCapacity = MAX_CREW_MEMBERS;
             crewMinCapacity = 1;
             

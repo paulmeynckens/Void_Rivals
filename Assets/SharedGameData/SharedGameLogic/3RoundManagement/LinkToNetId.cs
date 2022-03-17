@@ -20,19 +20,14 @@ namespace RoundManagement
 
         IEnumerator EstablishLink(uint netId)
         {
-            if (NetworkIdentity.spawned.ContainsKey(netId))
+            if (NetworkClient.spawned.ContainsKey(netId))
             {
-                OnClientLinkEstablished(NetworkIdentity.spawned[netId]);
+                OnClientLinkEstablished(NetworkClient.spawned[netId]);
             }
             else
             {
                 yield return null;
             }
-
-
-
-            
-
         }
     }
 }

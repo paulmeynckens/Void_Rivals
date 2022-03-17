@@ -10,16 +10,21 @@ namespace RoundManagement
     {
         // Start is called before the first frame update
 
-        public NetworkIdentity ShipCrewId
+        public NetworkIdentity CrewId
         {
-            get => shipCrewId;
-            set => shipCrewId = value;
+            get => crewId;
+            set
+            {
+
+                crewId = value;
+                crewNetId = value.netId;
+            }
         }
         
 
-        [SyncVar(hook = nameof(ClientChangeCrew))]NetworkIdentity shipCrewId = null;
-        
+        NetworkIdentity crewId = null;
 
+        [SyncVar(hook = nameof(ClientChangeCrew))] uint crewNetId = 0;
 
 
         public event Action<bool> OnClientSpawnStateChanged = delegate { };
@@ -30,23 +35,44 @@ namespace RoundManagement
 
 
 
-        void ClientChangeCrew(NetworkIdentity _old, NetworkIdentity _new)
+        void ClientChangeCrew(uint _old, uint _new)
         {
-            OnClientSpawnStateChanged(_new != null);
+            if (_new == 0)
+            {
+                crewId = null;
+                OnClientSpawnStateChanged(false);
+            }
+            else
+            {
+                StartCoroutine(SearchCrewNetidentity(_new));
+            }
+            
         }
 
-
+        IEnumerator SearchCrewNetidentity(uint netId)
+        {
+            while (crewId == null || crewId.netId!= netId)
+            {
+                yield return null;
+                if (NetworkClient.spawned.TryGetValue(netId, out NetworkIdentity identity))
+                {
+                    crewId = identity;
+                    OnClientSpawnStateChanged(true);
+                }
+                    
+            }
+        }
 
         public void ServerJoinCrew(NetworkIdentity crew)
         {
             
-            shipCrewId = crew;
+            crewId = crew;
         }
 
         public void ServerLeaveCrew()
         {
             
-            shipCrewId = null;
+            crewId = null;
         }
       
     }
