@@ -24,31 +24,16 @@ namespace UI.TabPanel
         [SerializeField] TMP_Text blueTeamNB = null;
         [SerializeField] TMP_Text redTeamNB = null;
 
-        [SerializeField] GameObject createBlueButton=null;
-        [SerializeField] GameObject createRedButton = null;
         public GameObject youNeedAShipToSpawn = null;
 
         private void FixedUpdate()
         {
             blueTeamNB.text = TeamsManager.instance.BlueCount.ToString();
             redTeamNB.text = TeamsManager.instance.RedCount.ToString();
-            if (PlayerPawn.local != null)
-            {
-                ClientHideOrShowCreateButtons();
-            }
             
         }
 
-        public void CreateCrew(bool team)
-        {
-            PlayerPawn.local.CmdAskCreateCrew(team);
-        }
+        
 
-        [ClientCallback]
-        void ClientHideOrShowCreateButtons()
-        {
-            createBlueButton.SetActive(PlayerPawn.local.Crew == null);
-            createRedButton.SetActive(PlayerPawn.local.Crew == null);
-        }
     }
 }

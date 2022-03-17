@@ -24,12 +24,12 @@ namespace ShipsRenderer
 
         private void Start()
         {
-            EnableOrDisable(shipPawn.ShipCrewNetId!=0);
+            EnableOrDisable(shipPawn.CrewId!=null);
         }
 
         private void FixedUpdate()
         {
-            gameObject.SetActive(shipPawn.ShipCrewNetId != 0);
+            gameObject.SetActive(shipPawn.CrewId != null);
             rb.MovePosition(shipExtBody.position);
             rb.MoveRotation(shipExtBody.rotation);
         }

@@ -15,51 +15,23 @@ namespace ShipsRenderer
 
         [SerializeField] RendererGroup[] rendererGroups;
         [SerializeField] ShipPawn shipPawn = null;
-        Crew crew=null;
+        
         Target target;
 
         private void Awake()
         {
             target = GetComponent<Target>();
-            /*
-            if (linkToNetId != null)
-            {
-                linkToNetId.OnClientLinkEstablished += SearchCrewAndSetApparence;
-            }
-            */
+
         }
 
 
 
         private void OnEnable()
         {
-            SearchCrewAndSetApparence(shipPawn.ShipCrewNetId);
+            Crew newCrew = shipPawn.CrewId.GetComponent<Crew>();
+            ChangeColor(newCrew.Team);
         }
-        void SearchCrewAndSetApparence(uint targetCrewId)
-        {
-            if (targetCrewId == 0)
-            {
-                return;
-            }
-            StartCoroutine(SearchCrew(targetCrewId));
-        }
-
-        IEnumerator SearchCrew(uint targetCrewId)
-        {
-            while (crew == null)
-            {
-                yield return null;
-                
-                if (NetworkIdentity.spawned.TryGetValue(targetCrewId, out NetworkIdentity identity))
-                {
-                    crew = identity.GetComponent<Crew>();
-                    ChangeColor(crew.team);
-                    //ChangeName(shipName);
-                    //string shipName = NetworkIdentity.spawned[crew.captain].GetComponent<PlayerPawn>().playerData.shipName;
-                }
-                    
-            }
-        }
+        
 
         void ChangeColor(bool _new)
         {

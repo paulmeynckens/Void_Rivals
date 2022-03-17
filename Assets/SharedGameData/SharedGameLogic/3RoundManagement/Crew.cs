@@ -11,57 +11,93 @@ namespace RoundManagement
 {
     public class Crew : NetworkBehaviour
     {
-        public static List<Crew> crews = new List<Crew>();
+        public bool Team { get => team; set => team = value; }
 
-        [SyncVar] public bool team = true;
-
-        public event Action<uint> OnChangeCaptain;
-        [SyncVar(hook = nameof(ClientNotifyChangeCaptain))] public uint captain = 0;
-        void ClientNotifyChangeCaptain(uint _old, uint _new)
-        {
-            OnChangeCaptain?.Invoke(_new);
-        }
-
-        public NetworkIdentity Ship
-        {
-            get => ship;
-        }
-        [SyncVar]  NetworkIdentity ship = null;
-
-        ShipSpawnedStateManager shipSpawnedStateManager = null;
-
-        [SyncVar] public string shipName = " ";
-
-        [SyncVar] public CrewState state = CrewState.Confirm;
-        
         public int CrewMinCapacity
         {
             get => crewMinCapacity;
             set => crewMinCapacity = value;
         }
-        [SyncVar] int crewMinCapacity = 0;
-        
+
         public int CrewMaxCapacity
         {
             get => crewMaxCapacity;
             set => crewMaxCapacity = value;
         }
+
+
+        public NetworkIdentity ShipPawnId
+        {
+            get => shipPawnId;
+
+        }
+
+        public CrewState State { get => state; set => state = value; }
+
+
+
+
+        bool team=false;
+
+        
+        
+
+        ShipSpawnedStateManager shipSpawnedStateManager = null;
+
+        NetworkIdentity shipPawnId = null;
+
+        [SyncVar(hook = nameof(ClientChangeShip))] uint shipPawnNetId = 0;
+
+        [SyncVar] string shipName = " ";
+
+        [SyncVar] CrewState state = CrewState.Open;
+
+        [SyncVar] int crewMinCapacity = 1;
+        
+        
+        
+
         [SyncVar] int crewMaxCapacity = MAX_CREW_MEMBERS;
 
-        [SyncVar] public string shipType = " ";
-        public SyncDictionary<uint, float> joinRequests = new SyncDictionary<uint, float>();
-        public readonly SyncList<uint> crewMembers = new SyncList<uint>();
+        [SyncVar] string shipType = " ";
+        public SyncDictionary<NetworkIdentity, float> joinRequests = new SyncDictionary<NetworkIdentity, float>();
+        
         
         
         public const float JOIN_CREW_REQUEST_TIMEOUT = 6f;
         public const int MAX_CREW_MEMBERS = 4;// increase this number when the maximum ship size increases
 
 
-
-        private void Awake()
+        void ClientChangeShip(uint _old, uint _new)
         {
-            crews.Add(this);
+            if (_new == 0)
+            {
+                shipPawnId = null;
+                
+            }
+            else
+            {
+                StartCoroutine(SearchShipNetidentity(_new));
+            }
+
         }
+
+        IEnumerator SearchShipNetidentity(uint netId)
+        {
+
+            while (shipPawnId == null || shipPawnId.netId != netId)
+            {
+                yield return null;
+                if (NetworkClient.spawned.TryGetValue(netId, out NetworkIdentity identity))
+                {
+                    shipPawnId = identity;
+                    
+                }
+
+            }
+
+        }
+
         private void FixedUpdate()
         {
             if (isServer)
@@ -71,10 +107,20 @@ namespace RoundManagement
 
         }
 
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            foreach(Transform _transform in transform.GetComponentInChildren<Transform>())
+            {
+                Destroy(_transform.gameObject);//to avoid miscalculations of child count due to crew icon
+            }
+            
+        }
+
         void ServerCheckJoinRequestsTimeout()
         {
 
-            foreach (KeyValuePair<uint, float> joinRequest in joinRequests)
+            foreach (KeyValuePair<NetworkIdentity, float> joinRequest in joinRequests)
             {
 
                 if (joinRequest.Value < Time.time-JOIN_CREW_REQUEST_TIMEOUT)
@@ -87,24 +133,8 @@ namespace RoundManagement
 
         }
 
-        public void ServerAddCrewMember(uint netId)
-        {
-            if (!crewMembers.Contains(netId))
-            {
-                
-                crewMembers.Add(netId);
-            }
-            
-
-        }
-        public void ServerRemoveCrewMember(uint netId)
-        {
-            if (crewMembers.Contains(netId))
-            {
-                crewMembers.Remove(netId);
-            }
-
-        }
+       
+        
 
         public void ServerSpawnShip(ShipSpawner shipSpawner)
         {
@@ -113,45 +143,37 @@ namespace RoundManagement
 
            shipSpawnedStateManager = shipSpawner.GetAvailableShip();
 
-            
 
-            /*
-            LinkToNetId shipLinkToNetId = spawnedShip.GetComponent<LinkToNetId>();
-            shipLinkToNetId.netIdLink = netId;
-            */
-
-            
-
-            
-            
-            
             Health shipHealth = shipSpawnedStateManager.Structure;
             shipHealth.OnServerDie += ServerRemoveShip;
 
             shipSpawnedStateManager.ServerSpawnShip(location.position, location.rotation, netIdentity);
 
 
-            ship = shipSpawnedStateManager.ShipPawn.netIdentity;
+            shipPawnId = shipSpawnedStateManager.ShipPawn.netIdentity;
+            shipPawnNetId = shipPawnId.netId;
+            shipSpawnedStateManager.ShipPawn.CrewId = netIdentity;
             crewMaxCapacity = shipSpawner.shipMaxCapacity;
             crewMinCapacity = shipSpawner.shipMinCapacity;
         }
 
         public void ServerRemoveShip()
         {
-            
+            if (shipSpawnedStateManager == null)
+            {
+                return;
+            }
             shipSpawnedStateManager.ServerDespawnShip();
-            shipSpawnedStateManager=null;
-            ship.GetComponent<ShipPawn>().ShipCrewNetId = 0;
-            ship = null;
-            crewMaxCapacity = 0;
-            crewMinCapacity = 0;
+            shipSpawnedStateManager.ShipPawn.CrewId = null;
+            shipSpawnedStateManager =null;            
+            shipPawnId = null;
+            shipPawnNetId = 0;
+            crewMaxCapacity = MAX_CREW_MEMBERS;
+            crewMinCapacity = 1;
             
         }
         
-        private void OnDestroy()
-        {
-            crews.Remove(this);
-        }
+        
 
 
 

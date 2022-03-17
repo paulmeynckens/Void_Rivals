@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8163081688194261353}
   - component: {fileID: 3811958330262186132}
   - component: {fileID: 8328628654865278075}
+  - component: {fileID: 823292915414867698}
   m_Layer: 0
   m_Name: PlayerPawn
   m_TagString: Untagged
@@ -47,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 0
   serverOnly: 0
-  m_AssetId: 
+  visible: 0
+  m_AssetId: 85ec6c2baec6dfa488dad4d021167390
   hasSpawned: 0
 --- !u!114 &8328628654865278075
 MonoBehaviour:
@@ -63,8 +65,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  crewIcon: {fileID: 6650166162019606107, guid: a5a90e34aab56224f8760a125e21ea6e,
-    type: 3}
   crewPrefab: {fileID: 2771210388594679419, guid: 63b9a20fcf3744f46a7fd2ad3e95348c,
     type: 3}
   characterPrefab: {fileID: 5254812820540187099, guid: 29c8b44968b6d834d958b83f83458a0c,
@@ -74,6 +74,20 @@ MonoBehaviour:
     playerName: 
     shipName: 
   spawned: 0
+--- !u!114 &823292915414867698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7630387878853568526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0fc7e5ceca1c440b7b759812c6a0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1001 &2921584828266480960
 PrefabInstance:
   m_ObjectHideFlags: 0

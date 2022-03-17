@@ -9,6 +9,7 @@ namespace UI.TabPanel
 {
     public class ShipIcon : MonoBehaviour
     {
+        /*
         GameObject ship;
         ShipSpawnLocationHolder shipCrewManager;
         Crew crew=null;
@@ -43,6 +44,7 @@ namespace UI.TabPanel
         {
             Destroy(gameObject);
         }
+        */
     }
 }
 

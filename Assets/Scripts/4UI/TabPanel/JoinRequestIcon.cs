@@ -13,18 +13,18 @@ namespace UI.TabPanel
     {
         [SerializeField] TMP_Text playerName = null;
 
-        public uint requestingPlayer = 0;
+        public NetworkIdentity requestingPlayer = null;
 
 
         private void Start()
         {
 
-            playerName.text = NetworkIdentity.spawned[requestingPlayer].gameObject.name + " wants to join your crew.";
+            playerName.text = requestingPlayer.gameObject.name + " wants to join your crew.";
         }
 
         public void AcceptOrRefuse(bool response)
         {            
-            PlayerPawn.local.CmdRespondJoinRequest(requestingPlayer, response);
+            PlayerPawn.localPlayerPawn.CmdRespondJoinRequest(PlayerPawn.localPlayerPawn.CrewId, requestingPlayer, response);
         }
     }
 }

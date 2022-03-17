@@ -41,13 +41,15 @@ namespace UI.TabPanel
 
         private void FixedUpdate()
         {
-            playerNameText.text = playerPawn.playerData.playerName;
+            playerNameText.text = playerPawn.PlayerData.playerName;
 
-            SetCaptainNameColor(IsCaptain());
+            SetCaptainNameColor(playerPawn.IsCaptain);
+
+            designateCaptainButton.SetActive(PlayerPawn.localPlayerPawn.IsCaptain && PlayerPawn.localPlayerPawn.CrewId == playerPawn.CrewId);
 
             SetPosition();
 
-            designateCaptainButton.SetActive(ShouldActivateCaptainButtons());
+            
         }
 
         void SetLocalColor(bool islocalPlayer)
@@ -74,47 +76,24 @@ namespace UI.TabPanel
             }
         }
 
-        bool IsCaptain()
-        {
-            bool isCaptain;
 
-            if(playerPawn.Crew == null)
-            {
-                isCaptain = false;
-            }
-            else
-            {
-                isCaptain = playerPawn.Crew.captain == playerPawn.netId;
-            }
-
-            return isCaptain;
-
-            
-        }
 
         void SetPosition()
         {
-            if (playerPawn.Crew == null)
+            if (playerPawn.CrewId == null)
             {
                 transform.SetParent(TeamsPanel.instance.noTeam);
                 transform.localScale = Vector3.one;
             }
             else
             {
-                transform.SetParent(CrewIcon.crewsIcons[playerPawn.Crew].transform);
+                transform.SetParent(CrewIcon.crewsIcons[playerPawn.CrewId].transform);
                 transform.localScale = Vector3.one;
             }
            
         }
 
-        bool ShouldActivateCaptainButtons()
-        {
-            if (PlayerPawn.local.Crew == null)
-            {
-                return false;
-            }
-            return PlayerPawn.local.Crew.captain==PlayerPawn.local.netId && PlayerPawn.local.Crew==playerPawn.Crew && !playerPawn.isLocalPlayer;
-        }
+        
         
 
         void SetAlive(bool isAlive)
@@ -130,7 +109,7 @@ namespace UI.TabPanel
  
         public void DesignateNewCaptain()
         {
-            PlayerPawn.local.CmdDesignateNewCaptain(playerPawn.netId);
+            PlayerPawn.localPlayerPawn.CmdDesignateNewCaptain(PlayerPawn.localPlayerPawn.CrewId, playerPawn.netIdentity);
         }
 
         void DestroyPlayerIcon()

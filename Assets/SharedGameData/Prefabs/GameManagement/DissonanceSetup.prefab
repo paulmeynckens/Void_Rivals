@@ -1,0 +1,349 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2799375845914993358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2799375845914993393}
+  - component: {fileID: 2799375845914993392}
+  - component: {fileID: 2799375845914993359}
+  - component: {fileID: 2799375845914993394}
+  m_Layer: 0
+  m_Name: CrewChatRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2799375845914993393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375845914993358}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.3225825, y: 1.5290487, z: -3.7851562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2798550444639562458}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2799375845914993392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375845914993358}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a066ddbf125f9546bcadc947418566b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _channelTypeExpanded: 1
+  _metadataExpanded: 0
+  _activationModeExpanded: 1
+  _tokensExpanded: 0
+  _ampExpanded: 0
+  _activationFaderSettings:
+    _volume: 1
+    _fadeInTicks: 0
+    _fadeOutTicks: 1500000
+  _triggerFaderSettings:
+    _volume: 1
+    _fadeInTicks: 7500000
+    _fadeOutTicks: 11500000
+  _broadcastPosition: 1
+  _channelType: 0
+  _inputName: CrewChat
+  _mode: 2
+  _muted: 0
+  _playerId: 
+  _useTrigger: 0
+  _roomName: Neutral
+  _priority: -2
+--- !u!114 &2799375845914993359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375845914993358}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3737438748cf23f448d18cd2c6192e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _roomName: Neutral
+  _useTrigger: 0
+--- !u!114 &2799375845914993394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375845914993358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa328182fd0e4874ea1339837c39a6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2799375846076786234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2799375846076786235}
+  - component: {fileID: 2799375846076786237}
+  - component: {fileID: 2799375846076786236}
+  - component: {fileID: 2799375846076786238}
+  m_Layer: 0
+  m_Name: TeamChatRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2799375846076786235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375846076786234}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.3225825, y: 1.5290487, z: -3.7851562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2798550444639562458}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2799375846076786237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375846076786234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a066ddbf125f9546bcadc947418566b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _channelTypeExpanded: 1
+  _metadataExpanded: 0
+  _activationModeExpanded: 1
+  _tokensExpanded: 0
+  _ampExpanded: 0
+  _activationFaderSettings:
+    _volume: 1
+    _fadeInTicks: 0
+    _fadeOutTicks: 1500000
+  _triggerFaderSettings:
+    _volume: 1
+    _fadeInTicks: 7500000
+    _fadeOutTicks: 11500000
+  _broadcastPosition: 1
+  _channelType: 0
+  _inputName: TeamChat
+  _mode: 2
+  _muted: 0
+  _playerId: 
+  _useTrigger: 0
+  _roomName: Neutral
+  _priority: -2
+--- !u!114 &2799375846076786236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375846076786234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3737438748cf23f448d18cd2c6192e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _roomName: Neutral
+  _useTrigger: 0
+--- !u!114 &2799375846076786238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375846076786234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2133448a8f27941bbb2db8d5822bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2799375846271836143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2799375846271836048}
+  - component: {fileID: 2799375846271836050}
+  - component: {fileID: 2799375846271836049}
+  m_Layer: 0
+  m_Name: GlobalChatRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2799375846271836048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375846271836143}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.3225825, y: 1.5290487, z: -3.7851562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2798550444639562458}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2799375846271836050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375846271836143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a066ddbf125f9546bcadc947418566b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _channelTypeExpanded: 1
+  _metadataExpanded: 0
+  _activationModeExpanded: 0
+  _tokensExpanded: 0
+  _ampExpanded: 0
+  _activationFaderSettings:
+    _volume: 1
+    _fadeInTicks: 0
+    _fadeOutTicks: 1500000
+  _triggerFaderSettings:
+    _volume: 1
+    _fadeInTicks: 7500000
+    _fadeOutTicks: 11500000
+  _broadcastPosition: 1
+  _channelType: 0
+  _inputName: GlobalChat
+  _mode: 2
+  _muted: 0
+  _playerId: 
+  _useTrigger: 0
+  _roomName: Global
+  _priority: -2
+--- !u!114 &2799375846271836049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799375846271836143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3737438748cf23f448d18cd2c6192e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _roomName: Global
+  _useTrigger: 0
+--- !u!1 &2801112618648746542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2798550444639562458}
+  - component: {fileID: 2832591423651610928}
+  - component: {fileID: 2828558488695851884}
+  m_Layer: 0
+  m_Name: DissonanceSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2798550444639562458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801112618648746542}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.3225825, y: -1.5290487, z: 3.7851562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2799375845914993393}
+  - {fileID: 2799375846076786235}
+  - {fileID: 2799375846271836048}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2832591423651610928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801112618648746542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb4dc319de88dc4cb76c47aafb46b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lastPrefabError: 
+  _isMuted: 0
+  _isDeafened: 0
+  _oneMinusBaseRemoteVoiceVolume: 0
+  _playbackPrefab: {fileID: 0}
+  _playbackPrefab2: {fileID: 0}
+  _micName: 
+  _playerPriority: 0
+  _tokens:
+    _tokens: []
+--- !u!114 &2828558488695851884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801112618648746542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e83d3d5772ae492499697165bf67bcd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

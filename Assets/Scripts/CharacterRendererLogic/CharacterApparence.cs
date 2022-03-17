@@ -19,6 +19,7 @@ namespace CharacterRenderer
 
         [SerializeField] Renderer[] headsRenderers = null;
 
+        
 
         private void Awake()
         {
@@ -29,19 +30,23 @@ namespace CharacterRenderer
             }
 
         }
-        void SearchPawnAndSetApparence(uint targetId)
+        void SearchPawnAndSetApparence(NetworkIdentity targetId)
         {
-            PlayerPawn playerPawn = NetworkIdentity.spawned[targetId].GetComponent<PlayerPawn>();
+            PlayerPawn playerPawn = targetId.GetComponent<PlayerPawn>();
 
-            SetColor(playerPawn.Crew.team);
-            SetGender(playerPawn.playerData.characterData.isMale);
-            SetName(playerPawn.playerData.playerName);
+            Crew playerCrew = playerPawn.CrewId.GetComponent<Crew>();
+
+            SetColor(playerCrew.Team);
+            SetGender(playerPawn.PlayerData.characterData.isMale);
+            SetName(playerPawn.PlayerData.playerName);
             if (playerPawn.isLocalPlayer)
             {
                 HideHead();
             }
 
         }
+
+        
 
         private void HideHead()
         {

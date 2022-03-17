@@ -12,7 +12,7 @@ namespace UI.TabPanel
 {
     public class CrewIcon : MonoBehaviour
     {
-        public readonly static Dictionary<Crew, CrewIcon> crewsIcons = new Dictionary<Crew, CrewIcon>();
+        public readonly static Dictionary<NetworkIdentity, CrewIcon> crewsIcons = new Dictionary<NetworkIdentity, CrewIcon>();
 
         Crew targetCrew;
 
@@ -27,21 +27,22 @@ namespace UI.TabPanel
         [SerializeField] GameObject joinRequestIconPrefab = null;
 
 
-        Dictionary<uint, JoinRequestIcon> joinRequestIcons = new Dictionary<uint, JoinRequestIcon>();
+        Dictionary<NetworkIdentity, JoinRequestIcon> joinRequestIcons = new Dictionary<NetworkIdentity, JoinRequestIcon>();
 
 
 
         private void Awake()
         {
             targetCrew = GetComponentInParent<Crew>();
-            crewsIcons.Add(targetCrew, this);
+            crewsIcons.Add(targetCrew.netIdentity, this);
 
             
         }
 
         private void Start()
         {
-            if (targetCrew.team)
+            
+            if (targetCrew.Team)
             {
                 transform.SetParent(TeamsPanel.instance.blueTeam);
                 transform.localScale = Vector3.one;
@@ -55,22 +56,18 @@ namespace UI.TabPanel
 
         private void FixedUpdate()//not very efficient but it works
         {
-            if (targetCrew == null)//self destruct if crew has been removed
-            {
-                Destroy(this.gameObject);
-            }
-
+            
             joinButton.SetActive(LocalPlayerCanJoinThisCrew());
 
             leaveButton.SetActive(LocalPlayerIsInThisCrew());
 
-            spawnButton.SetActive(LocalPlayerIsInThisCrew());
+            spawnButton.SetActive(ShouldActivateSpawnButton());
 
-            openShipPanelButton.SetActive(LocalPlayerIsCaptain() && targetCrew.Ship == null);
+            openShipPanelButton.SetActive(LocalPlayerIsInThisCrew() && LocalPlayerIsCaptain() && targetCrew.ShipPawnId == null);
 
-            captainMenu.SetActive(LocalPlayerIsCaptain());
+            captainMenu.SetActive(LocalPlayerIsCaptain()&&LocalPlayerIsInThisCrew());
 
-            SetCrewStatusVisual(targetCrew.state);
+            SetCrewStatusVisual(targetCrew.State);
 
             RefreshJoinRequestIcons();
 
@@ -85,22 +82,23 @@ namespace UI.TabPanel
 
         bool LocalPlayerCanJoinThisCrew()
         {
-            return PlayerPawn.local.Crew == null && (targetCrew.crewMembers.Count < targetCrew.CrewMaxCapacity) && targetCrew.state!=CrewState.Closed;
+            return PlayerPawn.localPlayerPawn.CrewId == null && (targetCrew.transform.childCount < targetCrew.CrewMaxCapacity) && targetCrew.State!=CrewState.Closed;
         }
         bool LocalPlayerIsInThisCrew()
         {
-            return targetCrew.crewMembers.Contains(PlayerPawn.local.netId);
+            return PlayerPawn.localPlayerPawn.CrewId==targetCrew.netIdentity;
         }
 
         bool LocalPlayerIsCaptain()
         {
-            return targetCrew.captain == PlayerPawn.local.netId;
+            return PlayerPawn.localPlayerPawn.IsCaptain;
         }
 
         bool ShouldActivateSpawnButton()
         {
-            return LocalPlayerIsInThisCrew() && targetCrew.Ship != null && !PlayerPawn.local.spawned;
+            return LocalPlayerIsInThisCrew() && targetCrew.ShipPawnId != null && !PlayerPawn.localPlayerPawn.Spawned;
         }
+
         void SetCrewStatusVisual(CrewState crewState)
         {
             switch (crewState)
@@ -122,7 +120,7 @@ namespace UI.TabPanel
         {
             if (!LocalPlayerIsCaptain())
             {
-                foreach (KeyValuePair<uint, JoinRequestIcon> joinRequestIcon in joinRequestIcons)// removes all crew icons if they are obsolete or if the local player is not the captain of the crew
+                foreach (KeyValuePair<NetworkIdentity, JoinRequestIcon> joinRequestIcon in joinRequestIcons)// removes all crew icons if they are obsolete or if the local player is not the captain of the crew
                 {
                     Destroy(joinRequestIcon.Value.gameObject);
                     joinRequestIcons.Remove(joinRequestIcon.Key);
@@ -131,7 +129,7 @@ namespace UI.TabPanel
                 return;
             }
 
-            foreach(KeyValuePair<uint,JoinRequestIcon> joinRequestIcon in joinRequestIcons)// removes all crew icons if they are obsolete or if the local player is not the captain of the crew
+            foreach(KeyValuePair<NetworkIdentity,JoinRequestIcon> joinRequestIcon in joinRequestIcons)// removes all crew icons if they are obsolete or if the local player is not the captain of the crew
             {
                 if (!targetCrew.joinRequests.ContainsKey(joinRequestIcon.Key))
                 {
@@ -141,7 +139,7 @@ namespace UI.TabPanel
                 }
             }
 
-            foreach(KeyValuePair<uint,float> joinRequest in targetCrew.joinRequests)//adds crew join request icons
+            foreach(KeyValuePair<NetworkIdentity,float> joinRequest in targetCrew.joinRequests)//adds crew join request icons
             {
                 if (!joinRequestIcons.ContainsKey(joinRequest.Key))
                 {
@@ -163,33 +161,33 @@ namespace UI.TabPanel
         #region buttons calls
         public void ClientAskJoinCrew()
         {
-            PlayerPawn.local.CmdAskJoinCrew(targetCrew.netIdentity);
+            PlayerPawn.localPlayerPawn.CmdAskJoinCrew(targetCrew.netIdentity);
         }
 
         public void AskLeaveCrew()
         {
-            PlayerPawn.local.CmdAskLeaveCrew();
+            PlayerPawn.localPlayerPawn.CmdAskLeaveCrew();
         }
 
         public void ChangeCrewStatus(string newCrewStatusString)
         {
             CrewState _crewState = (CrewState)Enum.Parse(typeof(CrewState), newCrewStatusString);
-            PlayerPawn.local.CmdAskChangeCrewStatus(_crewState);
+            PlayerPawn.localPlayerPawn.CmdAskChangeCrewStatus(targetCrew.netIdentity, _crewState);
         }
 
         public void AskSpawn()
         {
-            if (targetCrew.Ship == null)
+            if (targetCrew.ShipPawnId == null)
             {
                 TeamsPanel.instance.youNeedAShipToSpawn.SetActive(true);
             }
 
-            PlayerPawn.local.CmdAskSpawn();
+            PlayerPawn.localPlayerPawn.CmdAskSpawn();
         }
 
         public void AskOpenShipsSelectionPanel()
         {
-            if(LocalPlayerIsCaptain() && targetCrew.Ship == null)
+            if(LocalPlayerIsCaptain() && targetCrew.ShipPawnId == null)
             {
                 ShipsPanel.instance.gameObject.SetActive(true);
             }

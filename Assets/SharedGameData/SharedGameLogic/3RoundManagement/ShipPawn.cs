@@ -10,16 +10,21 @@ namespace RoundManagement
     {
         // Start is called before the first frame update
 
-        public uint ShipCrewNetId
+        public NetworkIdentity CrewId
         {
-            get => shipCrewNetId;
-            set => shipCrewNetId = value;
+            get => crewId;
+            set
+            {
+
+                crewId = value;
+                crewNetId = value.netId;
+            }
         }
         
 
-        [SyncVar(hook = nameof(ClientChangeCrew))]uint shipCrewNetId = 0;
-        NetworkIdentity crewNetworkIdentity = null;
+        NetworkIdentity crewId = null;
 
+        [SyncVar(hook = nameof(ClientChangeCrew))] uint crewNetId = 0;
 
 
         public event Action<bool> OnClientSpawnStateChanged = delegate { };
@@ -32,40 +37,42 @@ namespace RoundManagement
 
         void ClientChangeCrew(uint _old, uint _new)
         {
-            OnClientSpawnStateChanged(_new != 0);
             if (_new == 0)
             {
-                crewNetworkIdentity=null;
+                crewId = null;
+                OnClientSpawnStateChanged(false);
             }
             else
             {
-                StartCoroutine(ClientSearchAndJoinCrew(_new));
+                StartCoroutine(SearchCrewNetidentity(_new));
             }
-
+            
         }
 
-        IEnumerator ClientSearchAndJoinCrew(uint crewNetId)
+        IEnumerator SearchCrewNetidentity(uint netId)
         {
-            while (crewNetworkIdentity == null)
+            while (crewId == null || crewId.netId!= netId)
             {
                 yield return null;
-                if (NetworkIdentity.spawned.TryGetValue(crewNetId,out NetworkIdentity foundCrew))
+                if (NetworkClient.spawned.TryGetValue(netId, out NetworkIdentity identity))
                 {
-                    crewNetworkIdentity = foundCrew;
+                    crewId = identity;
+                    OnClientSpawnStateChanged(true);
                 }
+                    
             }
         }
 
         public void ServerJoinCrew(NetworkIdentity crew)
         {
             
-            shipCrewNetId = crew.netId;
+            crewId = crew;
         }
 
         public void ServerLeaveCrew()
         {
             
-            shipCrewNetId = 0;
+            crewId = null;
         }
       
     }

@@ -13,10 +13,20 @@ namespace RoundManagement
         private void Awake()
         {
             instance = this;
+            
+            foreach(Crew crew in blueCrewsParent.GetComponentsInChildren<Crew>())
+            {
+                crew.Team = true;
+            }
         }
 
         
         public int maxTeamDifference = 3;
+
+        [SerializeField] GameObject blueCrewsParent = null;
+        [SerializeField] GameObject redCrewsParent = null;
+
+        
 
         public int BlueCount
         {
@@ -33,6 +43,8 @@ namespace RoundManagement
 
         [SerializeField] SpawnLocationShuffler blueSpawnLocations = null;
         [SerializeField] SpawnLocationShuffler redSpawnLocations = null;
+
+        
 
         #region Server functions
         public bool ServerCanAddPlayerToTeam(bool targetTeam)
@@ -63,32 +75,11 @@ namespace RoundManagement
         }
 
         
-        private void Update()
-        {
-            if (isServer)
-            {
-                ServerRecountPlayers();
-            }
-        }
 
         public void ServerRecountPlayers()
         {
-            int blue = 0;
-            int red = 0;
-            foreach (Crew crew in Crew.crews)
-            {
-                if (crew.team == true)
-                {
-                    blue+=crew.crewMembers.Count;
-                }
-                else
-                {
-                    red+= crew.crewMembers.Count;
-                }
-
-            }
-            blueCount = blue;
-            redCount = red;
+            blueCount = blueCrewsParent.GetComponentsInChildren<PlayerPawn>().Length ;
+            redCount = redCrewsParent.GetComponentsInChildren<PlayerPawn>().Length;
         }
 
         public Transform FindSpawnLocation(bool team)
@@ -106,7 +97,7 @@ namespace RoundManagement
         #endregion
 
 
-
+        
 
 
 

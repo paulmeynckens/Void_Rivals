@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b721d4c93afeb429e5e64e3cbe2026, type: 3}
+  m_Name: ChatRoomSettings
+  m_EditorClassIdentifier: 
+  Names:
+  - Neutral
+  - Red
+  - Blue
+  - Red0
+  - Red1
+  - Red2
+  - Red3
+  - Red4
+  - Red5
+  - Red6
+  - Red7
+  - Red8
+  - Red9
+  - Red10
+  - Red11
+  - Red12
+  - Red13
+  - Red14
+  - Red15
+  - Blue0
+  - Blue1
+  - Blue2
+  - Blue3
+  - Blue4
+  - Blue5
+  - Blue6
+  - Blue7
+  - Blue8
+  - Blue9
+  - Blue10
+  - Blue11
+  - Blue12
+  - Blue13
+  - Blue14
+  - Blue15
+  - Global
