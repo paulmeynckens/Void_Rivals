@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7510c361d108844db89c81a057871bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  structure: {fileID: 6994744624661935633}
   externalCollider: {fileID: 700000589544242226}
 --- !u!114 &2117393565205634695
 MonoBehaviour:

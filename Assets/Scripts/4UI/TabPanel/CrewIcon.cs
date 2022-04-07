@@ -42,6 +42,12 @@ namespace UI.TabPanel
         private void Start()
         {
             
+            
+        }
+
+        private void FixedUpdate()//not very efficient but it works
+        {
+            //following lines where originally in start method but it doesn't works in build
             if (targetCrew.Team)
             {
                 transform.SetParent(TeamsPanel.instance.blueTeam);
@@ -52,11 +58,8 @@ namespace UI.TabPanel
                 transform.SetParent(TeamsPanel.instance.redTeam);
                 transform.localScale = Vector3.one;
             }
-        }
+            //
 
-        private void FixedUpdate()//not very efficient but it works
-        {
-            
             joinButton.SetActive(LocalPlayerCanJoinThisCrew());
 
             leaveButton.SetActive(LocalPlayerIsInThisCrew());

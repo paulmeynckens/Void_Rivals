@@ -13,13 +13,15 @@ namespace RoundManagement
     [DefaultExecutionOrder(-1000)]
     public class ShipSpawnedStateManager : MonoBehaviour
     {
+        [SerializeField] Transform externalCollider = null;
         NetworkIdentity[] childNetworkIdentities;
 
+        
 
         public Structure Structure { get => structure;}
         Structure structure;       
         
-        [SerializeField] Transform externalCollider = null;
+        
         IResettable[] resettables;
 
         MaleDockingPort maleDockingPort;
@@ -54,8 +56,11 @@ namespace RoundManagement
         private void Awake()
         {
             transform.parent = null;
+
             shipPawn = GetComponentInChildren<ShipPawn>();
+
             structure = GetComponentInChildren<Structure>();
+            
             structure.OnServerDie += ServerDestroyShip;
 
             resettables = GetComponentsInChildren<IResettable>();
@@ -63,12 +68,14 @@ namespace RoundManagement
             maleDockingPort = GetComponentInChildren<MaleDockingPort>();
 
             childNetworkIdentities = GetComponentsInChildren<NetworkIdentity>();
+
         }
 
 
-        [Server]
+        //[Server]
         private void Start()
         {
+            
             
             /*
             foreach (NetworkIdentity networkIdentity in childNetworkIdentities)

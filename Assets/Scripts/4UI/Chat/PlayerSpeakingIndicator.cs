@@ -27,10 +27,6 @@ namespace UI.Chat
         {
             playerPawn = transform.root.GetComponent<PlayerPawn>();
             _player = transform.root.GetComponent<IDissonancePlayer>();
-            
-
-
-
 
         }
 

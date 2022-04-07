@@ -299,6 +299,12 @@ namespace RoundManagement
         [Command]
         public void CmdAskSpawnShip(NetworkIdentity crew, string shipType)
         {
+            if (crew == null)
+            {
+                Debug.LogError(gameObject.name + " has tried to spawn a ship for no crew");
+                return;
+            }
+
             if (crewId == null)
             {
                 Debug.LogError(gameObject.name + " has tried to spawn a ship but has no crew");

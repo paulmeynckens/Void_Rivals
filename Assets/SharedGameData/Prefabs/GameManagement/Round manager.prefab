@@ -288,7 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6846740506915242161}
   m_Layer: 0
-  m_Name: red locations (1)
+  m_Name: red locations
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -516,12 +516,12 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Tadpole
-    - Caterpillar
     - Shark
+    - Caterpillar
     _keys:
     - Tadpole
-    - Caterpillar
     - Shark
+    - Caterpillar
     _values:
     - ships:
       - {fileID: 0}
@@ -531,16 +531,16 @@ MonoBehaviour:
       shipMaxCapacity: 2
       shipMinCapacity: 1
     - ships:
-      - {fileID: 53483653076492525}
-      - {fileID: 7808007512539458129}
-      - {fileID: 236394806846350239}
-      shipMaxCapacity: 4
-      shipMinCapacity: 1
-    - ships:
       - {fileID: 6116520155421999514}
       - {fileID: 1907771094798320810}
       - {fileID: 1760295156596599271}
       shipMaxCapacity: 2
+      shipMinCapacity: 1
+    - ships:
+      - {fileID: 53483653076492525}
+      - {fileID: 7808007512539458129}
+      - {fileID: 236394806846350239}
+      shipMaxCapacity: 4
       shipMinCapacity: 1
 --- !u!114 &4830423670499057785
 MonoBehaviour:
