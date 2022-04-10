@@ -57,17 +57,17 @@ namespace RoundManagement
         {
             transform.parent = null;
 
-            shipPawn = GetComponentInChildren<ShipPawn>();
+            shipPawn = GetComponentInChildren<ShipPawn>(true); // true otherwise the built mode does'nt works : https://answers.unity.com/questions/527810/why-getcomponentinchildren-is-not-working-.html
 
-            structure = GetComponentInChildren<Structure>();
+            structure = GetComponentInChildren<Structure>(true);
             
             structure.OnServerDie += ServerDestroyShip;
 
-            resettables = GetComponentsInChildren<IResettable>();
+            resettables = GetComponentsInChildren<IResettable>(true);
 
-            maleDockingPort = GetComponentInChildren<MaleDockingPort>();
+            maleDockingPort = GetComponentInChildren<MaleDockingPort>(true);
 
-            childNetworkIdentities = GetComponentsInChildren<NetworkIdentity>();
+            childNetworkIdentities = GetComponentsInChildren<NetworkIdentity>(true);
 
         }
 
